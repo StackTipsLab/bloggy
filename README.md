@@ -17,7 +17,20 @@ Install python dependencies
 pip3 install -r requirements.txt
 ```
 
-Rename the `.env.example` file to `.env` and provide all te configurations details including Database, Email Configurations. 
+Rename the `.env.example` file to `.env` and provide all te configurations details including Database, Email Configurations. Bare minimum, you will need these properties to get started. 
+```properties
+SECRET_KEY=
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+DEVELOPMENT_MODE=True
+
+# Your database configuration details
+DB_NAME=bloggy
+DB_USER=root
+DB_PASSWORD=password
+DB_HOST=127.0.0.1
+DB_PORT=3306
+```
 
 Create and apply database migrations
 
