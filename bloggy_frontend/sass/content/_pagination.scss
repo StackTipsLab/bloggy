@@ -1,0 +1,20 @@
+@import "../customVariables";
+
+.page-link {
+    border-radius: 0.35rem !important;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    background: $primary;
+    padding: 0.55rem 2rem;
+    margin: 0 0.75rem;
+    border: none;
+
+    &:hover, &:focus {
+        background: $secondary;
+        color: white;
+        box-shadow: none;
+
+    }
+}

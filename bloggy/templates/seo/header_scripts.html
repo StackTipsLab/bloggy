@@ -1,0 +1,55 @@
+{% spaceless %}
+{% load static %}
+{% if debug %}
+    <link rel="stylesheet" href="{% static 'dist/app.styles.css' %}"/>
+{% else %}
+    <link rel="stylesheet" href="{{ ASSETS_DOMAIN }}/static/dist/app.styles.css"/>
+{% endif %}
+<script async src="https://kit.fontawesome.com/16bc69a78f.js" crossorigin="anonymous"></script>
+<!-- Ad blocker popup -->
+{% comment %}{% if not debug %}
+    <script>
+        function adBlockFunction() {
+            const style = 'background-color: #fefce8; color: #c2410c;border: 1px dotted #c2410c; font-size: 1em;padding:5px;font-family: Consolas,monospace'
+            console.log("%cPlease consider supporting us by disabling your ad. Thank you for your understanding!", style);
+            const adbnwrap = document.querySelector(".adbn-wrap");
+            adbnwrap.style.display = "flex";
+        }
+        document.querySelector("#adbnrb").addEventListener("click", function () {
+            location.reload();
+        });
+    </script>
+{% endif %}{% endcomment %}
+
+<!-- Google Tag Manager -->
+{% if not debug or DEVELOPMENT_MODE  %}
+    <script>!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-NQF9FG5",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer");</script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JR7TS7XCGN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JR7TS7XCGN');
+    </script>
+    <!-- End Google Tag Manager -->
+{% endif %}
+
+<script type="text/javascript" src="{% static 'dist/app.bundle.js' %}"></script>
+
+{% if request.resolver_match.url_name == 'article_single' or request.resolver_match.url_name == 'quiz_single' or request.resolver_match.url_name == 'lesson_single' %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+{% endif %}
+
+{% if request.resolver_match.url_name == 'article_single' or request.resolver_match.url_name == 'quiz_single' or request.resolver_match.url_name == 'lesson_single' or request.resolver_match.url_name == 'pages.contact' %}
+    <script type="text/javascript" src="{% static 'dist/vue.bundle.js' %}"></script>
+{% endif %}
+
+{% if not debug %}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5125794458843883" crossorigin="anonymous"></script>
+{% endif %}
+
+{% csrf_token %}
+<meta name="is_authenticated" content="{{ user.is_authenticated }}"/>
+{% endspaceless %}

@@ -1,0 +1,69 @@
+{% load static %}
+{% load custom_widgets %}
+<ul class="list-unstyled static-pages-menu d-none d-md-block">
+    <li>
+        <a class="{% if request.resolver_match.url_name == 'pages.about' %} active{% endif %}"
+           href="{% url 'pages.about' %}">About us</a>
+    </li>
+    <li>
+        <a class="{% if request.resolver_match.url_name == 'pages.privacy' %} active{% endif %}"
+           href="{% url 'pages.privacy' %}">
+            Privacy policy</a>
+    </li>
+    <li>
+        <a class="{% if request.resolver_match.url_name == 'pages.cookie_policy' %} active{% endif %}"
+           href="{% url 'pages.cookie_policy' %}">
+            Cookie policy</a>
+    </li>
+    <li>
+        <a class="{% if request.resolver_match.url_name == 'pages.terms_of_service' %} active{% endif %}"
+           href="{% url 'pages.terms_of_service' %}">
+            Terms of service</a>
+    </li>
+
+    <li>
+        <a class="{% if request.resolver_match.url_name == 'pages.contribute' %} active{% endif %}"
+           href="{% url 'pages.contribute' %}">
+            Write for us</a>
+    </li>
+    <li>
+        <a class="{% if request.resolver_match.url_name == 'pages.code_of_conduct' %} active{% endif %}"
+           href="{% url 'pages.code_of_conduct' %}">
+            Code of Conduct</a>
+    </li>
+    <li>
+        <a class="{% if request.resolver_match.url_name == 'pages.contact' %} active{% endif %}"
+           href="{% url 'pages.contact' %}">
+            Get in touch</a>
+    </li>
+</ul>
+<div class="mx-3 d-block d-md-none">
+    <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
+            class="form-select border-secondary form-select-lg"
+            aria-label="Select course content drop down">
+        <option selected>
+            Select page
+        </option>
+        <option value="{% url 'pages.about' %}">
+            About us
+        </option>
+        <option value="{% url 'pages.privacy' %}">
+            Privacy policy
+        </option>
+        <option value="{% url 'pages.terms_of_service' %}">
+            Terms of service
+        </option>
+        <option value="{% url 'pages.cookie_policy' %}">
+            Cookie policy
+        </option>
+        <option value="{% url 'pages.contribute' %}">
+            Write for us
+        </option>
+        <option value="{% url 'pages.code_of_conduct' %}">
+            Code of conduct
+        </option>
+        <option value="{% url 'pages.contact' %}">
+            Get in touch
+        </option>
+    </select>
+</div>

@@ -1,0 +1,33 @@
+<div class="col">
+    <div class="article-card card">
+        {% if course.thumbnail %}
+            <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}"
+                 loading="lazy" height="155">
+        {% endif %}
+        <div class="card-body py-3 px-3">
+            <h3 class="article-title " style="font-size:1.1rem">
+                <a href="{% url 'courses_single' slug=course.slug %}"
+                   class="article-link">{{ course.title }}</a>
+            </h3>
+            {#            <small class="font-sm py-2">{{ course.excerpt|slice:"0:100" }}</small>#}
+            <small class="font-sm py-2">{{ course.excerpt }}</small>
+
+
+            <a href="{% url 'courses_single' slug=course.slug %}"
+               class="text-decoration-none text-uppercase font-xs text-primary fw-500 pt-3 d-block">
+                Start Course&nbsp;&rarr;</a>
+        </div>
+
+        <div class="card-footer ">
+            <div class="d-flex justify-content-between py-2">
+                <small class="card-text text-muted text-uppercase font-xs"><i
+                        class="fa-solid fa-book"></i> {{ course.get_lessons.count }} Lessons</small>
+
+                {% if course.difficulty %}
+                    <small class="card-text text-muted text-uppercase font-xs"><i
+                            class="fa-solid fa-chart-simple"></i> {{ course.difficulty | capfirst }}</small>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

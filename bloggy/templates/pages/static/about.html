@@ -1,0 +1,134 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% load custom_widgets %}
+{% block content %}
+        <div class="container">
+            <div class="row justify-content-left my-4">
+                <aside id="sidebar" class="col-md-2">
+                    {% include "partials/pages_menu.html" %}
+                </aside>
+                <main id="main-content" class="col-12 col-lg-8 bg-white">
+                    <article class="row static-page">
+                        <h1 class="display-2 my-2">Hi there, we're <span class="text-primary">STACKTIPS</span></h1>
+                        <p>We aim to provide developer-friendly ways to learn
+                            programming.
+                            With articles,
+                            programming course, and quizzes, we aim to teach in the ways developers learn
+                            best.</p>
+                        <p>StackTips brings developer-friendly ways to learn
+                            programming.
+                            With
+                            articles, programming
+                            course, and quizzes, we aim to teach in the ways developers learn best.</p>
+                        <p>
+                            StackTips is created and maintained by
+                            <a href="https://twitter.com/ask_nilan"
+                               class="text-primary text-decoration-underline">Nilanchal</a>.
+                        </p>
+
+
+                        <div class="row my-2">
+                            <h2 class="h3 mb-3">Story so far..</h2>
+                            <div class="col-lg-3 col-md-6">
+                                <a href="{% url 'articles' %}"
+                                   class="icon-box text-decoration-none d-block card-bordered">
+                                    <h4 class="title">{{ postsCount }}+</h4>
+                                    <p class="m-0">Tutorials</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <a href="{% url 'articles' %}"
+                                   class="icon-box text-decoration-none d-block card-bordered">
+                                    <h4 class="title">{{ coursesCount }}+</h4>
+                                    <p class="m-0">Courses</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <a href="{% url 'articles' %}"
+                                   class="icon-box text-decoration-none d-block bordered">
+                                    <h4 class="title">{{ quizCount }}+</h4>
+                                    <p class="m-0">Quizzes</p>
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
+                                <a href="{% url 'index' %}"
+                                   class="icon-box text-decoration-none d-block card-bordered">
+                                    <h4 class="title">{{ categoryCount }}+</h4>
+                                    <p class="m-0">Topics</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="d-flex mt-3">
+                            <div class="flex-shrink-0">
+                                <div class="icon-box2">
+                                    🎉
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="m-0">Completed over 6 million page views and counting!</p>
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex ">
+                            <div class="flex-shrink-0">
+                                <div class="icon-box2">
+                                    &#128525;
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="m-0">
+                                    Over 20K readers connected via our Social Channels.
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <div class="d-flex ">
+                            <div class="flex-shrink-0">
+                                <div class="icon-box2">
+                                    📈
+                                </div>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <p class="m-0">
+                                    Currently we generate over 80K page views and over 120K global unique people are
+                                    reading
+                                    us
+                                    each month.
+                                </p>
+                            </div>
+                        </div>
+
+                        <h3 class="h3 mb-3">Help & Feedback</h3>
+                        <p class="">If you have a concern about any posting or comment
+                            being factually incorrect,
+                            please
+                            drop us an email. Please provide details of who you are, how I can contact you, what
+                            your
+                            interest
+                            is, and what your concern is. If something has been written that is factually incorrect,
+                            it
+                            will be
+                            addressed.</p>
+                        <a class="btn btn-secondary btn-lg px-5 mt-3" href="{% url 'pages.contact' %}">Get in
+                            touch</a>
+                        <p>
+                        <small class="text-muted pt-3 fst-italic">* Anonymous complaints will be ignored.</small>
+                        </p>
+
+                    </article>
+
+
+                </main>
+            </div>
+        </div>
+    </div>
+{#    </div>#}
+
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,2 @@
+{% load custom_widgets %}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Course","name":"{{ course.title }}","description":"{{ course.description }}","provider":{"@type":"Organization","name":"StackTips","sameAs":"{% get_settings 'SITE_URL' %}{% url 'courses_single' slug=course.slug %}"}}</script>

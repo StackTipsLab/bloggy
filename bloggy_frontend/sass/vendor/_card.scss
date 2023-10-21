@@ -1,0 +1,67 @@
+@import "../customVariables";
+
+.card {
+  overflow: hidden;
+  border: none;
+  background: var(--feed-card-bg);
+  border-radius: $card-border-radius;
+  box-sizing: border-box;
+  //box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);
+  //background: var(--default-card-bg);
+  transition: all 0.2s ease-in-out !important;
+  //box-shadow: 0 0 0 1px rgba(23,23,23,0.05);
+}
+
+.card-rounded {
+  border-radius: $card-border-radius;
+}
+
+.card-text {
+  color: var(--card-body-text-color);
+}
+
+.card-title {
+  font-size: $h4-font-size;
+  font-weight: 500;
+}
+
+.card-img-top {
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.card-footer {
+  //padding: 0 0 0 0;
+  //margin: 0 1rem 0 1rem;
+  //border-top: none;
+  border-color: var(--table-border-color);
+  background-color: inherit;
+}
+
+.card-bordered {
+  border: 1px solid $border-color !important;
+}
+
+.card-active {
+  border-color: $primary !important;
+  background: #e8f2ff;
+  color: $primary;
+}
+
+
+.feed-card-course {
+  background: var(--course-card-bg) !important;
+  border: 1px solid #444444 !important;
+}
+
+.card-light-blue {
+  background: #eff6ff !important;
+  border: 1px solid #93c5fd;
+}
+
+
+.feed-card-quiz {
+  background: var(--quiz-card-bg) !important;
+}

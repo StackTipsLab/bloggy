@@ -1,0 +1,180 @@
+$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+$font-family-monospace: 'SFMono-Medium', 'SF Mono', 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Monaco, Consolas, Courier, monospace;
+
+$body-bg: hsl(219, 23%, 97%) !default;
+$blue-bg-01: #e1f5fe !default;
+$blue-bg-02: #e3f2fd !default;
+$blue-bg-03: #bbdefb !default;
+$body-color: rgb(51, 65, 85) !default;
+$bg-dark: #24292e;
+
+$font-weight-bold: 600;
+$font-weight-bolder: 700;
+$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-xs: $font-size-base * .7 !default;
+$font-size-sm: $font-size-base * .875 !default;
+$font-size-lg: $font-size-base * 1.15 !default;
+$h1-font-size: $font-size-base * 1.85 !default;
+$h2-font-size: $font-size-base * 1.45 !default;
+$h3-font-size: $font-size-base * 1.2 !default;
+$h4-font-size: $font-size-base * 1.05 !default;
+$h5-font-size: $font-size-base * 1 !default;
+$h6-font-size: $font-size-base !default;
+$table-border-width: 1px !default;
+
+$input-btn-font-size: 0.95rem !default;
+$btn-font-weight: 400;
+$input-btn-padding-y: .5rem !default;
+$input-btn-padding-x: .75rem !default;
+
+$headings-line-height:        1.3333333 !default;
+$h1-font-size: $font-size-base * 2 !default;
+$h2-font-size: $font-size-base * 1.75 !default;
+$h3-font-size: $font-size-base * 1.4 !default;
+$h4-font-size: $font-size-base * 1.25 !default;
+$h5-font-size: $font-size-base * 1.15 !default;
+$h6-font-size: $font-size-base !default;
+$font-sizes: (
+        1: $h1-font-size,
+        2: $h2-font-size,
+        3: $h3-font-size,
+        4: $h4-font-size,
+        5: $h5-font-size,
+        6: $h6-font-size
+) !default;
+
+$badge-font-weight: 500 !default;
+$btn-font-weight: 500 !default;
+
+$border-radius: .25rem !default;
+$border-radius-sm: .2rem !default;
+$border-radius-lg: .3rem !default;
+$border-radius-pill: 50rem !default;
+//$border-color: #e4e6ee; //rgb(226 232 240 / 80%) ;//#e9ecef !default;
+$border-color: #e8ebed; //rgb(226 232 240 / 80%) ;//#e9ecef !default;
+
+$input-border-color: #333333;
+$card-border-color: rgb(233, 236, 239);
+//$card-bg:#fff;
+$card-border-radius: 8px;
+//$card-border-radius: 0;
+
+$border-width: 1px !default;
+$border-widths: (
+        1: 1px,
+        2: 2px,
+        3: 3px,
+        4: 4px,
+        5: 5px
+) !default;
+
+$display-font-sizes: (
+        1: 3.35rem,
+        2: 2.5rem,
+        3: 2rem,
+        4: 1.35rem,
+        5: 1.2rem,
+        6: 1.15rem
+) !default;
+
+$navbar-padding-y: 0.35rem !default;
+$navbar-padding-x: 0.75rem !default;
+
+$navbar-margin-bottom: 0;
+$navbar-inverse-bg: #000;
+$navbar-inverse-link-color: rgba(255, 255, 255, 0.6);
+
+$navbar-inverse-stripe-color-active: #000;
+$navbar-inverse-stripe-color-hover: #e67e22;
+$navbar-default-stripe-color-active: #64ae5b;
+$navbar-default-stripe-color-hover: #93dc8a;
+
+// scss-docs-start container-max-widths
+$container-max-widths: (
+        sm: 100%,
+        md: 100%,
+        lg: 960px,
+        xl: 1140px,
+        xxl: 1280px
+) !default;
+
+
+// scss-docs-end container-max-widths
+
+// scss-docs-start gray-color-variables
+$white: #fff !default;
+$gray-100: #f6f9fc !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: $bg-dark !default;
+$black: #000 !default;
+
+// $blue: #1078ec !default;
+//$blue: #1273eb !default;
+$blue: #068bea !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #d63384 !default;
+$red: #fc4300 !default;
+$orange: #fd7e14 !default;
+$yellow: #df6b26 !default;
+$green: #87c60e !default;
+$teal: #20c997 !default;
+$cyan: #27a9f6 !default;
+
+
+$secondary: #394455 !default;
+//$secondary: #212326 !default;
+//$primary: #0975e0 !default;
+//$primary: #0975e0 !default;
+$primary: #068bea !default;
+$primaryDark: #067fd7 !default;
+$primaryLightest: #7dd3fc !default;
+$primaryLighter: #38bdf8 !default;
+
+$success: $green !default;
+$info: #bae6fd !default;
+$warning: $orange !default;
+$danger: $red !default;
+
+$text-color-black: rgb(15, 23, 42);
+$light: $body-bg;
+$dark: $gray-900 !default;
+
+$lead-font-size: $font-size-base * 1.15 !default;
+$lead-font-weight: 400 !default;
+
+// Allows for customizing button radius independently from global border radius
+$btn-border-radius: 0.25rem !default;
+$alert-padding-y: 0.75rem !default;
+$alert-padding-x: 0.75rem !default;
+
+/**
+List group
+ */
+$list-group-color: $gray-900;
+$list-group-bg: white;
+$list-group-border-color: white;
+
+/**
+Pagination
+ */
+$pagination-bg: $white;
+$pagination-border-width: $border-width;
+$pagination-border-radius: 6px;
+$pagination-margin-start: 8px;
+$pagination-border-color: $gray-200;
+$pagination-color: $text-color-black !default;
+$navbar-nav-link-padding-x: 0.85rem;
+$navbar-nav-link-padding-y: 0;
+$accordion-button-padding-y: 0.55rem;
+
+$beginner: #92d051;
+$intermediate: #ffc100;
+$advanced: #F44336;
+

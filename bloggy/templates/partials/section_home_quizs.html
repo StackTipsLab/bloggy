@@ -1,0 +1,45 @@
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    <section id="homeQuizzes_section" class="homeQuizzes py-3 py-md-5">
+        <div class="container">
+
+            <div class="d-flex pt-3">
+                <div class="flex-shrink-0 pe-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"
+                         fill="rgb(51, 65, 85)">
+                        <path d="M569-344q21 0 35.5-14.5T619-394q0-21-14.5-35.5T569-444q-21 0-35.5 14.5T519-394q0 21 14.5 35.5T569-344Zm-39-140h77q-1-32 4.647-46.051Q617.294-544.102 638-567q33-34 43.5-53t10.5-45.772q0-48.189-34.263-78.708Q623.474-775 568-775q-45.824 0-79.912 26Q454-723 443-679l68 27q7-25 22.196-39 15.196-14 34.804-14 22 0 35 12.5t13 32.5q0 15-8.5 27.5T582-605q-39 35-45.5 51t-6.5 70ZM329-210q-43.725 0-74.863-31.137Q223-272.275 223-316v-488q0-43.725 31.137-74.862Q285.275-910 329-910h488q43.725 0 74.862 31.138Q923-847.725 923-804v488q0 43.725-31.138 74.863Q860.725-210 817-210H329Zm0-106h488v-488H329v488ZM143-24q-43.725 0-74.862-31.138Q37-86.275 37-130v-594h106v594h594v106H143Zm186-780v488-488Z"/>
+                    </svg>
+                </div>
+                <h2 class="h2">Interactive quizzes</h2>
+            </div>
+            <p class="w-lg-50 mb-5 text-muted">Test your knowledge and learning progress with our quizzes!</p>
+
+            <div class="row">
+                <div class="quizzes-bg">
+                    {% if quizzes|length > 0 %}
+                        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+                            {% for quiz in quizzes %}
+                                <div class="col">
+                                    <div class="home-quiz-card card p-3"
+                                         style="background-image: url({% static 'media/quizzlet-bg.png' %})">
+                                        <div class="highlight-container">
+                                            <h3 class="mb-1 h4">
+                                                <span class="quiz-title">
+                                                    <a href="{% url 'quiz_single' slug=quiz.slug %}" class="quiz-link">{{ quiz.title }}</a>
+                                                </span>
+                                            </h3>
+                                            <small class="quiz-meta mb-0">
+                                                {{ quiz.duration }} Minutes
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endspaceless %}

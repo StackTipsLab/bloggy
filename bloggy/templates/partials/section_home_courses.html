@@ -1,0 +1,22 @@
+{% spaceless %}
+    <section class="homeCourses__section pb-2 pt-md-3 pb-lg-3">
+        {% load static %}
+        <div class="container">
+            <div class="d-flex py-3">
+                <div class="flex-shrink-0 pe-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"
+                         fill="rgb(51, 65, 85)">
+                        <path d="M480-72 170-240v-273L-19-618l499-273 500 273v366H874v-308l-84 47v273L480-72Zm0-394 280-152-280-151-279 151 279 152Zm0 273 204-110v-155L480-345 276-458v155l204 110Zm1-273Zm-1 113Zm0 0Z"/>
+                    </svg>
+                </div>
+                <h2 class="h2">Free Courses</h2>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3">
+                {% for course in courses %}
+                    {% include 'partials/course_grid_column.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endspaceless %}

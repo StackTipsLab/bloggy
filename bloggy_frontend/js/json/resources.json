@@ -1,0 +1,209 @@
+{
+  "title": "Useful Tools & Resources<br/>for Developers",
+  "excerpt": "Our goal is to provide online free tools so you don't have to install any\n  software for basic usages. We are going to add new tools as often as possible!",
+  "categories": [
+    {
+      "slug": "converter",
+      "title": "Converters",
+      "description": "",
+      "url": "/converter",
+      "hidden": false,
+      "icon": "",
+      "applications": [
+        {
+          "title": "Base 64 (Encoder/Decoder)",
+          "description": "Encode to Base64 format or decode from base64 format",
+          "url": "/base64-converter",
+          "hidden": false,
+          "icon": "/base-64.gif"
+        },
+        {
+          "title": "XML to JSON Converter",
+          "description": "This tool helps you to convert XML data into JSON format.",
+          "url": "/xml-to-json",
+          "hidden": true,
+          "icon": "/xml.gif"
+        },
+        {
+          "title": "JSON to XML Converter",
+          "description": "This tool helps you to convert JSON data into XML format.",
+          "url": "/json-to-xml",
+          "hidden": true,
+          "icon": "/json.gif"
+        },
+        {
+          "title": "Properties To YAML Converter",
+          "description": "This tool helps you to convert properties To YAML",
+          "url": "/properties-to-yaml",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "YAML to Properties Converter",
+          "description": "This tool helps you to convert YAML to properties",
+          "url": "yaml-to-properties-converter",
+          "hidden": false,
+          "icon": "/file-yaml-o.svg"
+        },
+        {
+          "title": "YAML to JSON Converter",
+          "description": "This tool helps you to convert YAML files into Json object",
+          "url": "/yaml-to-json",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "JSON to YAML Converter",
+          "description": "This tool helps you to convert YAML files into Json object",
+          "url": "/",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "URL (Encoder / Decoder)",
+          "description": "Encodes or decodes a string so that it conforms to the the URL Specification",
+          "url": "/url-encoder",
+          "hidden": false,
+          "icon": "/url-encode.png"
+        },
+        {
+          "title": "Epoch & Unix Timestamp Converter",
+          "description": "Converts an epoch/unix timestamp into a human readable date",
+          "url": "/",
+          "hidden": true,
+          "icon": ""
+        }
+      ]
+    },
+    {
+      "slug": "web-tools",
+      "title": "Web Tools",
+      "description": "",
+      "hidden": false,
+      "icon": "",
+      "url": "/web-tools",
+      "applications": [
+        {
+          "title": "What's my IP?",
+          "description": "This webpage displays public IP address assigned by your ISP.",
+          "url": "/find-ip-address",
+          "hidden": true,
+          "icon": "/ip-scanner.gif"
+        },
+        {
+          "title": "Analyze HTTP Header",
+          "description": "This tool will analyse HTTP header of the specified url.",
+          "url": "/analyze-http-header",
+          "hidden": false,
+          "icon": "/internet.gif"
+        },
+        {
+          "title": "Website Link Analyzer Tool",
+          "description": "Analyze both external and internal urls related to your site.",
+          "url": "/website-link-analyzer",
+          "hidden": false,
+          "icon": "/links.gif"
+        },
+        {
+          "title": "SMTP test tools",
+          "description": "Test SMTP authentication and send email, troubleshoot Email issues in realtime.",
+          "url": "/",
+          "hidden": true,
+          "icon": ""
+        }
+      ]
+    },
+    {
+      "slug": "generators",
+      "title": "Generators",
+      "description": "",
+      "url": "/generators",
+      "hidden": true,
+      "icon": "",
+      "applications": [
+        {
+          "title": "Password generator",
+          "description": "Test SMTP authentication and send email, troubleshoot Email issues in realtime.",
+          "url": "/",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "Lorem Ipsum Generator",
+          "description": "Generate Lorem Ipsum Text with online tool for websites, templates.",
+          "url": "/lorem-ipsum-generator",
+          "hidden": true,
+          "icon": ""
+        }
+      ]
+    },
+    {
+      "slug": "resources",
+      "title": "Other resources",
+      "description": "Our goal is to provide online free tools so you don't have to install any software for basic usages. We are going to add new tools as often as possible!",
+      "url": "/resources",
+      "hidden": false,
+      "icon": "",
+      "applications": [
+        {
+          "title": "HTTP Status Codes",
+          "description": "Easy to reference database of HTTP Status Codes with their definitions.",
+          "url": "/http-status-codes",
+          "hidden": false,
+          "icon": "/http-status.png"
+        },
+        {
+          "title": "List of Common HTTP Headers",
+          "description": "Here are list of most Common HTTP Response Headers",
+          "url": "/list-of-common-http-headers",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "Git Cheat Sheet",
+          "description": "Here are list of most Common HTTP Response Headers",
+          "url": "/list-of-common-http-headers",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "Curl Cheat Sheet",
+          "description": "Here are list of most Common HTTP Response Headers",
+          "url": "/list-of-common-http-headers",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "API Security Guidelines",
+          "description": "Here are list of most Common HTTP Response Headers",
+          "url": "/list-of-common-http-headers",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "List of MIME Types",
+          "description": "Here are list of most Common HTTP Response Headers",
+          "url": "/list-of-common-http-headers",
+          "hidden": true,
+          "icon": "/mime.gif"
+        },
+        {
+          "title": "ISO Country List",
+          "keywords": "",
+          "description": "Here are list of most Common HTTP Response Headers",
+          "url": "/list-of-common-http-headers",
+          "hidden": true,
+          "icon": ""
+        },
+        {
+          "title": "Time Zone List",
+          "keywords": "",
+          "description": "Here are list of most Common HTTP Response Headers",
+          "url": "/list-of-common-http-headers",
+          "hidden": true,
+          "icon": ""
+        }
+      ]
+    }
+  ]
+}

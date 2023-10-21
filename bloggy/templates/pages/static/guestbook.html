@@ -1,0 +1,41 @@
+{% extends "base-with-header-footer.html" %}
+{#{% block base_css_class %}bg-light{% endblock base_css_class %}#}
+{% load static %}
+{% load custom_widgets %}
+{% block content %}
+    <div class="container">
+        <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+                integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+                crossorigin="anonymous" async></script>
+
+        <div class="hero w-50 my-5">
+            <h1 class="display-2">Sign the Guestbook!</h1>
+            <p class="lead text-gray-dark">You have a chance to be creative. Indulge me by leaving a greeting below.
+                Anything
+                is welcome: insight, information, wisdom, or even humor. Surprise me!</p>
+        </div>
+
+        <section id="homeReviews_section" class="bg-light pb-3 pb-md-4">
+            <div class="row row-cols-1 row-cols-md-4 row-cols-lg-4 g-3" data-masonry='{"percentPosition": true }'>
+                {% for testimonial in data %}
+                    <div class="col">
+                        <div class="card card-borderedd card-rounded card-shadow bg-white">
+                            <div class="card-body p-4">
+                                <p class="text-dark fst-italic fw-light mb-0">{{ testimonial.quote }}</p>
+                                <div class="d-flex align-items-center mt-3">
+                                    <div class="">
+                                        <h4 class="h5 text-primary fw-bolder mb-1">{{ testimonial.name }}</h4>
+                                        <small class="text-muted mb-0">{{ testimonial.date_created }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+
+        {#        {% include "pages/home/section_home_reviews.html" %}#}
+    </div>
+{% endblock content %}

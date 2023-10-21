@@ -1,0 +1,66 @@
+{% extends "base-with-header-footer.html" %}
+{% load custom_widgets %}
+{% load static %}
+{#{% block base_css_class %}bg-light{% endblock base_css_class %}#}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-2">
+                {% include 'partials/dashboard_menu.html' with user=user %}
+            </div>
+
+            <div class="col-lg-9">
+                <div class="bg-white padding-medium">
+                    <h1 class="display-3 fw-600 pb-2">Update profile</h1>
+                    {% if user_form.errors %}
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <div id="form_errors">
+                                {% for key, value in user_form.errors.items %}
+                                    <smal class="text-muted text-danger">{{ value }}</smal>
+                                {% endfor %}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                    <form method="POST" enctype="multipart/form-data"
+                          class="update-profile-form d-flex flex-row flex-wrap">
+                        {% csrf_token %}
+
+                        {{ form.non_field_errors }}
+                        {% for hidden_field in form.hidden_fields %}
+                            {{ hidden_field.errors }}
+                            {{ hidden_field }}
+                        {% endfor %}
+
+                        {% for field in form.visible_fields %}
+                            <div class="form-group {% if field.name == 'profile_photo' or field.name == 'bio' %} col-md-12 {% else %} col-md-6 {% endif %} my-2"
+                                 style="padding: 0 1rem !important;">
+                                {% if field.name == "profile_photo" %}
+                                {% else %}
+                                    <label for="{{ field.name }}">{{ field.label_tag }}</label>
+                                {% endif %}
+
+                                <small class="errors "> {{ field.errors }}</small>
+                                {{ field }}
+
+                                <small id="emailHelp" class="form-text text-muted">{{ field.help_text }}</small>
+                                {% if field.name == "profile_photo" %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                        <div class="form-group my-4 col-md-12" style="padding: 0 1rem !important;">
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+            </div>
+        </div>
+    </div>
+{% endblock %}

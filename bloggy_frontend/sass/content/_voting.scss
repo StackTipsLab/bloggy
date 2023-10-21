@@ -1,0 +1,49 @@
+@import "../customVariables";
+
+.pulse-button {
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 12px;
+  width: fit-content;
+  background: $body-bg;
+  margin: 0 0 0 8px;
+  border: none;
+  border-radius: 6px;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  min-width: 48px;
+
+  &:hover {
+    background: #eceef2;
+  }
+
+  &:active {
+    background: rgb(233, 236, 239);
+  }
+
+  .vote-count {
+    color: $gray-900;
+    font-size: $font-size-sm;
+  }
+
+}
+
+
+.pulse-button.horizontal-layout {
+  display: flex;
+
+  .vote-count {
+    margin-left: 6px;
+  }
+}
+
+
+.reaction__icon--active {
+  fill: #fc4300;
+}
+
+.reaction__icon--inactive {
+  fill: $gray-800;
+}

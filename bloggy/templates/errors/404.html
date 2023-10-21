@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_widgets %}
+{% load define_action %}
+{% block content %}
+    <div class="container py-5">
+        <p style="font-weight: 400;" class="h2">{{ errorCode }}
+            <span style="font-weight: 300;" class="text-muted">{{ errorMessage }}</span>
+        </p>
+        <p style="max-width:600px; font-weight: 300;" class="h3 text-muted">{{ errorDescription }}.
+            Please do return to our <a href="{% url 'index' %}">homepage</a> and continue learning.</p>
+
+        <div class="row align-items-start my-5">
+            <div class="col-6">
+                <h3 class="h3 fw-normal mb-2">Here are some of the useful links:</h3>
+                {% include "errors/error_page_links.html" %}
+            </div>
+            <div class="col-4">
+                {% include "errors/search_widget.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,11 @@
+<div class="">
+    <h3 class="h3 fw-normal mb-3">Or, try searching..</h3>
+    <form class="d-flex" role="search" method="GET" action="{% url 'search' %}">
+        <input id="q" name="q" class="form-control me-1" type="search"
+               placeholder="Enter keyword to search"
+               aria-label="Search" value="{{ search_query }}">
+        <button class="btn btn-primary" type="submit">
+            SEARCH
+        </button>
+    </form>
+</div>

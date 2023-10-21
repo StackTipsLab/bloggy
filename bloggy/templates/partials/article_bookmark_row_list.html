@@ -1,0 +1,20 @@
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    {% load define_action %}
+    <div class="border-bottom py-3">
+
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+                <h3 class="h3 fw-500 mb-2">
+                    <a href="{% url 'article_single' slug=article.slug %}" class="text-decoration-none link-dark">{{ article.title }}</a>
+                </h3>
+                <div class="hero article-meta-container mb-2" style="font-size: 0.75rem">
+                    <small class="d-inline-block mb-1 text-muted text-uppercase">Updated on {{ article.updated_date|date:"M j, Y" }}</small>
+                    <span class="ms-3 badge-meta-pill {{ article.publish_status | lower }}">{{ article.publish_status | capfirst }}</span>
+                    <span class="badge-meta-pill {{ article.post_type| lower }}">{{ article.post_type | capfirst }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endspaceless %}

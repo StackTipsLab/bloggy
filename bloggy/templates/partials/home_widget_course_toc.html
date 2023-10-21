@@ -1,0 +1,14 @@
+<div class="mb-3 p-2 p-lg-2" >
+    <div class="d-none d-md-block">
+        <h3 class="h3 p-2">{{ course.title }}</h3>
+        <ul class="list-unstyled pb-3">
+            {% for lesson in course.get_lessons %}
+                {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
+                <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
+                    <a href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
+                       class="text-decoration-none text-secondary fw-normal p-0 m-0">{{ lesson.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

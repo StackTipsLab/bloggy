@@ -1,0 +1,24 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% load custom_widgets %}
+{% block content %}
+    <div class="container static-page-container">
+        <div class="row justify-content-left my-4">
+            <aside id="sidebar" class="col-md-2 pt-0">
+                {% include "partials/pages_menu.html" %}
+            </aside>
+            <main id="main-content" class="col-12 col-lg-7">
+                <article class="row static-page" id="static-page">
+                    {% block static_page_content %}{% endblock static_page_content %}
+                </article>
+            </main>
+            <div class="sidebar-content col-md-3 p-3" style="z-index: 99">
+                <div id="toc">
+                    <div id="toc-content" class="content">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

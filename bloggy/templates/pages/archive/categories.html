@@ -1,0 +1,72 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% spaceless %}
+{#    {% block base_css_class %}bg-light{% endblock base_css_class %}#}
+    {% block content %}
+        <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
+                integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
+                crossorigin="anonymous" async></script>
+
+
+        <div class=" container pt-5 pb-3">
+            <div id="homeIntroSection" class="hero" style="max-width: 860px;margin: 0 auto;text-align: center;">
+                <h1 class="display-1">
+                    Browse tutorial by <br/><span
+                        class="text-gradient text-primary">Categories</span>
+                </h1>
+                <p class="lead text-gray-dark">
+                    Collection of tutorials and courses organized by categories. Select a category and start your
+                    journey towards being a better developer.
+                </p>
+            </div>
+
+
+        </div>
+        <div class="container">
+            <div class="row row-eq-height archive-grid pb-4" data-masonry='{"percentPosition": true }'>
+                {% for category in categories %}
+                    <div class="col-md-3">
+                        <div class="py-2 h-100">
+                            <div class="h-100 article-card p-3 p-lg-4"
+                                 style="border-bottom: 3px solid {{ category.color }};">
+                                <div class="d-flex justify-content-between flex-row mb-1">
+                                    <div class="d-flex flex-column ml-2">
+                                        <h3 class="display-5 fw-500">{{ category.title }}</h3>
+                                        <small class="d-inline-block text-muted text-uppercase fw-bold font-xs">
+                                            {{ category.article_count }} article{{ category.article_count | pluralize }}
+                                        </small>
+                                    </div>
+                                    {% if category.logo %}
+                                        <div style="width:42px;
+                                                height: 42px;
+                                                background-image: url('{{ category.logo.url }}');
+                                                -o-object-fit: contain;
+                                                object-fit: contain;
+                                                text-align:center;
+                                                padding: 0px;
+                                                overflow: hidden;
+                                                background-size: contain;
+                                                position: absolute;
+                                                right: 1rem;
+                                                background-repeat: no-repeat;
+                                                top: 1rem;">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if category.description %}
+                                    <small class="text-muted fw-normal mb-0 text-ellipsis"
+                                           style="line-clamp: 6;-webkit-line-clamp: 6">{{ category.description }}</small>
+                                {% endif %}
+
+                                <div class="d-flex justify-content-start text-muted">
+                                    <a href="{% url 'categories_single' slug=category.slug %}"
+                                       style="text-decoration: none; color: initial" class="stretched-link"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock content %}
+{% endspaceless %}

@@ -1,0 +1,24 @@
+#bookmarkButton {
+  background-color: var(--toc-header-bg);
+  //color: $text-color-black;
+  border: none;//1px solid $secondary;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 5px;
+  //font-size: 0.7rem;
+  transition: background-color 0.3s ease;
+  text-transform: capitalize;
+  text-align: left;
+}
+
+#bookmarkButton.bookmarked {
+  background-color: $body-bg;
+}
+
+#bookmarkButton i {
+  margin-right: 5px;
+}
+
+#bookmarkButton.bookmarked i {
+  color: $secondary;
+}
