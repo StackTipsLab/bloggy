@@ -12,7 +12,7 @@ Vue.component('contact-form', () => import('./vue/disqus/ContactForm.vue'));
 // Vue.component('likebutton', () => import('./vue/LikeButton.vue'));
 // Vue.component('bookmark', () => import('./vue/Bookmark.vue'));
 Vue.component('cookie-consent', () => import('./vue/CookieConsent.vue'));
-Vue.component('quizzlet', () => import('./vue/quiz/bloggify.vue'));
+Vue.component('quizzlet', () => import('./vue/quiz/Quizlet.vue'));
 
 // Vue.component('testimonials', require('./vue/Testimonials.vue'));
 

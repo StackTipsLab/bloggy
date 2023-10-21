@@ -36,7 +36,7 @@ python3 manage.py createsuperuser
 Collect static files before publishing or development.
 
 ```shell    
-python manage.py collectstatic
+python3 manage.py collectstatic
 ```
 
 Start the application

@@ -86,7 +86,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Social login
-    'social_django.middleware.SocialAuthExceptionMiddleware',
+    # 'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'bloggy.middleware.page_not_found.PageNotFoundMiddleware',  # new articles mismatch url redirect
 ]
@@ -108,8 +108,8 @@ TEMPLATES = [
                 'bloggy.context_processors.app_settings',
 
                 # Social login
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },

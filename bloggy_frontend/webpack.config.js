@@ -14,7 +14,7 @@ const config = {
 
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, "../bloggify/static/dist")
+        path: path.resolve(__dirname, "../bloggy/static/dist")
     },
     plugins: [
         new MiniCssExtractPlugin({
