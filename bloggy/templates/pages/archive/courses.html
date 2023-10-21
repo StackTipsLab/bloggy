@@ -1,0 +1,25 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    {% load define_action %}
+    {% block content %}
+        <div class=" container pt-5 pb-3">
+            <div class="hero pt-lg-2 " style="max-width: 850px;margin: 0 auto">
+                <div class="text-center mb-5 px-lg-5">
+                    <h1 class="display-1 px-lg-5">Courses</h1>
+                    <p class="lead">
+                        Want to learn a topic? StackTips offers free courses on Java, Python, HTML, JavaScript and CSS.
+                        Enroll in
+                        these free courses and learn a new programming language.
+                    </p>
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3 mb-5">
+                {% for course in courses %}
+                    {% include 'partials/course_grid_column.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock content %}
+{% endspaceless %}

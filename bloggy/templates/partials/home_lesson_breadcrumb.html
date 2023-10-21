@@ -1,0 +1,20 @@
+<section class="article-breadcrumb d-none d-md-block d-print-none">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'courses' %}">Courses</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'courses_single' slug=course.slug %}">{{ course.title }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span>{{ article.title }}</span>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>

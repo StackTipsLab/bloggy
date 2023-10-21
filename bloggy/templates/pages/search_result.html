@@ -1,0 +1,82 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% load custom_widgets %}
+{% block content %}
+    <div class="p-3">
+        <div class="container">
+            <div class="col-md-7">
+                <form class="d-flex pt-4 pb-3" role="search" method="GET" action="{% url 'search' %}">
+                    <input id="q" name="q" class="form-control me-3" type="search" placeholder="Enter keyword to search"
+                           aria-label="Search" value="{{ search_query }}" style="border: 1px solid #24292e">
+                    <button class="btn btn-primary" type="submit">SEARCH</button>
+                </form>
+
+                {% if search_query %}
+                    <h1 class="h3 fw-normal mb-0">
+                        Showing results for: <span style="color: #3c8cf0;">{{ search_query }}</span>
+                    </h1>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-between">
+            <main id="main-content" class="col-12 col-lg-8 py-3 pe-3 pe-lg-5 py-lg-3">
+
+
+                <div class="mb-4">
+                    <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-2 gy-2 mb-4 mb-md-4 mb-lg-4">
+                        {% for category in categories %}
+                            <div class="col" style="display: grid;">
+                                <div class="card card-rounded card-shadow p-3">
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0">
+                                            {% if category.logo %}
+                                                <div style="width:42px;
+                                                        height: 42px;
+                                                        background-image: url('{{ category.logo.url }}');
+                                                        -o-object-fit: contain;
+                                                        object-fit: contain;
+                                                        text-align:center;
+                                                        padding: 0px;
+                                                        overflow: hidden;
+                                                        background-size: contain;
+                                                        position: absolute;
+                                                        right: 1rem;
+                                                        background-repeat: no-repeat;
+                                                        top: 1rem;">
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                        <div class="flex-grow-1 me-3">
+                                            <h3 class="h6 mb-0">{{ category.title }}</h3>
+                                            <small class="text-muted mt-1">{{ category.article_count }} articles</small>
+                                            <a href="{% url 'categories_single' slug=category.slug %}"
+                                               class="article-link"></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+
+                {% for article in articles %}
+                    {% include 'partials/search_result_row.html' with post=article search_query=search_query %}
+                {% endfor %}
+                {% include 'partials/paging.html' with posts=article %}
+            </main>
+
+            <aside id="sidebar-right" class="col-md-4">
+                <div class="bordered my-4">
+                    {% include "errors/error_page_links.html" %}
+                </div>
+            </aside>
+        </div>
+    </div>
+
+{% endblock %}

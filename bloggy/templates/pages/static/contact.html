@@ -1,0 +1,39 @@
+{% extends "base-with-header-footer.html" %}
+{% load custom_widgets %}
+{% load static %}
+{% block content %}
+    <div class="bg-light">
+        <div class="container">
+            <div class="row justify-content-left my-4">
+                <aside id="sidebar" class="col-md-2">
+                    {% include "partials/pages_menu.html" %}
+                </aside>
+                <main id="main-content" class="col-12 col-lg-8 bg-white">
+                    <article class="row static-page">
+                        <h1 class="display-2 my-2">Get in touch</h1>
+
+                        <div id="vueRoot">
+                            <p class="my-3 lh-base">
+                                We are here to answer any questions you may have about this website experience or have
+                                suggestions to improve the quality, let us know.
+                            </p>
+                            <p class="my-3 lh-base">
+                                Please note, we do not respond to questions on any specific tutorial or code error via
+                                this
+                                contact form. If you have any such questions, post your comment on the tutorial in the
+                                comments
+                                section.
+                            </p>
+
+                            <div class="mr-5">
+                                <contact-form></contact-form>
+                            </div>
+                        </div>
+
+
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

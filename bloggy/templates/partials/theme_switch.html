@@ -1,0 +1,26 @@
+<div class="theme-toggler-container py-2 py-md-0 mx-2 mx-xs-1">
+    <input class="form-check-input" type="checkbox" id="themeToggle"><label for="themeToggle">
+{#    <span class="d-inline d-md-none ps-2 text-light font-sm text-uppercase">Change Theme</span>#}
+</label>
+</div>
+<script>
+    const LOCAL_STORAGE_KEY = "stacktips.theme";
+    const themeToggle = document.getElementById('themeToggle');
+    let savedTheme = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if(null === savedTheme) {
+        savedTheme = 'light';
+    }
+    if (savedTheme) {
+        document.body.setAttribute('data-bs-theme', savedTheme);
+        themeToggle.checked = savedTheme === "dark";
+    }
+    themeToggle.addEventListener('change', function () {
+        if (this.checked) {
+            localStorage.setItem(LOCAL_STORAGE_KEY, "dark");
+            document.body.setAttribute('data-bs-theme', "dark");
+        } else {
+            localStorage.setItem(LOCAL_STORAGE_KEY, "light");
+            document.body.setAttribute('data-bs-theme', "light");
+        }
+    });
+</script>

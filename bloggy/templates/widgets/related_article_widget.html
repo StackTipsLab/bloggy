@@ -1,0 +1,37 @@
+{% load static %}
+{% load custom_widgets %}
+{% load define_action %}
+{% if relatedArticles|length > 0 %}
+
+    {% if widgetStyle == "list" %}
+        <h3 class="h3 mt-5 mb-3">{{ widgetTitle }}</h3>
+        <ul class="related-posts-list">
+            {% for article in relatedArticles %}
+               <li class="my-2">
+                <a data-cid="{{ article.id }}" data-type="article"  class=""
+                        href="{% url 'article_single' slug=article.slug %}">{{ article.title }}</a>
+               </li>
+            {% endfor %}
+        </ul>
+
+
+    {% elif widgetStyle == "grid" %}
+        <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 g-3">
+            {% for article in relatedArticles %}
+                <div class="col">{% include "partials/article_row_grid.html" with article=article cssClass="" %}</div>
+            {% endfor %}
+        </div>
+
+
+    {% elif widgetStyle == "miniGrid" %}
+        <div class="card card-rounded card-shadow mb-3 p-4">
+            <h3 class="h4 pb-3 mb-0">{{ widgetTitle }}</h3>
+            <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 gy-3">
+                {% for article in relatedArticles %}
+                    <div class="col">{% include "partials/article_row_mini_grid.html" with article=article cssClass="" %}</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+{% endif %}

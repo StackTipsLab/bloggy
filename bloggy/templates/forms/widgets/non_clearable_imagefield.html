@@ -1,0 +1,12 @@
+{% if widget.is_initial %}
+    <p class="file-upload">
+    <img src="{{ widget.value.url }}" alt="{{ widget.name }}"
+         class="img-fluid rounded-circled my-3"
+         id="{{ widget.name }}_preview"
+         height="150px" width="150px">
+    <br>
+{% endif %}
+<input type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+
+{% if widget.is_initial %}</p>
+{% endif %}

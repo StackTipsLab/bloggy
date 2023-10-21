@@ -1,0 +1,40 @@
+{% extends 'base-with-header.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block content %}
+    <section id="login-wrapper" class="pt-md-5">
+        <div class="login-wrapper-inner align-items-center card-rounded card-shadow">
+            <h1 class="display-2 lh-1 fw-normal">Sign in</h1>
+            <p class="">Login to continue with your StackTips account!</p>
+            <form method="post" role="form" class="update-profile-form">
+                {% csrf_token %}
+
+                <ul class = "form-errors text-danger help list-unstyled my-2">
+                    {% for error in form.non_field_errors %}<li>{{ error }}</li>{% endfor %}
+                </ul>
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}" class="text-muted form-text label">Email</label>
+                    {{ form.username|add_class:"form-control" }}
+                    <p class="help is-danger">{{ form.username.errors }}</p>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}" class="label form-text text-muted">Password</label>
+                    {{ form.password|add_class:"form-control" }}
+                    <p class="help is-danger">{{ form.password.errors }}</p>
+                </div>
+                <div class="w-100">
+                    <a href="" class="text-primary ml-2 form-textd">Forgot password?</a>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary login-btn w-100">Sign In</button>
+                </div>
+            </form>
+            <div class="w-100">
+                <p class="form-text text-muted my-2">
+                    Don't have account? Create your free account here.
+                    <a id="registerCta" href="{% url 'register' %}" class="mt-2 btn login-btn btn-md btn-secondary w-100">Create my account</a>
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

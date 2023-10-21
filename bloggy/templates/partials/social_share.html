@@ -1,0 +1,18 @@
+{% load social_share %}
+{% spaceless %}
+    <div class="d-grid gap-2 d-md-block mt-5 d-print-none">
+{#        <p class="h6 mb-2 text-primary">Sharing is caring!</p>#}
+        <p class="font-sm">Did you like what {{ authoName }} wrote? Thank them for their work by sharing it on social media.</p>
+        {% post_to_facebook object "Facebook" %}
+        {% post_to_twitter "{{ object.title }}" object "Share on X" %}
+        {% send_email object.title "{{ object.title }}. Check it out!" object_or_url "Email link" %}
+        {% copy_to_clipboard object "Copy link" %}
+        {% add_copy_script %}
+
+        <button onclick="window.print();" class="social-share-button btn-primary">
+            <span><i class="fa-solid fa-print"></i>Print</span>
+        </button>
+
+
+    </div>
+{% endspaceless %}

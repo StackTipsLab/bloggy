@@ -1,0 +1,46 @@
+.theme-toggler-container {
+  margin: 0 1rem;
+
+  input[type=checkbox] {
+    display: none;
+  }
+
+  input[type=checkbox] + label {
+    font-size: 20px;
+
+    &:before {
+      content: "\263E";
+      display: inline-block;
+      font-size: inherit;
+      text-rendering: auto;
+      color: #fff17f;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-variation-settings: normal;
+      moz-transition: all .4s ease-in-out;
+      -o-transition: all .4s ease-in-out;
+      -webkit-transition: all .4s ease-in-out;
+      transition: all .4s ease-in-out;
+      padding: 2px 4px;
+      border-radius: 4px;
+      width: 34px;
+      text-align: center;
+      background: var(--main-navbar-dark-color);
+    }
+  }
+}
+
+input[type=checkbox]:checked + label {
+  &:before {
+    content: "\2600";
+    display: inline-block;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-variation-settings: normal;
+    //color: #1b1b1b;
+    color: #ffffff;
+  }
+
+}

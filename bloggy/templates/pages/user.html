@@ -1,0 +1,21 @@
+{% extends "base-with-header-footer.html" %}
+{% block title %}
+    {{ userProfile.get_full_name }} - StackTips
+{% endblock title %}
+{% load static %}
+{% block content %}
+    {% load custom_widgets %}
+    {% include "partials/user_profile_header.html" %}
+    <div class="container mt-3 px-5">
+        <div class="py-3 pb-md-5">
+            <h1 class="h2 py-3 px-2">My articles(so far)</h1>
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-3">
+                {% for article in articles %}
+                    <div class="col">{% include "partials/article_row_grid.html" with article=article cssClass="" %}</div>
+                {% endfor %}
+            </div>
+            {% include 'partials/paging.html' with posts=articles %}
+
+        </div>
+    </div>
+{% endblock %}

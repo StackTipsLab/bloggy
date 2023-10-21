@@ -1,0 +1,88 @@
+#login-wrapper {
+  height: calc(100vh - 75px);
+  //background: $body-bg;
+}
+
+
+.login-wrapper-inner,
+.register-wrapper-inner {
+  position: relative;
+  margin: 0 auto;
+  max-width: 520px;
+  border-radius: $card-border-radius;
+  background: var(--bs-card-bg);
+  padding: 2.5rem;
+  //border-radius: var(--radius-auto) !important;
+  //box-shadow: rgba(23, 23, 23, 0.05) 0 0 0 1px;
+  //box-shadow: 5px 15px 15px rgba(89, 152, 152, 0.05);
+  transition: all 0.2s ease-in-out !important;
+  box-sizing: border-box
+}
+
+.login-with-github,
+.login-with-twitter {
+  padding: 0.65rem 0.25rem;
+  -webkit-transition: background-color 300ms linear;
+  -ms-transition: background-color 300ms linear;
+  transition: background-color 300ms linear, transform .2s;
+
+  svg {
+    height: 18px;
+    width: auto;
+    margin-right: 3px;
+  }
+
+  &:hover {
+    background: $blue-bg-01;
+    border: 1px solid $secondary;
+  }
+}
+
+.login-btn {
+  padding: 0.65rem 0.25rem;
+}
+
+
+$--color-twitter: rgb(29, 161, 242);
+$--color-github: #171515;
+
+.login-with-twitter {
+  border-color: $--color-twitter !important;
+  color: $--color-twitter !important;
+
+  svg {
+    fill: $--color-twitter;
+  }
+
+
+}
+
+.login-with-github {
+  border-color: $--color-github;
+  color: $--color-github;
+
+  svg {
+    fill: $--color-github;
+  }
+
+}
+
+.label.form-text {
+  font-weight: 400;
+}
+
+.help-block {
+  margin: 0 0 3px 0;
+  font-size: 0.75rem;
+  color: $gray-600;
+}
+
+.errorlist {
+  @extend .list-unstyled;
+  margin: 4px 0;
+
+  li {
+    font-size: 0.8rem;
+    color: $danger;
+  }
+}

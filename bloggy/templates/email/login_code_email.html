@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{ email_subject }}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        @media only screen and (max-width: 620px) {
+            table.body h1 {
+                font-size: 28px !important;
+                margin-bottom: 10px !important;
+            }
+
+            table.body p,
+            table.body ul,
+            table.body ol,
+            table.body td,
+            table.body span,
+            table.body a {
+                font-size: 16px !important;
+            }
+
+            table.body .wrapper,
+            table.body .article {
+                padding: 10px !important;
+            }
+
+            table.body .content {
+                padding: 0 !important;
+            }
+
+            table.body .container {
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            table.body .main {
+                border-left-width: 0 !important;
+                border-radius: 0 !important;
+                border-right-width: 0 !important;
+            }
+
+            table.body .btn table {
+                width: 100% !important;
+            }
+
+            table.body .btn a {
+                width: 100% !important;
+            }
+
+            table.body .img-responsive {
+                height: auto !important;
+                max-width: 100% !important;
+                width: auto !important;
+            }
+        }
+
+        @media all {
+            .ExternalClass {
+                width: 100%;
+            }
+        }
+    </style>
+<body>
+<p><span style="font-weight: bold;font-size: 1.25rem;">Confirm your email address</span></p>
+<p>Your {{ app_name }} confirmation code is below - enter it in your open browser window, and we'll help you get signed
+    in.</p>
+
+<div style="background:#f4f4f5;border-radius: 4px;padding: 2rem;text-align: center">
+    <span style="font-weight: bold;font-size: 1.5rem;color:#3f3f46">{{ verification_code }}</span>
+</div>
+<p>Or, <a href="{{ verification_link }}" target="_blank">click here</a> to continue login to your account.</p>
+<p style="margin-top: 1rem">If you didn't request this email, there's nothing to worry about - you can safely ignore
+    it.</p>
+</body>
+</html>

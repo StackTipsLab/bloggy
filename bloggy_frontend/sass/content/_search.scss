@@ -1,0 +1,13 @@
+span.highlight {
+  color: $primary;
+}
+
+.search-result-row {
+  .result-heading {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

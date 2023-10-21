@@ -1,0 +1,40 @@
+@import "../customVariables";
+
+.newsletter-subscribe {
+  align-items: center !important;
+}
+
+.newsletter-subscribe .intro {
+  font-size: 16px;
+  max-width: 750px;
+  margin: 0 0 1rem
+}
+
+.newsletter-subscribe .intro p {
+  margin-bottom: 1rem;
+}
+
+.newsletter-subscribe form {
+  justify-content: left
+}
+
+.tools-form-container .form-control,
+.newsletter-subscribe form .form-control {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid $secondary;
+  outline: none;
+  background: #fff;
+}
+
+.newsletter-subscribe form .btn:active {
+  transform: translateY(1px)
+}
+
+.newsletter-subscribe form .btn-primary {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.newsletter {
+  color: $text-color-black !important
+}

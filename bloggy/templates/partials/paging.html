@@ -1,0 +1,26 @@
+{% load static %}
+{% spaceless %}
+{% load custom_widgets %}
+{% if posts.has_other_pages %}
+
+    <div class="d-flex justify-content-between mt-5 mb-3">
+        <span class="text-muted">Showing page {{ posts.number }} of {{ posts.paginator.num_pages }}</span>
+        <nav aria-label="Page navigation" style="display: inline-block;">
+            <ul class="pagination justify-content-end mb-0">
+                {% if posts.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ request.path }}?{% url_replace request 'page' posts.previous_page_number %}">&larr;&nbsp;Prev</a>
+                    </li>
+                {% endif %}
+                {% if posts.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="{{ request.path }}?{% url_replace request 'page' posts.next_page_number %}">Next&nbsp;&rarr;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}
+{% endspaceless %}

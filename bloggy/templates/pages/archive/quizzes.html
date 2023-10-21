@@ -1,0 +1,64 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    {% block content %}
+        <div class="container">
+            <div id="homeIntroSection" class="hero py-5" style="max-width: 860px;margin: 0 auto;text-align: center;">
+                <h1 class="display-1">
+                    Challenge yourself with our<br/><span class="text-gradient text-primary">Interactive Quizzes</span>
+                </h1>
+                <p class="lead text-gray-dark">
+                    Test your knowledge and learning progress with our quizzes! Our user-friendly platform
+                    and extensive question bank make learning fun and easy. Pick a quiz and jump right in.
+                </p>
+            </div>
+        </div>
+        <div class="container pb-4 d-flex">
+            <div class="row">
+                <div class="container">
+                    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3">
+                        {% for quiz in posts %}
+                            <div class="col">
+                                <div class="card article-card">
+                                    {% if quiz.thumbnail %}
+                                        <img src="{{ quiz.thumbnail.url }}" class="card-img-top" loading="lazy"
+                                             alt="{{ quiz.title }}">
+                                    {% endif %}
+                                    <div class="card-body p-3">
+                                        <h3 class="article-title" style="font-size:1.1rem">
+                                            <a href="{% url 'quiz_single' slug=quiz.slug %}"
+                                               class="article-link">{{ quiz.title }}</a>
+                                        </h3>
+                                        <p class="font-sm mb-1">{{ quiz.excerpt }}</p>
+                                        <p class="mt-3 mb-0">
+                                            <a href="{% url 'courses_single' slug=quiz.slug %}"
+                                               class="text-decoration-none text-primary fw-500 font-sm w-100">Start
+                                                Quiz&nbsp;&rarr;</a>
+                                        </p>
+                                    </div>
+
+                                    <div class="card-footer ">
+                                        <div class="d-flex justify-content-between py-2">
+                                            <small class="card-text text-muted text-uppercase font-xs">
+                                                <i class="fa-solid fa-book"></i> {{ quiz.get_questions.count }}
+                                                Questions</small>
+
+                                            {% if quiz.duration %}
+                                                <small class="card-text text-muted text-uppercase font-xs">
+                                                    <i class="fa-regular fa-clock"></i> {{ quiz.duration }}
+                                                    Minutes</small>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+{% endspaceless %}

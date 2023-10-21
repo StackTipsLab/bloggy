@@ -1,0 +1,27 @@
+{% extends "base-with-header-footer.html" %}
+{% load custom_widgets %}
+{% spaceless %}
+    {% block content %}
+        {% load static %}
+        <section id="homeIntroSection" class="homeIntro">
+            <div class="hero jumbotron py-4 px-3 py-lg-5 text-center">
+                <div class="container">
+                    <h1 class="display-1 px-lg-5">
+                        Developer Friendly Way to Learn <span class="text-gradient text-primary">Programming.</span>
+                    </h1>
+                    <p class="lead px-lg-5 py-2" style="max-width: 900px;margin: 0 auto">
+                        StackTips brings developer-friendly ways to learn programming. With articles, programming
+                        course,
+                        and
+                        quizzes, we aim to teach in the ways developers learn best.
+                    </p>
+                    <a class="btn btn-primary btn-lg mt-4 ms-2" href="{% url 'login' %}?next={{ request.path }}">Create free account!</a>
+                </div>
+            </div>
+
+            {% include "partials/section_home_recent_articles.html" %}
+            {% include "partials/section_home_courses.html" %}
+            {% include "partials/section_home_quizs.html" %}
+        </section>
+    {% endblock content %}
+{% endspaceless %}

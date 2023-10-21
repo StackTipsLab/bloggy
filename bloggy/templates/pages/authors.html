@@ -1,0 +1,42 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% load custom_widgets %}
+{% block content %}
+    <div class="container pt-5 pb-3">
+        <div class="text-center mb-5 px-lg-5">
+            <h1 class="display-1 px-lg-5">Our Authors</h1>
+        </div>
+
+        <div class="container">
+            <div class="row row-eq-height archive-grid pb-4 ">
+                {% for author in authors %}
+                    <div class="col-md-3 authors-profile-card">
+                        <div class="px-4 py-4">
+                            <a href="{% url 'user_profile' username=author.username %}"
+                               class="text-decoration-none">
+                                <img src="{{ author.get_avatar }}"
+                                     alt="{{ author.get_full_name }}"
+                                     class="img-fluid card-img-top image-rounded-square"
+                                     style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);">
+                            </a>
+
+                            <div class="card-body">
+                                <a href="{% url 'user_profile' username=author.username %}"
+                                   class="text-decoration-none">
+                                    <h3 class="h3 text-body mt-3">{{ author.get_full_name }}</h3>
+                                </a>
+                                {% if author.bio %}
+                                    <p class="card-text"
+                                       style="-webkit-line-clamp:3;line-clamp:3;">{{ author.bio |striptags }}</p>
+                                {% endif %}
+                            </div>
+
+                            {% include 'partials/user_profile_social_media_links.html' with userProfile=author %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+{% endblock %}

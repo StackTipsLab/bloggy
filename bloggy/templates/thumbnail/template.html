@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <link rel="stylesheet" href="../../static/thumbnail-template/thumbnail-style.css">
+    <link rel="icon" href="{% static 'media/favicon/favicon.ico' %}" type="image/x-icon">
+</head>
+<body style="background: {{ category_color }} !important;">
+<main>
+    <div class="main-wrapper">
+        <div class="title-wrapper">
+            {% if category_image %}
+                <img src="{{ category_image }}" class="category-icon"/>
+            {% endif %}
+            <h1 class="post-title">
+                {{ post_title }}
+            </h1>
+        </div>
+
+        <div class="bottom-bar">
+            <div class="author-meta">
+                {% if author_image_url %}
+                    <img src="{{ author_image_url }}" class="author-avatar"/>
+                    <span class="author-name">{{ author_name }}</span>
+                {% endif %}
+            </div>
+
+            <img src="{{ brand_logo_url }}" class="brand-logo"/>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>{{ email_subject }}</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        a {
+            color: #068bea;
+        }
+
+        p {
+            line-height: 1.3rem;
+            color: #414141;
+        }
+
+        .primary-cta {
+            padding: 12px 20px;
+            background: #068bea;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: -0.25rem 0;
+            display: inline-block;
+            box-shadow: 5px 15px 15px rgb(93 118 118 / 12%);
+        }
+
+    </style>
+<body>
+
+<p>Thank you for signing up for my email newsletter!</p>
+<p>Please complete the process by
+    <a href="{{ verification_link }}"> clicking here </a> to confirm your registration.</p>
+<a href="{{ verification_link }}" style="padding: 12px 20px;background: #068bea;color: white;text-decoration: none;border-radius: 4px;margin: -0.25rem 0;display: inline-block;box-shadow: 5px 15px 15px rgb(93 118 118 / 12%);">Verify your email</a>
+<p style="margin-top: 1rem">If you didn't request this email, there's nothing to worry about - you can safely ignore
+    it.</p>
+<br>
+<em>Thank you,<br>
+StackTips Team</em>
+</body>
+</html>

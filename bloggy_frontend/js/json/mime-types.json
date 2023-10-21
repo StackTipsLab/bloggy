@@ -1,0 +1,195 @@
+[
+  {
+    "mime_type": "text/plain",
+    "description": "Plain text file",
+    "file_extension": ".txt",
+    "links": [
+      "https://en.wikipedia.org/wiki/Plain_text"
+    ]
+  },
+  {
+    "mime_type": "text/html",
+    "description": "Hypertext Markup Language (HTML) file",
+    "file_extension": ".html",
+    "links": [
+      "https://en.wikipedia.org/wiki/HTML"
+    ]
+  },
+  {
+    "mime_type": "application/json",
+    "description": "JSON (JavaScript Object Notation) file",
+    "file_extension": ".json",
+    "links": [
+      "https://www.json.org/"
+    ]
+  },
+  {
+    "mime_type": "application/pdf",
+    "description": "Portable Document Format (PDF) file",
+    "file_extension": ".pdf",
+    "links": [
+      "https://en.wikipedia.org/wiki/PDF"
+    ]
+  },
+  {
+    "mime_type": "image/jpeg",
+    "description": "JPEG (Joint Photographic Experts Group) image file",
+    "file_extension": ".jpg",
+    "links": [
+      "https://en.wikipedia.org/wiki/JPEG"
+    ]
+  },
+  {
+    "mime_type": "image/png",
+    "description": "Portable Network Graphics (PNG) image file",
+    "file_extension": ".png",
+    "links": [
+      "https://en.wikipedia.org/wiki/Portable_Network_Graphics"
+    ]
+  },
+  {
+    "mime_type": "audio/mpeg",
+    "description": "MPEG-1 Audio Layer 3 (MP3) audio file",
+    "file_extension": ".mp3",
+    "links": [
+      "https://en.wikipedia.org/wiki/MP3"
+    ]
+  },
+  {
+    "mime_type": "video/mp4",
+    "description": "MPEG-4 Part 14 (MP4) video file",
+    "file_extension": ".mp4",
+    "links": [
+      "https://en.wikipedia.org/wiki/MPEG-4_Part_14"
+    ]
+  },
+  {
+    "mime_type": "application/vnd.ms-excel",
+    "description": "Microsoft Excel spreadsheet",
+    "file_extension": ".xls",
+    "links": [
+      "https://en.wikipedia.org/wiki/Microsoft_Excel"
+    ]
+  },
+  {
+    "mime_type": "application/msword",
+    "description": "Microsoft Word document",
+    "file_extension": ".doc",
+    "links": [
+      "https://en.wikipedia.org/wiki/Microsoft_Word"
+    ]
+  }
+
+
+
+  {
+    "mime_type": "text/plain",
+    "description": "Plain text file",
+    "file_extension": ".txt",
+    "links": [
+      "https://en.wikipedia.org/wiki/Plain_text"
+    ]
+  },
+  {
+    "mime_type": "text/html",
+    "description": "Hypertext Markup Language (HTML) file",
+    "file_extension": ".html",
+    "links": [
+      "https://en.wikipedia.org/wiki/HTML"
+    ]
+  },
+  {
+    "mime_type": "application/json",
+    "description": "JSON (JavaScript Object Notation) file",
+    "file_extension": ".json",
+    "links": [
+      "https://www.json.org/"
+    ]
+  },
+  {
+    "mime_type": "application/pdf",
+    "description": "Portable Document Format (PDF) file",
+    "file_extension": ".pdf",
+    "links": [
+      "https://en.wikipedia.org/wiki/PDF"
+    ]
+  },
+  {
+    "mime_type": "image/jpeg",
+    "description": "JPEG (Joint Photographic Experts Group) image file",
+    "file_extension": ".jpg",
+    "links": [
+      "https://en.wikipedia.org/wiki/JPEG"
+    ]
+  },
+  {
+    "mime_type": "image/png",
+    "description": "Portable Network Graphics (PNG) image file",
+    "file_extension": ".png",
+    "links": [
+      "https://en.wikipedia.org/wiki/Portable_Network_Graphics"
+    ]
+  },
+  {
+    "mime_type": "audio/mpeg",
+    "description": "MPEG-1 Audio Layer 3 (MP3) audio file",
+    "file_extension": ".mp3",
+    "links": [
+      "https://en.wikipedia.org/wiki/MP3"
+    ]
+  },
+  {
+    "mime_type": "video/mp4",
+    "description": "MPEG-4 Part 14 (MP4) video file",
+    "file_extension": ".mp4",
+    "links": [
+      "https://en.wikipedia.org/wiki/MPEG-4_Part_14"
+    ]
+  },
+  {
+    "mime_type": "application/vnd.ms-excel",
+    "description": "Microsoft Excel spreadsheet",
+    "file_extension": ".xls",
+    "links": [
+      "https://en.wikipedia.org/wiki/Microsoft_Excel"
+    ]
+  },
+  {
+    "mime_type": "application/msword",
+    "description": "Microsoft Word document",
+    "file_extension": ".doc",
+    "links": [
+      "https://en.wikipedia.org/wiki/Microsoft_Word"
+    ]
+  },
+  {
+    "mime_type": "application/zip",
+    "description": "Zip archive file",
+    "file_extension": ".zip",
+    "links": [
+      "https://en.wikipedia.org/wiki/Zip_(file_format)"
+    ]
+  },
+  {
+    "mime_type": "application/xml",
+    "description": "XML (eXtensible Markup Language) file",
+    "file_extension": ".xml",
+    "links": [
+      "https://en.wikipedia.org/wiki/XML"
+    ]
+  },
+  {
+    "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "description": "Microsoft Word Open XML document",
+    "file_extension": ".docx",
+    "links": [
+      "https://en.wikipedia.org/wiki/Office_Open_XML"
+    ]
+  },
+  {
+    "mime_type": "application/octet-stream",
+    "description": "Arbitrary binary data",
+    "file_extension": ".bin",
+    "links
+
+]

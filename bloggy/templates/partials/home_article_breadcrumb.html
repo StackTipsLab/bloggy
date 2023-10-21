@@ -1,0 +1,17 @@
+<section class="article-breadcrumb d-none d-md-block d-print-none">
+    <div class="container">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'articles' %}">Tutorials</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span>{{ article.title }}</span>
+                </li>
+            </ol>
+        </nav>
+    </div>
+</section>

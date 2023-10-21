@@ -1,0 +1,18 @@
+@import "../customVariables";
+
+
+.list-group-item {
+  padding: 0.5rem 0;
+  background: none;
+}
+
+.list-group-item.active a {
+  color: $primary !important;
+  font-weight: 600;
+}
+
+.list-group-item:last-child,
+.list-group-item:first-child {
+  border-radius: 0;
+}
+

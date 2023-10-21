@@ -1,0 +1,38 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    {% block content %}
+        <div class="container">
+            {% include "partials/category_archive_banner.html" with category=selected_category %}
+            <div class="row">
+                <main id="main-content" class="col-12 col-lg-9 py-3 py-lg-4">
+
+                    <div class="d-flex bd-highlight">
+                        {% categories_widget count=99 content_type="article" widgetStyle="list" %}
+                        <div class="flex-grow-1">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-1 latest-feed-container">
+                                {% for article in articles %}
+                                    <div class="col mb-3">
+                                        {% include "partials/article_row_grid.html" with article=article cssClass="card-rounded" %}
+                                    </div>
+                                    {% if forloop.counter == 3 %}
+                                        {% include "partials/course_row_grid.html" with courses=courses %}
+                                    {% endif %}
+
+                                {% endfor %}
+                                {% include "partials/paging.html" with posts=articles %}
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <aside id="sidebar-right" class="flex-filled col-md-3">
+                    <div class="sidebar-content sticky-top" style="z-index: 99">
+                        {% include 'partials/newsletter.html' %}
+                        {% related_quizzes_widget limit=4 widgetTitle="Quizzes" %}
+                    </div>
+                </aside>
+            </div>
+        </div>
+    {% endblock content %}
+{% endspaceless %}

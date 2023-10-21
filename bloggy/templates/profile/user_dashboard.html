@@ -1,0 +1,33 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% load custom_widgets %}
+{#{% block base_css_class %}bg-light{% endblock base_css_class %}#}
+{% block content %}
+    <section>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-2">
+                    {% include 'partials/dashboard_menu.html' %}
+                </div>
+
+                <div class="col-lg-9">
+                    {% if articles %}
+                        <div class="bg-white padding-medium">
+                            <h1 class="display-3 fw-600 pb-2">My articles</h1>
+
+                            {% for article in articles %}
+                                {% include 'partials/article_row_list.html' with article=article %}
+                            {% endfor %}
+
+                            {% include 'partials/paging.html' with posts=articles %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

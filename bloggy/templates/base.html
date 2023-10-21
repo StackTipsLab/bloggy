@@ -1,0 +1,26 @@
+{% load static %}
+{% spaceless %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    {% include "seo/seotags.html" %}
+    {% block jsonld %}{% endblock jsonld %}
+    {% include "seo/header_scripts.html" %}
+</head>
+<body class="{% block base_css_class %}{% endblock base_css_class %}" >
+<div id="toastContainer"></div>
+{% if not debug %}
+     <!-- Google Tag Manager (noscript) -->
+        <noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NQF9FG5"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+{% endif %}
+{% block content %}{% endblock content %}
+</body>
+</html>
+{% endspaceless %}

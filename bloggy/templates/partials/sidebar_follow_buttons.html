@@ -1,0 +1,36 @@
+{% load custom_widgets %}
+{% load define_action %}
+{% spaceless %}
+    <div class="d-flex flex-column">
+        {% define article.author as author %}
+        {% if author %}
+            {% if author.youtube %}
+                <div class="mb-3">
+                    <script src="https://apis.google.com/js/platform.js" lazy></script>
+                    <div class="g-ytsubscribe" data-channelid="{% get_youtube_channel_id article.author.youtube %}"
+                         data-layout="full"
+                         data-count="hidden"></div>
+                </div>
+            {% endif %}
+
+            {% if author.twitter %}
+                <div class="mb-3">
+                    <a class="twitter-follow-button"
+                       href="{{ author.twitter }}"
+                       data-size="small"
+                       data-show-count="false">{% get_twitter_username author.twitter %}</a>
+                </div>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            {% endif %}
+
+            {% if author.github %}
+                <div class="mb-3">
+                    <a class="github-button" href="{{ author.github }}" data-size="large"
+                       aria-label="Follow @{% get_github_username author.github %} on GitHub">{% get_github_username author.github %}</a>
+                    <script async defer src="https://buttons.github.io/buttons.js"></script>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+
+{% endspaceless %}

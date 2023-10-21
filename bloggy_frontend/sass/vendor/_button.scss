@@ -1,0 +1,71 @@
+@import "../customVariables";
+
+.btn {
+  transition: all .3s ease-in-out;
+  border-radius: $btn-border-radius;
+
+  &:hover {
+    box-shadow: none;
+    transform: translateY(-4px);
+  }
+}
+
+.btn-primary,
+.btn-outline-warning,
+.btn-warning,
+.btn-outline-primary,
+.btn-outline-secondary {
+
+  &:hover,
+  &:active {
+    color: $white;
+
+    svg {
+      fill: $white;
+    }
+  }
+}
+
+.btn-info {
+  color: $gray-800;
+}
+
+.btn-primary,
+.btn-warning {
+  color: $white;
+}
+
+
+.btn-sm {
+  padding: 6px 10px;
+  font-size: $font-size-sm;
+  border-radius: $btn-border-radius;
+  box-shadow: none;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+}
+
+.btn-xs {
+  padding: 3px 8px !important;
+  border-radius: 5px !important;
+  font-size: 0.7rem !important;
+  text-transform: uppercase !important;
+}
+
+.btn-secondary {
+  &:hover,
+  &:active,
+  &:focus {
+    color: white;
+  }
+}
+
+.btn-lg {
+  padding: 0.65rem 1.25rem;
+  font-size: $font-size-base;
+  border-radius: $btn-border-radius !important;
+}

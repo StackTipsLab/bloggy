@@ -1,0 +1,54 @@
+{% load static %}
+{% load custom_widgets %}
+{% spaceless %}
+{% if request.resolver_match.url_name == 'index' %}
+    <title>{{ seo_site_name }} - {{ seo_title }}</title>
+    <meta name="title" content="{{ seo_site_name }} - {{ seo_title }}" />
+{% else %}
+    <title>{{ seo_title }} | {{ seo_site_name }}</title>
+    <meta name="title" content="{{ seo_title }} | {{ seo_site_name }}" />
+{% endif %}
+<link rel="dns-prefetch" href="https://stacktips.com" />
+<link rel="dns-prefetch" href="{{ ASSETS_DOMAIN}}" />
+<meta name="description" content="{{ seo_description }}" />
+{% if seo_keywords %}
+    <meta name="keywords" content="{{ seo_keywords }}"/>
+{% endif %}
+<meta name="author" content="StackTips"/>
+<meta name="generator" content="StackTips"/>
+<meta name="msvalidate.01" content="0BE11DA347C70DD1D08AB16F24582051"/>
+<link rel="canonical" href="{{ request.build_absolute_uri }}" />
+<link rel="preconnect" href="https://rsms.me/">
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="alternate" type="application/rss+xml" title="StackTips - Articles" href="{% url 'articles_feed' %}" />
+<link rel="alternate" type="application/rss+xml" title="StackTips - Courses" href="{% url 'courses_feed' %}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{% static 'media/favicon/apple-touch-icon.png' %}" />
+<link rel="icon" type="image/png" sizes="32x32" href="{% static 'media/favicon/favicon.ico' %}" />
+<link rel="icon" type="image/png" sizes="16x16" href="{% static 'media/favicon/favicon.ico' %}" />
+<meta name="msapplication-TileColor" content="#C0DEF9" />
+<meta name="theme-color" content="#C0DEF9" />
+<link rel="shortcut icon" type="image/x-icon" href="{% static 'media/favicon/apple-touch-icon.png' %}"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@StackTips"/>
+<meta name="twitter:creator" content="@ask_nilan"/>
+<meta name="twitter:title" content="{{ seo_title }}"/>
+<meta name="twitter:description" content="{{ seo_description }}"/>
+{% if og_image %}
+    <meta name="twitter:image" content="{{ og_image }}"/>
+{% else %}
+    <meta name="twitter:image" content="{{ seo_image }}"/>
+{% endif %}
+
+<meta property="og:url" content="{{ request.build_absolute_uri }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="{{ seo_title }} | {{ seo_site_name }}"/>
+<meta property="og:description" content="{{ seo_description }}"/>
+{% if og_image %}
+    <meta property="og:image" content="{{ og_image }}"/>
+{% else %}
+    <meta property="og:image" content="{{ seo_image }}"/>
+{% endif %}
+{% comment %} Organization JSON-LD {% endcomment %}
+<script type="application/ld+json">{"@context":"http://schema.org","@type":"Organization","name":"{% get_settings 'SITE_TITLE' %}","url":"{% get_settings 'SITE_URL' %}","logo":"{% get_settings 'SITE_LOGO' %}","description":"{% get_settings 'SITE_DESCRIPTION' %}","founder":[{"@type":"Person","name":"Nilanchala Panigrahy","url":"https://www.linkedin.com/in/nilanchala"}],"sameAs":["https://www.facebook.com/stacktips","https://twitter.com/stacktips","https://github.com/stacktipslab"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://stacktips.com/","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://stacktips.com/search?q={search_term_string}"},"query-input":"required name=search_term_string"}}</script>
+{% endspaceless %}

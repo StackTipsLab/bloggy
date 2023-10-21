@@ -1,0 +1,117 @@
+#homeIntroSection {
+  background-repeat: repeat;
+
+  .text-gradient {
+    background: -webkit-linear-gradient(30deg, #769BF2, #15CA82);
+    background-clip: border-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@keyframes scale {
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+.hover-effect {
+  &:hover {
+    background: #ebfcff !important;
+    -webkit-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    transition: background-color 300ms linear, transform .2s;
+  }
+}
+
+.home-quiz-card {
+  position: relative;
+  padding: 1rem 1rem;
+  margin-bottom: 1rem;
+  background: #e1ecfd no-repeat right bottom;
+  background-size: contain;
+  height: 100%;
+  max-height: 140px;
+  box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);
+  border: 1px solid #8fcaff;
+
+  &:hover {
+    transform: translateY(-5px);
+    background-color: #e3eeff;
+    border-color: $primary;
+    -webkit-transition: background-color 300ms linear;
+    -ms-transition: background-color 300ms linear;
+    transition: background-color, border-color 300ms linear, transform 0.2s;
+  }
+
+
+  .highlight-container {
+    max-width: 80%;
+    min-height: 55px;
+    display: block;
+  }
+
+  .quiz-title {
+    color: #174755;
+    background: #e1ecfe;
+    opacity: 0.98;
+    font-size: $font-size-base;
+  }
+
+  .quiz-meta {
+    color: #f57359;
+    font-weight: 400;
+  }
+}
+
+
+.scrolling-wrapper {
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+
+.topics-tag {
+  padding: 1.1rem 1rem;
+  background: #f0f9ff;
+  border-radius: $card-border-radius;
+  border: 0.09rem solid #b5c4cc;
+  transition: all 0.2s ease-in-out !important;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .tag__chevron {
+    height: 24px;
+    width: 24px;
+    color: $body-color
+  }
+
+  .tag__image {
+    -o-object-fit: contain;
+    object-fit: contain;
+    width: 32px;
+    height: 32px;
+  }
+
+}
+
+
+@media screen and (min-width: 992px) {
+  .latest-feed-container {
+    padding: 0 1rem;
+    margin: 0 0 0 1rem;
+
+    //.col:first-child {
+    //  margin-top: 0;
+    //}
+  }
+}

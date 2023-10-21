@@ -1,0 +1,53 @@
+{% extends "base-with-header-footer.html" %}
+{% block title %}
+    {{ selected_category }} - StackTips
+{% endblock %}
+{% load static %}
+{% load custom_widgets %}
+{% block content %}
+    <section class="article-breadcrumb d-none d-md-block mb-4 d-print-none">
+        <div class="container">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'index' %}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'quizzes' %}">Quizzes</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span>{{ article.title }}</span>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <main id="main-content" class="article-details-card padding-medium lessons_list col-12 col-md-8">
+                <div id="vueRoot">
+                    <quizzlet :quiz="{{ article.get_questions_json }}"></quizzlet>
+                </div>
+            </main>
+
+            <aside id="sidebar" class="flex-filled col-12 px-3 col-md-4 pt-0">
+                <div class="sidebar-content sticky-top ms-lg-3" style="z-index: 99">
+                    {% include "partials/home_widget_contribute_cta.html" %}
+                    {% related_article_widget count=6 slug=lesson.slug widgetTitle='Recent postss' widgetStyle="miniGrid" %}
+                    {% include 'partials/newsletter.html' %}
+
+                </div>
+            </aside>
+
+            <section class="py-5">
+                {% with category.title|addstr:" Quiz" as widgetTitle %}
+                    {% related_quizzes_widget limit=15 widgetTitle=widgetTitle widgetStyle="grid" %}
+                {% endwith %}
+            </section>
+
+        </div>
+    </div>
+{% endblock %}
+
+

@@ -1,0 +1,52 @@
+{% load static %}
+{% load custom_widgets %}
+{% load define_action %}
+{% load hitcount_tags %}
+{% spaceless %}
+    <div class="border-bottom py-3">
+        <div class="d-flex align-items-center">
+            <div class="flex-grow-1">
+                <div class="hero article-meta-container mb-2" style="font-size: 0.75rem">
+                    <small class="d-inline-block mb-1 text-muted text-uppercase">Updated on {{ article.updated_date|date:"M j, Y" }}</small>
+
+                    {% if  article.publish_status == 'DRAFT' %}
+                        <span class="ms-3 badge-meta-pill {{ article.publish_status | lower }}">{{ article.publish_status | capfirst }}</span>
+                    {% endif %}
+                    <span class="ms-3 badge-meta-pill {{ article.post_type| lower }}">{{ article.post_type | capfirst }}</span>
+
+
+                </div>
+                <h3 class="h3 fw-500 mb-2">
+                    <a href="{% url 'article_single' slug=article.slug %}"
+                       class="text-decoration-none link-dark">{{ article.title }}</a>
+                </h3>
+
+
+                {% if article.author.username == user.username %}
+                    <small class="me-3 text-muted text-uppercase" style="font-size:0.75rem">
+                        <i class="fa-solid fa-signal"></i>&nbsp;
+                        {% get_hit_count for article %} views
+                    </small>
+
+
+                    <small class="me-3 text-muted text-uppercase" style="font-size:0.75rem">
+                        <i class="fa-regular fa-comment"></i>
+                        {{ article.get_comments_count }} comments
+                    </small>
+                    <a class="btn btn-sm btn-xs btn-light me-3" href="{{ article.get_admin_url }}"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                {% endif %}
+
+            </div>
+
+            <div class="flex-shrink-0 ms-3">
+                {% if article.thumbnail %}
+                    <div class="archive-media-object" style="max-width: 100px">
+                        <img loading="lazy" src="{{ article.thumbnail.url }}" alt="{{ article.title }}" height="auto">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+    </div>
+{% endspaceless %}
