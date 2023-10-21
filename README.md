@@ -64,10 +64,10 @@ python3 manage.py runserver
 For building frontend code, you will need the following node version.
 
 ```shell
-  node -v
+node -v
   v12.22.12
   
-  npm -v      
+npm -v      
   6.14.16  
 ```
 
@@ -75,7 +75,6 @@ Once you have the above node version installed, install node dependencies using 
 
 ```shell
 npm install
-
 ```
 
 Now, you can build 
