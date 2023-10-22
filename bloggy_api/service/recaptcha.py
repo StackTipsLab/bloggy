@@ -3,10 +3,10 @@ from urllib import request
 from bloggy import settings
 
 
-def recaptcha_verify(recaptchaResponse):
+def recaptcha_verify(recaptcha_response):
     data = {
         'secret': settings.GOOGLE_RECAPTHCA_SECRET_KEY,
-        'response': recaptchaResponse
+        'response': recaptcha_response
     }
 
     req = request.Request(settings.GOOGLE_RECAPTHCA_TOKEN_VERIFY_URL, data=data)

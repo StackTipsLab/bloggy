@@ -4,21 +4,6 @@ from django.views.generic import TemplateView
 from bloggy.models import MyUser, Article
 
 
-# class UserDashboardView(TemplateView):
-#     template_name = "profile/user_dashboard.html"
-#
-#     def get_context_data(self, *args, **kwargs):
-#         context = super(UserDashboardView, self).get_context_data(*args, **kwargs)
-#         username = self.request.user.username
-#         user = get_object_or_404(MyUser, username=username)
-#         context.update({
-#             'articles': Article.objects.filter(author_id=user.id).order_by("-published_date").all(),
-#             'userProfile': user,
-#             'userType': "self",
-#         })
-#         return context
-
-
 class UserBookmarksView(TemplateView):
     template_name = "profile/user_bookmarks.html"
 

@@ -22,19 +22,9 @@ class SearchListView(ListView):
                 Article.objects.filter(title__icontains=search_query, excerpt__icontains=search_query, publish_status="LIVE"),
             )
 
-            # paginator = Paginator(results, self.paginate_by)
-            # page = self.request.GET.get('page')
-            # try:
-            #     results = paginator.page(page)
-            # except PageNotAnInteger:
-            #     results = paginator.page(1)
-            # except EmptyPage:
-            #     results = paginator.page(paginator.num_pages)
-
             context['articles'] = results
             context['categories'] = categories
             context['search_query'] = search_query
-
             context['seo_title'] = "Search result for {}".format(search_query)
             context['seo_description'] = "Search courses, tutorials, topics and quizzes on stacktips.com"
 

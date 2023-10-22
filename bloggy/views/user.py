@@ -105,36 +105,6 @@ class MyProfileView(DetailView):
         context['seo_title'] = "My Profile"
         context['seo_description'] = "My profile. Access your profile, account settings My Profile. You need a StackTips account to sign in and view your profile."
         if user.profile_photo:
-            context['seo_image'] = "https://media.stacktips.com/static/media/logo.png"
+            context['seo_image'] = settings.SITE_LOGO
 
         return context
-
-# def add_follow(self, request):
-#     user = self.get_object()
-#     user.profile.followed_by.add(request.user.profile)
-# def get_context_data(self, *args, **kwargs):
-#     # //username = self.kwargs.get("username")
-#
-#
-#     # user = User.all().fi
-#
-#     profile = get_object_or_404(Profile, user_id=self.request.user.id)
-#     print(profile)
-#     context['profile'] = profile
-#     return context
-#
-# # def get_context_data(self, *args, **kwargs):
-# #     context = super(Profile, self).get_context_data(*args, **kwargs)
-# #     user = self.get_object()
-# #     context.update({
-# #         'startups': user.startups.all()  # .filter(created_date__lte=timezone.now()).order_by(' -created_date')
-# #     })
-# #     return context
-#
-# # def get_context_data(self, request, **kwargs):
-# #     user_form = UserForm(request.user)
-# #     profile_form = ProfileForm(request.user.profile)
-# #     context['user'] = request.user
-# #     context['user_form'] = user_form
-# #     context['profile_form'] = profile_form
-# #     return context

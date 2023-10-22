@@ -55,9 +55,7 @@ class BookmarkAPIView(APIView):
 
         return HttpResponse(
             json.dumps({
-                # "result": created,
                 "userBookmarkCount": Bookmarks.objects.filter(user=user, post_id=post_id, post_type=post_type).count(),
-                # "totalBookmarks": self.model.objects.filter(post_id=post_id, post_type=post_type).count()
             }),
 
             content_type="application/json"

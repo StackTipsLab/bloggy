@@ -317,7 +317,6 @@ else:
         }
     }
 
-
 # Django HitCount
 HITCOUNT_KEEP_HIT_ACTIVE = {'days': 0}
 HITCOUNT_KEEP_HIT_IN_DATABASE = {'days': 77}
@@ -329,7 +328,7 @@ SHORTCODES_YOUTUBE_JQUERY = False
 # SEO related
 PING_INDEX_NOW_POST_UPDATE = os.getenv("PING_INDEX_NOW_POST_UPDATE", True)
 PING_GOOGLE_POST_UPDATE = os.getenv("PING_GOOGLE_POST_UPDATE", True)
-INDEX_NOW_API_KEY = os.getenv("INDEX_NOW_API_KEY",)
+INDEX_NOW_API_KEY = os.getenv("INDEX_NOW_API_KEY", )
 
 # Email configs
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
@@ -340,3 +339,6 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', True)
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emails'))
+
+# ads.txt file content
+MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')

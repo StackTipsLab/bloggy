@@ -23,21 +23,6 @@ class IndexView(TemplateView):
         return context
 
 
-class GuestBookView(TemplateView):
-    template_name = "pages/static/guestbook.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(GuestBookView, self).get_context_data(**kwargs)
-
-        try:
-            data = HttpUtils.read_file("/static/json/twitter-testimonials.json")
-            context['data'] = data['testimonials']
-        except Exception as e:
-            print(e)
-
-        return context
-
-
 class AboutPageView(TemplateView):
     template_name = "pages/static/about.html"
 
