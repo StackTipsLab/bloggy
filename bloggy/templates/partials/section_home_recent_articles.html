@@ -3,22 +3,19 @@
     {% load custom_widgets %}
     <section class="recent-articles py-3">
         <div class="container">
-            <div class="d-flex py-2">
-                <div class="flex-shrink-0 pe-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"
-                         fill="rgb(51, 65, 85)">
-                        <path d="m123-213-74-76 328-328 164 164 191-191h-88v-106h268v270H806v-90L541-303 377-467 123-213Z"/>
-                    </svg>
-                </div>
+            <div class="py-2">
                 <h2 class="h2">Recent posts</h2>
             </div>
 
             <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 g-3">
+                {% if articles|length <= 0 %}
+                    <p class="lead my-3 text-muted">No contents found!</p>
+                {% endif %}
+
                 {% for article in articles %}
                     <div class="col">
                         {% include "partials/article_row_grid.html" with article=article cssClass="card-rounded" %}
                     </div>
-
                 {% endfor %}
             </div>
             <div class="text-center mt-5">

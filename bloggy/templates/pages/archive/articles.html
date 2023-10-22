@@ -12,6 +12,10 @@
                         {% categories_widget count=99 content_type="article" widgetStyle="list" %}
                         <div class="flex-grow-1">
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-1 latest-feed-container">
+                                 {% if articles|length <= 0 %}
+                                    <p class="lead my-3 text-muted">No contents found!</p>
+                                 {% endif %}
+
                                 {% for article in articles %}
                                     <div class="col mb-3">
                                         {% include "partials/article_row_grid.html" with article=article cssClass="card-rounded" %}

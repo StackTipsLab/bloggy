@@ -1,7 +1,7 @@
 {% extends "base-with-header-footer.html" %}
 {% load static %}
 {% spaceless %}
-{#    {% block base_css_class %}bg-light{% endblock base_css_class %}#}
+    {#    {% block base_css_class %}bg-light{% endblock base_css_class %}#}
     {% block content %}
         <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
                 integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
@@ -24,6 +24,10 @@
         </div>
         <div class="container">
             <div class="row row-eq-height archive-grid pb-4" data-masonry='{"percentPosition": true }'>
+                {% if categories|length <= 0 %}
+                    <p class="lead my-3 text-muted">No contents found!</p>
+                {% endif %}
+
                 {% for category in categories %}
                     <div class="col-md-3">
                         <div class="py-2 h-100">
