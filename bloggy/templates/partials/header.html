@@ -19,11 +19,10 @@
 
             <div class="collapse navbar-collapse align-content-around" id="navbarNavAltMarkup">
                 <ul class="navbar-nav flex-shrink-0">
-                    {#                    <li class="nav-item">#}
-                    {#                        <a class="nav-link {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"#}
-                    {#                           href="{% url 'categories' %}">Topics</a>#}
-                    {#                    </li>#}
-
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"
+                           href="{% url 'categories' %}">Topics</a>
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'courses' %} active{% endif %}"

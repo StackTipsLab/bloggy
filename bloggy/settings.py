@@ -263,16 +263,11 @@ SUMMERNOTE_CONFIG = {
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
-SITE_TITLE = "StackTips"
-SITE_DESCRIPTION = "Free programming tutorials, how-to guides, code snippets on various tech subjects"
-SITE_LOGO = "https://media.stacktips.com/static/media/logo.png"
-
-# Social login
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.github.GithubOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
+SITE_TITLE = os.getenv("SITE_TITLE", "Demo Site")
+SITE_TAGLINE = os.getenv("SITE_TAGLINE", "Demo Site")
+SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION")
+SITE_LOGO = os.getenv("SITE_LOGO")
+ASSETS_DOMAIN = os.getenv("ASSETS_DOMAIN")
 
 GOOGLE_RECAPTHCA_SECRET_KEY = os.getenv('GOOGLE_RECAPTHCA_SECRET_KEY')
 GOOGLE_RECAPTHCA_TOKEN_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify'
@@ -286,7 +281,6 @@ REST_FRAMEWORK = {
 
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ]
 }
@@ -323,7 +317,6 @@ else:
         }
     }
 
-ASSETS_DOMAIN = os.getenv("ASSETS_DOMAIN", "https://media.stacktips.com")
 
 # Django HitCount
 HITCOUNT_KEEP_HIT_ACTIVE = {'days': 0}
@@ -336,7 +329,7 @@ SHORTCODES_YOUTUBE_JQUERY = False
 # SEO related
 PING_INDEX_NOW_POST_UPDATE = os.getenv("PING_INDEX_NOW_POST_UPDATE", True)
 PING_GOOGLE_POST_UPDATE = os.getenv("PING_GOOGLE_POST_UPDATE", True)
-INDEX_NOW_API_KEY = os.getenv("INDEX_NOW_API_KEY", "220764bdee4b4ff297c588217aaaafa3")
+INDEX_NOW_API_KEY = os.getenv("INDEX_NOW_API_KEY",)
 
 # Email configs
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
@@ -345,5 +338,5 @@ EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', True)
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'hello.stacktips@gmail.com')
-EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-mails'))
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emails'))

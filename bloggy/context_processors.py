@@ -10,39 +10,15 @@ def seo_attrs(request: HttpRequest):
     """
 
     seo = {
-        'seo_site_name': 'StackTips',
-        'seo_title': 'Resources for Developers',
+        'seo_site_name': settings.SITE_TITLE,
+        'seo_title': settings.SITE_TAGLINE,
         'seo_description': 'Elevate your coding skills with StackTips. Learn through articles, courses, and quizzes on StackTips',
         'seo_keywords': 'stacktips, stack tips, python course, java tutorials, spring tutorials, spring boot tutorials, maven course for bignners, practice quiz, aws practice quiz, aws practice test',
-        'seo_image': 'https://media.stacktips.com/static/media/logo.png',
-        'og_image': ''
+        'og_image': '',
+        'seo_image': settings.SITE_LOGO
     }
-    # 'seo_image': 'https://media.stacktips.com/media/uploads/stacktips-banner.png',
-    if request.path == "/resources":
-        seo["seo_title"] = "Tools"
-        seo['seo_description'] = "StackTips a variety of free online resources and tools to perform many day to day basic use without requiring to install any special software."
 
-    elif request.path == "/resources/base64-converter":
-        seo["seo_title"] = "Base64 Encoder/Decoder"
-        seo['seo_description'] = "Encode to Base64 format or decode from base64 format. Base64 encoding allows complex images or text to be transformed into simple text data (letters and numbers)."
-
-    elif request.path == "/resources/url-encoder":
-        seo["seo_title"] = "URL Encoder/Decoder"
-        seo['seo_description'] = "Encodes or decodes a string so that it conforms to the the URL Specification"
-
-    elif request.path == "/resources/analyze-http-header":
-        seo["seo_title"] = "HTTP Header Analyze"
-        seo['seo_description'] = "This tool will analyse HTTP header of the specified url."
-
-    elif request.path == "/resources/website-link-analyzer":
-        seo["seo_title"] = "Website Link Analyzer Tool"
-        seo['seo_description'] = "Analyze both external and internal urls related to your site."
-
-    elif request.path == "/resources/http-status-codes":
-        seo["seo_title"] = "HTTP Status Codes"
-        seo['seo_description'] = "Easy to reference database of HTTP Status Codes with their definitions."
-
-    elif request.path == "/quizzes":
+    if request.path == "/quizzes":
         seo["seo_title"] = "Interactive Quizzes"
         seo['seo_description'] = "Use bloggy to test your coding skills and gauge your learning progress in a fun way"
         seo['seo_keywords'] = 'stacktips quizzes, stack tips bloggy, quizlzet, take a quiz, practice test, aws quiz, python test, advance python test, aws practitioner test, CLF-C01 AWS test, aws CLF-C01 quiz'

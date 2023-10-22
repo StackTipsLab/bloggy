@@ -1,13 +1,9 @@
 .env
 .env.production
-
 /venv/*
 /venv
-/bloggy/frontend/node_modules/
-/site-content/uploads/
 /.idea/
 /venv/
-/env/
 __pycache__/*
 /bloggy_api/__pycache__/*
 /bloggy/__pycache__/*
@@ -65,7 +61,8 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
-/frontend/node_modules/
+/bloggy_frontend/node_modules/
+/bloggy/static/
 /bloggy/static
 /bloggy/static/debug_toolbar
 /bloggy/static/hitcount
