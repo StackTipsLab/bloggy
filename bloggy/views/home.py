@@ -7,7 +7,6 @@ from bloggy import settings
 from bloggy.models import Category, Article
 from bloggy.models.course import Course
 from bloggy.services.post_service import get_recent_quizzes
-from bloggy.utils.http_utils import HttpUtils
 
 
 @method_decorator([cache_page(settings.CACHE_TTL, key_prefix="home"), vary_on_cookie], name='dispatch')
