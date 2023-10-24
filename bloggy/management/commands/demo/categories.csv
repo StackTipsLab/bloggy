@@ -1,0 +1,12 @@
+title,slug,description,logo,color,publish_status
+Spring,spring,An application framework and inversion of control container for the Java platform,uploads/categories/spring.png,#FF5733,LIVE
+Java,java,"Java is a high-level, class-based, object-oriented programming language",uploads/categories/java.png,#3366FF,LIVE
+MicroServices,microservices,"An architectural approach to software development where software is composed of small independent, self-contained services.",uploads/categories/microservices.png,#33FF33,LIVE
+Android,android,"Operating system that was developed by Google, used in smartphones and tablets.",uploads/categories/android.png,#FF9933,LIVE
+Git,git,Git is a DevOps tool used for source code management,uploads/categories/git.png,#FF3333,LIVE
+Wordpress,wordpress,A free and open-source content management system written in PHP and paired with a MySQL or MariaDB database.,uploads/categories/wordpress.png,#FF33FF,LIVE
+Xamarin,xamarin,Developer's tool for cross-platform mobile application development.,uploads/categories/xamarin.png,#33FFFF,LIVE
+Spring Boot,spring-boot,"Popular, open-source, enterprise-level framework for creating standalone, production-grade applications that run on the JVM",uploads/categories/spring-boot.png,#33FF99,LIVE
+Kotlin,kotlin,"Kotlin is a cross-platform, statically typed, general-purpose programming language with type inference.",uploads/categories/kotlin.png,#3333FF,LIVE
+AWS,aws,"Amazon Web Services (AWS) is the world's most comprehensive, scalable, and cost-effective cloud computing solution.",uploads/categories/aws.png,#99FF33,DRAFT
+Django,django,A high-level Python web framework for rapid development.,uploads/categories/django.png,#FFFF33,DRAFT

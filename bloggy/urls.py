@@ -26,7 +26,7 @@ from bloggy import settings
 from bloggy.views import EditProfileView
 from bloggy.views.courses_view import CoursesListView, CourseDetailsView, LessonDetailsView
 from bloggy.views.home import IndexView, AboutPageView
-from bloggy.views.topics_view import CategoriesView, CategoriesDetailsView
+from bloggy.views.topics_view import TopicsView, TopicsDetailsView
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
@@ -51,8 +51,8 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('articles', ArticleListView.as_view(), name='articles'),
     path('articles/<slug:slug>', ArticleDetailsView.as_view(), name='article_single'),
-    path('topics', CategoriesView.as_view(), name='categories'),
-    path('topics/<str:slug>', CategoriesDetailsView.as_view(), name='categories_single'),
+    path('topics', TopicsView.as_view(), name='categories'),
+    path('topics/<str:slug>', TopicsDetailsView.as_view(), name='categories_single'),
     path('search', SearchListView.as_view(), name='search'),
     path('courses', CoursesListView.as_view(), name='courses'),
     path('courses/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
