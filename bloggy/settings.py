@@ -342,3 +342,7 @@ EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emai
 
 # ads.txt file content
 MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
+
+
+# Read the POST_TYPE_CHOICES environment variable from the .env file
+POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES', 'article:Article,quiz:Quiz,lesson:Lesson')

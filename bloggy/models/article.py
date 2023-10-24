@@ -25,18 +25,18 @@ DIFFICULTY_TYPE = [
     ('advance', 'Advance'),
 ]
 
-POST_TYPE = [
-    ('article', 'Article'),
-    ('quiz', 'Quiz'),
-    ('lesson', 'Lesson'),
-]
-
 TEMPLATE_TYPE = [
     ('standard', 'Standard'),
     ('cover', 'Cover'),
     ('naked', 'Naked'),
     ('full', 'Full'),
 ]
+
+
+# Splitting the environment variable value into a list of tuples
+def get_post_types():
+    post_type = [choice.split(':') for choice in settings.POST_TYPE_CHOICES.split(',')]
+    return [(value, label) for value, label in post_type]
 
 
 class Article(Post):
@@ -50,7 +50,7 @@ class Article(Post):
         verbose_name="Difficulty level")
 
     post_type = models.CharField(
-        max_length=20, choices=POST_TYPE,
+        max_length=20, choices=get_post_types(),
         default='article', blank=True, null=True,
         help_text="Post type",
         verbose_name="Post type")
