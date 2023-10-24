@@ -10,11 +10,11 @@ from bloggy.models import Category
 logger = logging.getLogger(__name__)
 
 
-class CategoriesView(TemplateView):
+class TopicsView(TemplateView):
     template_name = "pages/archive/categories.html"
 
     def get_context_data(self, **kwargs):
-        context = super(CategoriesView, self).get_context_data(**kwargs)
+        context = super(TopicsView, self).get_context_data(**kwargs)
         categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
         logger.debug('Loading categories: %s', categories)
         context['categories'] = categories
@@ -22,7 +22,7 @@ class CategoriesView(TemplateView):
         return context
 
 
-class CategoriesDetailsView(ListView):
+class TopicsDetailsView(ListView):
     model = Article
     template_name = "pages/archive/articles.html"
     paginate_by = 20

@@ -1,6 +1,8 @@
 # Bloggy
 
-Introducing Bloggy! The Open-Source Blogging Platform is Built on Python and Django framework that powers stacktips.com blog.
+Introducing Bloggy! The Open-Source Blogging Platform for developers. It is Built on Python and Django framework and powers [stacktips.com](https://stacktips.com) blog.
+
+If you are a new contributor to this project, have a look out for issues that have the [Hacktoberfest](https://github.com/StackTipsLab/Bloggy/issues?q=is%3Aissue+is%3Aopen+label%3Ahacktoberfest) label.
 
 ## Key Features
 Along with tons of features aimed at enhancing the development and blogging experience. 
@@ -13,11 +15,10 @@ Along with tons of features aimed at enhancing the development and blogging expe
 
 ![](https://res.cloudinary.com/practicaldev/image/fetch/s--ahvrJ22X--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/djjung54zz5kanrsk9v2.jpeg)
 
-
 ## Get Involved!
 Are you a developer looking to enhance your skills, share your knowledge, or simply be curious about the inner workings of a developer-centric blog platform? Now's your chance! 
 
-Want to contribute right away? 
+Want to contribute right away?
 
 Check out the issues section. https://github.com/StackTipsLab/bloggy/issues
 
@@ -105,3 +106,20 @@ Now, you can build
 npm run start
 npm run build # to generate a production build
 ```
+
+
+## Importing Demo Content
+
+We currently supports importing the categories from CSV file. This can be done using the `import_contents` command. All you need to do is to provide the base path where your `.csv` files are located.
+
+The sample CSV files are located in `bloggy/bloggy/management/commands/demo` directory.
+
+```shell
+python3 manage.py import_content --path=~/Documents/github/StackTipsLab/bloggy/bloggy/management/commands/demo
+```
+You may also import the content individually using specific commands
+
+```shell
+python3 manage.py import_categories --path=~/Documents/github/StackTipsLab/bloggy/bloggy/management/commands/demo/categories.csv
+```
+
