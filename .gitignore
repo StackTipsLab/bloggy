@@ -77,3 +77,6 @@ media/uploads/categories/*
 media/uploads/course/*
 media/uploads/quiz/*
 media/uploads/user/*
+
+# Virtual Environments Ignore
+.venv
