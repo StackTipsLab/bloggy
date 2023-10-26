@@ -1,13 +1,14 @@
 import re
+from datetime import datetime
 from urllib.parse import urlparse
 from django import template
 from django.utils.safestring import mark_safe
 from numerize.numerize import numerize
-from bloggy.models import Article, Votes, Bookmarks, Category, Option
 from django.conf import settings
 
+from bloggy.models import Votes, Bookmarks, Article, Category, Option
+
 register = template.Library()
-from datetime import datetime
 
 
 @register.simple_tag
@@ -84,12 +85,12 @@ def get_twitter_username(twitterUrl):
 
 
 @register.simple_tag
-def get_github_username(githubUrl):
+def get_github_username(github_url):
     regex = r"^https?:\/\/(?:www\.)?github\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$"
-    result = re.findall(regex, githubUrl)
+    result = re.findall(regex, github_url)
     if result:
         return result[0]
-    return githubUrl
+    return github_url
 
 
 @register.simple_tag
@@ -152,7 +153,7 @@ pass
 
 
 @register.inclusion_tag('widgets/related_quiz_widget.html', takes_context=True)
-def related_quizzes_widget(context, limit=5, category=None, widgetTitle="Challenges", widgetStyle=None):
+def related_quizzes_widget(context, limit=5, category=None, widget_title="Challenges", widget_style=None):
     if category is None:
         quizzes = Article.objects.filter(post_type="quiz")[:limit]
     else:
@@ -160,13 +161,14 @@ def related_quizzes_widget(context, limit=5, category=None, widgetTitle="Challen
 
     return {
         'quizzes': quizzes,
-        "widgetTitle": widgetTitle,
-        "widgetStyle": widgetStyle,
+        "widgetTitle": widget_title,
+        "widgetStyle": widget_style,
     }
 
 
 @register.inclusion_tag('widgets/related_article_widget.html', takes_context=True)
-def related_article_widget(context, count=12, categories=None, slug=0, widgetTitle="Related posts", widgetStyle="list"):
+def related_article_widget(context, count=12, categories=None, slug=0, widget_title="Related posts",
+                           widget_style="list"):
     articles = None
     if categories is None:
         articles = Article.objects.filter(publish_status="LIVE").filter(post_type="article") \
@@ -178,27 +180,25 @@ def related_article_widget(context, count=12, categories=None, slug=0, widgetTit
         category_slugs.append(str(category.slug))
 
     if len(category_slugs) > 0:
-        articles = Article.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(post_type="article") \
+        articles = Article.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(
+            post_type="article") \
                        .exclude(slug=slug).order_by('-published_date')[:count].all()
 
     return {
-        "widgetTitle": widgetTitle,
+        "widgetTitle": widget_title,
         "relatedArticles": articles,
-        "widgetStyle": widgetStyle,
+        "widgetStyle": widget_style,
     }
     pass
 
 
 @register.inclusion_tag('widgets/categories_widget.html', takes_context=True)
-def categories_widget(context, content_type="article", count=0, widgetStyle=""):
-    # if count > 0:
-    #     categories = Category.objects.filter(article_count__gt=0).order_by("-article_count")[:count].all()
-    # else:
+def categories_widget(context, content_type="article", count=0, widget_style=""):
     categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
 
     return {
         "categories": categories,
-        "widgetStyle": widgetStyle,
+        "widgetStyle": widget_style,
         "contentType": content_type
     }
 
@@ -219,7 +219,6 @@ def replace_all(pattern, repl, string) -> str:
 def highlight_search(text, search):
     highlighted = text.replace(
         search, '<span class="highlight">{}</span>'.format(search))
-    # highlighted = re.sub('(?i)' + re.escape('<span class="highlight">{}</span>'.format(search)), lambda m: search, text)
     return mark_safe(highlighted)
 
 

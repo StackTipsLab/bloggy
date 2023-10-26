@@ -82,8 +82,7 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     def get_full_name_or_username(self):
         if self.name:
             return self.name
-        else:
-            return self.username
+        return self.username
 
     def get_full_name(self):
         full_name = "%s" % self.name
@@ -92,8 +91,7 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     def get_avatar(self):
         if self.profile_photo:
             return self.profile_photo.url
-        else:
-            return get_gravatar(self.email)
+        return get_gravatar(self.email)
 
     def profile_photo_tag(self):
         if self.profile_photo:

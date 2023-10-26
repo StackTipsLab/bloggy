@@ -29,7 +29,7 @@ def seo_attrs(request: HttpRequest):
     return seo
 
 
-def app_settings():
+def app_settings(request: HttpRequest):
     """
         returns app settings
     """

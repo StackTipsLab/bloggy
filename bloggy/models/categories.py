@@ -53,4 +53,4 @@ class Category(Updatable):
     logo_tag.allow_tags = True
 
     def __str__(self):
-        return self.title
+        return str(self.title)

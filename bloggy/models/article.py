@@ -15,8 +15,8 @@ from bloggy.services.quizz_service import get_questions_json
 from bloggy.utils.string_utils import StringUtils
 
 
-def upload_thumbnail_image(self, post_id):
-    return 'uploads/articles/{post_id}'
+def upload_thumbnail_image(post_id):
+    return f'uploads/articles/{post_id}'
 
 
 DIFFICULTY_TYPE = [

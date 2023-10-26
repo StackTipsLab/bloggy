@@ -28,13 +28,9 @@ class MockRequest(object):
 def build_url(request, obj_or_url):
     if obj_or_url is not None:
         if isinstance(obj_or_url, Model):
-            # url = request.build_absolute_uri(obj_or_url.get_absolute_url())
             url = settings.SITE_URL + obj_or_url.get_absolute_url()
             return url
-            # urlShortener = UrlShortener()
-            # return urlShortener.shorten_url(url)
-        else:
-            return request.build_absolute_uri(obj_or_url)
+        return request.build_absolute_uri(obj_or_url)
     return ""
 
 

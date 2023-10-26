@@ -10,11 +10,11 @@ from bloggy.models.course import Course
 class ImageRssFeedGenerator(feedgenerator.Rss201rev2Feed):
     def add_root_elements(self, handler):
         super(ImageRssFeedGenerator, self).add_root_elements(handler)
-        handler.startElement(u'image', {})
-        handler.addQuickElement(u"url", self.feed['logo'])
-        handler.addQuickElement(u"title", self.feed['title'])
-        handler.addQuickElement(u"link", self.feed['link'])
-        handler.endElement(u'image')
+        handler.startElement('image', {})
+        handler.addQuickElement("url", self.feed['logo'])
+        handler.addQuickElement("title", self.feed['title'])
+        handler.addQuickElement("link", self.feed['link'])
+        handler.endElement('image')
 
 
 class BaseRssFeedView(Feed):
@@ -62,13 +62,12 @@ class ArticlesRssFeed(BaseRssFeedView):
         return Article.objects.filter(publish_status="LIVE").order_by('-published_date')[:30]
 
     def item_description(self, obj):
-        content = "{}\n<small>Originally published at <a href='{}' target='_blank'>stacktips.com</a></small>".format(
-            obj.content, settings.SITE_URL + obj.get_absolute_url())
+        content = f"{obj.content}\n<small>Originally published at <a href='{settings.SITE_URL + obj.get_absolute_url()}' target='_blank'>{settings.SITE_URL}</a></small>"
 
         thumbnail = "https://media.stacktips.com/media/uploads/stacktips-banner.png"
         if obj.thumbnail:
             thumbnail = settings.ASSETS_DOMAIN + obj.thumbnail.url
-        return '{}<img src="{}" alt="{}" style="display:none;">'.format(content, thumbnail, obj.title)
+        return f'{content}<img src="{thumbnail}" alt="{obj.title}" style="display:none;">'
 
     def item_author_name(self, obj):
         author = obj.author
@@ -83,6 +82,7 @@ class ArticleAtomFeed(ArticlesRssFeed):
     feed_type = ImageRssFeedGenerator
     subtitle = ArticlesRssFeed.description
 
+
 class CoursesRssFeed(BaseRssFeedView):
     title = "StackTips - Courses"
     link = "/courses"
@@ -91,8 +91,7 @@ class CoursesRssFeed(BaseRssFeedView):
         return Course.objects.filter(publish_status="LIVE").order_by('-published_date')[:30]
 
     def item_description(self, obj):
-        content = "{}\n<small>Take the free course from <a href='{}' target='_blank'>stacktips.com</a></small>".format(
-            obj.excerpt, settings.SITE_URL + obj.get_absolute_url())
+        content = f"{obj.excerpt}\n<small>Take the free course from <a href='{settings.SITE_URL + obj.get_absolute_url()}' target='_blank'>{settings.SITE_URL}</a></small>"
         return content
 
     def item_categories(self, obj):

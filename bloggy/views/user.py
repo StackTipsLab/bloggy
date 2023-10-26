@@ -61,7 +61,7 @@ class PublicProfileView(SingleObjectMixin, View):
             articles = paginator.page(paginator.num_pages)
 
         context['seo_title'] = self.object.get_full_name()
-        description = "StackTips Author. {}. {}".format(self.object.get_full_name(), self.object.bio)
+        description = f"StackTips Author. {self.object.get_full_name()}. {self.object.bio}"
         context['seo_description'] = strip_tags(description)
         context['seo_image'] = self.object.get_avatar()
 
@@ -84,7 +84,6 @@ class MyProfileView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(MyProfileView, self).get_context_data(*args, **kwargs)
         user = self.get_object()
-        logged_user = self.request.user
 
         articles = user.articles.order_by("-published_date").filter(publish_status="LIVE")
         paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
@@ -103,7 +102,8 @@ class MyProfileView(DetailView):
         })
 
         context['seo_title'] = "My Profile"
-        context['seo_description'] = "My profile. Access your profile, account settings My Profile. You need a StackTips account to sign in and view your profile."
+        context['seo_description'] = ("My profile. Access your profile, account settings My Profile. "
+                                      "You need a StackTips account to sign in and view your profile.")
         if user.profile_photo:
             context['seo_image'] = settings.SITE_LOGO
 

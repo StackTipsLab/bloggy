@@ -68,4 +68,4 @@ class Course(Post):
         super(Course, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return str(self.title)

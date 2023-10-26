@@ -34,7 +34,7 @@
             <aside id="sidebar" class="flex-filled col-12 px-3 col-md-4 pt-0">
                 <div class="sidebar-content sticky-top ms-lg-3" style="z-index: 99">
                     {% include "partials/home_widget_contribute_cta.html" %}
-                    {% related_article_widget count=6 slug=lesson.slug widgetTitle='Recent postss' widgetStyle="miniGrid" %}
+                    {% related_article_widget count=6 slug=lesson.slug widget_title='Recent posts' widget_style="miniGrid" %}
                     {% include 'partials/newsletter.html' %}
 
                 </div>
@@ -42,7 +42,7 @@
 
             <section class="py-5">
                 {% with category.title|addstr:" Quiz" as widgetTitle %}
-                    {% related_quizzes_widget limit=15 widgetTitle=widgetTitle widgetStyle="grid" %}
+                    {% related_quizzes_widget limit=15 widget_title=widget_title widget_style="grid" %}
                 {% endwith %}
             </section>
 

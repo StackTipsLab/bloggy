@@ -28,7 +28,8 @@ class PostMetaInlineFormSet(BaseInlineFormSet):
             {'meta_key': 'seo_description', 'meta_value': ""},
             {'meta_key': 'seo_keywords', 'meta_value': ""},
         ]
-        super(PostMetaInlineFormSet, self).__init__(*args, **kwargs)
+        # super(PostMetaInlineFormSet, self).__init__(*args, **kwargs)
+        super().__init__()
 
 
 class PostMetaInline(admin.TabularInline):

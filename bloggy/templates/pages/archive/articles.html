@@ -9,7 +9,7 @@
                 <main id="main-content" class="col-12 col-lg-9 py-3 py-lg-4">
 
                     <div class="d-flex bd-highlight">
-                        {% categories_widget count=99 content_type="article" widgetStyle="list" %}
+                        {% categories_widget count=99 content_type="article" widget_style="list" %}
                         <div class="flex-grow-1">
                             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-1 latest-feed-container">
                                  {% if articles|length <= 0 %}
@@ -33,7 +33,7 @@
                 <aside id="sidebar-right" class="flex-filled col-md-3">
                     <div class="sidebar-content sticky-top" style="z-index: 99">
                         {% include 'partials/newsletter.html' %}
-                        {% related_quizzes_widget limit=4 widgetTitle="Quizzes" %}
+                        {% related_quizzes_widget limit=4 widget_title="Quizzes" %}
                     </div>
                 </aside>
             </div>
