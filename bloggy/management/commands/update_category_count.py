@@ -20,6 +20,4 @@ class Command(BaseCommand):
                 category.save()
                 print("{\"" + category.title + "\": {\"article_count\":" + str(article_count) + "}}")
 
-                pass
-
         self.stdout.write(self.style.SUCCESS(f'Successfully updated'))

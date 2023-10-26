@@ -19,8 +19,8 @@ def create_token(user, token_type):
         # return the existing token, if it is not expired
         if time_difference_in_minutes < TOKEN_VALIDITY:
             return token
-        else:
-            token.delete()
+
+        token.delete()
 
     return VerificationToken.objects.create(user=user, token_type=token_type)
 

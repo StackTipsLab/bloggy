@@ -21,12 +21,12 @@ class UrlShortener:
 
         return original_link
 
-    def firebase_api(self, originalLink):
+    def firebase_api(self, original_link):
         try:
             url = f"https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key={UrlShortener.FIREBASE_API_KEY}"
             headers = {'Content-Type': 'application/json'}
             payload = json.dumps({
-                "longDynamicLink": f"{UrlShortener.FIREBASE_DYNAMIC_LINKS_DOMAIN}?link={originalLink}"
+                "longDynamicLink": f"{UrlShortener.FIREBASE_DYNAMIC_LINKS_DOMAIN}?link={original_link}"
             })
 
             response = requests.post(url, data=payload, headers=headers)

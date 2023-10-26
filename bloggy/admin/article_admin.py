@@ -98,7 +98,7 @@ class ArticleAdmin(SummernoteModelAdmin):
 
     def published_date_display(self, obj):
         return format_html(
-            '<small>{}</small>'.format(obj.published_date.strftime("%m/%d/%Y") if obj.published_date else "-"))
+            f'<small>{obj.published_date.strftime("%m/%d/%Y") if obj.published_date else "-"}</small>')
 
     published_date_display.short_description = "Published on"
 
