@@ -2,8 +2,8 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from bloggy.models import Category
 from bloggy.admin.misc_admin import publish, unpublish
+from bloggy.models import Category
 
 
 class CategoryForm(forms.ModelForm):
@@ -48,6 +48,6 @@ class CategoryAdmin(admin.ModelAdmin):
     display_updated_date.short_description = "Published on"
 
     def display_color(self, obj):
-        return format_html('<div style="background:{};width:30px;height:20px;"></div>'.format(obj.color))
+        return format_html(f'<div style="background:{obj.color};width:30px;height:20px;"></div>')
 
     display_color.short_description = "Color"

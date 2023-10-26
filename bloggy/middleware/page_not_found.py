@@ -2,6 +2,7 @@ import logging
 
 from django.http import HttpResponsePermanentRedirect
 from django.utils.deprecation import MiddlewareMixin
+
 from bloggy import settings
 
 logger = logging.getLogger(__name__)

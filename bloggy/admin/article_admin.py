@@ -44,7 +44,7 @@ class PostMetaInline(admin.TabularInline):
 @admin.register(Article)
 class ArticleAdmin(SummernoteModelAdmin):
     def get_form(self, request, obj=None, **kwargs):
-        form = super(ArticleAdmin, self).get_form(request, obj, **kwargs)
+        form = super().get_form(request, obj, **kwargs)
         form.base_fields["author"].queryset = get_user_model().objects.filter(is_staff=True)
         return form
 

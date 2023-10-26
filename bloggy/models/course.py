@@ -1,14 +1,14 @@
 from django.contrib.contenttypes.fields import GenericRelation
+from django.db import models
+from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.text import slugify
-from django.db import models
 from hitcount.models import HitCount
 
 from bloggy import settings
 from bloggy.models import Category
 from bloggy.models.post import Post
 from bloggy.utils.string_utils import StringUtils
-from django.urls import reverse
 
 
 def upload_thumbnail_image(self, post_id):

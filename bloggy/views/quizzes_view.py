@@ -16,7 +16,7 @@ class QuizListView(ListView):
     paginate_by = DEFAULT_PAGE_SIZE
 
     def get_context_data(self, **kwargs):
-        context = super(QuizListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['posts'] = get_recent_quizzes()
         return context
 

@@ -1,8 +1,10 @@
 # myproject.middleware.py
 import logging
+
 from django.http import HttpResponsePermanentRedirect
 from django.urls import reverse
 from django.utils.deprecation import MiddlewareMixin
+
 from bloggy import settings
 
 logger = logging.getLogger(__name__)

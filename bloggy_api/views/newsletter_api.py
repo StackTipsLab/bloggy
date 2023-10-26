@@ -28,12 +28,12 @@ class SubscriberSerializer(ModelSerializer):
 class NewsletterApi(viewsets.ViewSet):
 
     def subscribe(self, request):
-        jsonBody = request.data
+        json_body = request.data
         try:
             token = token_service.generate_verification_code()
             subscriber = Subscribers.objects.create(
-                email=jsonBody.get('email'),
-                name=jsonBody.get('name'),
+                email=json_body.get('email'),
+                name=json_body.get('name'),
                 created_date=timezone.now(),
                 confirmation_code=token,
                 confirmed=False,
@@ -57,6 +57,7 @@ class NewsletterApi(viewsets.ViewSet):
             subscriber.confirmation_code = None
             subscriber.save()
             messages.success(request,
-                             "Thank you for verifying your email.  Now we will send you weekly tutorials, and (exclusive) freebies directly to your inbox.")
+                             "Thank you for verifying your email.  "
+                             "Now we will send you weekly tutorials, and (exclusive) freebies directly to your inbox.")
 
         return redirect("index")

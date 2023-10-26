@@ -1,4 +1,5 @@
 from django.db import models
+
 from bloggy.models.updatable import Updatable
 
 

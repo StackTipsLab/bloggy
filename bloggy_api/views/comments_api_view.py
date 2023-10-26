@@ -48,7 +48,9 @@ class CommentsAPIView(APIView):
                 return HttpResponse(status=204)
 
         except Comment.DoesNotExist:
-            raise NotFoundException(default_detail="Comment with id {} doesn't exist".format(kwargs['id']));
+            raise NotFoundException(default_detail=f"Comment with id {kwargs['id']} doesn't exist")
+
+        return None
 
     @staticmethod
     def find_children(comment_id, comments):

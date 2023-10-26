@@ -141,7 +141,7 @@ class Article(Post):
         super(Article, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     def get_template_path(self):
-        return "pages/{}-{}.html".format(self.article, )
+        return 'pages/{}-{}.html'.format(self.article,)

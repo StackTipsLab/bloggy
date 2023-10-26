@@ -1,10 +1,11 @@
 import re
 from datetime import datetime
 from urllib.parse import urlparse
+
 from django import template
+from django.conf import settings
 from django.utils.safestring import mark_safe
 from numerize.numerize import numerize
-from django.conf import settings
 
 from bloggy.models import Votes, Bookmarks, Article, Category, Option
 
@@ -34,7 +35,7 @@ def sanitize_url(url):
         return url
 
     if not re.match('(?:http|https)://', url):
-        return 'https://{}'.format(url)
+        return f'https://{url}'
     return url
 
 
@@ -76,12 +77,12 @@ def get_domain(website):
 
 
 @register.simple_tag
-def get_twitter_username(twitterUrl):
+def get_twitter_username(twitter_url):
     regex = r"^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$"
-    result = re.findall(regex, twitterUrl)
+    result = re.findall(regex, twitter_url)
     if result:
         return result[0]
-    return twitterUrl
+    return twitter_url
 
 
 @register.simple_tag
@@ -94,25 +95,25 @@ def get_github_username(github_url):
 
 
 @register.simple_tag
-def format_date(dt=False, format='%Y-%m-%d %H:%M:%S'):
+def format_date(dt=False, date_format='%Y-%m-%d %H:%M:%S'):
     if dt is None:
         return ""
-    return datetime.today().strftime(format)
+    return datetime.today().strftime(date_format)
 
 
 @register.simple_tag
 def pretty_date(dt=False):
-    if dt is None:
-        return ""
     """
     Get a datetime object or a int() Epoch timestamp and return a
     pretty string like 'an hour ago', 'Yesterday', '3 months ago',
     'just now', etc
     """
+    if dt is None:
+        return ""
     time = dt.replace(tzinfo=None)
-    from datetime import datetime
+
     now = datetime.now()
-    if type(time) is int:
+    if isinstance(time) is int:
         diff = now - datetime.fromtimestamp(time)
     elif isinstance(time, datetime):
         diff = now - time
@@ -148,8 +149,6 @@ def pretty_date(dt=False):
     return str(day_diff // 365) + " years ago"
     # return dt.strftime("%d %b, %Y")
 
-
-pass
 
 
 @register.inclusion_tag('widgets/related_quiz_widget.html', takes_context=True)
@@ -189,7 +188,6 @@ def related_article_widget(context, count=12, categories=None, slug=0, widget_ti
         "relatedArticles": articles,
         "widgetStyle": widget_style,
     }
-    pass
 
 
 @register.inclusion_tag('widgets/categories_widget.html', takes_context=True)
@@ -218,7 +216,7 @@ def replace_all(pattern, repl, string) -> str:
 @register.filter
 def highlight_search(text, search):
     highlighted = text.replace(
-        search, '<span class="highlight">{}</span>'.format(search))
+        search, f'<span class="highlight">{search}</span>')
     return mark_safe(highlighted)
 
 

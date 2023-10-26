@@ -1,6 +1,6 @@
+from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 
-from django.contrib import admin
 from bloggy.models.comment import Comment
 
 
@@ -22,3 +22,6 @@ class CommentAdmin(SummernoteModelAdmin):
     list_filter = ('active', 'comment_date')
     search_fields = ('user', 'user', 'comment_content')
     actions = ['approve_comments']
+
+
+

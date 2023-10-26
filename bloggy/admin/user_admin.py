@@ -1,8 +1,9 @@
 from django.contrib import admin
-from django.utils.html import format_html
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from bloggy.models import MyUser
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.utils.html import format_html
+
+from bloggy.models import MyUser
 
 
 @admin.register(MyUser)

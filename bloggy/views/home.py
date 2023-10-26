@@ -14,7 +14,7 @@ class IndexView(TemplateView):
     template_name = "pages/home.html"
 
     def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['articles'] = Article.objects.prefetch_related("category").filter(publish_status="LIVE").filter(
             post_type__in=["article", "quiz", "lesson"]).order_by("-published_date")[:12]
         context['courses'] = Course.objects.filter(publish_status="LIVE").all()[:6]
@@ -26,7 +26,7 @@ class AboutPageView(TemplateView):
     template_name = "pages/static/about.html"
 
     def get_context_data(self, **kwargs):
-        context = super(AboutPageView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['categoryCount'] = Category.objects.filter(article_count__gt=0).order_by("-article_count").count()
         context['postsCount'] = Article.objects.filter(publish_status="LIVE").filter(post_type="article").count()
         context['quizCount'] = Article.objects.filter(publish_status="LIVE").filter(post_type="quiz").count()

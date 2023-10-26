@@ -16,7 +16,7 @@ class Media(AbstractAttachment):
 
     def save(self, *args, **kwargs):
         get_config()['attachment_upload_to'] = f'uploads/{self.post_type}/{self.post_id}'
-        super(Media, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_attachment_upload_to(self):
         return f'uploads/{self.post_type}/{self.post_id}'

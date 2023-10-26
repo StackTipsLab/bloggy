@@ -52,21 +52,5 @@ def get_recent_quizzes(publish_status="LIVE", page=1):
 
     return articles
 
-
-def get_recent_quizzes(publish_status="LIVE", page=1):
-    articles = models.Article.objects.filter(publish_status=publish_status, post_type="quiz") \
-        .prefetch_related("category", "quizquestion_set") \
-        .order_by("-display_order")
-    paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
-    try:
-        articles = paginator.page(page)
-    except PageNotAnInteger:
-        articles = paginator.page(1)
-    except EmptyPage:
-        articles = paginator.page(paginator.num_pages)
-
-    return articles
-
-
 def get_quiz_by_id(pk):
     return models.Article.objects.get(pk=pk)

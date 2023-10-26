@@ -1,6 +1,6 @@
 from django.db import models
+
 from bloggy import settings
-from bloggy.services import token_generator
 from bloggy.services.token_generator import TOKEN_LENGTH
 
 

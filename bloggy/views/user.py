@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
@@ -11,8 +12,6 @@ from django.views.generic.detail import SingleObjectMixin
 
 from bloggy import settings
 from bloggy.models import MyUser
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
 from bloggy.services.post_service import DEFAULT_PAGE_SIZE
 
 
@@ -82,7 +81,7 @@ class MyProfileView(DetailView):
         return get_object_or_404(MyUser, username=username)
 
     def get_context_data(self, *args, **kwargs):
-        context = super(MyProfileView, self).get_context_data(*args, **kwargs)
+        context = super().get_context_data(*args, **kwargs)
         user = self.get_object()
 
         articles = user.articles.order_by("-published_date").filter(publish_status="LIVE")

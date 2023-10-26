@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 
 from bloggy.models import MyUser
-from django import forms
 
 
 class SignUpForm(UserCreationForm):

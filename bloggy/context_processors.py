@@ -1,6 +1,7 @@
-import json as json
+import json
 
 from django.http import HttpRequest
+
 from bloggy import settings
 
 

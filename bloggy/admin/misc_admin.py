@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 import bloggy.models.option
 
 admin.site.site_header = "STACKTIPS"

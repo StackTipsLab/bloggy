@@ -1,11 +1,12 @@
+import urllib.parse
 from urllib import request
 
+import django.core
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-import django.core
-from bloggy import settings
+
 import bloggy.models
-import urllib.parse
+from bloggy import settings
 
 PING_GOOGLE_URL = "https://www.google.com/webmasters/tools/ping"
 INDEX_NOW = "https://www.bing.com/indexnow?url={}&key={}"

@@ -1,11 +1,11 @@
-from django.contrib.auth.validators import UnicodeUsernameValidator
-from django.utils import timezone
-
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 
 import bloggy
 from bloggy import settings
@@ -13,7 +13,6 @@ from bloggy.models.mixin.ResizeImageMixin import ResizeImageMixin
 from bloggy.services.account_manager import NewUserAccountManager
 from bloggy.services.gravtar import get_gravatar
 from bloggy.storage_backends import PublicMediaStorage, StaticStorage
-from django.utils.translation import gettext_lazy as _
 
 
 def upload_profile_image(self, filename):

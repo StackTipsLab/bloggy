@@ -28,7 +28,7 @@ class QuizQuestion(models.Model):
         verbose_name="Question type")
 
     def __str__(self):
-        return self.title
+        return str(self.title)
 
     def get_answers(self):
         return self.quizanswer_set.all()
