@@ -17,7 +17,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        pylint -d C0114,C0115,C0116,C0301,E1101,R0903,R0901,W0613,E0401 $(git ls-files '*.py')
+        pylint -d C0114,C0115,C0116,C0301,E1101,R0903,R0901,W0613 $(git ls-files '*.py')
