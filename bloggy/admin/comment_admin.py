@@ -22,6 +22,3 @@ class CommentAdmin(SummernoteModelAdmin):
     list_filter = ('active', 'comment_date')
     search_fields = ('user', 'user', 'comment_content')
     actions = ['approve_comments']
-
-
-

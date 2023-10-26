@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'id',
-        'is_published',
+        'is_category_published',
         'logo_tag',
         'article_count',
         'slug',
@@ -35,12 +35,12 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['title', 'slug']
     actions = [publish, unpublish]
 
-    def is_published(self, queryset):
+    def is_category_published(self, queryset):
         if queryset.publish_status == 'LIVE':
             return True
         return False
 
-    is_published.boolean = True
+    is_category_published.boolean = True
 
     def display_updated_date(self, obj):
         return obj.updated_date.strftime("%m/%d/%Y") if obj.updated_date else "-"

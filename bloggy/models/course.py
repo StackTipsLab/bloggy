@@ -6,8 +6,8 @@ from django.utils.text import slugify
 from hitcount.models import HitCount
 
 from bloggy import settings
-from bloggy.models import Category
 from bloggy.models.post import Post
+from bloggy.models import Category
 from bloggy.utils.string_utils import StringUtils
 
 
@@ -43,7 +43,6 @@ class Course(Post):
             models.Index(fields=['slug', 'publish_status', 'published_date']),
         ]
 
-    @staticmethod
     def get_excerpt(self):
         return self.excerpt[0, 10]
 
@@ -57,7 +56,8 @@ class Course(Post):
 
     def thumbnail_tag(self):
         if self.thumbnail:
-            return format_html('<img src="{}" width="auto" height="40"/>'.format(self.thumbnail.url))
+            return format_html(f'<img src="{self.thumbnail.url}" width="auto" height="40"/>')
+        return ""
 
     thumbnail_tag.short_description = 'Logo'
     thumbnail_tag.allow_tags = True
@@ -65,7 +65,7 @@ class Course(Post):
     def save(self, *args, **kwargs):
         if StringUtils.is_blank(self.slug):
             self.slug = slugify(self.title)
-        super(Course, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.title)

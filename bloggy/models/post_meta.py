@@ -9,7 +9,7 @@ class PostMeta(models.Model):
     meta_value = TextField(null=True, help_text='Enter value')
 
     def __str__(self):
-        return 'id:{}, meta_key:{}, meta_value:{}'.format(self.id, self.meta_key, self.meta_value)
+        return f'id:{self.id}, meta_key:{self.meta_key}, meta_value:{self.meta_value}'
 
     class Meta:
         verbose_name = "Post metadata"

@@ -36,7 +36,7 @@ TEMPLATE_TYPE = [
 # Splitting the environment variable value into a list of tuples
 def get_post_types():
     post_type = [choice.split(':') for choice in settings.POST_TYPE_CHOICES.split(',')]
-    return [(value, label) for value, label in post_type]
+    return list(post_type)
 
 
 class Article(Post):
@@ -85,17 +85,31 @@ class Article(Post):
         return bloggy.models.Comment.objects.filter(post_id=self.id).count()
 
     def get_admin_url(self):
-        return reverse('admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name), args=[self.id])
+        return reverse(f'admin:{self._meta.app_label}_{self._meta.model_name}_change', args=[self.id])
 
     def get_absolute_url(self):
-        if self.post_type == "quiz":
-            return reverse("quiz_single", kwargs={"slug": str(self.slug)})
-        elif self.post_type == "lesson":
-            return reverse("lesson_single", kwargs={"course": str(self.course.slug), "slug": str(self.slug)})
-        else:
-            return reverse("article_single", kwargs={"slug": str(self.slug)})
+        view_name_map = {
+            "quiz": ("quiz_single", {"slug": str(self.slug)}),
+            "lesson": ("lesson_single", {"course": str(self.course.slug), "slug": str(self.slug)}),
+        }
+        default_view = ("article_single", {"slug": str(self.slug)})
 
-    @staticmethod
+        view_name, kwargs = view_name_map.get(self.post_type, default_view)
+        return reverse(view_name, kwargs=kwargs)
+
+        # if self.post_type == "quiz":
+        #     return reverse("quiz_single", kwargs={
+        #         "slug": str(self.slug)
+        #     })
+        # elif self.post_type == "lesson":
+        #     return reverse("lesson_single", kwargs={
+        #         "course": str(self.course.slug), "slug": str(self.slug)
+        #     })
+        # else:
+        #     return reverse("article_single", kwargs={
+        #         "slug": str(self.slug)
+        #     })
+
     def get_excerpt(self):
         return self.excerpt[0, 10]
 
@@ -130,7 +144,8 @@ class Article(Post):
 
     def thumbnail_tag(self):
         if self.thumbnail:
-            return format_html('<img src="{}" width="auto" height="40"/>'.format(self.thumbnail.url))
+            return format_html(f'<img src="{self.thumbnail.url}" width="auto" height="40"/>')
+        return ''
 
     thumbnail_tag.short_description = 'Logo'
     thumbnail_tag.allow_tags = True
@@ -138,10 +153,10 @@ class Article(Post):
     def save(self, *args, **kwargs):
         if StringUtils.is_blank(self.slug):
             self.slug = slugify(self.title)
-        super(Article, self).save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.title)
 
     def get_template_path(self):
-        return 'pages/{}-{}.html'.format(self.article,)
+        return f"pages/{self.post_type}-{self.template_type}.html"

@@ -94,8 +94,8 @@ class CoursesRssFeed(BaseRssFeedView):
     def items(self):
         return Course.objects.filter(publish_status="LIVE").order_by('-published_date')[:30]
 
-    def item_description(self, obj):
-        content = f"{obj.excerpt}\n<small>Take the free course from <a href='{settings.SITE_URL + obj.get_absolute_url()}' target='_blank'>{settings.SITE_URL}</a></small>"
+    def item_description(self, item):
+        content = f"{item.excerpt}\n<small>Take the free course from <a href='{settings.SITE_URL + item.get_absolute_url()}' target='_blank'>{settings.SITE_URL}</a></small>"
         return content
 
     def item_categories(self, obj):

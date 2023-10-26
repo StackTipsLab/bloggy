@@ -1,5 +1,6 @@
 import urllib.parse
 from urllib import request
+from urllib.error import URLError
 
 import django.core
 from django.db.models.signals import post_save
@@ -29,19 +30,21 @@ def post_saved_action_signal(sender, instance, created, **kwargs):
 
 def ping_google():
     try:
-        params = urllib.parse.urlencode({"sitemap": settings.SITE_URL + "/sitemap.xml"})
-        response = request.urlopen(f"{PING_GOOGLE_URL}?{params}")
-        if response.code == 200:
-            print("Successfully pinged this page for Google!")
-    except Exception:
-        print("Error while pinging google")
+        sitemap_url = f"{settings.SITE_URL}/sitemap.xml"
+        params = urllib.parse.urlencode({"sitemap": sitemap_url})
+
+        with request.urlopen(f"{PING_GOOGLE_URL}?{params}") as response:
+            if response.code == 200:
+                print("Successfully pinged this page for Google!")
+    except URLError as e:
+        print(f"Error while pinging Google: {e}")
 
 
 def ping_index_now(article):
     try:
-        response = request.urlopen(
-            INDEX_NOW.format(article.get_absolute_url(), settings.INDEX_NOW_API_KEY))
-        if response.code == 200:
-            print("Successfully pinged this page for IndexNow!")
-    except Exception:
-        print("Error while pinging google")
+        url = INDEX_NOW.format(article.get_absolute_url(), settings.INDEX_NOW_API_KEY)
+        with request.urlopen(url) as response:
+            if response.code == 200:
+                print("Successfully pinged this page for IndexNow!")
+    except URLError as e:
+        print(f"Error while pinging IndexNow: {e}")

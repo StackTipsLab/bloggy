@@ -35,7 +35,7 @@ class QuizQuestionAdmin(admin.ModelAdmin):
 
 
 @admin.register(QuizAnswer)
-class QuizQuestionAdmin(admin.ModelAdmin):
+class QuizAnswerAdmin(admin.ModelAdmin):
     list_display = ('id', 'correct', 'display_question_id', 'display_question_title')
     list_filter = [
         ("question", admin.RelatedOnlyFieldListFilter)

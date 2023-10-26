@@ -26,7 +26,6 @@ class VerificationToken(models.Model):
         verbose_name="uuid",
     )
 
-    # TODO do we need this?
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         help_text="The user who owns the email address.",

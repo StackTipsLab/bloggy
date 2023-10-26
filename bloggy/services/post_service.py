@@ -39,18 +39,18 @@ def get_recent_posts(publish_status="LIVE", page=1, page_size=DEFAULT_PAGE_SIZE)
 
 
 def get_recent_quizzes(publish_status="LIVE", page=1):
-    articles = models.Article.objects.prefetch_related("category") \
+    quizzes = models.Article.objects.prefetch_related("category") \
         .filter(publish_status=publish_status).filter(post_type__in=["quiz"]) \
         .order_by("-published_date")
-    paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
+    paginator = Paginator(quizzes, DEFAULT_PAGE_SIZE)
     try:
-        articles = paginator.page(page)
+        quizzes = paginator.page(page)
     except PageNotAnInteger:
-        articles = paginator.page(1)
+        quizzes = paginator.page(1)
     except EmptyPage:
-        articles = paginator.page(paginator.num_pages)
+        quizzes = paginator.page(paginator.num_pages)
+    return quizzes
 
-    return articles
 
 def get_quiz_by_id(pk):
     return models.Article.objects.get(pk=pk)

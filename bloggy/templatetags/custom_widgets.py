@@ -102,53 +102,49 @@ def format_date(dt=False, date_format='%Y-%m-%d %H:%M:%S'):
 
 
 @register.simple_tag
-def pretty_date(dt=False):
+def pretty_date(dt=None):
     """
-    Get a datetime object or a int() Epoch timestamp and return a
-    pretty string like 'an hour ago', 'Yesterday', '3 months ago',
-    'just now', etc
-    """
+       Get a datetime object or a int() Epoch timestamp and return a
+       pretty string like 'an hour ago', 'Yesterday', '3 months ago',
+       'just now', etc
+       """
     if dt is None:
         return ""
-    time = dt.replace(tzinfo=None)
 
     now = datetime.now()
-    if isinstance(time) is int:
-        diff = now - datetime.fromtimestamp(time)
-    elif isinstance(time, datetime):
-        diff = now - time
-    elif not time:
-        diff = 0
-    second_diff = diff.seconds
+
+    if isinstance(dt, int):
+        dt = datetime.fromtimestamp(dt)
+
+    diff = now - dt
+    seconds_diff = diff.total_seconds()
     day_diff = diff.days
 
     if day_diff < 0:
         return ''
 
-    if day_diff == 0:
-        if second_diff < 10:
-            return "just now"
-        if second_diff < 60:
-            return str(second_diff) + " seconds ago"
-        if second_diff < 120:
-            return "a minute ago"
-        if second_diff < 3600:
-            return str(second_diff // 60) + " minutes ago"
-        if second_diff < 7200:
-            return "an hour ago"
-        if second_diff < 86400:
-            return str(second_diff // 3600) + " hours ago"
+    if seconds_diff < 10:
+        return "just now"
+    if seconds_diff < 60:
+        return f"{int(seconds_diff)} seconds ago"
+    if seconds_diff < 3600:
+        minutes_diff = int(seconds_diff / 60)
+        return f"{minutes_diff} minute{'s' if minutes_diff > 1 else ''} ago"
+    if seconds_diff < 86400:
+        hours_diff = int(seconds_diff / 3600)
+        return f"{hours_diff} hour{'s' if hours_diff > 1 else ''} ago"
     if day_diff == 1:
         return "yesterday"
     if day_diff < 7:
-        return str(day_diff) + " days ago"
+        return f"{day_diff} day{'s' if day_diff > 1 else ''} ago"
     if day_diff < 31:
-        return str(day_diff // 7) + " weeks ago"
+        weeks_diff = int(day_diff / 7)
+        return f"{weeks_diff} week{'s' if weeks_diff > 1 else ''} ago"
     if day_diff < 365:
-        return str(day_diff // 30) + " months ago"
-    return str(day_diff // 365) + " years ago"
-    # return dt.strftime("%d %b, %Y")
-
+        months_diff = int(day_diff / 30)
+        return f"{months_diff} month{'s' if months_diff > 1 else ''} ago"
+    years_diff = int(day_diff / 365)
+    return f"{years_diff} year{'s' if years_diff > 1 else ''} ago"
 
 
 @register.inclusion_tag('widgets/related_quiz_widget.html', takes_context=True)

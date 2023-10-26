@@ -3,7 +3,7 @@ from django.contrib.sitemaps import GenericSitemap
 from django.urls import reverse
 
 from bloggy.models.course import Course
-from ..models import Article, Category, MyUser
+from bloggy.models import Article, Category, MyUser
 
 
 class StaticPagesSitemap(sitemaps.Sitemap):

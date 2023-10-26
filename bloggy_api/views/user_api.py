@@ -10,4 +10,3 @@ class UsersAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         return MyUser.objects.filter(username=self.kwargs['username'])
 
-

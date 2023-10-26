@@ -84,7 +84,7 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
         return self.username
 
     def get_full_name(self):
-        full_name = "%s" % self.name
+        full_name = f"{self.name}"
         return full_name.strip()
 
     def get_avatar(self):
@@ -94,4 +94,5 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
 
     def profile_photo_tag(self):
         if self.profile_photo:
-            return format_html('<img src="{}" width="auto" height="40"/>'.format(self.profile_photo.url))
+            return format_html(f'<img src="{self.profile_photo.url}" width="auto" height="40"/>')
+        return ""

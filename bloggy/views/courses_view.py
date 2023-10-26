@@ -72,5 +72,5 @@ class LessonDetailsView(TemplateView):
             context['seo_image'] = course.thumbnail.url
             context['og_image'] = course.thumbnail.url
         else:
-            context['og_image'] = "{}/media/opengraph/{}/{}.png".format(settings.ASSETS_DOMAIN, article.post_type, article.slug)
+            context['og_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{article.post_type}/{article.slug}.png"
         return context

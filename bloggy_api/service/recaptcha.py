@@ -1,4 +1,6 @@
+import json
 from urllib import request
+from urllib.error import URLError
 
 from bloggy import settings
 
@@ -9,10 +11,13 @@ def recaptcha_verify(recaptcha_response):
         'response': recaptcha_response
     }
 
-    req = request.Request(settings.GOOGLE_RECAPTHCA_TOKEN_VERIFY_URL, data=data)
-    response = request.urlopen(req)
-    if response.status == 200:
-        result = response.json()
-        print("Recaptcha verification:" + str(result))
-        return True
+    try:
+        with request.urlopen(settings.GOOGLE_RECAPTHCA_TOKEN_VERIFY_URL,
+                             data=json.dumps(data).encode('utf-8')) as response:
+            if response.status == 200:
+                result = json.loads(response.read().decode('utf-8'))
+                print("Recaptcha verification:", result)
+                return True
+    except URLError as e:
+        print("Recaptcha verification error:", e)
     return False

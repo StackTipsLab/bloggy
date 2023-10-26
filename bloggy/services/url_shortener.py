@@ -4,6 +4,7 @@ import logging
 import os
 
 import requests
+from requests import RequestException
 
 logger = logging.getLogger(__name__)
 
@@ -14,7 +15,7 @@ class UrlShortener:
 
     def shorten_url(self, original_link):
         response_json = self.firebase_api(original_link)
-        logger.debug("Response from Firebase dynamic link", response_json)
+        logger.debug("Response from Firebase dynamic link %s", response_json)
         if response_json:
             response = json.loads(response_json)
             return response["shortLink"]
@@ -33,7 +34,7 @@ class UrlShortener:
             if response.status_code == 200:
                 return response.text
 
-        except Exception:
+        except RequestException:
             print("ERROR: while shorting the url")
 
         return None
