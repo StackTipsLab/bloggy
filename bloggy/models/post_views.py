@@ -12,4 +12,4 @@ class PostViews(models.Model):
     updated_date = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
-        return '{0} in {1} post'.format(self.ip_address, self.post.title)
+        return f'{self.ip_address} in {self.post.title} post'

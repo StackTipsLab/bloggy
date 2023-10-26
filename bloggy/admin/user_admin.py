@@ -1,9 +1,9 @@
-from django import forms
 from django.contrib import admin
-from django.utils.html import format_html
-from bloggy.models import MyUser
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.utils.html import format_html
+
+from bloggy.models import MyUser
 
 
 @admin.register(MyUser)
@@ -37,12 +37,12 @@ class MyUserAdmin(BaseUserAdmin):
     )
 
     def email_display(self, queryset):
-        return format_html('<small>{}</small>'.format(queryset.email))
+        return format_html(f'<small>{queryset.email}</small>')
 
     email_display.short_description = "Email"
 
     def full_name_display(self, queryset):
-        return format_html('<small>{}</small>'.format(queryset.name))
+        return format_html(f'<small>{queryset.name}</small>')
 
     full_name_display.short_description = "Name"
 

@@ -11,4 +11,3 @@ class Updatable(models.Model):
     class Meta:
         abstract = True
 
-

@@ -51,4 +51,3 @@ def get_questions_json(post):
         'time': post.duration,
         'category': category_json
     }
-

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django import template
 from django.db.models import Model
 from django.template.defaultfilters import urlencode
+
 from bloggy import settings
 
 register = template.Library()
@@ -22,19 +23,15 @@ class MockRequest(object):
     def build_absolute_uri(self, relative_url):
         if relative_url.startswith('http'):
             return relative_url
-        return '%s%s' % (settings.SITE_URL, relative_url)
+        return '%s%s' , settings.SITE_URL, relative_url
 
 
 def build_url(request, obj_or_url):
     if obj_or_url is not None:
         if isinstance(obj_or_url, Model):
-            # url = request.build_absolute_uri(obj_or_url.get_absolute_url())
             url = settings.SITE_URL + obj_or_url.get_absolute_url()
             return url
-            # urlShortener = UrlShortener()
-            # return urlShortener.shorten_url(url)
-        else:
-            return request.build_absolute_uri(obj_or_url)
+        return request.build_absolute_uri(obj_or_url)
     return ""
 
 
@@ -46,7 +43,7 @@ def compose_tweet(text, url=None):
         truncated_text = text[:(140 - len(url))] + "…"
     else:
         truncated_text = text
-    return "%s %s" % (truncated_text, url)
+    return "%s %s" ,truncated_text, url
 
 
 @register.simple_tag(takes_context=True)
@@ -92,7 +89,7 @@ def send_email_url(context, subject, text, obj_or_url=None):
     subject = compile_text(context, subject)
     request = context['request']
     url = build_url(request, obj_or_url)
-    full_text = "%s %s" % (text, url)
+    full_text = "%s %s", text, url
     context['mailto_url'] = MAIL_ENDPOINT % (urlencode(subject), urlencode(full_text))
     return context
 

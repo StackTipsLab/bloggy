@@ -1,0 +1,73 @@
+{
+  "/": {
+    "seo_title": "Interactive Quizzes",
+    "seo_description": "Elevate your coding skills with StackTips. Learn through articles, courses, and quizzes on StackTips",
+    "seo_keywords": "stacktips, stack tips, python course, java tutorials, spring tutorials, spring boot tutorials, maven course for beginners, practice quiz, aws practice quiz, aws practice test"
+  },
+  "/quizzes": {
+    "seo_title": "Interactive Quizzes",
+    "seo_description": "Use bloggy to test your coding skills and gauge your learning progress in a fun way",
+    "seo_keywords": "stacktips quizzes, stack tips bloggy, quizlzet, take a quiz, practice test, aws quiz, python test, advance python test, aws practitioner test, CLF-C01 AWS test, aws CLF-C01 quiz"
+  },
+  "/courses": {
+    "seo_title": "Courses",
+    "seo_description": "StackTips offers free Programming Courses to teach you the fundamentals of popular programming languages such as Java, Python, HTML, JavaScript and CSS",
+    "seo_keywords": "stacktips courses, stack tips courses, free courses, learn python for free, python course, maven for beginner, maven courses, maven basics course"
+  },
+  "/articles": {
+    "seo_title": "Tutorials",
+    "seo_description": "Learn from beginner basics to advanced tutorials on Java, Spring, Python, Android and Git.",
+    "seo_keywords": "stacktips tutorials, stack tips, free tutorials, java tutorials, spring tutorials, spring boot tutorials, django tutorials, python tutorials, git tutorials, maven tutorials, android tutorials"
+  },
+  "/topics": {
+    "seo_title": "Categories",
+    "seo_description": "Browse from collection of tutorials and courses organized by categories to make learning easy and accessible.",
+    "seo_keywords": "stacktips categories, stack tips topics, browse by topics, stacktips categories, tutorial categories, tutorial categories, all tutorials by category, android, django, python, django, spring, spring boot, git"
+  },
+  "/cookie-policy": {
+    "seo_title": "Cookie policy",
+    "seo_description": "Our Cookies Policy explains what Cookies are and how We use them."
+  },
+  "/privacy": {
+    "seo_title": "Privacy policy",
+    "seo_description": "This page explains our privacy policy"
+  },
+  "/terms-of-service": {
+    "seo_title": "Terms of service",
+    "seo_description": "This page outlines the legal terms of stacktips.com, its sub-domains, and all associated web and/or mobile apps."
+  },
+  "/comment-policy": {
+    "seo_title": "Comment policy",
+    "seo_description": "This page lists some of the simple ground rules for commenting on this site"
+  },
+  "/contact": {
+    "seo_title": "Get in touch",
+    "seo_description": "If you have any questions or have suggestions to improve the quality, let us know."
+  },
+  "/about": {
+    "seo_title": "About us",
+    "seo_description": "We aim to provide developer-friendly ways to learn programming. With articles, programming course, and quizzes, we aim to teach in the ways developers learn best."
+  },
+  "/guestbook": {
+    "seo_title": "Guestbook",
+    "seo_description": "You have a chance to be creative. Indulge me by leaving a greeting below."
+  },
+  "/newsletter": {
+    "seo_title": "Newsletter",
+    "seo_description": "Get access to our fortnightly newsletter with articles, courses, and quizzes. You may unsubscribe at any time using the link in our newsletter."
+  },
+  "/login": {
+    "seo_title": "Login",
+    "seo_description": "To keep connected with us, please log in with your email address and account password",
+    "seo_keywords": "stacktips account, login to stacktips, join stacktips, your stack tips account, join for free, login, sign in, login stack tips, signin to stacktips.com, login to stacktips"
+  },
+  "/register": {
+    "seo_title": "Create your free account!",
+    "seo_description": "Register to get exclusive access to articles, live-demos, or courses, We aim to teach in the ways developers learn best",
+    "seo_keywords": "stacktips account, create free stacktips account, signup new account, free account, stack tips account free, join stacktips, stacktips free account, register free account, new account stack tips"
+  },
+  "/authors": {
+    "seo_title": "Our Authors @ StackTips",
+    "seo_description": "List of the authors on StackTips website."
+  }
+}

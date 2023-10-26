@@ -1,6 +1,7 @@
 from itertools import chain
 
 from django.views.generic import ListView
+
 from bloggy.models import Category, Article
 from bloggy.utils.string_utils import StringUtils
 
@@ -14,7 +15,7 @@ class SearchListView(ListView):
 
     def get_context_data(self, **kwargs):
         search_query = self.request.GET.get("q")
-        context = super(SearchListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
 
         if StringUtils.is_not_blank(search_query):
             categories = Category.objects.filter(slug__icontains=search_query)[:5]
@@ -25,7 +26,7 @@ class SearchListView(ListView):
             context['articles'] = results
             context['categories'] = categories
             context['search_query'] = search_query
-            context['seo_title'] = "Search result for {}".format(search_query)
+            context['seo_title'] = f"Search result for {search_query}"
             context['seo_description'] = "Search courses, tutorials, topics and quizzes on stacktips.com"
 
         return context

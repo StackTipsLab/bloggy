@@ -1,11 +1,11 @@
-from django.contrib.auth.validators import UnicodeUsernameValidator
-from django.utils import timezone
-
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.html import format_html
+from django.utils.translation import gettext_lazy as _
 
 import bloggy
 from bloggy import settings
@@ -13,7 +13,6 @@ from bloggy.models.mixin.ResizeImageMixin import ResizeImageMixin
 from bloggy.services.account_manager import NewUserAccountManager
 from bloggy.services.gravtar import get_gravatar
 from bloggy.storage_backends import PublicMediaStorage, StaticStorage
-from django.utils.translation import gettext_lazy as _
 
 
 def upload_profile_image(self, filename):
@@ -82,19 +81,18 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     def get_full_name_or_username(self):
         if self.name:
             return self.name
-        else:
-            return self.username
+        return self.username
 
     def get_full_name(self):
-        full_name = "%s" % self.name
+        full_name = f"{self.name}"
         return full_name.strip()
 
     def get_avatar(self):
         if self.profile_photo:
             return self.profile_photo.url
-        else:
-            return get_gravatar(self.email)
+        return get_gravatar(self.email)
 
     def profile_photo_tag(self):
         if self.profile_photo:
-            return format_html('<img src="{}" width="auto" height="40"/>'.format(self.profile_photo.url))
+            return format_html(f'<img src="{self.profile_photo.url}" width="auto" height="40"/>')
+        return ""

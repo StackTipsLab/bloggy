@@ -30,7 +30,7 @@ def send_newsletter_verification_token(request, email, uuid, token):
 
 
 def email_verification_token(request, new_user, token):
-    subject = "{} confirmation code: {}".format(settings.SITE_TITLE, token.code)
+    subject = f"{settings.SITE_TITLE} confirmation code: {token.code}"
     args = {
         "email_subject": subject,
         "verification_code": token.code,

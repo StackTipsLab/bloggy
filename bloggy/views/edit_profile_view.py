@@ -1,8 +1,7 @@
 import os
-from urllib import request
 
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView, FormView
+from django.views.generic import FormView
 
 from bloggy.forms.edit_profile_form import EditProfileForm
 from bloggy.models import MyUser
@@ -15,14 +14,14 @@ class EditProfileView(FormView):
     form_class = EditProfileForm
 
     def get_context_data(self, **kwargs):
-        context = super(EditProfileView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['seo_title'] = "Update Profile"
         context['seo_description'] = "Update my profile. You need a StackTips account to sign in and view your profile."
         context['seo_image'] = "https://media.stacktips.com/static/media/logo.png"
         return context
 
     def get_initial(self):
-        initial = super(EditProfileView, self).get_initial()
+        initial = super().get_initial()
         username = self.request.user.username
         user = get_object_or_404(MyUser, username=username)
 
@@ -76,19 +75,9 @@ class EditProfileView(FormView):
     def save_media_file(self, image):
         # This will generate random folder for saving your image using UUID
         media_path = f'uploads/user/{self.request.user.username}/{image.name}'
-        file_path = f'media/' + media_path
+        file_path = f'media/{media_path}'
 
-        # if settings.USE_SPACES:
-        #     # if image_type == 'private':
-        #     #     upload = UploadPrivate(file=image_file)
-        #     # else:
-        #     upload = Media(file=image)
-        #     upload.save()
-        #     image_url = upload.file.url
-        # else:
         if not os.path.exists(file_path):
-            # This will ensure that the path is created properly and will raise exception if the directory
-            # already exists
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
             # Create image save path with title

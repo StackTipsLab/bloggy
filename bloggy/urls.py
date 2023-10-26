@@ -17,6 +17,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.sitemaps.views import sitemap, index
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path, include
@@ -39,10 +40,8 @@ from .views.old_blog_redirect_view import OldTagArchiveRedirectView
 from .views.quizzes_view import QuizListView, QuizDetailView
 from .views.rss import ArticlesRssFeed, CoursesRssFeed
 from .views.search_view import SearchListView
-
 from .views.user import MyProfileView, PublicProfileView, AuthorsListView
 from .views.user_collections import UserBookmarksView
-from django.contrib.auth.views import PasswordChangeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),

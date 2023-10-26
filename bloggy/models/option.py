@@ -10,4 +10,4 @@ class Option(Updatable):
     value = TextField(null=True, help_text='Enter value')
 
     def __str__(self):
-        return self.key
+        return str(self.key)

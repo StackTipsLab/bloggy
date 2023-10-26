@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
-from bloggy.models.course import Course
+
 from bloggy.admin.misc_admin import publish, unpublish
+from bloggy.models.course import Course
 
 
 class CourseForm(forms.ModelForm):

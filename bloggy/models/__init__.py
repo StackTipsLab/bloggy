@@ -10,5 +10,3 @@ from .option import Option
 from .post_meta import PostMeta
 from .verification_token import VerificationToken
 from .article import Article
-
-

@@ -180,7 +180,7 @@ if USE_SPACES:
     STATIC_URL = f'{os.getenv("ASSETS_DOMAIN")}/static/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-    MEDIA_URL = f'/media/'
+    MEDIA_URL = '/media/'
     DEFAULT_FILE_STORAGE = 'bloggy.storage_backends.PublicMediaStorage'
     # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
@@ -192,7 +192,7 @@ if USE_SPACES:
 
 else:
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'bloggy/')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'bloggy/static')
 
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -326,8 +326,8 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0
 SHORTCODES_YOUTUBE_JQUERY = False
 
 # SEO related
-PING_INDEX_NOW_POST_UPDATE = os.getenv("PING_INDEX_NOW_POST_UPDATE", True)
-PING_GOOGLE_POST_UPDATE = os.getenv("PING_GOOGLE_POST_UPDATE", True)
+PING_INDEX_NOW_POST_UPDATE = os.getenv("PING_INDEX_NOW_POST_UPDATE", "True")
+PING_GOOGLE_POST_UPDATE = os.getenv("PING_GOOGLE_POST_UPDATE", "True")
 INDEX_NOW_API_KEY = os.getenv("INDEX_NOW_API_KEY", )
 
 # Email configs
@@ -336,7 +336,7 @@ EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', True)
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', "True")
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emails'))
 

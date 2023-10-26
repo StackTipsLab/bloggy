@@ -17,7 +17,7 @@
                     <div class="d-flex ">
 
                         <div class="pr-4">
-                            {% categories_widget count=13 content_type="article" widgetStyle="list" %}
+                            {% categories_widget count=13 content_type="article" widget_style="list" %}
                             {% if user.is_authenticated and user.is_superuser %}
                                 <div class="mt-3">
                                     <a class="mt-3 btn btn-sm btn-secondary btn-xs"
@@ -58,7 +58,7 @@
                                         {% endif %}
                                     </article>
                                     {% include 'partials/author_widget.html' with author=article.author %}
-                                    {% related_article_widget count=10 slug=article.slug categories=article.category.all widgetTitle='Related articles' widgetStyle="list" %}
+                                    {% related_article_widget count=10 slug=article.slug categories=article.category.all widget_title='Related articles' widget_style="list" %}
                                 </div>
 
                             </div>
@@ -88,7 +88,7 @@
 
                     <div class="sidebar-content" style="z-index: 99">
                         {% include "partials/home_widget_contribute_cta.html" %}
-                        {% related_quizzes_widget limit=4 widgetTitle="bloggify" %}
+                        {% related_quizzes_widget limit=4 widget_title="bloggify" %}
                         {% include 'partials/newsletter.html' %}
                     </div>
                 </aside>

@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Update Category Count'
 
     def __init__(self, *args, **kwargs):
-        super(Command, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def handle(self, *args, **options):
         categories = Category.objects.select_for_update().all()
@@ -20,6 +20,4 @@ class Command(BaseCommand):
                 category.save()
                 print("{\"" + category.title + "\": {\"article_count\":" + str(article_count) + "}}")
 
-                pass
-
-        self.stdout.write(self.style.SUCCESS(f'Successfully updated'))
+        self.stdout.write(self.style.SUCCESS('Successfully updated'))

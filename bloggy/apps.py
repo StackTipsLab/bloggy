@@ -5,4 +5,4 @@ class MyAppConfig(AppConfig):
     name = 'bloggy'
 
     def ready(self):
-        import bloggy.signals
+        pass

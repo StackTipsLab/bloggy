@@ -20,7 +20,7 @@ class CoursesListView(TemplateView):
     paginate_by = DEFAULT_PAGE_SIZE
 
     def get_context_data(self, **kwargs):
-        context = super(CoursesListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         courses = Course.objects.filter(publish_status="LIVE").order_by("-display_order")
         paginator = Paginator(courses, self.paginate_by)
         page = self.request.GET.get('page')
@@ -72,5 +72,5 @@ class LessonDetailsView(TemplateView):
             context['seo_image'] = course.thumbnail.url
             context['og_image'] = course.thumbnail.url
         else:
-            context['og_image'] = "{}/media/opengraph/{}/{}.png".format(settings.ASSETS_DOMAIN, article.post_type, article.slug)
+            context['og_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{article.post_type}/{article.slug}.png"
         return context

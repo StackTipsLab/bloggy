@@ -2,8 +2,8 @@ from django.contrib import sitemaps
 from django.contrib.sitemaps import GenericSitemap
 from django.urls import reverse
 
-from ..models import Article, Category, MyUser
 from bloggy.models.course import Course
+from bloggy.models import Article, Category, MyUser
 
 
 class StaticPagesSitemap(sitemaps.Sitemap):

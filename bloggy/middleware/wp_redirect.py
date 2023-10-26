@@ -1,8 +1,10 @@
 # myproject.middleware.py
 import logging
+
 from django.http import HttpResponsePermanentRedirect
 from django.urls import reverse
 from django.utils.deprecation import MiddlewareMixin
+
 from bloggy import settings
 
 logger = logging.getLogger(__name__)
@@ -62,23 +64,23 @@ class OldUrlRedirectMiddleware(MiddlewareMixin):
 
         if request_path.startswith("/tutorials/blackberry/") or request_path.startswith("/tutorials/j2me/"):
             new_path = reverse("articles")
-            logger.warning("WPRedirect:: {}->{}".format(request_path, new_path))
+            logger.warning("WPRedirect:: %s->%s", request_path, new_path)
             return HttpResponsePermanentRedirect(settings.SITE_URL + new_path)
 
         if request_path in fallback_404_url_mapping_old_site:
             new_path = fallback_404_url_mapping_old_site[request_path]
-            logger.warning("WPRedirect:: {}->{}".format(request_path, new_path))
+            logger.warning("WPRedirect:: %s->%s", request_path, new_path)
             return HttpResponsePermanentRedirect(settings.SITE_URL + new_path)
 
         if request_path.startswith("/courses/maven/"):
             new_path = request_path.replace(request_path, "/courses/maven-for-beginners/")
-            logger.warning("WPRedirect:: {}->{}".format(request_path, new_path))
+            logger.warning("WPRedirect:: %s->%s", request_path, new_path)
             return HttpResponsePermanentRedirect(settings.SITE_URL + new_path)
 
         for ptr in paths_to_replace:
             if request_path.startswith(ptr):
                 new_path = request_path.replace(ptr, "/articles/")
-                logger.warning("WPRedirect:: {}->{}".format(request_path, new_path))
+                logger.warning("WPRedirect:: %s->%s", request_path, new_path)
                 return HttpResponsePermanentRedirect(settings.SITE_URL + new_path)
 
         return response

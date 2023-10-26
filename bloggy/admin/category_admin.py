@@ -2,8 +2,8 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from bloggy.models import Category
 from bloggy.admin.misc_admin import publish, unpublish
+from bloggy.models import Category
 
 
 class CategoryForm(forms.ModelForm):
@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'id',
-        'is_published',
+        'is_category_published',
         'logo_tag',
         'article_count',
         'slug',
@@ -35,12 +35,12 @@ class CategoryAdmin(admin.ModelAdmin):
     search_fields = ['title', 'slug']
     actions = [publish, unpublish]
 
-    def is_published(self, queryset):
+    def is_category_published(self, queryset):
         if queryset.publish_status == 'LIVE':
             return True
         return False
 
-    is_published.boolean = True
+    is_category_published.boolean = True
 
     def display_updated_date(self, obj):
         return obj.updated_date.strftime("%m/%d/%Y") if obj.updated_date else "-"
@@ -48,6 +48,6 @@ class CategoryAdmin(admin.ModelAdmin):
     display_updated_date.short_description = "Published on"
 
     def display_color(self, obj):
-        return format_html('<div style="background:{};width:30px;height:20px;"></div>'.format(obj.color))
+        return format_html(f'<div style="background:{obj.color};width:30px;height:20px;"></div>')
 
     display_color.short_description = "Color"

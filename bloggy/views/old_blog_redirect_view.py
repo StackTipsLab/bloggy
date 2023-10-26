@@ -1,8 +1,8 @@
+import logging
+
 from django.urls import reverse
 from django.utils.text import slugify
 from django.views.generic import RedirectView
-
-import logging
 
 logger = logging.getLogger(__name__)
 
