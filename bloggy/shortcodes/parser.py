@@ -41,7 +41,6 @@ def parse(value):
             parsed = re.sub(r'\[' + item + r'\]', result, parsed)
         except ImportError:
             print("Console error while loading module")
-            pass
 
     return parsed
 

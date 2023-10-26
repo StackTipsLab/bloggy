@@ -12,14 +12,14 @@ class UrlShortener:
     FIREBASE_API_KEY = os.getenv('FIREBASE_API_KEY')
     FIREBASE_DYNAMIC_LINKS_DOMAIN = os.getenv('FIREBASE_DYNAMIC_LINKS_DOMAIN')
 
-    def shorten_url(self, originalLink):
-        response_json = self.firebase_api(originalLink)
+    def shorten_url(self, original_link):
+        response_json = self.firebase_api(original_link)
         logger.debug("Response from Firebase dynamic link", response_json)
         if response_json:
             response = json.loads(response_json)
             return response["shortLink"]
 
-        return originalLink
+        return original_link
 
     def firebase_api(self, originalLink):
         try:

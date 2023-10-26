@@ -14,5 +14,5 @@ class StringUtils:
 
     @staticmethod
     def to_json(text):
-        tmpJson = serializers.serialize("json", text)
-        return json.dumps(json.loads(tmpJson))
+        tmp_json = serializers.serialize("json", text)
+        return json.dumps(json.loads(tmp_json))

@@ -33,9 +33,9 @@ class ArticleDetailsView(HitCountDetailView):
     def get_template_names(self):
         post_meta = self.object.get_postmeta()
         if post_meta is not None and 'template_type' in post_meta:
-            return "pages/single/{}-{}.html".format(self.object.post_type, post_meta['template_type'])
-        else:
-            return "pages/single/{}.html".format(self.object.post_type)
+            return f"pages/single/{self.object.post_type}-{post_meta['template_type']}.html"
+
+        return f"pages/single/{self.object.post_type}.html"
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)

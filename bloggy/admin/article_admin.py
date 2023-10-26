@@ -101,12 +101,12 @@ class ArticleAdmin(SummernoteModelAdmin):
 
     published_date_display.short_description = "Published on"
 
-    def has_video(self, obj):
-        return self.videoId
+    def has_video(self):
+        return self.video_id
 
     def updated_date_display(self, obj):
         return format_html(
-            '<small>{}</small>'.format(obj.updated_date.strftime("%m/%d/%Y") if obj.published_date else "-"))
+            f'<small>{obj.updated_date.strftime("%m/%d/%Y") if obj.published_date else "-"}</small>')
 
     updated_date_display.short_description = "Updated on"
 
@@ -121,9 +121,9 @@ class ArticleAdmin(SummernoteModelAdmin):
     def author_link(self, obj):
         url = reverse("admin:bloggy_myuser_change", args=[obj.author.id])
         if obj.author.name:
-            link = '<a href="%s">%s</a>' % (url, obj.author.name)
+            link = f'<a href="{url}">{obj.author.name}</a>'
         else:
-            link = '<a href="%s">%s</a>' % (url, obj.author.username)
+            link = f'<a href="{url}">{obj.author.username}</a>'
         return mark_safe(link)
 
     author_link.short_description = 'Author'
@@ -168,7 +168,7 @@ class PostMetaAdmin(admin.ModelAdmin):
 
     def article_link(self, obj):
         url = reverse("admin:bloggy_article_change", args=[obj.article.id])
-        link = '<a href="%s">%s</a>' % (url, obj.article.title)
+        link = f'<a href="{url}">{obj.article.title}</a>'
         return mark_safe(link)
 
     article_link.short_description = 'Author'
