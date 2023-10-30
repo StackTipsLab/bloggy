@@ -17,4 +17,7 @@ class Command(BaseCommand):
         print('Importing demo contents')
 
         call_command('import_categories', f'--file={file_path}/categories.csv')
+        call_command('import_articles', f'--file={file_path}/articles.csv')
+        call_command('update_category_count')
+
         self.stdout.write(self.style.SUCCESS("Import Complete!"))

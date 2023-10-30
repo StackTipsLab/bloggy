@@ -7,22 +7,18 @@
          data-type="{{ article.post_type }}">
         <div class="d-flex align-items-center d-flex">
             <div class="flex-shrink-0">
-                {% if article.video_id %}
-                    <div class="archive-media-object video-object">
-                        <img loading="lazy" src="https://img.youtube.com/vi/{{ article.video_id }}/maxresdefault.jpg"
-                             alt="{{ article.title }}">
-                    </div>
-                {% elif article.thumbnail %}
+                {% if article.thumbnail %}
                     <div class="archive-media-object">
                         <img loading="lazy" src="{{ article.thumbnail.url }}" alt="{{ article.title }}">
                     </div>
                 {% else %}
                     {% define article.category.first as category %}
                     <div class="archive-media-object {{ article.post_type }}-object">
-                        <img loading="lazy" src="{{ category.logo.url }}" style="object-fit: contain;padding: 1rem">
+                        {% if category.logo %}
+                            <img loading="lazy" src="{{ category.logo.url }}" style="object-fit: contain;padding: 1rem">
+                        {% endif %}
                     </div>
                 {% endif %}
-
             </div>
 
             <div class="flex-grow-1 ms-3">

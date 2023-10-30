@@ -110,13 +110,10 @@ class Article(Post):
         return reverse(f'admin:{self._meta.app_label}_{self._meta.model_name}_change', args=[self.id])
 
     def get_absolute_url(self):
-        view_name_map = {
-            "lesson": ("lesson_single", {"course": str(self.course.slug), "slug": str(self.slug)}),
-        }
-        default_view = ("article_single", {"slug": str(self.slug)})
-
-        view_name, kwargs = view_name_map.get(self.post_type, default_view)
-        return reverse(view_name, kwargs=kwargs)
+        if self.post_type == "lesson":
+            return reverse("lesson_single", kwargs={"course": str(self.course.slug), "slug": str(self.slug)})
+        else:
+            return reverse("article_single", kwargs={"slug": str(self.slug)})
 
     def get_excerpt(self):
         return self.excerpt[0, 10]

@@ -36,4 +36,4 @@ class Command(BaseCommand):
                         publish_status=row[5]
                     )
 
-        self.stdout.write(self.style.SUCCESS(f'Imported {0} categories'.format(str(counter))))
+        self.stdout.write(self.style.SUCCESS(f"Imported %s categories" % counter))

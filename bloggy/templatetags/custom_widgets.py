@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 from django import template
@@ -110,7 +110,7 @@ def pretty_date(dt=None):
     if dt is None:
         return ""
 
-    now = datetime.now()
+    now = datetime.now(timezone.utc)
 
     if isinstance(dt, int):
         dt = datetime.fromtimestamp(dt)
