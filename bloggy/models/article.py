@@ -11,7 +11,6 @@ from bloggy import settings
 from bloggy.models import Bookmarks, Category, Votes
 from bloggy.models.course import Course
 from bloggy.models.post import Post
-from bloggy.services.quizz_service import get_questions_json
 from bloggy.utils.string_utils import StringUtils
 
 
@@ -40,8 +39,18 @@ def get_post_types():
 
 
 class Article(Post):
-    excerpt = models.CharField(max_length=500, help_text='Enter excerpt', null=True, blank=True)
-    video_id = models.CharField(max_length=100, help_text='YouTube Video ID', null=True, blank=True)
+    excerpt = models.CharField(
+        max_length=500,
+        help_text='Enter excerpt',
+        null=True,
+        blank=True
+    )
+    video_id = models.CharField(
+        max_length=100,
+        help_text='YouTube Video ID',
+        null=True,
+        blank=True
+    )
 
     difficulty = models.CharField(
         max_length=20, choices=DIFFICULTY_TYPE,
@@ -61,15 +70,28 @@ class Article(Post):
         help_text="Template type",
         verbose_name="Template type")
 
-    duration = models.IntegerField(help_text="Duration in minutes. For articles, it will be calculated automatically.",
-                                   default="1")
-    is_featured = models.BooleanField(default=False, help_text="Should this story be featured on site?")
+    duration = models.IntegerField(
+        help_text="Duration in minutes. For articles, it will be calculated automatically.",
+        default="1"
+    )
+    is_featured = models.BooleanField(
+        default=False,
+        help_text="Should this story be featured on site?"
+    )
     content = TextField(null=True, help_text='Post content')
     thumbnail = models.ImageField(upload_to=upload_thumbnail_image, blank=True, null=True)
 
     # This comes from Django HitCount
-    view_count = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='articles')
+    view_count = GenericRelation(
+        HitCount,
+        object_id_field='object_pk',
+        related_query_name='hit_count_generic_relation'
+    )
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='articles'
+    )
     category = models.ManyToManyField(Category)
     course = models.ForeignKey(Course, on_delete=models.PROTECT, blank=True, null=True)
 
@@ -88,27 +110,10 @@ class Article(Post):
         return reverse(f'admin:{self._meta.app_label}_{self._meta.model_name}_change', args=[self.id])
 
     def get_absolute_url(self):
-        view_name_map = {
-            "quiz": ("quiz_single", {"slug": str(self.slug)}),
-            "lesson": ("lesson_single", {"course": str(self.course.slug), "slug": str(self.slug)}),
-        }
-        default_view = ("article_single", {"slug": str(self.slug)})
-
-        view_name, kwargs = view_name_map.get(self.post_type, default_view)
-        return reverse(view_name, kwargs=kwargs)
-
-        # if self.post_type == "quiz":
-        #     return reverse("quiz_single", kwargs={
-        #         "slug": str(self.slug)
-        #     })
-        # elif self.post_type == "lesson":
-        #     return reverse("lesson_single", kwargs={
-        #         "course": str(self.course.slug), "slug": str(self.slug)
-        #     })
-        # else:
-        #     return reverse("article_single", kwargs={
-        #         "slug": str(self.slug)
-        #     })
+        if self.post_type == "lesson":
+            return reverse("lesson_single", kwargs={"course": str(self.course.slug), "slug": str(self.slug)})
+        else:
+            return reverse("article_single", kwargs={"slug": str(self.slug)})
 
     def get_excerpt(self):
         return self.excerpt[0, 10]
@@ -132,15 +137,8 @@ class Article(Post):
     def get_bookmarks_count(self):
         return Bookmarks.objects.all().filter(post_id=self.id).count()
 
-    def get_questions(self):
-        return self.quizquestion_set.all()
-
     def get_lessons(self):
         return self.lesson_set.filter(publish_status="LIVE").order_by("display_order").all()
-
-    @property
-    def get_questions_json(self):
-        return get_questions_json(self)
 
     def thumbnail_tag(self):
         if self.thumbnail:

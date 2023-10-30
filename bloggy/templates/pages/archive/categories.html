@@ -1,12 +1,10 @@
 {% extends "base-with-header-footer.html" %}
 {% load static %}
 {% spaceless %}
-    {#    {% block base_css_class %}bg-light{% endblock base_css_class %}#}
     {% block content %}
         <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
                 integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
                 crossorigin="anonymous" async></script>
-
 
         <div class=" container pt-5 pb-3">
             <div id="homeIntroSection" class="hero" style="max-width: 860px;margin: 0 auto;text-align: center;">
@@ -19,8 +17,6 @@
                     journey towards being a better developer.
                 </p>
             </div>
-
-
         </div>
         <div class="container">
             <div class="row row-eq-height archive-grid pb-4" data-masonry='{"percentPosition": true }'>

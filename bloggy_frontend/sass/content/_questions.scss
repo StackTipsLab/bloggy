@@ -65,8 +65,7 @@
     border-color: #93c5fd;
   }
 
-  &.draft,
-  &.quiz {
+  &.draft {
     background: #fde047;
     border-color: #facc15;
   }
@@ -124,7 +123,6 @@
   }
 
   &.article-object,
-  &.quiz-object,
   &.video-object {
     position: relative;
     display: inline-block;
@@ -150,14 +148,6 @@
     }
   }
 
-  &.quiz-object {
-    &:after {
-      //content: url("https://media.stacktips.com/static/media/quiz-icon100x100.png");
-      content: none;
-      margin-left: -50px;
-      margin-top: -50px;
-    }
-  }
 }
 
 

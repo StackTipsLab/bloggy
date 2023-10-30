@@ -24,25 +24,10 @@
 
 }
 
-.quiz-link {
-  @extend .stretched-link;
-  color: var(--quiz-card-link-color);
-  -webkit-text-decoration-skip-ink: none;
-  text-decoration-skip-ink: none;
-  text-decoration-color: rgba(0, 0, 0, 0);
-
-  &:focus,
-  &:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-  }
-}
-
-
 .article-link {
   @extend .stretched-link;
   color: var(--heading-link-color);
-  -webkit-text-decoration-skip-ink: none;
+  --webkit-text-decoration-skip-ink: none;
   text-decoration-skip-ink: none;
   text-decoration-color: rgba(0, 0, 0, 0);
 

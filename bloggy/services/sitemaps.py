@@ -14,7 +14,6 @@ class StaticPagesSitemap(sitemaps.Sitemap):
         return [
             'index',
             'courses',
-            'quizzes',
             'articles',
             'categories',
             'authors',

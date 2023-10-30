@@ -10,3 +10,5 @@ Spring Boot,spring-boot,"Popular, open-source, enterprise-level framework for cr
 Kotlin,kotlin,"Kotlin is a cross-platform, statically typed, general-purpose programming language with type inference.",uploads/categories/kotlin.png,#3333FF,LIVE
 AWS,aws,"Amazon Web Services (AWS) is the world's most comprehensive, scalable, and cost-effective cloud computing solution.",uploads/categories/aws.png,#99FF33,DRAFT
 Django,django,A high-level Python web framework for rapid development.,uploads/categories/django.png,#FFFF33,DRAFT
+Tech,Tech,Tech blog posts,uploads/categories/microservices.png,#33FFFF,LIVE
+Blog,Blog,Tech blog posts,,#33FF33,LIVE

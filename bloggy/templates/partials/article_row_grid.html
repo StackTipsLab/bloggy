@@ -7,22 +7,18 @@
          data-type="{{ article.post_type }}">
         <div class="d-flex align-items-center d-flex">
             <div class="flex-shrink-0">
-                {% if article.video_id %}
-                    <div class="archive-media-object video-object">
-                        <img loading="lazy" src="https://img.youtube.com/vi/{{ article.video_id }}/maxresdefault.jpg"
-                             alt="{{ article.title }}">
-                    </div>
-                {% elif article.thumbnail %}
+                {% if article.thumbnail %}
                     <div class="archive-media-object">
                         <img loading="lazy" src="{{ article.thumbnail.url }}" alt="{{ article.title }}">
                     </div>
                 {% else %}
                     {% define article.category.first as category %}
                     <div class="archive-media-object {{ article.post_type }}-object">
-                        <img loading="lazy" src="{{ category.logo.url }}" style="object-fit: contain;padding: 1rem">
+                        {% if category.logo %}
+                            <img loading="lazy" src="{{ category.logo.url }}" style="object-fit: contain;padding: 1rem">
+                        {% endif %}
                     </div>
                 {% endif %}
-
             </div>
 
             <div class="flex-grow-1 ms-3">
@@ -31,17 +27,6 @@
                            style="font-size:0.7rem">
                         {% pretty_date article.updated_date %}
                     </small>
-                    {% if article.post_type == 'quiz' %}
-                        <span class="eyebrow__spacer">·</span>
-                        <small class="text-muted text-uppercase fw-bold" style="font-size:0.7rem">
-                            {{ article.get_questions.count }} Questions
-                        </small>
-                        <span class="eyebrow__spacer">·</span>
-                        <small class="text-muted text-uppercase fw-bold" style="font-size:0.7rem">
-                            {{ article.duration }} Minutes
-                        </small>
-                    {% endif %}
-
                     <span class="eyebrow__spacer">·</span>
                     {% for category in article.category.all %}
                         <a class="text-decoration-none text-reset link-primary fw-bold"
@@ -56,10 +41,7 @@
                 </div>
 
                 <h3 class="h3 fw-500 mb-2">
-                    {% if article.post_type == 'quiz' %}
-                        <a href="{% url 'quiz_single' slug=article.slug %}"
-                           class="article-link">{{ article.title }} </a>
-                    {% elif article.post_type == 'article' %}
+                    {% if article.post_type == 'article' %}
                         <a href="{% url 'article_single' slug=article.slug %}"
                            class="article-link">{{ article.title }}</a>
                     {% elif article.post_type == 'lesson' %}
@@ -78,13 +60,6 @@
                     {% endif %}
                 </div>
 
-                <div class="mt-2">
-                    {% if article.post_type == 'quiz' %}
-                        <a href="{% url 'quiz_single' slug=article.slug %}"
-                           class="text-decoration-none text-primary fw-500 font-sm">Start the quiz&nbsp;&rarr;</a>
-                    {% endif %}
-
-                </div>
             </div>
 
         </div>

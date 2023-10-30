@@ -18,6 +18,5 @@ class Command(BaseCommand):
                 if article_count > 0:
                     category.article_count = article_count
                 category.save()
-                print("{\"" + category.title + "\": {\"article_count\":" + str(article_count) + "}}")
 
-        self.stdout.write(self.style.SUCCESS('Successfully updated'))
+        self.stdout.write(self.style.SUCCESS('Updated category count.'))
