@@ -27,7 +27,7 @@ from bloggy import settings
 from bloggy.views import EditProfileView
 from bloggy.views.courses_view import CoursesListView, CourseDetailsView, LessonDetailsView
 from bloggy.views.home import IndexView, AboutPageView
-from bloggy.views.topics_view import TopicsView, TopicsDetailsView
+from bloggy.views.topics_view import CategoriesView, CategoryDetailsView
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
@@ -37,7 +37,6 @@ from .views.misc_views import AdsTextView
 from .views.old_blog_redirect_view import AuthorRedirectView
 from .views.old_blog_redirect_view import OldCategoryDetailsRedirectView
 from .views.old_blog_redirect_view import OldTagArchiveRedirectView
-from .views.quizzes_view import QuizListView, QuizDetailView
 from .views.rss import ArticlesRssFeed, CoursesRssFeed
 from .views.search_view import SearchListView
 from .views.user import MyProfileView, PublicProfileView, AuthorsListView
@@ -50,14 +49,12 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('articles', ArticleListView.as_view(), name='articles'),
     path('articles/<slug:slug>', ArticleDetailsView.as_view(), name='article_single'),
-    path('topics', TopicsView.as_view(), name='categories'),
-    path('topics/<str:slug>', TopicsDetailsView.as_view(), name='categories_single'),
+    path('topics', CategoriesView.as_view(), name='categories'),
+    path('topics/<str:slug>', CategoryDetailsView.as_view(), name='categories_single'),
     path('search', SearchListView.as_view(), name='search'),
     path('courses', CoursesListView.as_view(), name='courses'),
     path('courses/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
     path('courses/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
-    path('quizzes', QuizListView.as_view(), name='quizzes'),
-    path('quizzes/<slug:slug>', QuizDetailView.as_view(), name='quiz_single'),
 
     path('login', MyLoginView.as_view(template_name="auth/login.html"), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
@@ -90,8 +87,6 @@ urlpatterns = [
     # static files for SEO or other reasons
     path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path('ads.txt', AdsTextView.as_view(), name='ads_txt'),
-    path('220764bdee4b4ff297c588217aaaafa3.txt',
-         TemplateView.as_view(template_name="220764bdee4b4ff297c588217aaaafa3.txt", content_type="text/plain")),
 
     # redirects for old website migration
     path('author/<str:user>', AuthorRedirectView.as_view()),

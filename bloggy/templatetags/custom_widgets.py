@@ -11,7 +11,6 @@ from bloggy.models import Votes, Bookmarks, Article, Category, Option
 
 register = template.Library()
 
-
 @register.simple_tag
 def url_replace(request, field, value):
     dict_ = request.GET.copy()
@@ -147,18 +146,6 @@ def pretty_date(dt=None):
     return f"{years_diff} year{'s' if years_diff > 1 else ''} ago"
 
 
-@register.inclusion_tag('widgets/related_quiz_widget.html', takes_context=True)
-def related_quizzes_widget(context, limit=5, category=None, widget_title="Challenges", widget_style=None):
-    if category is None:
-        quizzes = Article.objects.filter(post_type="quiz")[:limit]
-    else:
-        quizzes = Article.objects.filter(post_type="quiz").filter(category=category).all()[:limit]
-
-    return {
-        'quizzes': quizzes,
-        "widgetTitle": widget_title,
-        "widgetStyle": widget_style,
-    }
 
 
 @register.inclusion_tag('widgets/related_article_widget.html', takes_context=True)

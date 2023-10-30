@@ -19,11 +19,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         file_path = options['file']
 
+        counter = 0
         with open(file_path, encoding="utf-8") as f:
             reader = csv.reader(f)
             print('Importing categories from file', file_path)
 
-            counter = 0
             for index, row in enumerate(reader):
                 if index > 0:
                     counter = counter + 1
@@ -34,8 +34,6 @@ class Command(BaseCommand):
                         logo=row[3],
                         color=row[4],
                         publish_status=row[5]
-
                     )
-        self.stdout.write(
-            self.style.SUCCESS("Imported %s categories", str(counter))
-        )
+
+        self.stdout.write(self.style.SUCCESS(f'Imported {0} categories'.format(str(counter))))

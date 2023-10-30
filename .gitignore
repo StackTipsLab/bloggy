@@ -64,19 +64,8 @@ docs/_build/
 /bloggy_frontend/node_modules/
 /bloggy/static/
 /bloggy/static
-/bloggy/static/debug_toolbar
-/bloggy/static/hitcount
-/bloggy/static/media
-/bloggy/static/rest_framework
-/bloggy/static/summernote
-/bloggy/static/colorfield
-/bloggy/static/admin/
-media/uploads/default_avatar.png
-media/uploads/articles/*
-media/uploads/categories/*
-media/uploads/course/*
-media/uploads/quiz/*
-media/uploads/user/*
+media/uploads/*
+media/uploads/
 
 # Virtual Environments Ignore
 .venv

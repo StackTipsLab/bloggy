@@ -108,25 +108,6 @@ class ArticleSerializer(serializers.ModelSerializer):
         ]
 
 
-class QuizSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Article
-        fields = [
-            'id',
-            'title',
-            'excerpt',
-            'content',
-            'duration',
-            'difficulty',
-            'is_featured',
-            'post_type',
-            'display_order',
-            'updated_date',
-            'published_date',
-            'slug',
-        ]
-
-
 class RecursiveSerializer(serializers.Serializer):
     def to_representation(self, value):
         serializer = self.parent.parent.__class__(value, context=self.context)

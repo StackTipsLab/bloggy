@@ -27,6 +27,6 @@ class SearchListView(ListView):
             context['categories'] = categories
             context['search_query'] = search_query
             context['seo_title'] = f"Search result for {search_query}"
-            context['seo_description'] = "Search courses, tutorials, topics and quizzes on stacktips.com"
+            context['seo_description'] = "Search articles"
 
         return context

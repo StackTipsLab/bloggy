@@ -28,7 +28,6 @@ const config = {
         new CopyPlugin({
             patterns: [
                 {from: "assets", to: "../media"},
-                {from: "js/json", to: "../json"},
             ],
         }),
     ],
@@ -38,7 +37,6 @@ const config = {
                 test: /\.s[ac]ss$/,
                 exclude: /node_modules/,
                 use: [
-                    // MiniCssExtractPlugin.loader,
                     "style-loader",
                     "css-loader",
                     "sass-loader",

@@ -31,17 +31,6 @@
                            style="font-size:0.7rem">
                         {% pretty_date article.updated_date %}
                     </small>
-                    {% if article.post_type == 'quiz' %}
-                        <span class="eyebrow__spacer">·</span>
-                        <small class="text-muted text-uppercase fw-bold" style="font-size:0.7rem">
-                            {{ article.get_questions.count }} Questions
-                        </small>
-                        <span class="eyebrow__spacer">·</span>
-                        <small class="text-muted text-uppercase fw-bold" style="font-size:0.7rem">
-                            {{ article.duration }} Minutes
-                        </small>
-                    {% endif %}
-
                     <span class="eyebrow__spacer">·</span>
                     {% for category in article.category.all %}
                         <a class="text-decoration-none text-reset link-primary fw-bold"
@@ -56,10 +45,7 @@
                 </div>
 
                 <h3 class="h3 fw-500 mb-2">
-                    {% if article.post_type == 'quiz' %}
-                        <a href="{% url 'quiz_single' slug=article.slug %}"
-                           class="article-link">{{ article.title }} </a>
-                    {% elif article.post_type == 'article' %}
+                    {% if article.post_type == 'article' %}
                         <a href="{% url 'article_single' slug=article.slug %}"
                            class="article-link">{{ article.title }}</a>
                     {% elif article.post_type == 'lesson' %}
@@ -78,13 +64,6 @@
                     {% endif %}
                 </div>
 
-                <div class="mt-2">
-                    {% if article.post_type == 'quiz' %}
-                        <a href="{% url 'quiz_single' slug=article.slug %}"
-                           class="text-decoration-none text-primary fw-500 font-sm">Start the quiz&nbsp;&rarr;</a>
-                    {% endif %}
-
-                </div>
             </div>
 
         </div>

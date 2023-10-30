@@ -4,25 +4,30 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.views.generic import TemplateView, ListView
 
+from bloggy import settings
 from bloggy.models import Article
 from bloggy.models import Category
 
 logger = logging.getLogger(__name__)
 
 
-class TopicsView(TemplateView):
+class CategoriesView(TemplateView):
     template_name = "pages/archive/categories.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
+        if settings.SHOW_EMTPY_CATEGORIES:
+            categories = Category.objects.order_by("-article_count").all()
+        else:
+            categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
+
         logger.debug('Loading categories: %s', categories)
         context['categories'] = categories
 
         return context
 
 
-class TopicsDetailsView(ListView):
+class CategoryDetailsView(ListView):
     model = Article
     template_name = "pages/archive/articles.html"
     paginate_by = 20

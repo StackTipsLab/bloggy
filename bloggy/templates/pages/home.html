@@ -10,10 +10,7 @@
                         Developer Friendly Way to Learn <span class="text-gradient text-primary">Programming.</span>
                     </h1>
                     <p class="lead px-lg-5 py-2" style="max-width: 900px;margin: 0 auto">
-                        StackTips brings developer-friendly ways to learn programming. With articles, programming
-                        course,
-                        and
-                        quizzes, we aim to teach in the ways developers learn best.
+                        StackTips brings developer-friendly ways to learn programming. With courses, articles, and how-to guides, we aim to teach in the ways developers learn best.
                     </p>
                     <a class="btn btn-primary btn-lg mt-4 ms-2" href="{% url 'login' %}?next={{ request.path }}">Create free account!</a>
                 </div>
@@ -21,7 +18,6 @@
 
             {% include "partials/section_home_recent_articles.html" %}
             {% include "partials/section_home_courses.html" %}
-            {% include "partials/section_home_quizs.html" %}
         </section>
     {% endblock content %}
 {% endspaceless %}
