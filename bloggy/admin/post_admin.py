@@ -11,15 +11,23 @@ from bloggy.admin.misc_admin import publish, unpublish
 from bloggy.models import Post
 
 
-class ArticleForm(forms.ModelForm):
+class PostForm(forms.ModelForm):
     excerpt = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
     model = Post
-    keywords = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_title = forms.CharField(widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
+    meta_description = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_keywords = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
 
 
 @admin.register(Post)
-class ArticleAdmin(SummernoteModelAdmin):
+class PostAdmin(SummernoteModelAdmin):
+
+    def get_changeform_initial_data(self, request):
+        return {
+            'meta_title': '{title}',
+            'meta_description': '{excerpt}'
+        }
 
     def get_form(self, request, obj=None, change=False, **kwargs):
         form = super().get_form(request, obj, change, **kwargs)
@@ -52,22 +60,25 @@ class ArticleAdmin(SummernoteModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'excerpt', 'keywords', 'slug', 'content', 'thumbnail', 'author', 'category',)
+            'fields': ('title', 'excerpt', 'slug', 'content', 'thumbnail', 'author', 'category',)
         }),
         ('Publication options', {
             'fields': ('publish_status', 'published_date',),
         }),
         ('Advanced options', {
-            'fields': ('post_type', 'template_type', 'course', 'duration', 'difficulty', 'video_id', 'is_featured',
+            'fields': ('post_type', 'template_type', 'course', 'difficulty', 'video_id', 'is_featured',
                        'display_order'),
         }),
+        ('SEO Settings', {
+            'fields': ('meta_title', 'meta_description', 'meta_keywords'),
+        })
     )
 
     search_fields = ['title']
     summernote_fields = ('content',)
     readonly_fields = ['updated_date', 'created_date']
     date_hierarchy = 'published_date'
-    form = ArticleForm
+    form = PostForm
     ordering = ('-created_date',)
     list_display_links = ['title']
     list_per_page = 50
@@ -97,7 +108,7 @@ class ArticleAdmin(SummernoteModelAdmin):
     category_display.short_description = "Categories"
 
     def author_link(self, obj):
-        url = reverse("admin:bloggy_myuser_change", args=[obj.author.id])
+        url = reverse("admin:bloggy_user_change", args=[obj.author.id])
         if obj.author.name:
             link = f'<a href="{url}">{obj.author.name}</a>'
         else:

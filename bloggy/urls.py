@@ -33,10 +33,11 @@ from .views import RegisterView
 from .views.account import AccountActivationView
 from .views.article_views import ArticleListView, PostDetailsView
 from .views.login import MyLoginView
-from .views.misc_views import AdsTextView
+from .views.misc_views import AdsTextView, robots
 from .views.old_blog_redirect_view import AuthorRedirectView
 from .views.old_blog_redirect_view import OldCategoryDetailsRedirectView
 from .views.old_blog_redirect_view import OldTagArchiveRedirectView
+from .views.page_view import PageDetailsView
 from .views.rss import ArticlesRssFeed, CoursesRssFeed
 from .views.search_view import SearchListView
 from .views.user import MyProfileView, PublicProfileView, AuthorsListView
@@ -85,7 +86,7 @@ urlpatterns = [
          name='django.contrib.sitemaps.views.sitemap'),
 
     # static files for SEO or other reasons
-    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    path('robots.txt', robots, name='robots'),
     path('ads.txt', AdsTextView.as_view(), name='ads_txt'),
 
     # redirects for old website migration
@@ -96,6 +97,7 @@ urlpatterns = [
 
     path('summernote/', include('django_summernote.urls')),
     path('api/1.0/', include('bloggy_api.urls')),
+    path('<str:url>', PageDetailsView.as_view()),
 ]
 
 if settings.DEBUG:
