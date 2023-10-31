@@ -1,8 +1,6 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.db.models import TextField
-from django.forms import Textarea, BaseInlineFormSet
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
@@ -10,38 +8,17 @@ from django.utils.safestring import mark_safe
 from django_summernote.admin import SummernoteModelAdmin
 
 from bloggy.admin.misc_admin import publish, unpublish
-from bloggy.models import Article, PostMeta
+from bloggy.models import Post
 
 
 class ArticleForm(forms.ModelForm):
     excerpt = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
-    model = Article
+    model = Post
     keywords = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
 
 
-class PostMetaInlineFormSet(BaseInlineFormSet):
-    def __init__(self, *args, **kwargs):
-        self.initial = [
-            {'meta_key': 'template_type', 'meta_value': "standard"},
-            {'meta_key': 'seo_title', 'meta_value': ""},
-            {'meta_key': 'seo_description', 'meta_value': ""},
-            {'meta_key': 'seo_keywords', 'meta_value': ""},
-        ]
-        # super(PostMetaInlineFormSet, self).__init__(*args, **kwargs)
-        super().__init__()
-
-
-class PostMetaInline(admin.TabularInline):
-    model = PostMeta
-    extra = 0
-    formfield_overrides = {
-        TextField: {'widget': Textarea(attrs={'rows': 1, 'cols': 105})},
-    }
-    formset = PostMetaInlineFormSet
-
-
-@admin.register(Article)
+@admin.register(Post)
 class ArticleAdmin(SummernoteModelAdmin):
 
     def get_form(self, request, obj=None, change=False, **kwargs):
@@ -95,7 +72,6 @@ class ArticleAdmin(SummernoteModelAdmin):
     list_display_links = ['title']
     list_per_page = 50
     actions = [publish, unpublish]
-    inlines = [PostMetaInline]
 
     def published_date_display(self, obj):
         return format_html(
@@ -161,16 +137,3 @@ class ArticleAdmin(SummernoteModelAdmin):
         return True
 
     has_excerpt.boolean = True
-
-
-@admin.register(PostMeta)
-class PostMetaAdmin(admin.ModelAdmin):
-    list_display = ['id', 'article_link', 'meta_key', 'meta_value']
-    list_filter = ['meta_key']
-
-    def article_link(self, obj):
-        url = reverse("admin:bloggy_article_change", args=[obj.article.id])
-        link = f'<a href="{url}">{obj.article.title}</a>'
-        return mark_safe(link)
-
-    article_link.short_description = 'Author'

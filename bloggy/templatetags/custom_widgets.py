@@ -7,7 +7,7 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from numerize.numerize import numerize
 
-from bloggy.models import Votes, Bookmarks, Article, Category, Option
+from bloggy.models import Vote, Bookmark, Post, Category, Option
 
 register = template.Library()
 
@@ -58,14 +58,14 @@ def format_number(num):
 @register.simple_tag
 def check_if_user_bookmarked(post_id, post_type, user):
     if user.is_authenticated:
-        return Bookmarks.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
+        return Bookmark.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
     return 0
 
 
 @register.simple_tag
 def check_if_user_voted(post_id, post_type, user):
     if user.is_authenticated:
-        return Votes.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
+        return Vote.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
     return 0
 
 
@@ -153,7 +153,7 @@ def related_article_widget(context, count=12, categories=None, slug=0, widget_ti
                            widget_style="list"):
     articles = None
     if categories is None:
-        articles = Article.objects.filter(publish_status="LIVE").filter(post_type="article") \
+        articles = Post.objects.filter(publish_status="LIVE").filter(post_type="article") \
                        .exclude(slug=slug).order_by('-published_date')[:count].all()
         categories = []
 
@@ -162,7 +162,7 @@ def related_article_widget(context, count=12, categories=None, slug=0, widget_ti
         category_slugs.append(str(category.slug))
 
     if len(category_slugs) > 0:
-        articles = Article.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(
+        articles = Post.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(
             post_type="article") \
                        .exclude(slug=slug).order_by('-published_date')[:count].all()
 

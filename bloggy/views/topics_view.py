@@ -5,8 +5,8 @@ from django.http import Http404
 from django.views.generic import TemplateView, ListView
 
 from bloggy import settings
-from bloggy.models import Article
 from bloggy.models import Category
+from bloggy.models import Post
 
 logger = logging.getLogger(__name__)
 
@@ -28,7 +28,7 @@ class CategoriesView(TemplateView):
 
 
 class CategoryDetailsView(ListView):
-    model = Article
+    model = Post
     template_name = "pages/archive/articles.html"
     paginate_by = 20
 
@@ -42,7 +42,7 @@ class CategoryDetailsView(ListView):
         except Category.DoesNotExist:
             raise Http404
 
-        articles = Article.objects.filter(category__slug__in=[category_param], publish_status="LIVE").order_by(
+        articles = Post.objects.filter(category__slug__in=[category_param], publish_status="LIVE").order_by(
             "-published_date")
         paginator = Paginator(articles, self.paginate_by)
         page = self.request.GET.get('page')
@@ -56,6 +56,6 @@ class CategoryDetailsView(ListView):
 
         context['articles'] = articles
         context['categories'] = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
-        context['seo_title'] = category.title
-        context['seo_description'] = category.description
+        context['meta_title'] = category.title
+        context['meta_description'] = category.description
         return context

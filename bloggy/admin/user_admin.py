@@ -3,10 +3,10 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.html import format_html
 
-from bloggy.models import MyUser
+from bloggy.models import User
 
 
-@admin.register(MyUser)
+@admin.register(User)
 class MyUserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm

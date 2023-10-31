@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 
-from bloggy.models import Article
+from bloggy.models import Post
 from bloggy_api.serializers import ArticleSerializer
 
 
@@ -14,7 +14,7 @@ class ArticleAPIView(generics.ListAPIView):
     serializer_class = ArticleSerializer
 
     def get_queryset(self):
-        queryset = Article.objects.filter(publish_status="LIVE") \
+        queryset = Post.objects.filter(publish_status="LIVE") \
             .order_by("-published_date")
 
         categories = self.request.query_params.getlist('category', None)
@@ -30,5 +30,5 @@ class ArticleAPIView(generics.ListAPIView):
 
 class ArticleDetailsAPIView(generics.RetrieveAPIView):
     serializer_class = ArticleSerializer
-    queryset = Article.objects.filter(publish_status="LIVE").all()
+    queryset = Post.objects.filter(publish_status="LIVE").all()
     lookup_field = 'slug'

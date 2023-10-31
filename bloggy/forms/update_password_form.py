@@ -1,11 +1,11 @@
 from django import forms
 from django.forms import CharField, PasswordInput
 
-from bloggy.models import MyUser
+from bloggy.models import User
 
 
 class UpdatePasswordForm(forms.BaseForm):
-    model = MyUser
+    model = User
 
     error_css_class = 'has-error'
     error_messages = {'password_incorrect': "The old password is not correct. Try again."}

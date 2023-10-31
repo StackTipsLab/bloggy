@@ -31,7 +31,7 @@ from bloggy.views.topics_view import CategoriesView, CategoryDetailsView
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
-from .views.article_views import ArticleListView, ArticleDetailsView
+from .views.article_views import ArticleListView, PostDetailsView
 from .views.login import MyLoginView
 from .views.misc_views import AdsTextView
 from .views.old_blog_redirect_view import AuthorRedirectView
@@ -48,7 +48,7 @@ urlpatterns = [
 
     path('', IndexView.as_view(), name='index'),
     path('articles', ArticleListView.as_view(), name='articles'),
-    path('articles/<slug:slug>', ArticleDetailsView.as_view(), name='article_single'),
+    path('articles/<slug:slug>', PostDetailsView.as_view(), name='article_single'),
     path('topics', CategoriesView.as_view(), name='categories'),
     path('topics/<str:slug>', CategoryDetailsView.as_view(), name='categories_single'),
     path('search', SearchListView.as_view(), name='search'),

@@ -1,10 +1,10 @@
 import csv
-from django.utils import timezone
 
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 from django.utils.text import slugify
 
-from bloggy.models import Category, Article, MyUser
+from bloggy.models import Category, Post, User
 
 
 class Command(BaseCommand):
@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 if index > 0:
                     counter = counter + 1
                     slug = slugify(row[0])
-                    article = Article.objects.get_or_create(
+                    article = Post.objects.get_or_create(
                         title=row[0],
                         slug=slug,
                         publish_status=row[1],
@@ -40,11 +40,11 @@ class Command(BaseCommand):
                         post_type=row[9],
                         template_type=row[10],
                         published_date=timezone.now(),
-                        author=MyUser.objects.get(id=row[7]),
+                        author=User.objects.get(id=row[7]),
                     )
 
                     categories = Category.objects.filter(slug__in=row[11].split(",")).all()
-                    saved_article = Article.objects.get(slug=slug)
+                    saved_article = Post.objects.get(slug=slug)
                     saved_article.category.set(categories)
                     saved_article.save()
 

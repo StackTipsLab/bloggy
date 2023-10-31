@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import TextField
 
-from bloggy.models.updatable import Updatable
+from bloggy.models.mixin.updatable import Updatable
 
 
 class Option(Updatable):

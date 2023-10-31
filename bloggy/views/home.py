@@ -4,7 +4,7 @@ from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import TemplateView
 
 from bloggy import settings
-from bloggy.models import Category, Article
+from bloggy.models import Category, Post
 from bloggy.models.course import Course
 
 
@@ -14,8 +14,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = Article.objects.prefetch_related("category").filter(publish_status="LIVE").filter(
-            post_type__in=["article", "lesson"]).order_by("-published_date")[:12]
+        context['articles'] = Post.objects.prefetch_related("category").filter(publish_status="LIVE").order_by("-published_date")[:12]
         context['courses'] = Course.objects.filter(publish_status="LIVE").all()[:6]
         return context
 
@@ -26,6 +25,6 @@ class AboutPageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categoryCount'] = Category.objects.filter(article_count__gt=0).order_by("-article_count").count()
-        context['postsCount'] = Article.objects.filter(publish_status="LIVE").filter(post_type="article").count()
+        context['postsCount'] = Post.objects.filter(publish_status="LIVE").filter(post_type="article").count()
         context['coursesCount'] = Course.objects.filter(publish_status="LIVE").count()
         return context

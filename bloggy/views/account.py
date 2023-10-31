@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.views import View
 
 from bloggy import settings
-from bloggy.models import MyUser
+from bloggy.models import User
 from bloggy.services.token_service import get_token, is_token_expired
 
 
@@ -17,7 +17,7 @@ class AccountActivationView(View):
             return redirect('index')
 
         # activate user
-        user = MyUser.objects.get(email=verification_token.user.email)
+        user = User.objects.get(email=verification_token.user.email)
         user.is_active = True
         user.is_staff = False
         group = Group.objects.get_or_create(name=settings.AUTH_USER_DEFAULT_GROUP)

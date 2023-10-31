@@ -4,18 +4,12 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.text import slugify
 
-from bloggy.models.updatable import Updatable
+from bloggy.models.mixin.updatable import Updatable
 from bloggy.utils.string_utils import StringUtils
 
 
 def upload_logo_image(self, filename):
     return f'uploads/categories/{filename}'
-
-
-PUBLISH_STATUS = [
-    ('DRAFT', 'DRAFT'),
-    ('LIVE', 'LIVE')
-]
 
 
 class Category(Updatable):
@@ -27,7 +21,10 @@ class Category(Updatable):
     color = ColorField(default='#1976D2')
 
     publish_status = models.CharField(
-        max_length=20, choices=PUBLISH_STATUS,
+        max_length=20, choices=[
+            ('DRAFT', 'DRAFT'),
+            ('LIVE', 'LIVE')
+        ],
         default='DRAFT', blank=True, null=True,
         help_text="Select publish status",
         verbose_name="Publish status")

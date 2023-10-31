@@ -5,7 +5,7 @@
 {% load shortcodes_filters %}
 {% block base_css_class %}{% endblock base_css_class %}
 {% block jsonld %}
-    {% include "seo/article_jsonld.html" with author=article.author %}
+    {% include "seo/article_jsonld.html" with author=post.author %}
 {% endblock jsonld %}
 {% spaceless %}
 {% block content %}

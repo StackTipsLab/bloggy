@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ClearableFileInput
 
-from bloggy.models import MyUser
+from bloggy.models import User
 
 
 class NonClearableFileInput(ClearableFileInput):
@@ -10,7 +10,7 @@ class NonClearableFileInput(ClearableFileInput):
 
 class EditProfileForm(forms.ModelForm):
     class Meta:
-        model = MyUser
+        model = User
         fields = [
             'profile_photo',
             'name',

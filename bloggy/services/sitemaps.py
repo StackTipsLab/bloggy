@@ -2,8 +2,8 @@ from django.contrib import sitemaps
 from django.contrib.sitemaps import GenericSitemap
 from django.urls import reverse
 
+from bloggy.models import Post, Category, User
 from bloggy.models.course import Course
-from bloggy.models import Article, Category, MyUser
 
 
 class StaticPagesSitemap(sitemaps.Sitemap):
@@ -42,7 +42,7 @@ class StaticPagesSitemap(sitemaps.Sitemap):
 sitemaps_list = {
     'pages': StaticPagesSitemap,
     'articles': GenericSitemap({
-        'queryset': Article.objects.filter(publish_status="LIVE").order_by("-published_date").all(),
+        'queryset': Post.objects.filter(publish_status="LIVE").order_by("-published_date").all(),
         'date_field': 'published_date'
     }, priority=0.6, changefreq='daily'),
 
@@ -56,7 +56,7 @@ sitemaps_list = {
     }, priority=0.6, changefreq='daily'),
 
     'users': GenericSitemap({
-        'queryset': MyUser.objects.exclude(username__in=["siteadmin", "superadmin", "admin"]).filter(is_staff=True).all()
+        'queryset': User.objects.exclude(username__in=["siteadmin", "superadmin", "admin"]).filter(is_staff=True).all()
     }, priority=0.6, changefreq='daily'),
 
 }

@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from hitcount.views import HitCountDetailView
 
 from bloggy import settings
-from bloggy.models import Article
+from bloggy.models import Post
 from bloggy.models.course import Course
 
 DEFAULT_PAGE_SIZE = 40
@@ -43,11 +43,11 @@ class CourseDetailsView(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        context['seo_title'] = self.object.title
-        context['seo_description'] = self.object.excerpt
+        context['meta_title'] = self.object.meta_title
+        context['meta_description'] = self.object.meta_description
+        context['meta_keywords'] = self.object.meta_keywords
         if self.object.thumbnail:
-            context['seo_image'] = self.object.thumbnail.url
+            context['meta_image'] = self.object.thumbnail.url
         return context
 
 
@@ -58,19 +58,18 @@ class LessonDetailsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         course_slug = context["course"]
-        article = Article.objects.filter(course__slug=course_slug).filter(slug=context["slug"]).order_by("display_order").first()
+        article = Post.objects.filter(course__slug=course_slug).filter(slug=context["slug"]).order_by("display_order").first()
         if not article:
             raise Http404
 
         context["article"] = article
         course = article.course
         context["course"] = course
-        context['seo_title'] = article.title
-        context['seo_description'] = article.excerpt
-        context['seo_keywords'] = article.keywords
+        context['meta_title'] = article.meta_title
+        context['meta_description'] = article.meta_description
+        context['meta_keywords'] = article.meta_keywords
         if course.thumbnail:
-            context['seo_image'] = course.thumbnail.url
-            context['og_image'] = course.thumbnail.url
+            context['meta_image'] = course.thumbnail.url
         else:
-            context['og_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{article.post_type}/{article.slug}.png"
+            context['meta_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{article.post_type}/{article.slug}.png"
         return context

@@ -4,7 +4,7 @@ from bloggy import settings
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('bloggy.Article', on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey('bloggy.Post', on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments', blank=True,
                              null=True)
     parent = models.ForeignKey('self', related_name='reply_set', null=True, on_delete=models.PROTECT)

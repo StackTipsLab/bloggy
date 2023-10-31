@@ -49,7 +49,6 @@ class VerificationToken(models.Model):
 
     token = models.CharField(
         help_text="The random token identifying the verification request.",
-        # default=token_generator.generate_verification_code(),
         max_length=TOKEN_LENGTH,
         unique=True,
         verbose_name="token",

@@ -4,7 +4,7 @@ from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
 
 from bloggy import settings
-from bloggy.models import Article
+from bloggy.models import Post
 from bloggy.models.course import Course
 
 
@@ -61,7 +61,7 @@ class ArticlesRssFeed(BaseRssFeedView):
         return thumbnail
 
     def items(self):
-        return Article.objects.filter(publish_status="LIVE").order_by('-published_date')[:30]
+        return Post.objects.filter(publish_status="LIVE").order_by('-published_date')[:30]
 
     def item_description(self, item):
         content = (f"{item.content}\n<small>Originally published at "

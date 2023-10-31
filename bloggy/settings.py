@@ -207,7 +207,7 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = 'bloggy.MyUser'
+AUTH_USER_MODEL = 'bloggy.User'
 AUTH_USER_DEFAULT_GROUP = 'bloggy-members'
 
 SUMMERNOTE_THEME = 'bs4'
@@ -344,5 +344,10 @@ EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emai
 MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
 
 # Read the POST_TYPE_CHOICES environment variable from the .env file
-POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES', 'article:Article,lesson:Lesson')
+POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES')
 SHOW_EMTPY_CATEGORIES = os.getenv("SHOW_EMTPY_CATEGORIES", "False") == "True"
+
+
+def get_post_types():
+    post_type = [choice.split(':') for choice in POST_TYPE_CHOICES.split(',')]
+    return list(post_type)
