@@ -26,20 +26,20 @@ from django.views.generic.base import TemplateView
 from bloggy import settings
 from bloggy.views import EditProfileView
 from bloggy.views.courses_view import CoursesListView, CourseDetailsView, LessonDetailsView
-from bloggy.views.home import IndexView, AboutPageView
+from bloggy.views.pages import IndexView
 from bloggy.views.topics_view import CategoriesView, CategoryDetailsView
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
 from .views.article_views import ArticleListView, PostDetailsView
 from .views.login import MyLoginView
-from .views.misc_views import AdsTextView, robots
-from .views.old_blog_redirect_view import AuthorRedirectView
-from .views.old_blog_redirect_view import OldCategoryDetailsRedirectView
-from .views.old_blog_redirect_view import OldTagArchiveRedirectView
-from .views.page_view import PageDetailsView
+from .views.pages import AdsTextView, robots
+from .views.redirects import AuthorRedirectView
+from .views.redirects import OldCategoryDetailsRedirectView
+from .views.redirects import OldTagArchiveRedirectView
+from .views.pages import PageDetailsView
 from .views.rss import ArticlesRssFeed, CoursesRssFeed
-from .views.search_view import SearchListView
+from .views.search import SearchListView
 from .views.user import MyProfileView, PublicProfileView, AuthorsListView
 from .views.user_collections import UserBookmarksView
 
@@ -68,17 +68,7 @@ urlpatterns = [
     path('dashboard', login_required(MyProfileView.as_view()), name="profile.dashboard"),
     path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
 
-    path('privacy', TemplateView.as_view(template_name="pages/static/privacy-policy.html"), name='pages.privacy'),
-    path('code-of-conduct', TemplateView.as_view(template_name="pages/static/code_of_conduct.html"),
-         name='pages.code_of_conduct'),
-    path('contribute', TemplateView.as_view(template_name="pages/static/contribute.html"), name='pages.contribute'),
-    path('about', AboutPageView.as_view(), name='pages.about'),
-    path('contact', TemplateView.as_view(template_name="pages/static/contact.html"), name='pages.contact'),
-    path('terms-of-service', TemplateView.as_view(template_name="pages/static/terms-of-service.html"),
-         name='pages.terms_of_service'),
-    path('cookie-policy', TemplateView.as_view(template_name="pages/static/cookie-policy.html"),
-         name='pages.cookie_policy'),
-
+    path('contact', TemplateView.as_view(template_name="pages/static/templates/pages/contact.html"), name='pages.contact'),
     path("rss/articles", ArticlesRssFeed(), name="articles_feed"),
     path("rss/courses", CoursesRssFeed(), name="courses_feed"),
     path('sitemap.xml', index, {'sitemaps': sitemaps_list}, name='django.contrib.sitemaps.views.index'),

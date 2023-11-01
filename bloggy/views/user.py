@@ -46,7 +46,7 @@ class PublicProfileView(SingleObjectMixin, View):
         # user = get_object_or_404(MyUser.objects.filter(is_active=True), username=username)
         posts = self.object.posts.filter(publish_status="LIVE").order_by("-published_date")
 
-        paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
+        paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
         try:
             articles = paginator.page(page)
@@ -80,7 +80,7 @@ class MyProfileView(DetailView):
         context = super().get_context_data(*args, **kwargs)
         user = self.get_object()
 
-        articles = user.articles.order_by("-published_date").filter(publish_status="LIVE")
+        articles = user.posts.order_by("-published_date").filter(publish_status="LIVE")
         paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
         try:

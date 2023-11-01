@@ -29,7 +29,7 @@ class CategoriesView(TemplateView):
 
 class CategoryDetailsView(ListView):
     model = Post
-    template_name = "pages/archive/articles.html"
+    template_name = "pages/archive/posts.html"
     paginate_by = 20
 
     def get_context_data(self, **kwargs):

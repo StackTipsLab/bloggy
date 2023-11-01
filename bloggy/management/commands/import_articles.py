@@ -8,14 +8,14 @@ from bloggy.models import Category, Post, User
 
 
 class Command(BaseCommand):
-    help = 'Importing articles'
+    help = 'Importing posts'
 
     def __init__(self, *args, **kwargs):
         super().__init__()
 
     def add_arguments(self, parser):
         parser.add_argument('-f', '--file', type=str,
-                            help="File path to import, e.g. ~/bloggy/management/commands/demo/articles.csv")
+                            help="File path to import, e.g. ~/bloggy/management/commands/demo_content/posts.csv")
 
     def handle(self, *args, **options):
         file_path = options['file']

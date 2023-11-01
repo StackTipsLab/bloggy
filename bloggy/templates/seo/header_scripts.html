@@ -6,20 +6,6 @@
     <link rel="stylesheet" href="{{ ASSETS_DOMAIN }}/static/dist/app.styles.css"/>
 {% endif %}
 <script async src="https://kit.fontawesome.com/16bc69a78f.js" crossorigin="anonymous"></script>
-<!-- Ad blocker popup -->
-{% comment %}{% if not debug %}
-    <script>
-        function adBlockFunction() {
-            const style = 'background-color: #fefce8; color: #c2410c;border: 1px dotted #c2410c; font-size: 1em;padding:5px;font-family: Consolas,monospace'
-            console.log("%cPlease consider supporting us by disabling your ad. Thank you for your understanding!", style);
-            const adbnwrap = document.querySelector(".adbn-wrap");
-            adbnwrap.style.display = "flex";
-        }
-        document.querySelector("#adbnrb").addEventListener("click", function () {
-            location.reload();
-        });
-    </script>
-{% endif %}{% endcomment %}
 
 <!-- Google Tag Manager -->
 {% if not debug or DEVELOPMENT_MODE  %}

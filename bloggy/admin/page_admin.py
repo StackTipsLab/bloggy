@@ -25,7 +25,7 @@ class PageAdmin(SummernoteModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'excerpt', 'url', 'content', 'active',)
+            'fields': ('title', 'excerpt', 'url', 'content', 'publish_status',)
         }),
         ('SEO Settings', {
             'fields': ('meta_title', 'meta_description', 'meta_keywords'),

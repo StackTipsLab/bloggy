@@ -114,6 +114,6 @@ We currently supports importing the categories from CSV file. This can be done u
 The sample CSV files are located in `bloggy/bloggy/management/commands/demo` directory.
 
 ```shell
-python3 manage.py import_content --path=~/Documents/github/StackTipsLab/bloggy/bloggy/management/commands/demo
+python3 manage.py import_content --path=~/Documents/github/StackTipsLab/bloggy/bloggy/management/commands/demo_content
 ```
 

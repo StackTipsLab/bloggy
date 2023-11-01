@@ -4,11 +4,6 @@
     "meta_description": "Elevate your coding skills with StackTips. Learn through articles, courses, and quizzes on StackTips",
     "meta_keywords": "stacktips, stack tips, python course, java tutorials, spring tutorials, spring boot tutorials, maven course for beginners, practice quiz, aws practice quiz, aws practice test"
   },
-  "/quizzes": {
-    "meta_title": "Interactive Quizzes",
-    "meta_description": "Use bloggy to test your coding skills and gauge your learning progress in a fun way",
-    "meta_keywords": "stacktips quizzes, stack tips bloggy, quizlzet, take a quiz, practice test, aws quiz, python test, advance python test, aws practitioner test, CLF-C01 AWS test, aws CLF-C01 quiz"
-  },
   "/courses": {
     "meta_title": "Courses",
     "meta_description": "StackTips offers free Programming Courses to teach you the fundamentals of popular programming languages such as Java, Python, HTML, JavaScript and CSS",
@@ -24,33 +19,9 @@
     "meta_description": "Browse from collection of tutorials and courses organized by categories to make learning easy and accessible.",
     "meta_keywords": "stacktips categories, stack tips topics, browse by topics, stacktips categories, tutorial categories, tutorial categories, all tutorials by category, android, django, python, django, spring, spring boot, git"
   },
-  "/cookie-policy": {
-    "meta_title": "Cookie policy",
-    "meta_description": "Our Cookies Policy explains what Cookies are and how We use them."
-  },
-  "/privacy": {
-    "meta_title": "Privacy policy",
-    "meta_description": "This page explains our privacy policy"
-  },
-  "/terms-of-service": {
-    "meta_title": "Terms of service",
-    "meta_description": "This page outlines the legal terms of stacktips.com, its sub-domains, and all associated web and/or mobile apps."
-  },
-  "/comment-policy": {
-    "meta_title": "Comment policy",
-    "meta_description": "This page lists some of the simple ground rules for commenting on this site"
-  },
   "/contact": {
     "meta_title": "Get in touch",
     "meta_description": "If you have any questions or have suggestions to improve the quality, let us know."
-  },
-  "/about": {
-    "meta_title": "About us",
-    "meta_description": "We aim to provide developer-friendly ways to learn programming. With articles, programming course, and quizzes, we aim to teach in the ways developers learn best."
-  },
-  "/guestbook": {
-    "meta_title": "Guestbook",
-    "meta_description": "You have a chance to be creative. Indulge me by leaving a greeting below."
   },
   "/newsletter": {
     "meta_title": "Newsletter",

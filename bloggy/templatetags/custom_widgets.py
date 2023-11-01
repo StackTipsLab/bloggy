@@ -148,7 +148,7 @@ def pretty_date(dt=None):
 
 
 
-@register.inclusion_tag('widgets/related_article_widget.html', takes_context=True)
+@register.inclusion_tag('widgets/related_posts.html', takes_context=True)
 def related_article_widget(context, count=12, categories=None, slug=0, widget_title="Related posts",
                            widget_style="list"):
     articles = None
@@ -173,7 +173,7 @@ def related_article_widget(context, count=12, categories=None, slug=0, widget_ti
     }
 
 
-@register.inclusion_tag('widgets/categories_widget.html', takes_context=True)
+@register.inclusion_tag('widgets/categories.html', takes_context=True)
 def categories_widget(context, content_type="article", count=0, widget_style=""):
     categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
 

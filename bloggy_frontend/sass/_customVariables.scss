@@ -10,7 +10,7 @@ $bg-dark: #24292e;
 
 $font-weight-bold: 600;
 $font-weight-bolder: 700;
-$font-size-base: 1rem !default; // Assumes the browser default, typically `16px`
+$font-size-base: 1rem !default;
 $font-size-xs: $font-size-base * .7 !default;
 $font-size-sm: $font-size-base * .875 !default;
 $font-size-lg: $font-size-base * 1.15 !default;
@@ -27,7 +27,7 @@ $btn-font-weight: 400;
 $input-btn-padding-y: .5rem !default;
 $input-btn-padding-x: .75rem !default;
 
-$headings-line-height:        1.3333333 !default;
+$headings-line-height: 1.3333333 !default;
 $h1-font-size: $font-size-base * 2 !default;
 $h2-font-size: $font-size-base * 1.75 !default;
 $h3-font-size: $font-size-base * 1.4 !default;
@@ -50,14 +50,11 @@ $border-radius: .25rem !default;
 $border-radius-sm: .2rem !default;
 $border-radius-lg: .3rem !default;
 $border-radius-pill: 50rem !default;
-//$border-color: #e4e6ee; //rgb(226 232 240 / 80%) ;//#e9ecef !default;
-$border-color: #e8ebed; //rgb(226 232 240 / 80%) ;//#e9ecef !default;
+$border-color: #e8ebed;
 
 $input-border-color: #333333;
 $card-border-color: rgb(233, 236, 239);
-//$card-bg:#fff;
 $card-border-radius: 8px;
-//$card-border-radius: 0;
 
 $border-width: 1px !default;
 $border-widths: (
@@ -97,8 +94,6 @@ $container-max-widths: (
         xl: 1140px,
         xxl: 1280px
 ) !default;
-
-
 // scss-docs-end container-max-widths
 
 // scss-docs-start gray-color-variables
@@ -114,8 +109,6 @@ $gray-800: #343a40 !default;
 $gray-900: $bg-dark !default;
 $black: #000 !default;
 
-// $blue: #1078ec !default;
-//$blue: #1273eb !default;
 $blue: #068bea !default;
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
@@ -129,9 +122,6 @@ $cyan: #27a9f6 !default;
 
 
 $secondary: #394455 !default;
-//$secondary: #212326 !default;
-//$primary: #0975e0 !default;
-//$primary: #0975e0 !default;
 $primary: #068bea !default;
 $primaryDark: #067fd7 !default;
 $primaryLightest: #7dd3fc !default;

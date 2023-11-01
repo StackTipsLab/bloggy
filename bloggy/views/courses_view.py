@@ -39,7 +39,7 @@ class CoursesListView(TemplateView):
 @method_decorator([cache_page(settings.CACHE_TTL, key_prefix="course_single"), vary_on_cookie], name='dispatch')
 class CourseDetailsView(HitCountDetailView):
     model = Course
-    template_name = "pages/course_single.html"
+    template_name = "pages/single/course.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

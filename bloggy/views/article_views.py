@@ -14,7 +14,7 @@ from bloggy.services.post_service import get_recent_feed
 @method_decorator([cache_page(settings.CACHE_TTL, key_prefix="articles"), vary_on_cookie], name='dispatch')
 class ArticleListView(ListView):
     model = Post
-    template_name = "pages/archive/articles.html"
+    template_name = "pages/archive/posts.html"
     paginate_by = 20
 
     def get_context_data(self, **kwargs):

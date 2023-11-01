@@ -19,11 +19,6 @@ class Page(Updatable, SEOAwareMixin):
     )
 
     content = TextField(null=True, help_text='Post content')
-    active = models.BooleanField(
-        default=False,
-        blank=True,
-        help_text="Active"
-    )
     published_date = models.DateTimeField(null=True, blank=True)
     publish_status = models.CharField(
         max_length=20, choices=[
