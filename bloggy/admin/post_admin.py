@@ -118,7 +118,7 @@ class PostAdmin(SummernoteModelAdmin):
     author_link.short_description = 'Author'
 
     def view_on_site(self, obj):
-        url = reverse('article_single', kwargs={'slug': obj.slug})
+        url = reverse('post_single', kwargs={'slug': obj.slug})
         return url + "?context=preview"
 
     def save_model(self, request, obj, form, change):

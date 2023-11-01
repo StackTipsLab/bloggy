@@ -15,7 +15,7 @@ from bloggy.utils.string_utils import StringUtils
 
 
 def upload_thumbnail_image(post_id):
-    return f'uploads/articles/{post_id}'
+    return f'uploads/posts/{post_id}'
 
 
 class Post(Content):
@@ -70,15 +70,15 @@ class Post(Content):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name='articles'
+        related_name='posts'
     )
     category = models.ManyToManyField(Category)
     course = models.ForeignKey(Course, on_delete=models.PROTECT, blank=True, null=True)
 
     class Meta:
         ordering = ['title']
-        verbose_name = "article"
-        verbose_name_plural = "articles"
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
         indexes = [
             models.Index(fields=['slug', 'publish_status', 'post_type', 'published_date']),
         ]
@@ -93,11 +93,11 @@ class Post(Content):
         if self.post_type == "lesson":
             return reverse("lesson_single", kwargs={"course": str(self.course.slug), "slug": str(self.slug)})
         else:
-            return reverse("article_single", kwargs={"slug": str(self.slug)})
+            return reverse("post_single", kwargs={"slug": str(self.slug)})
 
     @property
     def get_votes_count(self):
-        return Vote.objects.all().filter(post_id=self.id).filter(post_type="article").count()
+        return Vote.objects.all().filter(post_id=self.id).filter(post_type="post").count()
 
     @property
     def get_read_count(self):

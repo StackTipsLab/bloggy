@@ -7,7 +7,7 @@
         <div class="d-flex align-items-center">
             <div class="flex-grow-1">
                 <h3 class="h3 fw-500 mb-2">
-                    <a href="{% url 'article_single' slug=article.slug %}" class="text-decoration-none link-dark">{{ article.title }}</a>
+                    <a href="{% url 'post_single' slug=article.slug %}" class="text-decoration-none link-dark">{{ article.title }}</a>
                 </h3>
                 <div class="hero article-meta-container mb-2" style="font-size: 0.75rem">
                     <small class="d-inline-block mb-1 text-muted text-uppercase">Updated on {{ article.updated_date|date:"M j, Y" }}</small>

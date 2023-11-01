@@ -9,7 +9,7 @@
             {% for article in relatedArticles %}
                <li class="my-2">
                 <a data-cid="{{ article.id }}" data-type="article"  class=""
-                        href="{% url 'article_single' slug=article.slug %}">{{ article.title }}</a>
+                        href="{% url 'post_single' slug=article.slug %}">{{ article.title }}</a>
                </li>
             {% endfor %}
         </ul>

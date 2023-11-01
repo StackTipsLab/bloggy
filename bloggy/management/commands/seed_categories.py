@@ -7,7 +7,7 @@ from bloggy.models import Category
 
 
 class Command(BaseCommand):
-    help = 'Importing Categories'
+    help = 'Importing categories'
 
     def add_arguments(self, parser):
         parser.add_argument('-f', '--file', type=str,

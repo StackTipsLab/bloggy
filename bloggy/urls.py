@@ -38,7 +38,7 @@ from .views.redirects import AuthorRedirectView
 from .views.redirects import OldCategoryDetailsRedirectView
 from .views.redirects import OldTagArchiveRedirectView
 from .views.pages import PageDetailsView
-from .views.rss import ArticlesRssFeed, CoursesRssFeed
+from .views.rss import PostsRssFeed, CoursesRssFeed
 from .views.search import SearchListView
 from .views.user import MyProfileView, PublicProfileView, AuthorsListView
 from .views.user_collections import UserBookmarksView
@@ -48,8 +48,8 @@ urlpatterns = [
     path('admin/password_change/', PasswordChangeView.as_view(), name='password_change'),
 
     path('', IndexView.as_view(), name='index'),
-    path('articles', ArticleListView.as_view(), name='articles'),
-    path('articles/<slug:slug>', PostDetailsView.as_view(), name='article_single'),
+    path('articles', ArticleListView.as_view(), name='posts'),
+    path('articles/<slug:slug>', PostDetailsView.as_view(), name='post_single'),
     path('topics', CategoriesView.as_view(), name='categories'),
     path('topics/<str:slug>', CategoryDetailsView.as_view(), name='categories_single'),
     path('search', SearchListView.as_view(), name='search'),
@@ -69,7 +69,7 @@ urlpatterns = [
     path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
 
     path('contact', TemplateView.as_view(template_name="pages/static/templates/pages/contact.html"), name='pages.contact'),
-    path("rss/articles", ArticlesRssFeed(), name="articles_feed"),
+    path("rss/articles", PostsRssFeed(), name="articles_feed"),
     path("rss/courses", CoursesRssFeed(), name="courses_feed"),
     path('sitemap.xml', index, {'sitemaps': sitemaps_list}, name='django.contrib.sitemaps.views.index'),
     path('sitemap/<str:section>.xml', sitemap, {'sitemaps': sitemaps_list},

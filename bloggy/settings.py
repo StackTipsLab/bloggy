@@ -186,9 +186,7 @@ if USE_SPACES:
 
     PRIVATE_MEDIA_LOCATION = 'private'
     PRIVATE_FILE_STORAGE = 'bloggy.storage_backends.PrivateMediaStorage'
-
     AWS_S3_CUSTOM_DOMAIN = 'media.stacktips.com'
-
 
 else:
     STATIC_URL = '/static/'
@@ -263,8 +261,8 @@ SUMMERNOTE_CONFIG = {
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
-SITE_TITLE = os.getenv("SITE_TITLE", "Demo Site")
-SITE_TAGLINE = os.getenv("SITE_TAGLINE", "Demo Site")
+SITE_TITLE = os.getenv("SITE_TITLE", "Bloggy")
+SITE_TAGLINE = os.getenv("SITE_TAGLINE", "A perfectly crafted blog that developers love.")
 SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION")
 SITE_LOGO = os.getenv("SITE_LOGO")
 ASSETS_DOMAIN = os.getenv("ASSETS_DOMAIN")

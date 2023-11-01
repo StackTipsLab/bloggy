@@ -26,7 +26,7 @@ class ArticleListView(ListView):
         return context
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="article_single"), vary_on_cookie], name='dispatch')
+@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="post_single"), vary_on_cookie], name='dispatch')
 class PostDetailsView(HitCountDetailView):
     model = Post
     count_hit = True

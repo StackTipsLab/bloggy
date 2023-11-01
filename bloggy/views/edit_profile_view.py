@@ -1,8 +1,10 @@
 import os
 
 from django.shortcuts import get_object_or_404
+from django.template.context_processors import static
 from django.views.generic import FormView
 
+from bloggy import settings
 from bloggy.forms.edit_profile_form import EditProfileForm
 from bloggy.models import User
 from bloggy.templatetags.custom_widgets import sanitize_url
@@ -16,8 +18,9 @@ class EditProfileView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['meta_title'] = "Update Profile"
-        context['meta_description'] = "Update my profile. You need a StackTips account to sign in and view your profile."
-        context['meta_image'] = "https://media.stacktips.com/static/media/logo.png"
+        context[
+            'meta_description'] = f"Update my profile. You need a {settings.SITE_TITLE}  account to sign in and view your profile."
+        context['meta_image'] = static('static/media/logo.png')
         return context
 
     def get_initial(self):

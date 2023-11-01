@@ -15,7 +15,7 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('-f', '--file', type=str,
-                            help="File path to import, e.g. ~/bloggy/management/commands/demo_content/posts.csv")
+                            help="File path to import, e.g. ~/bloggy/demo_content/posts.csv")
 
     def handle(self, *args, **options):
         file_path = options['file']

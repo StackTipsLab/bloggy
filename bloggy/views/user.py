@@ -44,7 +44,7 @@ class PublicProfileView(SingleObjectMixin, View):
         context = self.get_context_data(object=self.object)
 
         # user = get_object_or_404(MyUser.objects.filter(is_active=True), username=username)
-        posts = self.object.posts.filter(publish_status="LIVE").order_by("-published_date")
+        posts = self.object.articles.filter(publish_status="LIVE").order_by("-published_date")
 
         paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
@@ -56,7 +56,7 @@ class PublicProfileView(SingleObjectMixin, View):
             articles = paginator.page(paginator.num_pages)
 
         context['meta_title'] = self.object.get_full_name()
-        description = f"StackTips Author. {self.object.get_full_name()}. {self.object.bio}"
+        description = f"{settings.SITE_TITLE} Author. {self.object.get_full_name()}. {self.object.bio}"
         context['meta_description'] = strip_tags(description)
         context['meta_image'] = self.object.get_avatar()
 
@@ -97,8 +97,8 @@ class MyProfileView(DetailView):
         })
 
         context['meta_title'] = "My Profile"
-        context['meta_description'] = ("My profile. Access your profile, account settings My Profile. "
-                                      "You need a StackTips account to sign in and view your profile.")
+        context[
+            'meta_description'] = f'My profile. Access your {settings.SITE_TITLE} profile, account settings My Profile.'
         if user.profile_photo:
             context['meta_image'] = settings.SITE_LOGO
 

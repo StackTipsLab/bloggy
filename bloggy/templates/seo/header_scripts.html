@@ -24,11 +24,11 @@
 
 <script type="text/javascript" src="{% static 'dist/app.bundle.js' %}"></script>
 
-{% if request.resolver_match.url_name == 'article_single' or request.resolver_match.url_name == 'lesson_single' %}
+{% if request.resolver_match.url_name == 'post_single' or request.resolver_match.url_name == 'lesson_single' %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
 {% endif %}
 
-{% if request.resolver_match.url_name == 'article_single' or request.resolver_match.url_name == 'lesson_single' or request.resolver_match.url_name == 'pages.contact' %}
+{% if request.resolver_match.url_name == 'post_single' or request.resolver_match.url_name == 'lesson_single' or request.resolver_match.url_name == 'pages.contact' %}
     <script type="text/javascript" src="{% static 'dist/vue.bundle.js' %}"></script>
 {% endif %}
 

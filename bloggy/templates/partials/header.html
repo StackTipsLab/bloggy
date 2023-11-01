@@ -24,8 +24,8 @@
                            href="{% url 'categories' %}">Topics</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'articles' %} active{% endif %}"
-                           href="{% url 'articles' %}">Articles</a>
+                        <a class="nav-link {% if request.resolver_match.url_name == 'posts' %} active{% endif %}"
+                           href="{% url 'posts' %}">Articles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'courses' %} active{% endif %}"

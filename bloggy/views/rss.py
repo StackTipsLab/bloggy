@@ -2,7 +2,7 @@ from datetime import date
 
 from django.contrib.syndication.views import Feed
 from django.utils import feedgenerator
-
+from django.template.context_processors import static
 from bloggy import settings
 from bloggy.models import Post
 from bloggy.models.course import Course
@@ -22,13 +22,13 @@ class ImageRssFeedGenerator(feedgenerator.Rss201rev2Feed):
 class BaseRssFeedView(Feed):
     feed_type = ImageRssFeedGenerator
     content_type = 'application/xml; charset=utf-8'
-    description = "most recent 30 from stacktips.com"
+    description = f'most recent posts from {settings.SITE_TITLE}'
     language = "en"
 
     def feed_extra_kwargs(self, obj):
         return {
             'logo': settings.SITE_LOGO,
-            'icon': 'https://media.stacktips.com/static/media/favicon/favicon-32x32.png'
+            'icon': static('static/media/logo.png')
         }
 
     def item_title(self, item):
@@ -41,7 +41,7 @@ class BaseRssFeedView(Feed):
         return "image/jpeg"
 
     def feed_copyright(self):
-        return 'Copyright(c) ' + str(date.today().year) + ', StackTips'
+        return f'Copyright(c) {str(date.today().year)} {settings.SITE_TITLE}'
 
     def item_pubdate(self, item):
         return item.published_date
@@ -50,12 +50,12 @@ class BaseRssFeedView(Feed):
         return [category.slug for category in obj.category.all()]
 
 
-class ArticlesRssFeed(BaseRssFeedView):
-    title = "StackTips - Articles"
+class PostsRssFeed(BaseRssFeedView):
+    title = f'Posts from {settings.SITE_TITLE}'
     link = "/articles"
 
     def item_enclosure_url(self, item):
-        thumbnail = "https://media.stacktips.com/media/uploads/stacktips-banner.png"
+        thumbnail = static('static/media/default-banner.png')
         if item.thumbnail:
             thumbnail = settings.ASSETS_DOMAIN + item.thumbnail.url
         return thumbnail
@@ -68,27 +68,27 @@ class ArticlesRssFeed(BaseRssFeedView):
                    f"<a href='{settings.SITE_URL + item.get_absolute_url()}' "
                    f"target='_blank'>{settings.SITE_URL}</a></small>")
 
-        thumbnail = "https://media.stacktips.com/media/uploads/stacktips-banner.png"
+        thumbnail = static('static/media/default-banner.png')
         if item.thumbnail:
             thumbnail = settings.ASSETS_DOMAIN + item.thumbnail.url
         return f'{content}<img src="{thumbnail}" alt="{item.title}" style="display:none;">'
 
     def item_author_name(self, item):
         author = item.author
-        return author.username if author else "StackTips"
+        return author.username if author else None
 
     def item_author_link(self, item):
         author = item.author
         return settings.SITE_URL + item.get_absolute_url() if author else "/"
 
 
-class ArticleAtomFeed(ArticlesRssFeed):
+class ArticleAtomFeed(PostsRssFeed):
     feed_type = ImageRssFeedGenerator
-    subtitle = ArticlesRssFeed.description
+    subtitle = PostsRssFeed.description
 
 
 class CoursesRssFeed(BaseRssFeedView):
-    title = "StackTips - Courses"
+    title = "Courses"
     link = "/courses"
 
     def items(self):
