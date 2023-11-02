@@ -11,6 +11,7 @@ from bloggy.models import Vote, Bookmark, Post, Category, Option
 
 register = template.Library()
 
+
 @register.simple_tag
 def url_replace(request, field, value):
     dict_ = request.GET.copy()
@@ -146,8 +147,6 @@ def pretty_date(dt=None):
     return f"{years_diff} year{'s' if years_diff > 1 else ''} ago"
 
 
-
-
 @register.inclusion_tag('widgets/related_posts.html', takes_context=True)
 def related_article_widget(context, count=12, categories=None, slug=0, widget_title="Related posts",
                            widget_style="list"):
@@ -175,8 +174,10 @@ def related_article_widget(context, count=12, categories=None, slug=0, widget_ti
 
 @register.inclusion_tag('widgets/categories.html', takes_context=True)
 def categories_widget(context, content_type="article", count=0, widget_style=""):
-    categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
-
+    if settings.SHOW_EMTPY_CATEGORIES:
+        categories = Category.objects.order_by("-article_count").all()
+    else:
+        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
     return {
         "categories": categories,
         "widgetStyle": widget_style,

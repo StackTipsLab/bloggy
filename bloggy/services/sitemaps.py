@@ -1,9 +1,9 @@
 from django.contrib import sitemaps
 from django.contrib.sitemaps import GenericSitemap
 from django.urls import reverse
-
 from bloggy.models import Post, Category, User
 from bloggy.models.course import Course
+from bloggy.models.page import Page
 
 
 class StaticPagesSitemap(sitemaps.Sitemap):
@@ -11,32 +11,24 @@ class StaticPagesSitemap(sitemaps.Sitemap):
     changefreq = 'daily'
 
     def items(self):
-        return [
+        items = []
+        staticPages = [
             'index',
             'courses',
-            'articles',
+            'posts',
             'categories',
-            'authors',
-            'pages.privacy',
-            'pages.code_of_conduct',
-            'pages.contribute',
-            'pages.about',
-            'pages.contact',
-            'pages.terms_of_service',
-            'pages.cookie_policy',
-            'resources',
-            'resources.status_codes',
-            'resources.base64_converter',
-            'resources.url_encoder',
-            'resources.analyze_http_header',
-            'resources.website_link_analyzer',
-        ]
+            'authors']
+
+        for staticPage in staticPages:
+            items.append(reverse(staticPage))
+
+        pages = Page.objects.filter(publish_status="LIVE").all()
+        for page in pages:
+            items.append(f'/{page.url}')
+        return items
 
     def location(self, item):
-        if item.startswith("/"):
-            return item
-
-        return reverse(item)
+        return item
 
 
 sitemaps_list = {

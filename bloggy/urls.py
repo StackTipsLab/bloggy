@@ -50,12 +50,15 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('articles', ArticleListView.as_view(), name='posts'),
     path('articles/<slug:slug>', PostDetailsView.as_view(), name='post_single'),
+
     path('topics', CategoriesView.as_view(), name='categories'),
     path('topics/<str:slug>', CategoryDetailsView.as_view(), name='categories_single'),
+
     path('search', SearchListView.as_view(), name='search'),
-    path('courses', CoursesListView.as_view(), name='courses'),
-    path('courses/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
-    path('courses/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
+
+    path('guides', CoursesListView.as_view(), name='courses'),
+    path('guides/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
+    path('guides/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
 
     path('login', MyLoginView.as_view(template_name="auth/login.html"), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
@@ -68,7 +71,7 @@ urlpatterns = [
     path('dashboard', login_required(MyProfileView.as_view()), name="profile.dashboard"),
     path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
 
-    path('contact', TemplateView.as_view(template_name="pages/static/templates/pages/contact.html"), name='pages.contact'),
+    path('contact', TemplateView.as_view(template_name="pages/contact.html"), name='pages.contact'),
     path("rss/articles", PostsRssFeed(), name="articles_feed"),
     path("rss/courses", CoursesRssFeed(), name="courses_feed"),
     path('sitemap.xml', index, {'sitemaps': sitemaps_list}, name='django.contrib.sitemaps.views.index'),
@@ -87,7 +90,7 @@ urlpatterns = [
 
     path('summernote/', include('django_summernote.urls')),
     path('api/1.0/', include('bloggy_api.urls')),
-    path('<str:url>', PageDetailsView.as_view()),
+    # path('<path:url>', PageDetailsView.as_view()),
 ]
 
 if settings.DEBUG:
@@ -97,6 +100,9 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 else:
     urlpatterns += staticfiles_urlpatterns()
+
+pagesmapping = [path('<path:url>', PageDetailsView.as_view()), ]
+urlpatterns += pagesmapping
 
 handler404 = 'bloggy.views.handler_404'
 handler500 = 'bloggy.views.handler_500'

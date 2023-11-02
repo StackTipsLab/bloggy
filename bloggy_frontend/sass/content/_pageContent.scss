@@ -46,14 +46,15 @@ ul.static-pages-menu {
 }
 
 .static-page {
-  border-radius: $card-border-radius;
-  background: var(--bs-card-bg);
+  //border-radius: $card-border-radius;
+  //background: var(--bs-card-bg);
   //box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.05);
   overflow: hidden;
   //@extend .p-md-4;
 
   ol, ul, dl {
-    //margin: 0 0 1.5rem 2rem;
+    margin: 0 0 1.5rem 2rem;
+
     li {
       padding: 0.35rem 0;
     }
