@@ -3,17 +3,17 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.utils.html import format_html
 
-from bloggy.models import MyUser
+from bloggy.models import User
 
 
-@admin.register(MyUser)
+@admin.register(User)
 class MyUserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
 
     list_display = (
         'username', 'email_display', 'full_name_display', 'is_staff', 'is_active', 'date_joined', 'last_login',
-        'profile_photo_tag', 'articles_count_display',)
+        'profile_photo_tag', 'posts_count_display',)
     list_filter = ('is_staff', 'is_superuser', 'groups', 'is_active')
     search_fields = ('username',)
     ordering = ('-date_joined',)
@@ -46,7 +46,7 @@ class MyUserAdmin(BaseUserAdmin):
 
     full_name_display.short_description = "Name"
 
-    def articles_count_display(self, queryset):
-        return queryset.articles.count()
+    def posts_count_display(self, queryset):
+        return queryset.posts.count()
 
-    articles_count_display.short_description = "Articles"
+    posts_count_display.short_description = "Articles"

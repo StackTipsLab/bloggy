@@ -15,11 +15,10 @@ def seo_attrs(request: HttpRequest):
 
         # Default SEO attributes
         seo = {
-            'seo_site_name': settings.SITE_TITLE,
-            'seo_title': settings.SITE_TAGLINE,
-            'seo_description': settings.SITE_DESCRIPTION,
-            'og_image': settings.SITE_LOGO,
-            'seo_image': settings.SITE_LOGO
+            'site_name': settings.SITE_TITLE,
+            'meta_title': settings.SITE_TAGLINE,
+            'meta_description': settings.SITE_DESCRIPTION,
+            'meta_image': settings.SITE_LOGO
         }
 
         # Get SEO attributes based on the request path

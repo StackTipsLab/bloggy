@@ -7,14 +7,11 @@ from bloggy.models import Category
 
 
 class Command(BaseCommand):
-    help = 'Importing Categories from CSV'
-
-    def __init__(self, *args, **kwargs):
-        super().__init__()
+    help = 'Importing categories'
 
     def add_arguments(self, parser):
         parser.add_argument('-f', '--file', type=str,
-                            help="File path to import, e.g. ~/bloggy/management/commands/demo/categories.csv")
+                            help="File path to import, e.g. ~/bloggy/demo_content/categories.csv")
 
     def handle(self, *args, **options):
         file_path = options['file']

@@ -1,8 +1,9 @@
 article {
 
   li, p {
-    font-size: 1.05rem;
+    font-size: 1.02rem;
     line-height: 1.75;
+    margin:1rem 0 1.5rem
   }
 
   .lead {
@@ -14,36 +15,33 @@ article {
 
   h1 {
     font-size: $h1-font-size * 1.1;
-    margin-top: 1.1em;
-    margin-bottom: .8888889em;
+    margin: 2rem 0 .5rem;
     line-height: 1.1111111
   }
 
   h2 {
     font-size: $h2-font-size * 1.3;
-    margin-top: 1.35em;
-    margin-bottom: 0.5em;
+    margin: 2rem 0 .5rem;
     line-height: 1.3333333
   }
 
   h3 {
     font-size: $h3-font-size * 1.3;
-    margin-top: 1.35em;
-    margin-bottom: .5em;
+    margin: 2rem 0 .5rem;
     line-height: 1.3333333
   }
 
   h4 {
     font-size: $h4-font-size * 1.3;
-    margin-top: 1em;
-    margin-bottom: .5em;
+    margin: 2rem 0 1rem;
     line-height: 1.3333333
   }
 
-  h5 {
+  h5, h6 {
     font-size: $h5-font-size * 1.3;
-    margin-bottom: .5em;
-    line-height: 1.5
+    letter-spacing: 1.5px;
+    margin: 2rem 0 1rem;
+    text-transform: uppercase;
   }
 
 }
@@ -174,33 +172,5 @@ article {
   .article-details-card {
     border-radius: $card-border-radius;
     //box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.05);
-  }
-}
-
-
-.mini-thumbnail {
-  width: 100px;
-  height: 70px;
-
-  img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-  }
-}
-
-
-.related-posts-list {
-
-  li {
-    //padding: 0.15rem 0;
-    //margin: 5px 0 5px 25px;
-    //list-style-type: disc;
-    //list-style-position: outside;
-
-    &::marker {
-      //color: $gray-600;
-    }
   }
 }

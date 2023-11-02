@@ -109,11 +109,11 @@ npm run build # to generate a production build
 
 ## Importing Demo Content
 
-We currently supports importing the categories from CSV file. This can be done using the `import_contents` command. All you need to do is to provide the base path where your `.csv` files are located.
+We currently supports importing the categories from CSV file. This can be done using the `runseed` command. All you need to do is to provide the base path where your `.csv` files are located.
 
-The sample CSV files are located in `bloggy/bloggy/management/commands/demo` directory.
+The sample CSV files are located in `bloggy/bloggy/demo_content` directory.
 
 ```shell
-python3 manage.py import_content --path=~/Documents/github/StackTipsLab/bloggy/bloggy/management/commands/demo
+python3 manage.py runseed --dir=~/Documents/github/StackTipsLab/bloggy/demo_content
 ```
 

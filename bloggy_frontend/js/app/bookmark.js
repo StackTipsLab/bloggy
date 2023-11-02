@@ -69,7 +69,7 @@ $(document).ready(async function () {
     function updateBookmarkStatus() {
         let bookmarkButton = document.getElementById('bookmarkButton');
         const iconClass = isBookmarked ? 'fa-bookmark' : 'fa-bookmark-o';
-        bookmarkButton.innerHTML = `<i class="fa ${iconClass}"></i> ${isBookmarked ? 'Bookmarked' : 'Add bookmark'}`;
+        bookmarkButton.innerHTML = `<i class="fa ${iconClass}"></i> ${isBookmarked ? 'Bookmarked' : 'Bookmark'}`;
         bookmarkButton.classList.toggle('bookmarked', isBookmarked);
     }
 
@@ -81,7 +81,7 @@ $(document).ready(async function () {
             button.innerHTML = `<i class="fa fa-bookmark" aria-hidden="true"></i> Bookmarked`;
         } else {
             button.setAttribute("id", "bookmarkButton");
-            button.innerHTML = `<i class="fa fa-bookmark-o" aria-hidden="true"></i> Add bookmark`;
+            button.innerHTML = `<i class="fa fa-bookmark-o" aria-hidden="true"></i> Bookmark`;
         }
 
         button.addEventListener('click', toggleBookmark);

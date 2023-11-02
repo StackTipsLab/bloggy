@@ -5,7 +5,7 @@
 {% load shortcodes_filters %}
 {% block base_css_class %}{% endblock base_css_class %}
 {% block jsonld %}
-    {% include "seo/article_jsonld.html" with author=article.author %}
+    {% include "seo/article_jsonld.html" with author=post.author %}
 {% endblock jsonld %}
 {% spaceless %}
     {% block content %}
@@ -28,7 +28,7 @@
 
                         <div class="flex-grow-1" style="overflow: hidden">
                             <div class="article-details-card ms-md-3 mb-4">
-                                {% if article.thumbnail and postmeta.template_type == "cover" %}
+                                {% if article.thumbnail and article.template_type == "cover" %}
                                     <div class="article-single-thumbnails">
                                         <img src="{{ article.thumbnail.url }}" alt="{{ article.title }}"
                                              loading="lazy"/>
@@ -39,11 +39,11 @@
                                 <div class="padding-medium relative">
                                     <h1 class="post-title display-2 fw-600 mt-0 mb-2"
                                             style="line-height: 1.2">{{ article.title }}</h1>
-                                    <article id="article-content" class="article-content" data-cid="{{ article.id }}"
+                                    <article id="article-content" class="article-content" data-cid="{{ post.id }}"
                                              data-type="{{ post_type }}">
 
                                         <div class="d-lg-flex justify-content-between align-items-center my-4">
-                                            {% include 'partials/article_meta_container.html' with article=article %}
+                                            {% include 'partials/article_meta_container.html' with post=post %}
                                             <div id="bookmarkContainer" class="d-none d-md-inline"></div>
                                         </div>
 
@@ -51,7 +51,7 @@
                                             {% include 'partials/toc_widget.html' %}
                                             <div class="mb-3">
                                                 <div id="article-content" class="article-content text-zoomed">
-                                                    <div>{{ article.content|expand_media_url }}</div>
+                                                    <div>{{ post.content|expand_media_url }}</div>
                                                 </div>
                                                 {% include "partials/social_share.html" with object=article %}
                                             </div>
@@ -63,7 +63,7 @@
 
                             <div class="padding-medium article-details-card ms-md-3 mb-4">
                                 <section id="vueRoot" class="d-print-none ">
-                                    <comments post-id="{{ article.id }}" post-type="{{ article.post_type }}"
+                                    <comments post-id="{{ post.id }}" post-type="{{ post.post_type }}"
                                               current-user="{{ user }}"></comments>
                                 </section>
                             </div>
@@ -72,9 +72,9 @@
                 </main>
 
                 <aside id="right-sidebar" class="col-12 col-md-3 col-lg-3 d-print-none px-lgF-0">
-                    {% if article.video_id %}
+                    {% if post.video_id %}
                         <div class="article-details-card p-0 mb-4">
-                            {% with '[youtube=https://www.youtube.com/watch?v='|addstr:article.video_id|addstr:']' as youtubeUrl %}
+                            {% with '[youtube=https://www.youtube.com/watch?v='|addstr:post.video_id|addstr:']' as youtubeUrl %}
                                 {{ youtubeUrl|shortcodes|safe }}
                             {% endwith %}
                         </div>

@@ -26,19 +26,20 @@ from django.views.generic.base import TemplateView
 from bloggy import settings
 from bloggy.views import EditProfileView
 from bloggy.views.courses_view import CoursesListView, CourseDetailsView, LessonDetailsView
-from bloggy.views.home import IndexView, AboutPageView
+from bloggy.views.pages import IndexView
 from bloggy.views.topics_view import CategoriesView, CategoryDetailsView
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
-from .views.article_views import ArticleListView, ArticleDetailsView
+from .views.article_views import ArticleListView, PostDetailsView
 from .views.login import MyLoginView
-from .views.misc_views import AdsTextView
-from .views.old_blog_redirect_view import AuthorRedirectView
-from .views.old_blog_redirect_view import OldCategoryDetailsRedirectView
-from .views.old_blog_redirect_view import OldTagArchiveRedirectView
-from .views.rss import ArticlesRssFeed, CoursesRssFeed
-from .views.search_view import SearchListView
+from .views.pages import AdsTextView, robots
+from .views.redirects import AuthorRedirectView
+from .views.redirects import OldCategoryDetailsRedirectView
+from .views.redirects import OldTagArchiveRedirectView
+from .views.pages import PageDetailsView
+from .views.rss import PostsRssFeed, CoursesRssFeed
+from .views.search import SearchListView
 from .views.user import MyProfileView, PublicProfileView, AuthorsListView
 from .views.user_collections import UserBookmarksView
 
@@ -47,14 +48,17 @@ urlpatterns = [
     path('admin/password_change/', PasswordChangeView.as_view(), name='password_change'),
 
     path('', IndexView.as_view(), name='index'),
-    path('articles', ArticleListView.as_view(), name='articles'),
-    path('articles/<slug:slug>', ArticleDetailsView.as_view(), name='article_single'),
+    path('articles', ArticleListView.as_view(), name='posts'),
+    path('articles/<slug:slug>', PostDetailsView.as_view(), name='post_single'),
+
     path('topics', CategoriesView.as_view(), name='categories'),
     path('topics/<str:slug>', CategoryDetailsView.as_view(), name='categories_single'),
+
     path('search', SearchListView.as_view(), name='search'),
-    path('courses', CoursesListView.as_view(), name='courses'),
-    path('courses/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
-    path('courses/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
+
+    path('guides', CoursesListView.as_view(), name='courses'),
+    path('guides/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
+    path('guides/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
 
     path('login', MyLoginView.as_view(template_name="auth/login.html"), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
@@ -67,25 +71,15 @@ urlpatterns = [
     path('dashboard', login_required(MyProfileView.as_view()), name="profile.dashboard"),
     path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
 
-    path('privacy', TemplateView.as_view(template_name="pages/static/privacy-policy.html"), name='pages.privacy'),
-    path('code-of-conduct', TemplateView.as_view(template_name="pages/static/code_of_conduct.html"),
-         name='pages.code_of_conduct'),
-    path('contribute', TemplateView.as_view(template_name="pages/static/contribute.html"), name='pages.contribute'),
-    path('about', AboutPageView.as_view(), name='pages.about'),
-    path('contact', TemplateView.as_view(template_name="pages/static/contact.html"), name='pages.contact'),
-    path('terms-of-service', TemplateView.as_view(template_name="pages/static/terms-of-service.html"),
-         name='pages.terms_of_service'),
-    path('cookie-policy', TemplateView.as_view(template_name="pages/static/cookie-policy.html"),
-         name='pages.cookie_policy'),
-
-    path("rss/articles", ArticlesRssFeed(), name="articles_feed"),
+    path('contact', TemplateView.as_view(template_name="pages/contact.html"), name='pages.contact'),
+    path("rss/articles", PostsRssFeed(), name="articles_feed"),
     path("rss/courses", CoursesRssFeed(), name="courses_feed"),
     path('sitemap.xml', index, {'sitemaps': sitemaps_list}, name='django.contrib.sitemaps.views.index'),
     path('sitemap/<str:section>.xml', sitemap, {'sitemaps': sitemaps_list},
          name='django.contrib.sitemaps.views.sitemap'),
 
     # static files for SEO or other reasons
-    path('robots.txt', TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
+    path('robots.txt', robots, name='robots'),
     path('ads.txt', AdsTextView.as_view(), name='ads_txt'),
 
     # redirects for old website migration
@@ -96,6 +90,7 @@ urlpatterns = [
 
     path('summernote/', include('django_summernote.urls')),
     path('api/1.0/', include('bloggy_api.urls')),
+    # path('<path:url>', PageDetailsView.as_view()),
 ]
 
 if settings.DEBUG:
@@ -105,6 +100,9 @@ if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 else:
     urlpatterns += staticfiles_urlpatterns()
+
+pagesmapping = [path('<path:url>', PageDetailsView.as_view()), ]
+urlpatterns += pagesmapping
 
 handler404 = 'bloggy.views.handler_404'
 handler500 = 'bloggy.views.handler_500'

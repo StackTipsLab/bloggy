@@ -42,7 +42,7 @@
 
                 <h3 class="h3 fw-500 mb-2">
                     {% if article.post_type == 'article' %}
-                        <a href="{% url 'article_single' slug=article.slug %}"
+                        <a href="{% url 'post_single' slug=article.slug %}"
                            class="article-link">{{ article.title }}</a>
                     {% elif article.post_type == 'lesson' %}
                         <a href="{% url 'lesson_single' course=article.course.slug slug=article.slug %}"

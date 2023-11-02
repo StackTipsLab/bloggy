@@ -1,11 +1,11 @@
 from django.contrib.auth.forms import UserCreationForm
 
-from bloggy.models import MyUser
+from bloggy.models import User
 
 
 class SignUpForm(UserCreationForm):
     class Meta:
-        model = MyUser
+        model = User
         fields = ('name', 'email', 'password1', 'password2')
 
     def save(self, commit=True):
@@ -26,7 +26,7 @@ class SignUpForm(UserCreationForm):
         # Check if the base_username is unique, if not, append a number until it is
         username = base_username
         count = 1
-        while MyUser.objects.filter(username=username).exists():
+        while User.objects.filter(username=username).exists():
             username = f"{base_username}{count}"
             count += 1
 

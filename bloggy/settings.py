@@ -186,9 +186,7 @@ if USE_SPACES:
 
     PRIVATE_MEDIA_LOCATION = 'private'
     PRIVATE_FILE_STORAGE = 'bloggy.storage_backends.PrivateMediaStorage'
-
     AWS_S3_CUSTOM_DOMAIN = 'media.stacktips.com'
-
 
 else:
     STATIC_URL = '/static/'
@@ -207,7 +205,7 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = 'bloggy.MyUser'
+AUTH_USER_MODEL = 'bloggy.User'
 AUTH_USER_DEFAULT_GROUP = 'bloggy-members'
 
 SUMMERNOTE_THEME = 'bs4'
@@ -263,8 +261,8 @@ SUMMERNOTE_CONFIG = {
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
-SITE_TITLE = os.getenv("SITE_TITLE", "Demo Site")
-SITE_TAGLINE = os.getenv("SITE_TAGLINE", "Demo Site")
+SITE_TITLE = os.getenv("SITE_TITLE", "Bloggy")
+SITE_TAGLINE = os.getenv("SITE_TAGLINE", "A perfectly crafted blog that developers love.")
 SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION")
 SITE_LOGO = os.getenv("SITE_LOGO")
 ASSETS_DOMAIN = os.getenv("ASSETS_DOMAIN")
@@ -344,5 +342,10 @@ EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emai
 MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
 
 # Read the POST_TYPE_CHOICES environment variable from the .env file
-POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES', 'article:Article,lesson:Lesson')
+POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES')
 SHOW_EMTPY_CATEGORIES = os.getenv("SHOW_EMTPY_CATEGORIES", "False") == "True"
+
+
+def get_post_types():
+    post_type = [choice.split(':') for choice in POST_TYPE_CHOICES.split(',')]
+    return list(post_type)

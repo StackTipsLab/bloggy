@@ -21,9 +21,14 @@ h3 > code,
 h4 > code,
 h5 > code,
 {
+  box-sizing: border-box;
+  padding: 0.125rem 0.25rem;
+  //width: -webkit-fit-content;
+  //width: -moz-fit-content;
+  width: fit-content;
   background: var(--bs-body-bg);
-  padding: 2px 4px;
-  border-radius: 4px;
+  //padding: 2px 4px;
+  border-radius: 0.25rem;
 }
 
 

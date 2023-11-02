@@ -3,7 +3,7 @@
 {% spaceless %}
     {% block content %}
         {% load static %}
-        <section id="homeIntroSection" class="homeIntro">
+        <section id="homeIntroSection" class="container homeIntro">
             <div class="hero jumbotron py-4 px-3 py-lg-5 text-center">
                 <div class="container">
                     <h1 class="display-1 px-lg-5">
@@ -16,7 +16,7 @@
                 </div>
             </div>
 
-            {% include "partials/section_home_recent_articles.html" %}
+            {% include "partials/section_home_recent_posts.html" %}
             {% include "partials/section_home_courses.html" %}
         </section>
     {% endblock content %}

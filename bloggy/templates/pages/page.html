@@ -1,6 +1,7 @@
 {% extends "base-with-header-footer.html" %}
 {% load static %}
 {% load custom_widgets %}
+{% load define_action %}
 {% block content %}
     <div class="container static-page-container">
         <div class="row justify-content-left my-4">
@@ -9,16 +10,13 @@
             </aside>
             <main id="main-content" class="col-12 col-lg-7">
                 <article class="row static-page" id="static-page">
-                    {% block static_page_content %}{% endblock static_page_content %}
+                    <h1 class="display-2 my-2">{{ page.title }}</h1>
+                    {% if page.excerpt %}
+                        <p class="lead">{{ page.excerpt }}</p>
+                    {% endif %}
+                    {{ page.content|expand_media_url }}
                 </article>
             </main>
-            <div class="sidebar-content col-md-3 p-3" style="z-index: 99">
-                <div id="toc">
-                    <div id="toc-content" class="content">
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from bloggy.models import Article, MyUser, Category
+from bloggy.models import Post, User, Category
 from bloggy.models.comment import Comment
 from bloggy.models.course import Course
 
@@ -26,7 +26,7 @@ class AuthorSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField('get_full_name')
 
     class Meta:
-        model = MyUser
+        model = User
         fields = (
             'name',
             'username',
@@ -50,7 +50,7 @@ class UserSerializer(serializers.ModelSerializer):
     bio = serializers.CharField()
 
     class Meta:
-        model = MyUser
+        model = User
         fields = [
             'name',
             'email',
@@ -89,7 +89,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     course = CourseSerializer(many=False, read_only=True)
 
     class Meta:
-        model = Article
+        model = Post
         fields = [
             'id',
             'title',

@@ -23,7 +23,7 @@ def select_storage():
     return PublicMediaStorage() if settings.USE_SPACES else StaticStorage()
 
 
-class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
+class User(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
     username = models.CharField(
         _("username"),
@@ -42,7 +42,6 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     profile_photo = models.ImageField(null=True, blank=True, upload_to=upload_profile_image,
                                       storage=select_storage)  # , storage=PublicMediaStorage()
-
     is_staff = models.BooleanField(
         "staff status",
         default=False,
@@ -69,6 +68,7 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     bio = models.TextField(max_length=250, null=True, blank=True)
 
     class Meta:
+        db_table = "bloggy_user"
         ordering = ['username']
         verbose_name_plural = "Users"
 
@@ -76,7 +76,7 @@ class MyUser(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
         return reverse('user_profile', args=[str(self.username)])
 
     def get_bookmarks_count(self):
-        return bloggy.models.Bookmarks.objects.filter(user_id=self.id).count()
+        return bloggy.models.Bookmark.objects.filter(user_id=self.id).count()
 
     def get_full_name_or_username(self):
         if self.name:

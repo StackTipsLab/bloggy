@@ -10,7 +10,6 @@ class Subscribers(models.Model):
     confirmed = models.BooleanField(null=True, default=False)
     confirmation_code = models.CharField(
         default=None,
-        # default=token_generator.generate_verification_code(),
         max_length=TOKEN_LENGTH,
         help_text="The random token identifying the verification request.",
         null=True,
@@ -18,8 +17,13 @@ class Subscribers(models.Model):
         verbose_name="token",
     )
     created_date = models.DateTimeField(auto_created=True, null=True, auto_now_add=True)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='user', blank=True,
-                             null=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name='user',
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return self.email + " (" + ("not " if not self.confirmed else "") + "confirmed)"

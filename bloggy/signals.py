@@ -13,7 +13,7 @@ PING_GOOGLE_URL = "https://www.google.com/webmasters/tools/ping"
 INDEX_NOW = "https://www.bing.com/indexnow?url={}&key={}"
 
 
-@receiver(post_save, sender=bloggy.models.Article)
+@receiver(post_save, sender=bloggy.models.Post)
 def post_saved_action_signal(sender, instance, created, **kwargs):
     # Update category count everytime three is a new object added
     if created:

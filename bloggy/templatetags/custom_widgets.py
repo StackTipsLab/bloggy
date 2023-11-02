@@ -7,9 +7,10 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from numerize.numerize import numerize
 
-from bloggy.models import Votes, Bookmarks, Article, Category, Option
+from bloggy.models import Vote, Bookmark, Post, Category, Option
 
 register = template.Library()
+
 
 @register.simple_tag
 def url_replace(request, field, value):
@@ -58,14 +59,14 @@ def format_number(num):
 @register.simple_tag
 def check_if_user_bookmarked(post_id, post_type, user):
     if user.is_authenticated:
-        return Bookmarks.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
+        return Bookmark.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
     return 0
 
 
 @register.simple_tag
 def check_if_user_voted(post_id, post_type, user):
     if user.is_authenticated:
-        return Votes.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
+        return Vote.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
     return 0
 
 
@@ -146,14 +147,12 @@ def pretty_date(dt=None):
     return f"{years_diff} year{'s' if years_diff > 1 else ''} ago"
 
 
-
-
-@register.inclusion_tag('widgets/related_article_widget.html', takes_context=True)
+@register.inclusion_tag('widgets/related_posts.html', takes_context=True)
 def related_article_widget(context, count=12, categories=None, slug=0, widget_title="Related posts",
                            widget_style="list"):
     articles = None
     if categories is None:
-        articles = Article.objects.filter(publish_status="LIVE").filter(post_type="article") \
+        articles = Post.objects.filter(publish_status="LIVE").filter(post_type="article") \
                        .exclude(slug=slug).order_by('-published_date')[:count].all()
         categories = []
 
@@ -162,7 +161,7 @@ def related_article_widget(context, count=12, categories=None, slug=0, widget_ti
         category_slugs.append(str(category.slug))
 
     if len(category_slugs) > 0:
-        articles = Article.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(
+        articles = Post.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(
             post_type="article") \
                        .exclude(slug=slug).order_by('-published_date')[:count].all()
 
@@ -173,10 +172,12 @@ def related_article_widget(context, count=12, categories=None, slug=0, widget_ti
     }
 
 
-@register.inclusion_tag('widgets/categories_widget.html', takes_context=True)
+@register.inclusion_tag('widgets/categories.html', takes_context=True)
 def categories_widget(context, content_type="article", count=0, widget_style=""):
-    categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
-
+    if settings.SHOW_EMTPY_CATEGORIES:
+        categories = Category.objects.order_by("-article_count").all()
+    else:
+        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
     return {
         "categories": categories,
         "widgetStyle": widget_style,

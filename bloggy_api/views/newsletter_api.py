@@ -40,14 +40,18 @@ class NewsletterApi(viewsets.ViewSet):
             )
             send_newsletter_verification_token(request, subscriber.email, subscriber.id, token)
         except IntegrityError:
-            return HttpResponse(status=208,
-                                content=json.dumps({"error": "Already subscribed"}),
-                                content_type="application/json")
-        return HttpResponse(json.dumps({"result": "successful"}), content_type="application/json")
+            return HttpResponse(
+                status=208,
+                content=json.dumps({"error": "Already subscribed"}),
+                content_type="application/json"
+            )
+        return HttpResponse(
+            json.dumps({"result": "successful"}),
+            content_type="application/json"
+        )
 
     def confirm(self, request, subscriber_id, token):
-        subscriber = (Subscribers.objects.filter(id=subscriber_id)
-                      .filter(confirmation_code=token).first())
+        subscriber = (Subscribers.objects.filter(id=subscriber_id).filter(confirmation_code=token).first())
         if subscriber is None:
             messages.error(request, "The verification link is expired or malformed.")
         elif subscriber.confirmed:

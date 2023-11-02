@@ -3,7 +3,7 @@
 {% load define_action %}
 {% load shortcodes_filters %}
 {% spaceless %}
-    {% define article.author as author %}
+    {% define post.author as author %}
     <div class="d-flex align-items-center ">
         <div class="flex-shrink-0">
             <img src="{{ author.get_avatar }}"
@@ -15,20 +15,20 @@
 
         </div>
         <div class="flex-grow-1 ms-3">
-            <a class="text-decoration-none text-reset fw-500" href="{% url 'user_profile' username=author.username %}">
+            <a class="text-decoration-none text-reset fw-600" href="{% url 'user_profile' username=author.username %}">
                 {{ author.get_full_name_or_username }}
             </a>
 
 
             <div class="hero article-meta-container" style="font-size: 0.75rem">
-                {% if article.publish_status == "DRAFT" %}
-                    <span class="badge rounded-pill text-bg-warning text-white">{{ article.publish_status }} / PREVIEW</span>
+                {% if post.publish_status == "DRAFT" %}
+                    <span class="badge rounded-pill text-bg-warning text-white">{{ post.publish_status }} / PREVIEW</span>
                 {% endif %}
                 <small class="d-inline-block mb-1 text-muted text-uppercase">
-                    Updated on {{ article.updated_date|date:"M j, Y g:i A" }},&nbsp
+                    Updated on {{ post.updated_date|date:"M j, Y g:i A" }},&nbsp
                 </small>
 
-                {% for category in article.category.all %}
+                {% for category in post.category.all %}
                     <a class="text-decoration-none text-reset link-primary fw-bold"
                        style="z-index:999;position:relative"
                        href="{% url 'categories_single' slug=category.slug %}">
