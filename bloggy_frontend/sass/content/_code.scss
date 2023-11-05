@@ -1,0 +1,36 @@
+pre {
+  font-size: 0.95rem;
+  color: rgb(47, 51, 55);
+  background: $body-bg;
+  margin: 1rem 0;
+  padding: 1rem;
+  line-height: 1.3rem;
+  font-family: $font-family-monospace;
+  position: relative;
+
+  & > code {
+    padding: 0 !important;
+  }
+}
+
+.codeBox {
+  position: relative;
+}
+
+pre[class*="lang-"],
+pre[class*="language-"] {
+  padding: 1rem;
+}
+
+.btn__copyCode {
+  background: hsl(207.7, 12.9%, 19.8%);
+  font-size: 0.75rem;
+  position: absolute;
+  padding: 2px 2px;
+  top: 1px;
+  right: 1px;
+  min-width: 55px;
+  color: #e3e3e3;
+  border-bottom-left-radius: 6px;
+  border: none;
+}

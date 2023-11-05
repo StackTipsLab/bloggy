@@ -1,38 +1,33 @@
 {% load static %}
 {% load custom_widgets %}
-{% if author and author.username not in 'siteadmin' and author.username not in 'stacktips' %}
-    <div class="row mt-5">
-        <div class="card card-rounded p-4">
-            <div class="d-flex">
-                <div class="flex-shrink-0">
-                    <img src="{{ author.get_avatar }}"
-                         alt="{{ author.username }} avtar"
-                         loading="lazy"
-                         class="img-fluidd image-rounded-square"
-                         style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);"
-                         height="auto"
-                         width="150px">
+<div class="row author-widget p-4 my-5">
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <img src="{{ author.get_avatar }}"
+                 alt="{{ author.username }} avtar"
+                 loading="lazy"
+                 class="img-fluid image-rounded-square"
+                 style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);"
+                 height="auto"
+                 width="120px">
 
-                </div>
-                <div class="flex-grow-1 ms-3">
-                    <div class="text-center text-md-start bsb-hover-special-pull-x">
-                        <h3 class="h2">{{ author.get_full_name_or_username }}</h3>
-                        <p class="mb-2">{{ author.bio | safe }}</p>
-                        <div class="d-flex align-items-start">
-                            {% include 'partials/user_profile_social_media_links.html' with userProfile=author %}
+        </div>
+        <div class="flex-grow-1 ms-4">
+            <div class="text-center text-md-start bsb-hover-special-pull-x">
+                <h3 class="h3">{{ author.get_full_name_or_username }}</h3>
+                <p class="font-sm mb-2">{{ author.bio | safe }}</p>
+                <div class="d-flex align-items-start">
+                    {% include 'partials/user_profile_social_media_links.html' with userProfile=author %}
 
-                            {% if author.username %}
-                                <a href="{% url 'user_profile' username=author.username %}"
-                                   class="btn btn-sm btn-light my-3">Read all articles &#8594</a>
-                            {% endif %}
-                        </div>
-                    </div>
+                    {% if author.username %}
+                        <a href="{% url 'user_profile' username=author.username %}"
+                           class="btn btn-sm btn-light my-3">Read all articles &#8594</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-{% endif %}
-
+</div>
 
 
 

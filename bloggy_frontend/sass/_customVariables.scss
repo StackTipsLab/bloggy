@@ -54,7 +54,7 @@ $border-color: #e8ebed;
 
 $input-border-color: #333333;
 $card-border-color: rgb(233, 236, 239);
-$card-border-radius: 8px;
+$card-border-radius: 0;
 
 $border-width: 1px !default;
 $border-widths: (
@@ -67,7 +67,7 @@ $border-widths: (
 
 $display-font-sizes: (
         1: 3.35rem,
-        2: 2.55rem,
+        2: 2.65rem,
         3: 2rem,
         4: 1.35rem,
         5: 1.2rem,
@@ -92,7 +92,7 @@ $container-max-widths: (
         md: 100%,
         lg: 960px,
         xl: 1140px,
-        xxl: 1280px
+        xxl: 1320px
 ) !default;
 // scss-docs-end container-max-widths
 

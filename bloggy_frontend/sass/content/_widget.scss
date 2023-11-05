@@ -2,5 +2,10 @@
 
 .sidebar-widget {
 
+}
 
+.share-appeal-widget {
+  border: 1px solid $secondary;
+  background: var(--feed-card-bg);
+  box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);
 }

@@ -12,15 +12,15 @@ from bloggy.services.post_service import get_recent_feed
 from bloggy.utils.string_utils import StringUtils
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="articles"), vary_on_cookie], name='dispatch')
-class ArticleListView(ListView):
+@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="posts"), vary_on_cookie], name='dispatch')
+class PostListView(ListView):
     model = Post
     template_name = "pages/archive/posts.html"
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
-        context = super(ArticleListView, self).get_context_data(**kwargs)
-        context['articles'] = get_recent_feed(page=self.request.GET.get('page'))
+        context = super(PostListView, self).get_context_data(**kwargs)
+        context['posts'] = get_recent_feed(page=self.request.GET.get('page'))
         context['courses'] = Course.objects.filter(publish_status="LIVE").all()[:2]
         context['categories'] = (Category.objects.filter(article_count__gt=0)
                                  .order_by("-article_count").all())

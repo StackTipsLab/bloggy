@@ -57,19 +57,19 @@ class LessonDetailsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        course_slug = context["course"]
-        article = Post.objects.filter(course__slug=course_slug).filter(slug=context["slug"]).order_by("display_order").first()
-        if not article:
+        guide_slug = context["course"]
+        post = Post.objects.filter(course__slug=guide_slug).filter(slug=context["slug"]).order_by("display_order").first()
+        if not post:
             raise Http404
 
-        context["article"] = article
-        course = article.course
+        context["post"] = post
+        course = post.course
         context["course"] = course
-        context['meta_title'] = article.meta_title
-        context['meta_description'] = article.meta_description
-        context['meta_keywords'] = article.meta_keywords
+        context['meta_title'] = post.meta_title
+        context['meta_description'] = post.meta_description
+        context['meta_keywords'] = post.meta_keywords
         if course.thumbnail:
             context['meta_image'] = course.thumbnail.url
         else:
-            context['meta_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{article.post_type}/{article.slug}.png"
+            context['meta_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{post.post_type}/{post.slug}.png"
         return context

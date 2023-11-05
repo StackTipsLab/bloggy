@@ -23,8 +23,6 @@
     <div class="container">
         <div class="row justify-content-between">
             <main id="main-content" class="col-12 col-lg-8 py-3 pe-3 pe-lg-5 py-lg-3">
-
-
                 <div class="mb-4">
                     <div class="row row-cols-2 row-cols-md-2 row-cols-lg-3 g-2 gy-2 mb-4 mb-md-4 mb-lg-4">
                         {% for category in categories %}
@@ -40,7 +38,7 @@
                                                         -o-object-fit: contain;
                                                         object-fit: contain;
                                                         text-align:center;
-                                                        padding: 0px;
+                                                        padding: 0;
                                                         overflow: hidden;
                                                         background-size: contain;
                                                         position: absolute;
@@ -52,7 +50,7 @@
                                         </div>
                                         <div class="flex-grow-1 me-3">
                                             <h3 class="h6 mb-0">{{ category.title }}</h3>
-                                            <small class="text-muted mt-1">{{ category.article_count }} articles</small>
+                                            <small class="text-muted mt-1">{{ category.article_count }} posts</small>
                                             <a href="{% url 'categories_single' slug=category.slug %}"
                                                class="article-link"></a>
                                         </div>
@@ -65,10 +63,34 @@
                 </div>
 
 
-                {% for article in articles %}
-                    {% include 'partials/search_result_row.html' with post=article search_query=search_query %}
+                {% for post in posts %}
+                    <div class="search-result-row position-relative">
+                        <div class="d-flex align-items-center my-4">
+                            <div class="flex-grow-1 me-3">
+
+                                <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
+                                    <h3 class="h4 fw-normal mb-0 result-heading">{{ post.title | highlight_search:search_query }}</h3>
+                                </a>
+                                {% if post.excerpt %}
+                                    <p class="font-sm my-2">{{ post.excerpt |slice:"0:180" |safe }}</p>
+                                {% elif post.answer %}
+                                    <p class="font-sm my-2">{{ post.answer |slice:"0:180" |striptags }}</p>
+                                {% elif post.description %}
+                                    <p class="font-sm my-2">{{ post.description |slice:"0:200" |striptags }}</p>
+                                {% endif %}
+                                <small class="d-inline-block mb-1 text-muted text-uppercase font-xs">{{ post.updated_date|date:"M j, Y" }}</small>
+                                <span class="eyebrow__spacer">·</span>
+                                <span class="badge-meta-pill {{ post.post_type| lower }}">{{ post.post_type | capfirst }}</span>
+                            </div>
+                            <div class="flex-shrink-0">
+                                {% if post.thumbnail and post.is_featured %}
+                                    <img src="{{ post.thumbnail.url }}" width="140px" style="border-radius: 12px;">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-                {% include 'partials/paging.html' with posts=article %}
+                {% include 'partials/paging.html' with posts=post %}
             </main>
 
             <aside id="sidebar-right" class="col-md-4">

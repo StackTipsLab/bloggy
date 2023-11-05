@@ -1,22 +1,24 @@
 from django.db import models
 from django.db.models import TextField
-from bloggy.models.mixin.SEOAwareMixin import SEOAwareMixin
+
+from bloggy.models.mixin.SeoAware import SeoAware
 from bloggy.models.mixin.updatable import Updatable
 
 
-class Page(Updatable, SEOAwareMixin):
+class Page(Updatable, SeoAware):
     """
     Stores page data.
     """
 
     title = models.CharField(max_length=300, help_text='Enter title')
-    url = models.CharField(max_length=150, help_text='Enter url', unique=True)
     excerpt = models.CharField(
         max_length=500,
         help_text='Enter excerpt',
         null=True,
         blank=True
     )
+
+    url = models.CharField(max_length=150, help_text='Enter url', unique=True)
 
     content = TextField(null=True, help_text='Post content')
     published_date = models.DateTimeField(null=True, blank=True)

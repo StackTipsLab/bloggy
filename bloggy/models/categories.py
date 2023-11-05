@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 from django.utils.text import slugify
 
+from bloggy.models.mixin.SeoAware import SeoAware
 from bloggy.models.mixin.updatable import Updatable
 from bloggy.utils.string_utils import StringUtils
 
@@ -12,7 +13,7 @@ def upload_logo_image(self, filename):
     return f'uploads/categories/{filename}'
 
 
-class Category(Updatable):
+class Category(Updatable, SeoAware):
     title = models.CharField(max_length=150, help_text='Enter title')
     article_count = models.IntegerField(default=0)
     slug = models.SlugField(max_length=150, help_text='Enter slug', unique=True)

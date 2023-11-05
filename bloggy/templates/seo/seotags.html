@@ -14,14 +14,14 @@
 {% if meta_keywords %}
     <meta name="keywords" content="{{ meta_keywords }}"/>
 {% endif %}
-<meta name="author" content="StackTips"/>
-<meta name="generator" content="StackTips"/>
+<meta name="author" content="{{ site_name }}"/>
+<meta name="generator" content="{{ site_name }}"/>
 <meta name="msvalidate.01" content="0BE11DA347C70DD1D08AB16F24582051"/>
 <link rel="canonical" href="{{ request.build_absolute_uri }}" />
 <link rel="preconnect" href="https://rsms.me/">
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-<link rel="alternate" type="application/rss+xml" title="StackTips - Articles" href="{% url 'articles_feed' %}" />
-<link rel="alternate" type="application/rss+xml" title="StackTips - Courses" href="{% url 'courses_feed' %}" />
+<link rel="alternate" type="application/rss+xml" title="{{ site_name }} - Articles" href="{% url 'articles_feed' %}" />
+<link rel="alternate" type="application/rss+xml" title="{{ site_name }} - Courses" href="{% url 'courses_feed' %}" />
 <link rel="apple-touch-icon" sizes="180x180" href="{% static 'media/favicon/apple-touch-icon.png' %}" />
 <link rel="icon" type="image/png" sizes="32x32" href="{% static 'media/favicon/favicon.ico' %}" />
 <link rel="icon" type="image/png" sizes="16x16" href="{% static 'media/favicon/favicon.ico' %}" />

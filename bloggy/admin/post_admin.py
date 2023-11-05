@@ -12,12 +12,13 @@ from bloggy.models import Post
 
 
 class PostForm(forms.ModelForm):
-    excerpt = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
-    title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'size': 102}))
+    slug = forms.CharField(widget=forms.TextInput(attrs={'size': 102}))
+    excerpt = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_title = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
+    meta_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_keywords = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     model = Post
-    meta_title = forms.CharField(widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
-    meta_description = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
-    meta_keywords = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
 
 
 @admin.register(Post)
@@ -66,7 +67,7 @@ class PostAdmin(SummernoteModelAdmin):
             'fields': ('publish_status', 'published_date',),
         }),
         ('Advanced options', {
-            'fields': ('post_type', 'template_type', 'course', 'difficulty', 'video_id', 'is_featured',
+            'fields': ('post_type', 'template_type', 'course', 'difficulty', 'video_id', 'github_link', 'is_featured',
                        'display_order'),
         }),
         ('SEO Settings', {
@@ -89,9 +90,6 @@ class PostAdmin(SummernoteModelAdmin):
             f'<small>{obj.published_date.strftime("%m/%d/%Y") if obj.published_date else "-"}</small>')
 
     published_date_display.short_description = "Published on"
-
-    def has_video(self):
-        return self.video_id
 
     def updated_date_display(self, obj):
         return format_html(

@@ -10,6 +10,9 @@ class CourseForm(forms.ModelForm):
     excerpt = forms.CharField(
         widget=forms.Textarea(attrs={'rows': 3, 'cols': 105}))
     title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
+    meta_title = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
+    meta_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_keywords = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     model = Course
 
 
@@ -21,6 +24,26 @@ class CourseAdmin(SummernoteModelAdmin):
     list_filter = ('difficulty',
                    ("category", admin.RelatedOnlyFieldListFilter),
                    )
+
+    fieldsets = (
+        (None, {'fields': (
+            'title',
+            'excerpt',
+            'slug',
+            'description',
+            'display_order',
+            'thumbnail',
+            'category',
+            'difficulty',
+            'is_featured')
+        }),
+        ('Publication options', {
+            'fields': ('publish_status', 'published_date',),
+        }),
+        ('SEO Settings', {
+            'fields': ('meta_title', 'meta_description', 'meta_keywords'),
+        })
+    )
     summernote_fields = ('description',)
     readonly_fields = ['thumbnail_tag']
     ordering = ('-display_order',)

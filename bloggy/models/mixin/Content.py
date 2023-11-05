@@ -1,12 +1,11 @@
 from django.db import models
 from django.utils.text import slugify
-
-from bloggy.models.mixin.SEOAwareMixin import SEOAwareMixin
+from bloggy.models.mixin.SeoAware import SeoAware
 from bloggy.models.mixin.updatable import Updatable
 from bloggy.utils.string_utils import StringUtils
 
 
-class Content(Updatable, SEOAwareMixin):
+class Content(Updatable, SeoAware):
     title = models.CharField(max_length=300, help_text='Enter title')
     slug = models.SlugField(max_length=150, help_text='Enter slug', unique=True)
     excerpt = models.CharField(

@@ -10,6 +10,9 @@ class CategoryForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 105}))
     title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
     slug = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
+    meta_title = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
+    meta_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_keywords = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     model = Category
 
 
@@ -25,6 +28,16 @@ class CategoryAdmin(admin.ModelAdmin):
         'display_updated_date',
         'display_color',
     )
+
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'description', 'logo', 'color', 'publish_status')
+        }),
+        ('SEO Settings', {
+            'fields': ('meta_title', 'meta_description', 'meta_keywords'),
+        })
+    )
+
     show_change_link = True
     form = CategoryForm
     readonly_fields = ['logo_tag', 'article_count']

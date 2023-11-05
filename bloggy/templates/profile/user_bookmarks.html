@@ -10,11 +10,11 @@
             </div>
 
             <div class="col-lg-9">
-                {% if articles %}
+                {% if posts %}
                     <div class="bg-white padding-medium">
                         <h1 class="display-3 fw-600 pb-2">Bookmarks</h1>
-                        {% for article in articles %}
-                            {% include 'partials/article_bookmark_row_list.html' with article=article %}
+                        {% for post in posts %}
+                            {% include 'partials/article_bookmark_row_list.html' with post=post %}
                         {% endfor %}
                     </div>
                 {% endif %}

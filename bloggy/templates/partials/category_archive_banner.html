@@ -1,11 +1,11 @@
 {% load static %}
 {% spaceless %}
 {% if category %}
-    <div class="my-4 p-4 category_archive_banner" style="border-color:{{ category.color }};">
+    <div class="my-4 p-4 category-archive-banner" style="border-color:{{ category.color }};">
         <div class="d-lg-flex">
             <div class="flex-shrink-0">
                 {% if category.logo %}
-                    <div class="category_thumbnail">
+                    <div class="category-thumbnail">
                         <img src="{{ category.logo.url }}" alt="{{ category.title }}" />
                     </div>
                 {% endif %}

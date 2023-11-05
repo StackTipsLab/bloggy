@@ -9,9 +9,7 @@
                 <a href="{% url 'courses_single' slug=course.slug %}"
                    class="article-link">{{ course.title }}</a>
             </h3>
-            {#            <small class="font-sm py-2">{{ course.excerpt|slice:"0:100" }}</small>#}
             <small class="font-sm py-2">{{ course.excerpt }}</small>
-
 
             <a href="{% url 'courses_single' slug=course.slug %}"
                class="text-decoration-none text-uppercase font-xs text-primary fw-500 pt-3 d-block">

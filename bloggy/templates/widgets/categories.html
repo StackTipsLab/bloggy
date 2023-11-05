@@ -2,7 +2,7 @@
 {% if categories %}
     {% if widgetStyle == "home" %}
         <div class="row row-cols-4 row-cols-md-3 row-cols-lg-5 gx-2 gx-lg-4 gy-2 gy-lg-4">
-            {% for category in categories %}
+        {% for category in categories %}
             <div class="col">
                 <div class="topics-tag">
                     <div class="d-flex align-items-center">
@@ -18,7 +18,8 @@
                             </div>
                         </div>
                         <div class="flex-grow-1 ms-3 d-none d-md-block">
-                            <h3 class="mb-0 fw-normal" style="font-weight:400;font-size:1.1rem">{{ category.title }}</h3>
+                            <h3 class="mb-0 fw-normal"
+                                style="font-weight:400;font-size:1.1rem">{{ category.title }}</h3>
                         </div>
                         <a class="stretched-link" href="{% url 'categories_single' slug=category.slug %}"></a>
                     </div>
@@ -31,7 +32,7 @@
                         <div class="flex-shrink-0">
                             <div class="tag__image">
                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                    height="32px"
+                                     height="32px"
                                      width="32px"
                                      viewBox="0 0 24 24"
                                      fill="#000000">
@@ -51,16 +52,11 @@
                 </div>
             {% endif %}
         {% endfor %}
-        </div>
+    </div>
     {% else %}
         <ul class="tags-list {{ widgetStyle }} d-none d-lg-block d-xl-block">
             {% for category in categories %}
-                <li>
-                    {% if contentType == 'article' %}
-                        <a href="{% url 'categories_single' slug=category.slug %}">#{{ category.slug }}</a>
-                    {% else %}
-                        <a href="{% url 'interview_questions_by_category' category=category.slug %}">#{{ category.slug }}</a>
-                    {% endif %}
+                <li><a href="{% url 'categories_single' slug=category.slug %}">#{{ category.slug }}</a>
                 </li>
             {% endfor %}
         </ul>

@@ -1,18 +1,26 @@
 
 pre {
-  font-size: 0.95rem;
   color: rgb(47, 51, 55);
   background: $body-bg;
-  margin: 1rem 0;
-  padding: 1rem;
-  line-height: 1.3rem;
-  font-family: $font-family-monospace;
-  position: relative;
 
-  & > code {
-    padding: 0 !important;
+  > code {
+    background: none !important;
+    border: none !important;
   }
 }
+
+code {
+  box-sizing: border-box;
+  width: fit-content;
+  padding: 3px 6px;
+  background: hsl(216deg 13.51% 92.75%);
+  color: var(--bs-body-color);
+  border-radius: 4px;
+  border: 1px solid rgba(234, 234, 234, 0.63);
+  white-space: pre;
+  font-weight: normal !important;
+}
+
 
 pre code.hljs {
   display: block;
@@ -123,23 +131,7 @@ code.hljs {
   font-style: italic
 }
 
-/*
-
-Atom One Dark by Daniel Gamage
-Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
-
-base:    #282c34
-mono-1:  #abb2bf
-mono-2:  #818896
-mono-3:  #5c6370
-hue-1:   #56b6c2
-hue-2:   #61aeee
-hue-3:   #c678dd
-hue-4:   #98c379
-hue-5:   #e06c75
-hue-5-2: #be5046
-hue-6:   #d19a66
-hue-6-2: #e6c07b
-
-*/
-
+.btn__copyCode {
+  background: var(--toc-header-bg);
+  color: var(--heading-link-color);
+}

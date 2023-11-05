@@ -19,6 +19,7 @@ class Command(BaseCommand):
             ('seed_categories', 'categories.csv'),
             ('seed_posts', 'posts.csv'),
             ('seed_pages', 'pages.csv'),
+            ('seed_redirectrules', 'redirect_rules.csv'),
             ('update_category_count', None),
         ]
 

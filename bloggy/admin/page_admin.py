@@ -8,10 +8,11 @@ from bloggy.models.page import Page
 class PageForm(forms.ModelForm):
     excerpt = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
+    url = forms.CharField(widget=forms.URLInput(attrs={'size': 102}))
+    meta_title = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
+    meta_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_keywords = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     model = Page
-    meta_title = forms.CharField(widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
-    meta_description = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
-    meta_keywords = forms.CharField(widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
 
 
 @admin.register(Page)
@@ -21,6 +22,8 @@ class PageAdmin(SummernoteModelAdmin):
         'id',
         'title',
         'url',
+        'excerpt',
+        'publish_status',
     )
 
     fieldsets = (

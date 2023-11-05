@@ -71,7 +71,7 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'bloggy.middleware.wp_redirect.OldUrlRedirectMiddleware',  # redirect for old wp site urls
+    'bloggy.middleware.redirect_middleware.UrlRedirectMiddleware',
     'bloggy.middleware.slash_middleware.AppendOrRemoveSlashMiddleware',  # Remove slash from url
 
     # Cache

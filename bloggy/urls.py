@@ -27,16 +27,13 @@ from bloggy import settings
 from bloggy.views import EditProfileView
 from bloggy.views.courses_view import CoursesListView, CourseDetailsView, LessonDetailsView
 from bloggy.views.pages import IndexView
-from bloggy.views.topics_view import CategoriesView, CategoryDetailsView
+from bloggy.views.category_view import CategoriesView, CategoryDetailsView
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
-from .views.article_views import ArticleListView, PostDetailsView
+from .views.posts import PostListView, PostDetailsView
 from .views.login import MyLoginView
 from .views.pages import AdsTextView, robots
-from .views.redirects import AuthorRedirectView
-from .views.redirects import OldCategoryDetailsRedirectView
-from .views.redirects import OldTagArchiveRedirectView
 from .views.pages import PageDetailsView
 from .views.rss import PostsRssFeed, CoursesRssFeed
 from .views.search import SearchListView
@@ -48,17 +45,16 @@ urlpatterns = [
     path('admin/password_change/', PasswordChangeView.as_view(), name='password_change'),
 
     path('', IndexView.as_view(), name='index'),
-    path('articles', ArticleListView.as_view(), name='posts'),
+    path('articles', PostListView.as_view(), name='posts'),
     path('articles/<slug:slug>', PostDetailsView.as_view(), name='post_single'),
 
     path('topics', CategoriesView.as_view(), name='categories'),
     path('topics/<str:slug>', CategoryDetailsView.as_view(), name='categories_single'),
-
     path('search', SearchListView.as_view(), name='search'),
 
-    path('guides', CoursesListView.as_view(), name='courses'),
-    path('guides/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
-    path('guides/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
+    path('courses', CoursesListView.as_view(), name='courses'),
+    path('courses/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
+    path('courses/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
 
     path('login', MyLoginView.as_view(template_name="auth/login.html"), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),
@@ -82,15 +78,8 @@ urlpatterns = [
     path('robots.txt', robots, name='robots'),
     path('ads.txt', AdsTextView.as_view(), name='ads_txt'),
 
-    # redirects for old website migration
-    path('author/<str:user>', AuthorRedirectView.as_view()),
-    path('tag/<str:tagname>', OldTagArchiveRedirectView.as_view()),
-    path('topics/tutorials/<str:category>', OldCategoryDetailsRedirectView.as_view()),
-    # END redirections
-
     path('summernote/', include('django_summernote.urls')),
     path('api/1.0/', include('bloggy_api.urls')),
-    # path('<path:url>', PageDetailsView.as_view()),
 ]
 
 if settings.DEBUG:
@@ -101,8 +90,8 @@ if settings.DEBUG:
 else:
     urlpatterns += staticfiles_urlpatterns()
 
-pagesmapping = [path('<path:url>', PageDetailsView.as_view()), ]
-urlpatterns += pagesmapping
+staticpages = [path('<path:url>', PageDetailsView.as_view()), ]
+urlpatterns += staticpages
 
 handler404 = 'bloggy.views.handler_404'
 handler500 = 'bloggy.views.handler_500'

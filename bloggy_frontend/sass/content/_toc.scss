@@ -9,7 +9,6 @@
     border: none;
     text-align: left;
     outline: none;
-    border-radius: 8px;
     font-weight: 500;
     color: var(--heading-link-color);
 
@@ -55,8 +54,6 @@
 }
 
 .toc-content-link {
-  color: var(--card-body-text-color);
-
   &.h1,
   &.h2,
   &.h3,
@@ -68,4 +65,3 @@
     margin-top: 0.75rem;
   }
 }
-

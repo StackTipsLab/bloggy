@@ -18,7 +18,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = Post.objects.prefetch_related("category").filter(publish_status="LIVE").order_by(
+        context['posts'] = Post.objects.prefetch_related("category").filter(publish_status="LIVE").order_by(
             "-published_date")[:12]
         context['courses'] = Course.objects.filter(publish_status="LIVE").all()[:6]
         return context
@@ -56,11 +56,11 @@ class PageDetailsView(TemplateView):
         context = super().get_context_data(**kwargs)
         url = context["url"]
         page = Page.objects.filter(url=url).filter(publish_status="LIVE").first()
-        if not page:
-            raise Http404
+        if page:
+            context["page"] = page
+            context['meta_title'] = page.meta_title
+            context['meta_description'] = page.meta_description
+            context['meta_keywords'] = page.meta_keywords
+            return context
 
-        context["page"] = page
-        context['meta_title'] = page.meta_title
-        context['meta_description'] = page.meta_description
-        context['meta_keywords'] = page.meta_keywords
-        return context
+        raise Http404

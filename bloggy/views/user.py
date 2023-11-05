@@ -42,18 +42,16 @@ class PublicProfileView(SingleObjectMixin, View):
 
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
-
-        # user = get_object_or_404(MyUser.objects.filter(is_active=True), username=username)
-        posts = self.object.articles.filter(publish_status="LIVE").order_by("-published_date")
+        posts = self.object.posts.filter(publish_status="LIVE").order_by("-published_date")
 
         paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
         try:
-            articles = paginator.page(page)
+            posts = paginator.page(page)
         except PageNotAnInteger:
-            articles = paginator.page(1)
+            posts = paginator.page(1)
         except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
+            posts = paginator.page(paginator.num_pages)
 
         context['meta_title'] = self.object.get_full_name()
         description = f"{settings.SITE_TITLE} Author. {self.object.get_full_name()}. {self.object.bio}"
@@ -62,7 +60,7 @@ class PublicProfileView(SingleObjectMixin, View):
 
         context.update({
             'posts': posts,
-            'userProfile': self.object
+            'user': self.object
         })
 
         return render(request, self.template_name, context)
@@ -80,18 +78,18 @@ class MyProfileView(DetailView):
         context = super().get_context_data(*args, **kwargs)
         user = self.get_object()
 
-        articles = user.posts.order_by("-published_date").filter(publish_status="LIVE")
-        paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
+        posts = user.posts.order_by("-published_date").filter(publish_status="LIVE")
+        paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
         try:
-            articles = paginator.page(page)
+            posts = paginator.page(page)
         except PageNotAnInteger:
-            articles = paginator.page(1)
+            posts = paginator.page(1)
         except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
+            posts = paginator.page(paginator.num_pages)
 
         context.update({
-            'articles': articles,
+            'posts': posts,
             'userProfile': user,
             'userType': "self",
         })
