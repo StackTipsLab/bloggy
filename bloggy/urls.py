@@ -35,6 +35,7 @@ from .views.posts import PostListView, PostDetailsView
 from .views.login import MyLoginView
 from .views.pages import AdsTextView, robots
 from .views.pages import PageDetailsView
+from .views.quizzes_view import QuizListView, QuizDetailView
 from .views.rss import PostsRssFeed, CoursesRssFeed
 from .views.search import SearchListView
 from .views.user import MyProfileView, PublicProfileView, AuthorsListView
@@ -55,6 +56,9 @@ urlpatterns = [
     path('courses', CoursesListView.as_view(), name='courses'),
     path('courses/<slug:slug>', CourseDetailsView.as_view(), name='courses_single'),
     path('courses/<str:course>/<slug:slug>', LessonDetailsView.as_view(), name='lesson_single'),
+
+    path('quizzes', QuizListView.as_view(), name='quizzes'),
+    path('quizzes/<slug:slug>', QuizDetailView.as_view(), name='quiz_single'),
 
     path('login', MyLoginView.as_view(template_name="auth/login.html"), name='login'),
     path('logout', LogoutView.as_view(), name='logout'),

@@ -56,15 +56,11 @@
                 </main>
 
                 <aside id="right-sidebar" class="col-12 col-md-3 col-lg-3 d-print-none">
-                    {% include 'partials/video_widget.html' %}
-                    {% if post %}
-                        {% include 'partials/toc_widget.html' %}
-                        {% include 'partials/github_widget.html' with githubLink=post.github_link %}
-                    {% endif %}
-
                     <div class="sidebar-content" style="z-index: 99">
+                        {% include 'partials/video_widget.html' %}
                         {% include "partials/home_widget_contribute_cta.html" %}
                         {% include 'partials/newsletter.html' %}
+                        {% include 'partials/github_widget.html' with githubLink=post.github_link %}
                     </div>
                 </aside>
             </div>

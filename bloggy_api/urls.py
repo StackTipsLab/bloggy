@@ -7,6 +7,7 @@ from bloggy_api.views.category_api import CategoryAPIView
 from bloggy_api.views.comments_api_view import CommentsAPIView
 from bloggy_api.views.course_api import CoursesAPIView
 from bloggy_api.views.newsletter_api import NewsletterApi
+from bloggy_api.views.quizzes_api import QuizzesAPIView, QuizDetailsAPIView
 from bloggy_api.views.user_api import UsersAPIView
 from bloggy_api.views.vote_api import VoteAPIView
 
@@ -15,6 +16,10 @@ urlpatterns = [
     path('courses', CoursesAPIView.as_view()),
     path('articles', ArticleAPIView.as_view()),
     path('articles/<str:slug>', ArticleDetailsAPIView.as_view()),
+
+    path('quizzes', QuizzesAPIView.as_view()),
+    path('quizzes/<int:pk>', QuizDetailsAPIView.as_view()),
+
     path('users/<str:username>', login_required(UsersAPIView.as_view())),
     path('vote', VoteAPIView.as_view(), name='vote'),
     path('bookmark', BookmarkAPIView.as_view()),

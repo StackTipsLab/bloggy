@@ -9,3 +9,4 @@ from .post import Post
 from .user import User
 from .verification_token import VerificationToken
 from .redirect_rule import RedirectRule
+from .quiz import *

@@ -27,7 +27,7 @@
         <div class="card card-rounded card-shadow mb-3 p-4">
             <h3 class="h4 pb-3 mb-0">{{ widgetTitle }}</h3>
             <div class="row row-cols-1 row-cols-md-1 row-cols-lg-1 gy-3">
-                {% for posts in relatedPosts %}
+                {% for post in relatedPosts %}
                     <div class="col">{% include "partials/article_row_mini_grid.html" with post=post cssClass="" %}</div>
                 {% endfor %}
             </div>

@@ -9,6 +9,8 @@ import Vue from 'vue/dist/vue.js';
 Vue.component("comments", () => import("./vue/disqus/Comments.vue"));
 Vue.component('contact-form', () => import('./vue/disqus/ContactForm.vue'));
 Vue.component('cookie-consent', () => import('./vue/CookieConsent.vue'));
+Vue.component('quizzlet', () => import('./vue/quiz/Quizlet.vue'));
+
 window.addEventListener('load', function () {
     window.axios.defaults.headers.common['X-CSRFToken'] = document.querySelector('[name=csrfmiddlewaretoken]').value;
     const app = new Vue({

@@ -1,41 +1,28 @@
-from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
-from django_summernote.admin import SummernoteModelAdmin
 
-from bloggy.admin.misc_admin import publish, unpublish
+from bloggy.admin import BloggyAdmin, BloggyAdminForm, publication_fieldsets, seo_fieldsets
 from bloggy.models import Post
 
 
-class PostForm(forms.ModelForm):
-    title = forms.CharField(widget=forms.TextInput(attrs={'size': 102}))
-    slug = forms.CharField(widget=forms.TextInput(attrs={'size': 102}))
-    excerpt = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
-    meta_title = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
-    meta_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
-    meta_keywords = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+class PostForm(BloggyAdminForm):
     model = Post
 
 
 @admin.register(Post)
-class PostAdmin(SummernoteModelAdmin):
-
-    def get_changeform_initial_data(self, request):
-        return {
-            'meta_title': '{title}',
-            'meta_description': '{excerpt}'
-        }
-
-    def get_form(self, request, obj=None, change=False, **kwargs):
-        form = super().get_form(request, obj, change, **kwargs)
-        form.base_fields["author"].queryset = get_user_model().objects.filter(is_staff=True)
-        return form
-
+class PostAdmin(BloggyAdmin):
     prepopulated_fields = {"slug": ("title",)}
+    search_fields = ['title']
+    summernote_fields = ('content',)
+    readonly_fields = ['updated_date', 'created_date']
+    date_hierarchy = 'published_date'
+    form = PostForm
+    ordering = ('-created_date',)
+    list_display_links = ['title']
     list_display = (
         'id',
         'title',
@@ -63,33 +50,23 @@ class PostAdmin(SummernoteModelAdmin):
         (None, {
             'fields': ('title', 'excerpt', 'slug', 'content', 'thumbnail', 'author', 'category',)
         }),
-        ('Publication options', {
-            'fields': ('publish_status', 'published_date',),
-        }),
+        publication_fieldsets,
         ('Advanced options', {
             'fields': ('post_type', 'template_type', 'course', 'difficulty', 'video_id', 'github_link', 'is_featured',
                        'display_order'),
         }),
-        ('SEO Settings', {
-            'fields': ('meta_title', 'meta_description', 'meta_keywords'),
-        })
-    )
+        seo_fieldsets)
 
-    search_fields = ['title']
-    summernote_fields = ('content',)
-    readonly_fields = ['updated_date', 'created_date']
-    date_hierarchy = 'published_date'
-    form = PostForm
-    ordering = ('-created_date',)
-    list_display_links = ['title']
-    list_per_page = 50
-    actions = [publish, unpublish]
+    def get_changeform_initial_data(self, request):
+        return {
+            'meta_title': '{title}',
+            'meta_description': '{excerpt}'
+        }
 
-    def published_date_display(self, obj):
-        return format_html(
-            f'<small>{obj.published_date.strftime("%m/%d/%Y") if obj.published_date else "-"}</small>')
-
-    published_date_display.short_description = "Published on"
+    def get_form(self, request, obj=None, change=False, **kwargs):
+        form = super().get_form(request, obj, change, **kwargs)
+        form.base_fields["author"].queryset = get_user_model().objects.filter(is_staff=True)
+        return form
 
     def updated_date_display(self, obj):
         return format_html(
@@ -131,14 +108,6 @@ class PostAdmin(SummernoteModelAdmin):
         if queryset.publish_status == 'LIVE':
             return True
         return False
-
-    def is_published(self, queryset):
-        if queryset.publish_status == 'LIVE':
-            return True
-        return False
-
-    is_published.boolean = True
-    is_published.short_description = "Status"
 
     def has_excerpt(self, queryset):
         if queryset.excerpt is None:

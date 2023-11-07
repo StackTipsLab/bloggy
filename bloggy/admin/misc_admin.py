@@ -10,20 +10,6 @@ admin.site.index_title = "Dashboard"
 admin.site.register(bloggy.models.option.Option)
 
 
-def publish(model_admin, request, queryset):
-    queryset.update(publish_status='LIVE')
-
-
-publish.short_description = "Publish"
-
-
-def unpublish(model_admin, request, queryset):
-    queryset.update(publish_status='DRAFT')
-
-
-unpublish.short_description = "Unpublish"
-
-
 @admin.register(RedirectRule)
 class RedirectRuleAdmin(admin.ModelAdmin):
     list_display = (
@@ -33,4 +19,3 @@ class RedirectRuleAdmin(admin.ModelAdmin):
         'is_regx',
         'note',
     )
-    pass

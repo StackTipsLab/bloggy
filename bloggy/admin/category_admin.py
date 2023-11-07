@@ -2,7 +2,8 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from bloggy.admin.misc_admin import publish, unpublish
+from bloggy.admin import seo_fieldsets
+from bloggy.admin.admin import publish, unpublish
 from bloggy.models import Category
 
 
@@ -33,9 +34,7 @@ class CategoryAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('title', 'slug', 'description', 'logo', 'color', 'publish_status')
         }),
-        ('SEO Settings', {
-            'fields': ('meta_title', 'meta_description', 'meta_keywords'),
-        })
+        seo_fieldsets
     )
 
     show_change_link = True
