@@ -1,4 +1,4 @@
-from_url,to_url,status_code,is_regx,note
+source,destination,status_code,is_regx,note
 /tutorials/spring/how-to-configure-pojos-with-java-collection-attributes,/articles/configure-pojos-with-java-collection-attributes-in-spring,301,True,
 /android/download-and-display-image-in-android-gridview,/articles/download-and-display-image-in-android-gridview,301,True,
 /article/how-to-format-your-post,/how-to-format-your-post,301,True,

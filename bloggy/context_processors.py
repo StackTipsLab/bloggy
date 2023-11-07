@@ -12,7 +12,6 @@ def seo_attrs(request: HttpRequest):
     """
     with open('seo_settings.json', 'r', encoding='utf-8') as seo_file:
         seo_settings = json.load(seo_file)
-
         # Default SEO attributes
         seo = {
             'site_name': settings.SITE_TITLE,

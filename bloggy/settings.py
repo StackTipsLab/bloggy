@@ -71,7 +71,6 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'bloggy.middleware.redirect_middleware.UrlRedirectMiddleware',
     'bloggy.middleware.slash_middleware.AppendOrRemoveSlashMiddleware',  # Remove slash from url
 
     # Cache
@@ -88,7 +87,7 @@ MIDDLEWARE = [
     # Social login
     # 'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'bloggy.middleware.page_not_found.PageNotFoundMiddleware',  # new articles mismatch url redirect
+    'bloggy.middleware.redirect.RedirectMiddleware',  # new articles mismatch url redirect
 ]
 
 ROOT_URLCONF = 'bloggy.urls'

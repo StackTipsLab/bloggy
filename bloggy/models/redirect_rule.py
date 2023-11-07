@@ -4,8 +4,8 @@ from bloggy.models.mixin.updatable import Updatable
 
 
 class RedirectRule(Updatable):
-    from_url = models.CharField(max_length=300, help_text='Enter from url')
-    to_url = models.CharField(max_length=300, help_text='Enter to url')
+    source = models.CharField(max_length=300, help_text='Enter from url')
+    destination = models.CharField(max_length=300, help_text='Enter to url')
     status_code = models.IntegerField(
         default='standard', blank=True, null=True,
         choices=[
@@ -29,7 +29,7 @@ class RedirectRule(Updatable):
     )
 
     def __str__(self):
-        return f"{self.status_code}::{self.from_url}"
+        return f"{self.status_code}::{self.source}"
 
 
 class Meta:

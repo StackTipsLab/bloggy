@@ -13,8 +13,8 @@ admin.site.register(bloggy.models.option.Option)
 @admin.register(RedirectRule)
 class RedirectRuleAdmin(admin.ModelAdmin):
     list_display = (
-        'from_url',
-        'to_url',
+        'source',
+        'destination',
         'status_code',
         'is_regx',
         'note',

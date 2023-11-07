@@ -46,3 +46,5 @@ def get_keywords(content, *extras):
     filtered_keywords_str = remove_stopwords(keywords_str, stopwords_list)
     print(f"Keywords:{filtered_keywords_str}")
     return keywords_str.lower()
+
+
