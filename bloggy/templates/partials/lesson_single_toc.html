@@ -1,17 +1,15 @@
 {% load custom_widgets %}
 {% load define_action %}
 {% if course %}
-    <div class="timeline-container p-4 mt-4">
+    <div class="timeline-container mb-4 p-2 p-lg-3">
         <div class="w-100">
-            <h2 class="display-5 fw-500 pb-4 mb-0">{{ course.title }}</h2>
+            <h2 class="h4 ps-2 pt-3 pb-3 mb-0">{{ course.title }}</h2>
             <ul class="sessions">
                 {% for lesson in course.get_lessons %}
                     {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
                     <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
                         <a href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
-                           class="text-decoration-none text-dark p-0 m-0 w-500">Chapter#{{ forloop.counter }}
-                            - {{ lesson.title }}</a>
-{#                        <p class="font-sm text-muted mb-0">{{ lesson.excerpt }}</p>#}
+                           class="text-decoration-none text-dark p-0 m-0 w-500 font-sm">Chapter {{ forloop.counter }}: {{ lesson.title }}</a>
                     </li>
                 {% endfor %}
             </ul>

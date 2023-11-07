@@ -7,7 +7,7 @@ from django.conf import settings
 from django.utils.safestring import mark_safe
 from numerize.numerize import numerize
 
-from bloggy.models import Vote, Bookmark, Post, Category, Option
+from bloggy.models import Vote, Bookmark, Post, Category, Option, Quiz
 
 register = template.Library()
 
@@ -167,6 +167,20 @@ def related_article_widget(context, count=12, categories=None, slug=None, widget
         "widgetTitle": widget_title,
         "relatedPosts": posts,
         "widgetStyle": widget_style,
+    }
+
+
+@register.inclusion_tag('widgets/related_quiz_widget.html', takes_context=True)
+def related_quizzes_widget(context, limit=5, category=None, widget_title="Challenges", widget_style=None):
+    if category is None:
+        quizzes = Quiz.objects.all()[:limit]
+    else:
+        quizzes = Quiz.objects.filter(category=category).all()[:limit]
+
+    return {
+        'quizzes': quizzes,
+        "widget_style": widget_style,
+        "widget_title": widget_title,
     }
 
 

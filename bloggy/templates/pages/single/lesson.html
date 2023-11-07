@@ -36,8 +36,6 @@
                                         </div>
                                     {% endif %}
 
-                                    {% include 'partials/lesson_single_toc.html' %}
-
                                     <article id="article-content" class="article-content" data-cid="{{ post.id }}"
                                              data-type="{{ post_type }}">
                                         {% if post %}
@@ -57,10 +55,12 @@
 
                 <aside id="right-sidebar" class="col-12 col-md-3 col-lg-3 d-print-none">
                     <div class="sidebar-content" style="z-index: 99">
+                        {% include 'partials/lesson_single_toc.html' %}
                         {% include 'partials/video_widget.html' %}
                         {% include "partials/home_widget_contribute_cta.html" %}
                         {% include 'partials/newsletter.html' %}
                         {% include 'partials/github_widget.html' with githubLink=post.github_link %}
+                        {% related_quizzes_widget limit=15 widget_title="Related Quizzes" widget_style="grid" %}
                     </div>
                 </aside>
             </div>

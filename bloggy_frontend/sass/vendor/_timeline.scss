@@ -3,10 +3,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  border-radius: $card-border-radius;
   background: rgb(226, 244, 255);
   background: linear-gradient(197deg, rgb(226, 244, 255) 0%, rgb(237, 248, 255) 25%, rgb(230, 246, 255) 87%, rgb(223, 243, 255) 100%);
-  border: 1px solid #068bea;
+  //border: 1px solid #068bea;
 
 
   ul, li {
@@ -14,10 +14,6 @@
     padding: 0;
   }
 
-  //.sessions {
-    //border-radius: 12px;
-    //position: relative;
-  //}
 
   li {
     border-left: 1px solid #abaaed;
