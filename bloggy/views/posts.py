@@ -19,7 +19,7 @@ class PostListView(ListView):
     paginate_by = 20
 
     def get_context_data(self, **kwargs):
-        context = super(PostListView, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['posts'] = get_recent_feed(page=self.request.GET.get('page'))
         context['courses'] = Course.objects.filter(publish_status="LIVE").all()[:2]
         context['categories'] = (Category.objects.filter(article_count__gt=0)

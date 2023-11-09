@@ -5,7 +5,7 @@ from django.views.generic import ListView
 from hitcount.views import HitCountDetailView
 
 from bloggy import settings
-from bloggy.models import Quiz
+from bloggy.models.quizzes import Quiz
 from bloggy.services.post_service import DEFAULT_PAGE_SIZE, get_recent_quizzes
 from bloggy.utils.string_utils import StringUtils
 

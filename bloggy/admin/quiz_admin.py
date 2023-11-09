@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 
 from bloggy.admin import BloggyAdminForm, BloggyAdmin, publication_fieldsets, seo_fieldsets
-from bloggy.models.quiz import QuizAnswer, QuizQuestion, Quiz, UserQuizScore
+from bloggy.models.quizzes import QuizAnswer, QuizQuestion, Quiz, UserQuizScore
 
 
 class QuizForm(BloggyAdminForm):

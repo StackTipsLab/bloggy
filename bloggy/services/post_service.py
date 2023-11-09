@@ -1,13 +1,12 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from bloggy import models
-from bloggy.models import Quiz
+from bloggy.models import Post, Quiz
 
 DEFAULT_PAGE_SIZE = 20
 
 
 def get_recent_feed(publish_status="LIVE", page=1, page_size=DEFAULT_PAGE_SIZE):
-    posts = models.Post.objects.prefetch_related("category") \
+    posts = Post.objects.prefetch_related("category") \
         .filter(publish_status=publish_status) \
         .order_by("-published_date")
 
@@ -22,7 +21,7 @@ def get_recent_feed(publish_status="LIVE", page=1, page_size=DEFAULT_PAGE_SIZE):
 
 
 def get_recent_posts(publish_status="LIVE", page=1, page_size=DEFAULT_PAGE_SIZE):
-    articles = models.Post.objects.prefetch_related("category") \
+    articles = Post.objects.prefetch_related("category") \
         .filter(publish_status=publish_status).filter(post_type__in=["article"]) \
         .order_by("-published_date")
 

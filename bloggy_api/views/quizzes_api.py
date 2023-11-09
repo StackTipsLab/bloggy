@@ -9,8 +9,10 @@ from bloggy_api.serializers import QuizSerializer
 
 
 class QuizzesAPIView(generics.ListCreateAPIView):
-    queryset = get_recent_quizzes()
     serializer_class = QuizSerializer
+
+    def get_queryset(self):
+        return get_recent_quizzes()
 
 
 class QuizDetailsAPIView(APIView):

@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
-from bloggy.models import Post, User, Category, Quiz
+from bloggy.models import Post, User, Category
 from bloggy.models.comment import Comment
 from bloggy.models.course import Course
+from bloggy.models.quizzes import Quiz
 
 
 class CategorySerializer(serializers.ModelSerializer):

@@ -1,3 +1,4 @@
+
 from django.db import models
 
 from bloggy import settings
@@ -18,3 +19,8 @@ class Vote(Updatable):
     class Meta:
         verbose_name = "Vote"
         verbose_name_plural = "Votes"
+
+class Bookmark(Vote):
+    class Meta:
+        verbose_name = "Bookmark"
+        verbose_name_plural = "Bookmarks"

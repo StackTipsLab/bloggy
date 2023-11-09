@@ -8,11 +8,10 @@ from hitcount.models import HitCount
 
 import bloggy
 from bloggy import settings
-from bloggy.models import Category, Vote, Bookmark
+from bloggy.models import Category, Bookmark
 from bloggy.models.course import Course
 from bloggy.models.mixin.Content import Content
 from bloggy.utils.string_utils import StringUtils
-import re
 
 
 def upload_thumbnail_image(self, post_id):
