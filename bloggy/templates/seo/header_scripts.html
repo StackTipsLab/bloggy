@@ -8,7 +8,7 @@
 <script async src="https://kit.fontawesome.com/16bc69a78f.js" crossorigin="anonymous"></script>
 
 <!-- Google Tag Manager -->
-{% if not debug or DEVELOPMENT_MODE  %}
+{% if LOAD_GOOGLE_TAG_MANAGER  %}
     <script>!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-NQF9FG5",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer");</script>
 
     <!-- Google tag (gtag.js) -->
@@ -32,10 +32,9 @@
     <script type="text/javascript" src="{% static 'dist/vue.bundle.js' %}"></script>
 {% endif %}
 
-{% if not debug %}
+{% if LOAD_GOOGLE_ADS %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5125794458843883" crossorigin="anonymous"></script>
 {% endif %}
-
 {% csrf_token %}
 <meta name="is_authenticated" content="{{ user.is_authenticated }}"/>
 {% endspaceless %}

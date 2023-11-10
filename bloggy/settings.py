@@ -29,10 +29,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
-
-# enable special cases like tag manager enabled in dev mode. Used to override the default DEBUG behaviour
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1, localhost").split(",")
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -337,9 +333,6 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', "True")
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emails'))
 
-# ads.txt file content
-MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
-
 # Read the POST_TYPE_CHOICES environment variable from the .env file
 POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES')
 SHOW_EMTPY_CATEGORIES = os.getenv("SHOW_EMTPY_CATEGORIES", "False") == "True"
@@ -348,3 +341,9 @@ SHOW_EMTPY_CATEGORIES = os.getenv("SHOW_EMTPY_CATEGORIES", "False") == "True"
 def get_post_types():
     post_type = [choice.split(':') for choice in POST_TYPE_CHOICES.split(',')]
     return list(post_type)
+
+
+# enable special cases like tag manager, google ads
+LOAD_GOOGLE_TAG_MANAGER = os.getenv("LOAD_GOOGLE_TAG_MANAGER", "False") == "True"
+LOAD_GOOGLE_ADS = os.getenv("LOAD_GOOGLE_ADS", "False") == "True"
+MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')

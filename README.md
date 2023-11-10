@@ -57,7 +57,7 @@ Configurations. Bare minimum, you will need these properties to get started.
 SECRET_KEY=
 DEBUG=True
 ALLOWED_HOSTS=127.0.0.1,localhost
-DEVELOPMENT_MODE=True
+
 # Your database configuration details
 DB_NAME=bloggy
 DB_USER=root

@@ -33,6 +33,7 @@ def app_settings(request: HttpRequest):
         returns app settings
     """
     return {
-        "DEVELOPMENT_MODE": settings.DEVELOPMENT_MODE,
+        "LOAD_GOOGLE_TAG_MANAGER": settings.LOAD_GOOGLE_TAG_MANAGER,
+        "LOAD_GOOGLE_ADS": settings.LOAD_GOOGLE_ADS,
         "ASSETS_DOMAIN": settings.ASSETS_DOMAIN
     }

@@ -1,9 +1,10 @@
 <template>
   <div class="container quizlet-form">
     <!-- Quiz Landing page -->
-    <quiz-landing-component v-if="this.quizStatus === QuizState.UNDEFINED"
-                            :quiz="quiz"
-                            :quiz-state="this.quizStatus"/>
+    <quiz-landing-component
+        v-if="this.quizStatus === QuizState.UNDEFINED"
+        :quiz="quiz"
+        :quiz-state="this.quizStatus"/>
 
     <!-- Quiz Test page -->
     <div class="row --full-screen" v-if="this.quizStatus === QuizState.IN_PROGRESS">
