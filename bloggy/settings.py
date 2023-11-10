@@ -284,17 +284,8 @@ CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
 CACHE_MIDDLEWARE_SECONDS = CACHE_TTL  # number of seconds to cache a page for (TTL)
 CACHE_MIDDLEWARE_KEY_PREFIX = ''  # should be used if the cache is shared across multiple sites that use the same Django instance
 
-if DEBUG:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }, 'redis': {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': 'redis://127.0.0.1:6379',
-            "KEY_PREFIX": "bloggy"
-        },
-    }
-else:
+ENABLE_CACHING = os.getenv("ENABLE_CACHING", "False") == "True"
+if ENABLE_CACHING:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
@@ -307,6 +298,12 @@ else:
                     "ketama": True,
                 },
             },
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
 
