@@ -347,3 +347,24 @@ def get_post_types():
 LOAD_GOOGLE_TAG_MANAGER = os.getenv("LOAD_GOOGLE_TAG_MANAGER", "False") == "True"
 LOAD_GOOGLE_ADS = os.getenv("LOAD_GOOGLE_ADS", "False") == "True"
 MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        },
+    },
+}
