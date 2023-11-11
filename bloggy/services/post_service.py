@@ -57,11 +57,10 @@ def set_seo_settings(post, context):
         context["meta_title"] = post.meta_title
 
     if StringUtils.is_blank(post.meta_description):
-        context["meta_description"] = post.meta_description
-    else:
         context["meta_description"] = post.excerpt
-
+    else:
+        context["meta_description"] = post.meta_description
     context['meta_keywords'] = post.meta_keywords
+
     if post.thumbnail:
         context['meta_image'] = post.thumbnail.url
-    # return context

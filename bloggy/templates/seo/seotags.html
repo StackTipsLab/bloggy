@@ -8,7 +8,7 @@
     <title>{{ meta_title }} | {{ site_name }}</title>
     <meta name="title" content="{{ meta_title }} | {{ site_name }}" />
 {% endif %}
-<link rel="dns-prefetch" href="https://stacktips.com" />
+<link rel="dns-prefetch" href="{% get_settings 'SITE_URL' %}" />
 <link rel="dns-prefetch" href="{{ ASSETS_DOMAIN}}" />
 <meta name="description" content="{{ meta_description }}" />
 {% if meta_keywords %}
@@ -30,9 +30,9 @@
 <link rel="shortcut icon" type="image/x-icon" href="{% static 'media/favicon/apple-touch-icon.png' %}"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:site" content="@StackTips"/>
-<meta name="twitter:creator" content="@ask_nilan"/>
-<meta name="twitter:title" content="{{ title_title }}"/>
-<meta name="twitter:description" content="{{ title_description }}"/>
+<meta name="twitter:creator" content="@asknilan"/>
+<meta name="twitter:title" content="{{ meta_title }} | {{ site_name }}"/>
+<meta name="twitter:description" content="{{ meta_description }}"/>
 <meta name="twitter:image" content="{{ meta_image }}"/>
 <meta property="og:url" content="{{ request.build_absolute_uri }}"/>
 <meta property="og:type" content="article"/>

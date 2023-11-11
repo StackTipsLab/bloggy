@@ -36,6 +36,9 @@ class Page(Updatable, SeoAware):
         help_text="Select publish status",
         verbose_name="Publish status")
 
+    def __str__(self):
+        return str(self.title)
+
     class Meta:
         verbose_name = 'Page'
         verbose_name_plural = 'Pages'

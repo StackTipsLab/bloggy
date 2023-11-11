@@ -10,7 +10,10 @@ from bloggy.models import Post, Category
 from bloggy.models.course import Course
 from bloggy.services.post_service import get_recent_feed, set_seo_settings
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="posts"), vary_on_cookie], name='dispatch')
+
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="posts"), vary_on_cookie],
+    name='dispatch')
 class PostListView(ListView):
     model = Post
     template_name = "pages/archive/posts.html"
@@ -25,7 +28,9 @@ class PostListView(ListView):
         return context
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="post_single"), vary_on_cookie], name='dispatch')
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="post_single"), vary_on_cookie],
+    name='dispatch')
 class PostDetailsView(HitCountDetailView):
     model = Post
     count_hit = True
