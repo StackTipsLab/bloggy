@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, ListView
 from bloggy import settings
 from bloggy.models import Category
 from bloggy.models import Post
+from bloggy.services.post_service import set_seo_settings
 
 logger = logging.getLogger(__name__)
 
@@ -56,6 +57,6 @@ class CategoryDetailsView(ListView):
 
         context['posts'] = posts
         context['categories'] = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
-        context['meta_title'] = category.title
-        context['meta_description'] = category.description
+
+        set_seo_settings(post=category, context=context)
         return context

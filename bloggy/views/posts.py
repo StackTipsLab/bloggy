@@ -8,9 +8,7 @@ from hitcount.views import HitCountDetailView
 from bloggy import settings
 from bloggy.models import Post, Category
 from bloggy.models.course import Course
-from bloggy.services.post_service import get_recent_feed
-from bloggy.utils.string_utils import StringUtils
-
+from bloggy.services.post_service import get_recent_feed, set_seo_settings
 
 @method_decorator([cache_page(settings.CACHE_TTL, key_prefix="posts"), vary_on_cookie], name='dispatch')
 class PostListView(ListView):
@@ -63,20 +61,6 @@ class PostDetailsView(HitCountDetailView):
                 raise HttpResponse('Unauthorized', status=401)
 
         context = super().get_context_data(**kwargs)
-
-        meta_title = self.object.meta_title
-        if StringUtils.is_blank(meta_title) or meta_title == "{title}":
-            meta_title = self.object.title
-        context["meta_title"] = meta_title
-
-        meta_description = self.object.meta_description
-        if StringUtils.is_blank(meta_description) or meta_description == "{excerpt}":
-            meta_description = self.object.excerpt
-        context["meta_description"] = meta_description
-        context['meta_keywords'] = self.object.meta_keywords
-        if self.object.thumbnail:
-            context['meta_image'] = self.object.thumbnail.url
-        else:
-            context['meta_image'] = "{}/media/opengraph/{}/{}.png".format(
-                settings.ASSETS_DOMAIN, self.object.post_type, self.object.slug)
+        # SEO settings
+        set_seo_settings(post=self.object, context=context)
         return context

@@ -9,11 +9,16 @@ from hitcount.views import HitCountDetailView
 from bloggy import settings
 from bloggy.models import Post
 from bloggy.models.course import Course
+from bloggy.services.post_service import set_seo_settings
 
 DEFAULT_PAGE_SIZE = 40
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="courses"), vary_on_cookie], name='dispatch')
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="courses"),
+     vary_on_cookie],
+    name='dispatch'
+)
 class CoursesListView(TemplateView):
     model = Course
     template_name = "pages/archive/courses.html"
@@ -36,7 +41,9 @@ class CoursesListView(TemplateView):
         return context
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="course_single"), vary_on_cookie], name='dispatch')
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="course_single"), vary_on_cookie],
+    name='dispatch')
 class CourseDetailsView(HitCountDetailView):
     model = Course
     template_name = "pages/single/course.html"
@@ -51,25 +58,23 @@ class CourseDetailsView(HitCountDetailView):
         return context
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="lesson_single"), vary_on_cookie], name='dispatch')
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="lesson_single"), vary_on_cookie],
+    name='dispatch'
+)
 class LessonDetailsView(TemplateView):
     template_name = "pages/single/lesson.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         guide_slug = context["course"]
-        post = Post.objects.filter(course__slug=guide_slug).filter(slug=context["slug"]).order_by("display_order").first()
+        post = Post.objects.filter(course__slug=guide_slug).filter(slug=context["slug"]).order_by(
+            "display_order").first()
         if not post:
             raise Http404
 
         context["post"] = post
         course = post.course
         context["course"] = course
-        context['meta_title'] = post.meta_title
-        context['meta_description'] = post.meta_description
-        context['meta_keywords'] = post.meta_keywords
-        if course.thumbnail:
-            context['meta_image'] = course.thumbnail.url
-        else:
-            context['meta_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{post.post_type}/{post.slug}.png"
+        set_seo_settings(post=course, context=context)
         return context

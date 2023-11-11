@@ -4,15 +4,15 @@
     <div class="my-4 p-4 category-archive-banner" style="border-color:{{ category.color }};">
         <div class="d-lg-flex">
             <div class="flex-shrink-0">
-                {% if category.logo %}
+                {% if category.thumbnail %}
                     <div class="category-thumbnail">
-                        <img src="{{ category.logo.url }}" alt="{{ category.title }}" />
+                        <img src="{{ category.thumbnail.url }}" alt="{{ category.title }}" />
                     </div>
                 {% endif %}
             </div>
             <div class="flex-grow-1 ms-lg-3">
                 <h1 class="display-5 fw-bold">{{ category.title }}</h1>
-                {% if category.description %}<p class="mb-1">{{ category.description }}</p>{% endif %}
+                {% if category.excerpt %}<p class="mb-1">{{ category.excerpt }}</p>{% endif %}
             </div>
         </div>
     </div>

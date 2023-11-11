@@ -5,6 +5,10 @@ from bloggy.models.mixin.SeoAware import SeoAware
 from bloggy.models.mixin.updatable import Updatable
 
 
+def image_upload_path(self, page_id):
+    return f'uploads/pages/{page_id}'
+
+
 class Page(Updatable, SeoAware):
     """
     Stores page data.
@@ -19,7 +23,7 @@ class Page(Updatable, SeoAware):
     )
 
     url = models.CharField(max_length=150, help_text='Enter url', unique=True)
-
+    thumbnail = models.ImageField(upload_to=image_upload_path, blank=True, null=True)
     content = TextField(null=True, help_text='Post content')
     published_date = models.DateTimeField(null=True, blank=True)
     publish_status = models.CharField(

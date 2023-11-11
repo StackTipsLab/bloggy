@@ -10,6 +10,7 @@ from bloggy import settings
 from bloggy.models import Post
 from bloggy.models.course import Course
 from bloggy.models.page import Page
+from bloggy.services.post_service import set_seo_settings
 
 
 @method_decorator([cache_page(settings.CACHE_TTL, key_prefix="home"), vary_on_cookie], name='dispatch')
@@ -36,14 +37,14 @@ def robots(request):
     """
     domain = settings.SITE_URL
 
-    data = """User-agent: *
+    data = f"""User-agent: *
 Disallow: /admin/
 Disallow: /media/
 Disallow: /static/
 Disallow: /api/
 
-Sitemap: {}/sitemap.xml
-""".format(domain)
+Sitemap: {domain}/sitemap.xml
+"""
 
     return HttpResponse(data, content_type='text/plain')
 
@@ -58,9 +59,6 @@ class PageDetailsView(TemplateView):
         page = Page.objects.filter(url=url).filter(publish_status="LIVE").first()
         if page:
             context["page"] = page
-            context['meta_title'] = page.meta_title
-            context['meta_description'] = page.meta_description
-            context['meta_keywords'] = page.meta_keywords
+            set_seo_settings(post=page, context=context)
             return context
-
         raise Http404

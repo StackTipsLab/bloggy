@@ -14,8 +14,8 @@
                 {% else %}
                     {% define post.category.first as category %}
                     <div class="archive-media-object {{ post.post_type }}-object">
-                        {% if category.logo %}
-                            <img loading="lazy" src="{{ category.logo.url }}" style="object-fit: contain;padding: 1rem">
+                        {% if category.thumbnail %}
+                            <img loading="lazy" src="{{ category.thumbnail.url }}" style="object-fit: contain;padding: 1rem">
                         {% endif %}
                     </div>
                 {% endif %}

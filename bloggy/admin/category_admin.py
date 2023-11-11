@@ -23,7 +23,7 @@ class CategoryAdmin(admin.ModelAdmin):
         'title',
         'id',
         'is_category_published',
-        'logo_tag',
+        'thumbnail_tag',
         'article_count',
         'slug',
         'display_updated_date',
@@ -32,14 +32,14 @@ class CategoryAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'slug', 'description', 'logo', 'color', 'publish_status')
+            'fields': ('title', 'slug', 'description', 'thumbnail', 'color', 'publish_status')
         }),
         seo_fieldsets
     )
 
     show_change_link = True
     form = CategoryForm
-    readonly_fields = ['logo_tag', 'article_count']
+    readonly_fields = ['thumbnail_tag', 'article_count']
     prepopulated_fields = {"slug": ("title",)}
     list_per_page = 50
     ordering = ('-article_count',)

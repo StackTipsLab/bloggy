@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from bloggy.models import Post, Quiz
+from bloggy.utils.string_utils import StringUtils
 
 DEFAULT_PAGE_SIZE = 20
 
@@ -50,12 +51,17 @@ def get_recent_quizzes(publish_status="LIVE", page=1):
 
 
 def set_seo_settings(post, context):
-    context["meta_title"] = meta_title
+    if StringUtils.is_blank(post.meta_title):
+        context["meta_title"] = post.title
+    else:
+        context["meta_title"] = post.meta_title
 
-    meta_description = self.object.meta_description
-    if StringUtils.is_blank(meta_description) or meta_description == "{excerpt}":
-        meta_description = self.object.excerpt
-    context["meta_description"] = meta_description
-    context['meta_keywords'] = self.object.meta_keywords
-    if self.object.thumbnail:
-        context['meta_image'] = self.object.thumbnail.url
+    if StringUtils.is_blank(post.meta_description):
+        context["meta_description"] = post.meta_description
+    else:
+        context["meta_description"] = post.excerpt
+
+    context['meta_keywords'] = post.meta_keywords
+    if post.thumbnail:
+        context['meta_image'] = post.thumbnail.url
+    # return context
