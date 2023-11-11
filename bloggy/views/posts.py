@@ -61,6 +61,5 @@ class PostDetailsView(HitCountDetailView):
                 raise HttpResponse('Unauthorized', status=401)
 
         context = super().get_context_data(**kwargs)
-        # SEO settings
         set_seo_settings(post=self.object, context=context)
         return context

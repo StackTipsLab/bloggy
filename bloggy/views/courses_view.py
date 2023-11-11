@@ -50,11 +50,7 @@ class CourseDetailsView(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['meta_title'] = self.object.meta_title
-        context['meta_description'] = self.object.meta_description
-        context['meta_keywords'] = self.object.meta_keywords
-        if self.object.thumbnail:
-            context['meta_image'] = self.object.thumbnail.url
+        set_seo_settings(post=self.object, context=context)
         return context
 
 
