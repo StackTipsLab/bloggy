@@ -8,35 +8,34 @@
         </div>
 
         <div class="container">
-            <div class="row row-eq-height archive-grid pb-4 ">
+            <div class="row">
                 {% for author in authors %}
-                    <div class="col-md-3 authors-profile-card">
-                        <div class="px-4 py-4">
+                    <div class="col-lg-3 col-sm-6 author-block">
+                        <div class="px-4 py-4 author-card">
                             <a href="{% url 'user_profile' username=author.username %}"
                                class="text-decoration-none">
                                 <img src="{{ author.get_avatar }}"
                                      alt="{{ author.get_full_name }}"
-                                     class="rounded"
+                                     class="img-fluid author-image"
                                      style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);">
                             </a>
 
                             <div class="card-body">
                                 <a href="{% url 'user_profile' username=author.username %}"
                                    class="text-decoration-none">
-                                    <h3 class="h3 text-body mt-3">{{ author.get_full_name }}</h3>
+                                    <h3 class="h2 text-dark mt-3">{{ author.get_full_name }}</h3>
                                 </a>
                                 {% if author.bio %}
-                                    <p class="card-text"
-                                       style="-webkit-line-clamp:3;line-clamp:3;">{{ author.bio |striptags }}</p>
+                                    <small class=""
+                                           style="-webkit-line-clamp:3;line-clamp:3;">{{ author.bio |striptags }}</small>
                                 {% endif %}
                             </div>
 
-                            {% include 'partials/user_profile_social_media_links.html' with userProfile=author %}
+                            {% include 'partials/user_profile_social_media_links.html' with user=author %}
                         </div>
                     </div>
                 {% endfor %}
-
             </div>
         </div>
-
+    </div>
 {% endblock %}

@@ -47,3 +47,15 @@ def get_recent_quizzes(publish_status="LIVE", page=1):
         quizzes = paginator.page(paginator.num_pages)
 
     return quizzes
+
+
+def set_seo_settings(post, context):
+    context["meta_title"] = meta_title
+
+    meta_description = self.object.meta_description
+    if StringUtils.is_blank(meta_description) or meta_description == "{excerpt}":
+        meta_description = self.object.excerpt
+    context["meta_description"] = meta_description
+    context['meta_keywords'] = self.object.meta_keywords
+    if self.object.thumbnail:
+        context['meta_image'] = self.object.thumbnail.url
