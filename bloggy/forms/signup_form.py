@@ -12,14 +12,15 @@ class SignUpForm(UserCreationForm):
         user = super().save(commit=False)  # Call the parent class's save method
         # Generate the username based on the user's name (you can use your custom function here)
         user.username = self.generate_unique_username(self.cleaned_data['name'])
-        user.is_active = True
+        user.is_active = False
         user.is_staff = False
 
         if commit:
             user.save()
         return user
 
-    def generate_unique_username(self, name):
+    @staticmethod
+    def generate_unique_username(name):
         # Convert the user's name to a lowercase username with underscores
         base_username = name.lower().replace(' ', '_')
 
