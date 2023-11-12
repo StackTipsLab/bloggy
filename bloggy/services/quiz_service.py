@@ -34,7 +34,7 @@ def get_questions_json(post):
         'id': post.id,
         'title': post.title,
         'slug': post.slug,
-        'description': post.content if post.content else "",
+        'content': post.content if post.content else "",
         'questions_count': len(questions),
         'duration': post.duration,
         'logo': post.thumbnail.url if post.thumbnail else "",

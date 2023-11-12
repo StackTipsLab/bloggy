@@ -186,11 +186,11 @@ def related_quizzes_widget(context, limit=5, category=None, widget_title="Challe
 
 
 @register.inclusion_tag('widgets/categories.html', takes_context=True)
-def categories_widget(context, content_type="post", count=0, widget_style=""):
+def categories_widget(context, content_type="post", count=10, widget_style=""):
     if settings.SHOW_EMTPY_CATEGORIES:
-        categories = Category.objects.order_by("-article_count").all()
+        categories = Category.objects.order_by("-article_count").all()[:count]
     else:
-        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
+        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()[:count]
     return {
         "categories": categories,
         "widgetStyle": widget_style,
