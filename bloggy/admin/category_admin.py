@@ -8,7 +8,7 @@ from bloggy.models import Category
 
 
 class CategoryForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 105}))
+    excerpt = forms.CharField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 105}))
     title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
     slug = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
     meta_title = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
