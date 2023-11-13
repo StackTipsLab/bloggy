@@ -68,7 +68,7 @@ urlpatterns = [
     path('user/<str:username>', PublicProfileView.as_view(), name="user_profile"),
 
     path('edit-profile', login_required(EditProfileView.as_view()), name="profile.edit_profile"),
-    path('dashboard', login_required(MyProfileView.as_view()), name="profile.dashboard"),
+    # path('dashboard', login_required(MyProfileView.as_view()), name="profile.dashboard"),
     path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
 
     path('contact', TemplateView.as_view(template_name="pages/contact.html"), name='pages.contact'),

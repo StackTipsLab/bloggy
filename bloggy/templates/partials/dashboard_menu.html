@@ -2,27 +2,18 @@
 {% load custom_widgets %}
 <ul class="list-unstyled static-pages-menu d-none d-md-block">
     <li>
-        <a class="{% if request.resolver_match.url_name == 'profile.dashboard' %} active{% endif %}"
-           href="{% url 'profile.dashboard' %}">My articles</a>
+        <a href="{% url 'user_profile' username=user.username %}">My profile</a>
     </li>
     <li>
         <a class="{% if request.resolver_match.url_name == 'profile.bookmarks' %} active{% endif %}"
            href="{% url 'profile.bookmarks' %}">Bookmarks</a>
     </li>
     <li>
-        <a href="{% url 'profile.edit_profile' %}">Update profile</a>
-    </li>
-    <li>
-        <a href="{% url 'user_profile' username=user.username %}">View my profile <i class="fa fa-external-link"></i></a>
+        <a href="{% url 'profile.edit_profile' %}">Edit profile</a>
     </li>
     {% if user.is_superuser %}
         <li>
             <a href="{% url 'admin:index' %}">Dashboard</a>
         </li>
     {% endif %}
-
-
-    <li>
-        <a href="{% url 'user_profile' username=user.username %}">Settings</a>
-    </li>
 </ul>

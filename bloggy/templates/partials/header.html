@@ -64,10 +64,9 @@
                                 <p class="menu-heading font-xs pt-2">{% if user.name %}Hello,
                                     {{ user.name }}{% else %}My Account{% endif %}</p>
                                 <a class="dropdown-item" href="{% url 'profile.edit_profile' %}">Edit profile</a>
-                                <a class="dropdown-item" href="{% url 'profile.dashboard' %}">My Posts</a>
                                 <a class="dropdown-item" href="{% url 'profile.bookmarks' %}">Bookmarks</a>
                                 {% if user.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin dashboard</a>
+                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>
                                 {% endif %}
                                 <hr>
                                 <a class="dropdown-item text-danger"
