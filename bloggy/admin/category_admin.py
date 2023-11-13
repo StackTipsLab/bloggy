@@ -32,7 +32,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'slug', 'description', 'thumbnail', 'color', 'publish_status')
+            'fields': ('title', 'slug', 'excerpt', 'thumbnail', 'color', 'publish_status')
         }),
         seo_fieldsets
     )
