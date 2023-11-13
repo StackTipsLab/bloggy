@@ -45,7 +45,7 @@ class Category(Updatable, SeoAware):
 
     def thumbnail_tag(self):
         if self.thumbnail_tag:
-            return format_html(f'<img src="{self.thumbnail_tag.url}" width="auto" height="40"/>')
+            return format_html(f'<img src="{self.thumbnail.url}" width="auto" height="40"/>')
         return ""
 
     thumbnail_tag.short_description = 'Thumbnail'

@@ -40,7 +40,9 @@ class BloggyAdmin(SummernoteModelAdmin):
     list_per_page = 50
 
     def published_date_display(self, obj):
-        return obj.published_date.strftime("%b %d, %Y")
+        if obj.published_date:
+            return obj.published_date.strftime("%b %d, %Y")
+        return "-"
 
     published_date_display.short_description = "Date Published"
 
