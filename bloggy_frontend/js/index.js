@@ -1,4 +1,3 @@
-// Import Bootstrap’s JavaScript by adding this line to your app’s entry point /src/app.js:
 import 'bootstrap';
 // const jQuery = require("jquery")
 // require("bootstrap")
@@ -9,7 +8,6 @@ global.$ = global.jQuery = require('jquery');
 import "../sass/style.scss";
 
 window.axios = require('axios');
-// require("./axios-config.js");
 // require('./app/cookie');
 require('./app/toast');
 require('./app/heading');
@@ -43,30 +41,6 @@ $(document).ready(function () {
         animateValue(element, 1, element.getAttribute("max-value"), duration);
     }
 
-    /*$(".reveal-more-content-cta span").on("click", function () {
-        var $content = $(this).parent().next("div.click-to-reveal-content");
-        var linkText = $(this).text().toUpperCase();
-
-        if (linkText === "SHOW ANSWER") {
-            linkText = "HIDE ANSWER";
-            $content.removeClass("hideContent")
-            $content.addClass("showContent");
-        } else {
-            linkText = "SHOW ANSWER";
-            $content.removeClass("showContent")
-            $content.addClass("hideContent");
-        }
-
-        $(this).text(linkText);
-
-    });*/
-
-    // $('.share-button').on('click', function (event) {
-    //     event.preventDefault();
-    //     $('.smenu').toggleClass('share');
-    // });
-
-
     $(window).scroll(function () {
         var y = $(window).scrollTop();
         if (y > 0) {
@@ -77,9 +51,3 @@ $(document).ready(function () {
     });
 
 })
-
-
-// var alertList = document.querySelectorAll('.alert')
-// alertList.forEach(function (alert) {
-//     new bootstrap.Alert(alert)
-// })

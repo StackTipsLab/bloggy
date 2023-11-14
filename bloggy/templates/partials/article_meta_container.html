@@ -9,35 +9,31 @@
             <img src="{{ author.get_avatar }}"
                  alt="{{ author.username }} avtar"
                  loading="lazy"
-                 class="img-fluid image-rounded-square m-0"
+                 class="img-fluid m-0"
                  height="42px"
-                 width="42px"/>
+                 width="42px" style="border-radius: 50%"/>
 
         </div>
         <div class="flex-grow-1 ms-3">
-            <a class="text-decoration-none text-reset fw-600" href="{% url 'user_profile' username=author.username %}">
+            <a class="text-decoration-none fw-600 text-reset" href="{% url 'user_profile' username=author.username %}">
                 {{ author.get_full_name_or_username }}
             </a>
+            &nbsp;&nbsp;<span class="font-xs text-muted">|</span>&nbsp;&nbsp;
+            {% for category in post.category.all %}
+                <a class="text-decoration-none text-reset link-primary fw-bold"
+                   style="z-index:999;position:relative"
+                   href="{% url 'categories_single' slug=category.slug %}">
+                    <span class="d-inline-block mb-1 text-primary text-lowercase fw-500">#{{ category.title }}</span>
+                    {% if forloop.last != True %}
+                        <span class="text-muted pe-2"></span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+            &nbsp;&nbsp;<span class="font-xs text-muted">|</span>&nbsp;&nbsp;
+            <span class="text-decoration-none font-sm fw-400">
+                {{ post.updated_date|date:"M d, Y" }},&nbsp
+            </span>
 
-
-            <div class="hero article-meta-container" style="font-size: 0.75rem">
-                {% if post.publish_status == "DRAFT" %}
-                    <span class="badge rounded-pill text-bg-warning text-white">{{ post.publish_status }} / PREVIEW</span>
-                {% endif %}
-                <small class="d-inline-block mb-1 text-muted text-uppercase">
-                    Updated on {{ post.updated_date|date:"M j, Y g:i A" }},&nbsp
-                </small>
-
-                {% for category in post.category.all %}
-                    <a class="text-decoration-none text-reset link-primary fw-bold"
-                       style="z-index:999;position:relative"
-                       href="{% url 'categories_single' slug=category.slug %}">
-                        <small class="d-inline-block mb-1 text-primary text-uppercase fw-500">{{ category.title }}</small>
-                        {% if forloop.last != True %}
-                            <span class="text-muted">,</span>{% endif %}
-                    </a>
-                {% endfor %}
-            </div>
         </div>
     </div>
 {% endspaceless %}

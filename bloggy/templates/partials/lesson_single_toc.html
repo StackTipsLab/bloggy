@@ -1,43 +1,18 @@
 {% load custom_widgets %}
 {% load define_action %}
-<div class="card card-rounded card-shadow mb-3 lesson-menu-widget">
-    {% if course.thumbnail %}
-        <div class="card-img-top">
-            <img alt="{{ course.title }}"
-                 width="100%"
-                 height="auto"
-                 src="{{ course.thumbnail.url }}"
-                 class="thumbnail mr-3"
-                 loading="lazy" />
-        </div>
-    {% endif %}
-
-    <h3 class="display-5 fw-500 p-3 mb-0">{{ course.title }}</h3>
-    <div class="lessons-menu-sidebar d-print-none">
-        <div class="m-3 d-block d-md-none">
-            <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);"
-                    class="form-select border-secondary form-select-lg"
-                    aria-label="Select course content drop down">
-                <option selected>
-                    Table of contents
-                </option>
+{% if course %}
+    <div class="timeline-container mb-4 p-2 p-lg-3">
+        <div class="w-100">
+            <h2 class="h4 ps-2 pt-3 pb-3 mb-0">{{ course.title }}</h2>
+            <ul class="sessions">
                 {% for lesson in course.get_lessons %}
-                    <option value="{% url 'lesson_single' course=course.slug slug=lesson.slug %}">
-                        {{ lesson.title }}
-                    </option>
+                    {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
+                    <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
+                        <a href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
+                           class="text-decoration-none text-dark p-0 m-0 w-500 font-sm">{{ lesson.title }}</a>
+                    </li>
                 {% endfor %}
-            </select>
+            </ul>
         </div>
-
-        <ul class="d-none d-md-block list-unstyled pb-3">
-            {% for lesson in course.get_lessons %}
-                {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
-                <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
-                    <a href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
-                       class="text-decoration-none text-muted font-sm p-0 m-0">{{ lesson.title }}</a>
-                </li>
-            {% endfor %}
-        </ul>
     </div>
-    <div class="pb-2"></div>
-</div>
+{% endif %}

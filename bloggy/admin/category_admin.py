@@ -2,14 +2,18 @@ from django import forms
 from django.contrib import admin
 from django.utils.html import format_html
 
-from bloggy.admin.misc_admin import publish, unpublish
+from bloggy.admin import seo_fieldsets
+from bloggy.admin.admin import publish, unpublish
 from bloggy.models import Category
 
 
 class CategoryForm(forms.ModelForm):
-    description = forms.CharField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 105}))
+    excerpt = forms.CharField(widget=forms.Textarea(attrs={'rows': 3, 'cols': 105}))
     title = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
     slug = forms.CharField(widget=forms.TextInput(attrs={'size': 105}))
+    meta_title = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 1, 'cols': 100}))
+    meta_description = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
+    meta_keywords = forms.CharField(required=False, widget=forms.Textarea(attrs={'rows': 2, 'cols': 100}))
     model = Category
 
 
@@ -19,15 +23,23 @@ class CategoryAdmin(admin.ModelAdmin):
         'title',
         'id',
         'is_category_published',
-        'logo_tag',
+        'thumbnail_tag',
         'article_count',
         'slug',
         'display_updated_date',
         'display_color',
     )
+
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'slug', 'excerpt', 'thumbnail', 'color', 'publish_status')
+        }),
+        seo_fieldsets
+    )
+
     show_change_link = True
     form = CategoryForm
-    readonly_fields = ['logo_tag', 'article_count']
+    readonly_fields = ['thumbnail_tag', 'article_count']
     prepopulated_fields = {"slug": ("title",)}
     list_per_page = 50
     ordering = ('-article_count',)

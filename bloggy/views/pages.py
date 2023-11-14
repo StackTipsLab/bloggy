@@ -10,6 +10,7 @@ from bloggy import settings
 from bloggy.models import Post
 from bloggy.models.course import Course
 from bloggy.models.page import Page
+from bloggy.services.post_service import set_seo_settings
 
 
 @method_decorator([cache_page(settings.CACHE_TTL, key_prefix="home"), vary_on_cookie], name='dispatch')
@@ -18,7 +19,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = Post.objects.prefetch_related("category").filter(publish_status="LIVE").order_by(
+        context['posts'] = Post.objects.prefetch_related("category").filter(publish_status="LIVE").order_by(
             "-published_date")[:12]
         context['courses'] = Course.objects.filter(publish_status="LIVE").all()[:6]
         return context
@@ -36,14 +37,14 @@ def robots(request):
     """
     domain = settings.SITE_URL
 
-    data = """User-agent: *
+    data = f"""User-agent: *
 Disallow: /admin/
 Disallow: /media/
 Disallow: /static/
 Disallow: /api/
 
-Sitemap: {}/sitemap.xml
-""".format(domain)
+Sitemap: {domain}/sitemap.xml
+"""
 
     return HttpResponse(data, content_type='text/plain')
 
@@ -56,11 +57,8 @@ class PageDetailsView(TemplateView):
         context = super().get_context_data(**kwargs)
         url = context["url"]
         page = Page.objects.filter(url=url).filter(publish_status="LIVE").first()
-        if not page:
-            raise Http404
-
-        context["page"] = page
-        context['meta_title'] = page.meta_title
-        context['meta_description'] = page.meta_description
-        context['meta_keywords'] = page.meta_keywords
-        return context
+        if page:
+            context["page"] = page
+            set_seo_settings(post=page, context=context)
+            return context
+        raise Http404

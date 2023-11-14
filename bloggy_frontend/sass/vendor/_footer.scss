@@ -1,11 +1,10 @@
 .footer {
 
-}
-
-.footer-text {
-  color: var(--card-body-text-color);
-  text-decoration: none;
-  @extend .font-xs;
-  letter-spacing: -3;
+  .footer-text {
+    color: var(--card-body-text-color);
+    text-decoration: none;
+    @extend .font-sm;
+    letter-spacing: -3;
+  }
 }
 

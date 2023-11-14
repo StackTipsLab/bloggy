@@ -1,9 +1,11 @@
+
 from django.db import models
 
 from bloggy import settings
+from bloggy.models.mixin.updatable import Updatable
 
 
-class Vote(models.Model):
+class Vote(Updatable):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post_id = models.IntegerField(null=False, help_text='Post id')
     post_type = models.CharField(
@@ -14,9 +16,11 @@ class Vote(models.Model):
         verbose_name="Content type"
     )
 
-    created_date = models.DateTimeField(auto_created=True, null=True, auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True, null=True)
-
     class Meta:
         verbose_name = "Vote"
         verbose_name_plural = "Votes"
+
+class Bookmark(Vote):
+    class Meta:
+        verbose_name = "Bookmark"
+        verbose_name_plural = "Bookmarks"

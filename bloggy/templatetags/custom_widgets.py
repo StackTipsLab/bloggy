@@ -112,7 +112,6 @@ def pretty_date(dt=None):
         return ""
 
     now = datetime.now(timezone.utc)
-
     if isinstance(dt, int):
         dt = datetime.fromtimestamp(dt)
 
@@ -148,36 +147,50 @@ def pretty_date(dt=None):
 
 
 @register.inclusion_tag('widgets/related_posts.html', takes_context=True)
-def related_article_widget(context, count=12, categories=None, slug=0, widget_title="Related posts",
+def related_article_widget(context, count=12, categories=None, slug=None, widget_title="Related posts",
                            widget_style="list"):
-    articles = None
+    posts = None
     if categories is None:
-        articles = Post.objects.filter(publish_status="LIVE").filter(post_type="article") \
-                       .exclude(slug=slug).order_by('-published_date')[:count].all()
-        categories = []
+        posts = Post.objects.filter(publish_status="LIVE").exclude(slug=slug).order_by('-published_date').distinct()[
+                :count]
 
     category_slugs = []
-    for category in categories:
-        category_slugs.append(str(category.slug))
+    if categories is not None:
+        for category in categories:
+            category_slugs.append(str(category.slug))
 
     if len(category_slugs) > 0:
-        articles = Post.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(
-            post_type="article") \
-                       .exclude(slug=slug).order_by('-published_date')[:count].all()
+        posts = Post.objects.filter(category__slug__in=category_slugs).filter(publish_status="LIVE").exclude(
+            slug=slug).order_by('-published_date').distinct()[:count].all()
 
     return {
         "widgetTitle": widget_title,
-        "relatedArticles": articles,
+        "relatedPosts": posts,
         "widgetStyle": widget_style,
     }
 
 
-@register.inclusion_tag('widgets/categories.html', takes_context=True)
-def categories_widget(context, content_type="article", count=0, widget_style=""):
-    if settings.SHOW_EMTPY_CATEGORIES:
-        categories = Category.objects.order_by("-article_count").all()
+@register.inclusion_tag('widgets/related_quiz_widget.html', takes_context=True)
+def related_quizzes_widget(context, limit=5, category=None, widget_title="Challenges", widget_style=None):
+    from bloggy.models.quizzes import Quiz
+    if category is None:
+        quizzes = Quiz.objects.all()[:limit]
     else:
-        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
+        quizzes = Quiz.objects.filter(category=category).all()[:limit]
+
+    return {
+        'quizzes': quizzes,
+        "widget_style": widget_style,
+        "widget_title": widget_title,
+    }
+
+
+@register.inclusion_tag('widgets/categories.html', takes_context=True)
+def categories_widget(context, content_type="post", count=10, widget_style=""):
+    if settings.SHOW_EMTPY_CATEGORIES:
+        categories = Category.objects.order_by("-article_count").all()[:count]
+    else:
+        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()[:count]
     return {
         "categories": categories,
         "widgetStyle": widget_style,

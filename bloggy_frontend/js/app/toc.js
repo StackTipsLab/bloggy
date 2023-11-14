@@ -1,6 +1,5 @@
 function htmlTableOfContents() {
     let tocContainer = document.getElementById("toc-content");
-
     let articleContent = document.getElementById("article-content");
     if (null === articleContent) {
         articleContent = document.getElementById("static-page");
@@ -8,7 +7,6 @@ function htmlTableOfContents() {
 
     if (null === articleContent)
         return
-
 
     let headings = [].slice.call(articleContent.querySelectorAll('h2, h3, h4,h5'));
     if (headings.length >= 3) {
@@ -28,12 +26,11 @@ function htmlTableOfContents() {
             link.setAttribute('class', 'd-block toc-content-link mb-2 ' + heading.localName);
 
             let headingCounter = heading.localName.substring(1)
-            link.setAttribute('style', 'padding-left:' + (8 * (headingCounter-2)) + "px;");
+            link.setAttribute('style', 'padding-left:' + (8 * (headingCounter - 2)) + "px;");
 
             link.textContent = heading.textContent //.replace(/[0-9].\s/g, '');
             tableOfContentList.appendChild(link);
         });
-
         tocContainer.appendChild(tableOfContentList);
     } else {
         tocContainer.remove();
@@ -55,12 +52,9 @@ function registerCollapsibleEvents() {
     }
 }
 
-
 $(document).ready(function () {
     if (document.getElementById("toc")) {
         htmlTableOfContents();
-
-        //Events are registered inside copyCode.js now
         // registerCollapsibleEvents();
     }
 });

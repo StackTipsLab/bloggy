@@ -19,6 +19,11 @@
     "meta_description": "Browse from collection of tutorials and courses organized by categories to make learning easy and accessible.",
     "meta_keywords": "stacktips categories, stack tips topics, browse by topics, stacktips categories, tutorial categories, tutorial categories, all tutorials by category, android, django, python, django, spring, spring boot, git"
   },
+  "/quizzes": {
+    "meta_title": "Interactive Quizzes",
+    "meta_description": "Use StackTips to test your coding skills and gauge your learning progress in a fun way",
+    "meta_keywords": "stacktips quizzes, stack tips quiz test, quizlzet, take a quiz, practice test, aws quiz, python test, advance python test, aws practitioner test, CLF-C01 AWS test, aws CLF-C01 quiz"
+  },
   "/contact": {
     "meta_title": "Get in touch",
     "meta_description": "If you have any questions or have suggestions to improve the quality, let us know."

@@ -1,29 +1,28 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
-from bloggy import models
+from bloggy.models import Post, Quiz
+from bloggy.utils.string_utils import StringUtils
 
 DEFAULT_PAGE_SIZE = 20
 
 
 def get_recent_feed(publish_status="LIVE", page=1, page_size=DEFAULT_PAGE_SIZE):
-    articles = models.Post.objects.prefetch_related("category") \
+    posts = Post.objects.prefetch_related("category") \
         .filter(publish_status=publish_status) \
-        .filter(post_type__in=["article", 'lesson']) \
         .order_by("-published_date")
 
-    paginator = Paginator(articles, page_size)
+    paginator = Paginator(posts, page_size)
     try:
-        articles = paginator.page(page)
+        posts = paginator.page(page)
     except PageNotAnInteger:
-        articles = paginator.page(1)
+        posts = paginator.page(1)
     except EmptyPage:
-        articles = paginator.page(paginator.num_pages)
-
-    return articles
+        posts = paginator.page(paginator.num_pages)
+    return posts
 
 
 def get_recent_posts(publish_status="LIVE", page=1, page_size=DEFAULT_PAGE_SIZE):
-    articles = models.Post.objects.prefetch_related("category") \
+    articles = Post.objects.prefetch_related("category") \
         .filter(publish_status=publish_status).filter(post_type__in=["article"]) \
         .order_by("-published_date")
 
@@ -35,3 +34,33 @@ def get_recent_posts(publish_status="LIVE", page=1, page_size=DEFAULT_PAGE_SIZE)
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
     return articles
+
+
+def get_recent_quizzes(publish_status="LIVE", page=1):
+    quizzes = Quiz.objects.prefetch_related("category") \
+        .filter(publish_status=publish_status).order_by("-published_date")
+    paginator = Paginator(quizzes, DEFAULT_PAGE_SIZE)
+    try:
+        quizzes = paginator.page(page)
+    except PageNotAnInteger:
+        quizzes = paginator.page(1)
+    except EmptyPage:
+        quizzes = paginator.page(paginator.num_pages)
+
+    return quizzes
+
+
+def set_seo_settings(post, context):
+    if StringUtils.is_blank(post.meta_title):
+        context["meta_title"] = post.title
+    else:
+        context["meta_title"] = post.meta_title
+
+    if StringUtils.is_blank(post.meta_description):
+        context["meta_description"] = post.excerpt
+    else:
+        context["meta_description"] = post.meta_description
+    context['meta_keywords'] = post.meta_keywords
+
+    if post.thumbnail:
+        context['meta_image'] = post.thumbnail.url

@@ -7,6 +7,7 @@ from django.views.generic import TemplateView, ListView
 from bloggy import settings
 from bloggy.models import Category
 from bloggy.models import Post
+from bloggy.services.post_service import set_seo_settings
 
 logger = logging.getLogger(__name__)
 
@@ -42,20 +43,20 @@ class CategoryDetailsView(ListView):
         except Category.DoesNotExist:
             raise Http404
 
-        articles = Post.objects.filter(category__slug__in=[category_param], publish_status="LIVE").order_by(
+        posts = Post.objects.filter(category__slug__in=[category_param], publish_status="LIVE").order_by(
             "-published_date")
-        paginator = Paginator(articles, self.paginate_by)
+        paginator = Paginator(posts, self.paginate_by)
         page = self.request.GET.get('page')
 
         try:
-            articles = paginator.page(page)
+            posts = paginator.page(page)
         except PageNotAnInteger:
-            articles = paginator.page(1)
+            posts = paginator.page(1)
         except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
+            posts = paginator.page(paginator.num_pages)
 
-        context['articles'] = articles
+        context['posts'] = posts
         context['categories'] = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
-        context['meta_title'] = category.title
-        context['meta_description'] = category.description
+
+        set_seo_settings(post=category, context=context)
         return context

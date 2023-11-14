@@ -12,8 +12,16 @@ class MyUserAdmin(BaseUserAdmin):
     add_form = UserCreationForm
 
     list_display = (
-        'username', 'email_display', 'full_name_display', 'is_staff', 'is_active', 'date_joined', 'last_login',
-        'profile_photo_tag', 'posts_count_display',)
+        'username',
+        'email_display',
+        'full_name_display',
+        'is_staff',
+        'is_active',
+        'date_joined',
+        'last_login',
+        'profile_photo_tag',
+        'posts_count_display'
+    )
     list_filter = ('is_staff', 'is_superuser', 'groups', 'is_active')
     search_fields = ('username',)
     ordering = ('-date_joined',)

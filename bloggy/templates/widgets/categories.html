@@ -1,66 +1,22 @@
 {% load static %}
 {% if categories %}
     {% if widgetStyle == "home" %}
-        <div class="row row-cols-4 row-cols-md-3 row-cols-lg-5 gx-2 gx-lg-4 gy-2 gy-lg-4">
-            {% for category in categories %}
-            <div class="col">
-                <div class="topics-tag">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="tag__image">
-                                <img src="{% if category.logo %} {{ category.logo.url }} {% endif %}"
-                                     height="32px"
-                                     width="32px"
-                                     aria-hidden="true"
-                                     style="-o-object-fit: contain;object-fit: contain;"
-                                     alt=""
-                                     loading="lazy"/>
-                            </div>
-                        </div>
-                        <div class="flex-grow-1 ms-3 d-none d-md-block">
-                            <h3 class="mb-0 fw-normal" style="font-weight:400;font-size:1.1rem">{{ category.title }}</h3>
-                        </div>
-                        <a class="stretched-link" href="{% url 'categories_single' slug=category.slug %}"></a>
-                    </div>
-                </div>
-            </div>
-            {% if forloop.last == True %}
-                <div class="col d-none d-md-block">
-                <div class="topics-tag" href="{% url 'categories' %}">
-                    <div class="d-flex align-items-center">
-                        <div class="flex-shrink-0">
-                            <div class="tag__image">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    height="32px"
-                                     width="32px"
-                                     viewBox="0 0 24 24"
-                                     fill="#000000">
-                                    <path d="M0 0h24v24H0V0z" fill="none"/>
-                                    <path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/>
-                                </svg>
-                            </div>
-                        </div>
-
-                        <div class="flex-grow-1 ms-3">
-                            <h3 class="mb-0 fw-normal" style="font-weight:400;font-size:1.1rem">All topics</h3>
-                        </div>
-
-                        <a class="stretched-link" href="{% url 'categories' %}"></a>
-                        <span class="tag__chevron">&#8594</span>
-                    </div>
-                </div>
-            {% endif %}
-        {% endfor %}
+        <div class="category__items">
+            <ul class="p-0">
+                {% for category in categories %}
+                    <li>
+                        <a href="{% url 'categories_single' slug=category.slug %}" class="text-decoration-none text-reset">{{ category.title }}
+                            <img src="{% if category.thumbnail %} {{ category.thumbnail.url }} {% endif %}"
+                                 height="32px" width="32px" alt="">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     {% else %}
         <ul class="tags-list {{ widgetStyle }} d-none d-lg-block d-xl-block">
             {% for category in categories %}
-                <li>
-                    {% if contentType == 'article' %}
-                        <a href="{% url 'categories_single' slug=category.slug %}">#{{ category.slug }}</a>
-                    {% else %}
-                        <a href="{% url 'interview_questions_by_category' category=category.slug %}">#{{ category.slug }}</a>
-                    {% endif %}
+                <li><a href="{% url 'categories_single' slug=category.slug %}">#{{ category.slug }}</a>
                 </li>
             {% endfor %}
         </ul>

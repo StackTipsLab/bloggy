@@ -29,10 +29,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
-
-# enable special cases like tag manager enabled in dev mode. Used to override the default DEBUG behaviour
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1, localhost").split(",")
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -71,7 +67,6 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'bloggy.middleware.wp_redirect.OldUrlRedirectMiddleware',  # redirect for old wp site urls
     'bloggy.middleware.slash_middleware.AppendOrRemoveSlashMiddleware',  # Remove slash from url
 
     # Cache
@@ -88,7 +83,7 @@ MIDDLEWARE = [
     # Social login
     # 'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'bloggy.middleware.page_not_found.PageNotFoundMiddleware',  # new articles mismatch url redirect
+    'bloggy.middleware.redirect.RedirectMiddleware',  # new articles mismatch url redirect
 ]
 
 ROOT_URLCONF = 'bloggy.urls'
@@ -287,19 +282,11 @@ REST_FRAMEWORK = {
 CACHE_TTL = 60 * 15
 CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
 CACHE_MIDDLEWARE_SECONDS = CACHE_TTL  # number of seconds to cache a page for (TTL)
-CACHE_MIDDLEWARE_KEY_PREFIX = ''  # should be used if the cache is shared across multiple sites that use the same Django instance
+CACHE_MIDDLEWARE_KEY_PREFIX = ''  # should be used if the cache is shared across multiple sites that use the same
 
-if DEBUG:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }, 'redis': {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': 'redis://127.0.0.1:6379',
-            "KEY_PREFIX": "bloggy"
-        },
-    }
-else:
+
+ENABLE_CACHING = os.getenv("ENABLE_CACHING", "False") == "True"
+if ENABLE_CACHING:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
@@ -312,6 +299,12 @@ else:
                     "ketama": True,
                 },
             },
+        }
+    }
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
         }
     }
 
@@ -338,9 +331,6 @@ EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', "True")
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
 EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emails'))
 
-# ads.txt file content
-MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
-
 # Read the POST_TYPE_CHOICES environment variable from the .env file
 POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES')
 SHOW_EMTPY_CATEGORIES = os.getenv("SHOW_EMTPY_CATEGORIES", "False") == "True"
@@ -349,3 +339,30 @@ SHOW_EMTPY_CATEGORIES = os.getenv("SHOW_EMTPY_CATEGORIES", "False") == "True"
 def get_post_types():
     post_type = [choice.split(':') for choice in POST_TYPE_CHOICES.split(',')]
     return list(post_type)
+
+
+# enable special cases like tag manager, google ads
+LOAD_GOOGLE_TAG_MANAGER = os.getenv("LOAD_GOOGLE_TAG_MANAGER", "False") == "True"
+LOAD_GOOGLE_ADS = os.getenv("LOAD_GOOGLE_ADS", "False") == "True"
+MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        },
+    },
+}

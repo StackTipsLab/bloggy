@@ -3,6 +3,7 @@ from rest_framework import serializers
 from bloggy.models import Post, User, Category
 from bloggy.models.comment import Comment
 from bloggy.models.course import Course
+from bloggy.models.quizzes import Quiz
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -132,4 +133,25 @@ class CommentSerializer(serializers.ModelSerializer):
             'comment_date',
             'active',
             'reply_set'
+        ]
+
+
+class QuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = [
+            'id',
+            'title',
+            'question_set',
+            'excerpt',
+            'content',
+            'duration',
+            'difficulty',
+            'is_featured',
+            'thumbnail',
+            'category',
+            'display_order',
+            'updated_date',
+            'published_date',
+            'slug',
         ]

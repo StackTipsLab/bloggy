@@ -41,7 +41,7 @@ def email_verification_token(request, new_user, token):
 
 
 def email_registration_token(request, new_user, verification_token):
-    subject = f'Welcome to {settings.SITE_TITLE}! Complete your registration and get started!'
+    subject = f'Welcome to {settings.SITE_TITLE}!'
     args = {
         "email_subject": subject,
         "user_name": new_user.name,

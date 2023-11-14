@@ -38,7 +38,7 @@ class User(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     )
 
     email = models.EmailField('email address', unique=True)
-    name = models.CharField(_("first name"), max_length=150, blank=True)
+    name = models.CharField(_("full name"), max_length=150, blank=True)
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     profile_photo = models.ImageField(null=True, blank=True, upload_to=upload_profile_image,
                                       storage=select_storage)  # , storage=PublicMediaStorage()
@@ -81,6 +81,7 @@ class User(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     def get_full_name_or_username(self):
         if self.name:
             return self.name
+
         return self.username
 
     def get_full_name(self):

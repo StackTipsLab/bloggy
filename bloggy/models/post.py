@@ -8,13 +8,13 @@ from hitcount.models import HitCount
 
 import bloggy
 from bloggy import settings
-from bloggy.models import Category, Vote, Bookmark
+from bloggy.models import Category, Bookmark
 from bloggy.models.course import Course
 from bloggy.models.mixin.Content import Content
 from bloggy.utils.string_utils import StringUtils
 
 
-def upload_thumbnail_image(post_id):
+def upload_thumbnail_image(self, post_id):
     return f'uploads/posts/{post_id}'
 
 
@@ -37,6 +37,13 @@ class Post(Content):
     video_id = models.CharField(
         max_length=100,
         help_text='YouTube Video ID',
+        null=True,
+        blank=True
+    )
+
+    github_link = models.CharField(
+        max_length=200,
+        help_text='Github project link',
         null=True,
         blank=True
     )

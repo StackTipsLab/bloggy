@@ -9,11 +9,16 @@ from hitcount.views import HitCountDetailView
 from bloggy import settings
 from bloggy.models import Post
 from bloggy.models.course import Course
+from bloggy.services.post_service import set_seo_settings
 
 DEFAULT_PAGE_SIZE = 40
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="courses"), vary_on_cookie], name='dispatch')
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="courses"),
+     vary_on_cookie],
+    name='dispatch'
+)
 class CoursesListView(TemplateView):
     model = Course
     template_name = "pages/archive/courses.html"
@@ -36,40 +41,36 @@ class CoursesListView(TemplateView):
         return context
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="course_single"), vary_on_cookie], name='dispatch')
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="course_single"), vary_on_cookie],
+    name='dispatch')
 class CourseDetailsView(HitCountDetailView):
     model = Course
     template_name = "pages/single/course.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['meta_title'] = self.object.meta_title
-        context['meta_description'] = self.object.meta_description
-        context['meta_keywords'] = self.object.meta_keywords
-        if self.object.thumbnail:
-            context['meta_image'] = self.object.thumbnail.url
+        set_seo_settings(post=self.object, context=context)
         return context
 
 
-@method_decorator([cache_page(settings.CACHE_TTL, key_prefix="lesson_single"), vary_on_cookie], name='dispatch')
+@method_decorator(
+    [cache_page(settings.CACHE_TTL, key_prefix="lesson_single"), vary_on_cookie],
+    name='dispatch'
+)
 class LessonDetailsView(TemplateView):
     template_name = "pages/single/lesson.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        course_slug = context["course"]
-        article = Post.objects.filter(course__slug=course_slug).filter(slug=context["slug"]).order_by("display_order").first()
-        if not article:
+        guide_slug = context["course"]
+        post = Post.objects.filter(course__slug=guide_slug).filter(slug=context["slug"]).order_by(
+            "display_order").first()
+        if not post:
             raise Http404
 
-        context["article"] = article
-        course = article.course
+        context["post"] = post
+        course = post.course
         context["course"] = course
-        context['meta_title'] = article.meta_title
-        context['meta_description'] = article.meta_description
-        context['meta_keywords'] = article.meta_keywords
-        if course.thumbnail:
-            context['meta_image'] = course.thumbnail.url
-        else:
-            context['meta_image'] = f"{settings.ASSETS_DOMAIN}/media/opengraph/{article.post_type}/{article.slug}.png"
+        set_seo_settings(post=course, context=context)
         return context

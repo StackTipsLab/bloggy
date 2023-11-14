@@ -45,3 +45,27 @@ $(document).ready(function () {
     });
 
 });
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    let articleContent = document.getElementById("article-content");
+    if (null === articleContent) {
+        articleContent = document.getElementById("static-page");
+    }
+
+    if (null === articleContent)
+        return
+
+
+    var currentDomain = window.location.hostname;
+    var links = articleContent.querySelectorAll('a');
+
+    links.forEach(function (link) {
+        if (link.href.startsWith('http') || link.href.startsWith('www')) {
+            if (!link.href.startsWith('https://' + currentDomain)) {
+                link.classList.add('external');
+            }
+        }
+    });
+});

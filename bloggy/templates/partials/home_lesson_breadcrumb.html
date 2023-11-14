@@ -9,10 +9,10 @@
                     <a href="{% url 'courses' %}">Courses</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'courses_single' slug=course.slug %}">{{ course.title }}</a>
+                    <a href="{% url 'courses_single' slug=course.slug %}">{{ guide.title }}</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <span>{{ article.title }}</span>
+                    <span>{{ post.title }}</span>
                 </li>
             </ol>
         </nav>

@@ -23,7 +23,7 @@ class SearchListView(ListView):
                 Post.objects.filter(title__icontains=search_query, excerpt__icontains=search_query, publish_status="LIVE"),
             )
 
-            context['articles'] = results
+            context['posts'] = results
             context['categories'] = categories
             context['search_query'] = search_query
             context['meta_title'] = f"Search result for {search_query}"
