@@ -15,12 +15,6 @@ class RedirectRule(Updatable):
         help_text="Redirect type",
         verbose_name="Redirect type")
 
-    is_regx = models.BooleanField(
-        default=False,
-        null=True,
-        help_text="Is this regx?"
-    )
-
     note = models.CharField(
         max_length=500,
         help_text='Enter note',

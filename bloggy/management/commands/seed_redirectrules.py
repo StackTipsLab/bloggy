@@ -28,8 +28,7 @@ class Command(BaseCommand):
                         from_url=row[0],
                         to_url=row[1],
                         status_code=row[2],
-                        is_regx=row[3],
-                        note=row[4]
+                        note=row[3]
                     )
 
         self.stdout.write(self.style.SUCCESS(f"%s redirect rules imported" % counter))

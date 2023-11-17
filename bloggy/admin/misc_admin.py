@@ -16,6 +16,5 @@ class RedirectRuleAdmin(admin.ModelAdmin):
         'source',
         'destination',
         'status_code',
-        'is_regx',
         'note',
     )
