@@ -1,14 +1,12 @@
 from .media import Media
 from .categories import Category
-from .user import MyUser
-from .post_views import PostViews
-from .post_bookmark import Bookmarks
-from .post_vote import Votes
+from .user import User
+from .post_actions import Bookmark, Vote
 from .comment import Comment
-from bloggy.models.course import Course
 from .option import Option
-from .post_meta import PostMeta
+from .post import Post
+from .course import Course
+from .quizzes import Quiz, QuizQuestion, QuizAnswer, UserQuizScore
+from .redirect_rule import RedirectRule
 from .verification_token import VerificationToken
-from .article import Article
-
 

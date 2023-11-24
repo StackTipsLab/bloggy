@@ -31,18 +31,20 @@ def remove_stopwords(input_string, stopwords):
 
 
 def get_keywords(content, *extras):
-    Soup = BeautifulSoup(content, 'html5lib')
+    soup = BeautifulSoup(content, 'html5lib')
     heading_tags = ["h1", "h2", "h3"]
 
     keywords = []
-    for tags in Soup.find_all(heading_tags):
+    for tags in soup.find_all(heading_tags):
         keywords.append(tags.text.strip())
     if extras:
         keywords_str = (','.join(extras)) + "," + (','.join(keywords))
     else:
         keywords_str = ','.join(keywords)
-    print("Keywords:%s" % keywords_str)
+    print('Keywords: %s', keywords_str)
 
     filtered_keywords_str = remove_stopwords(keywords_str, stopwords_list)
-    print("Keywords:%s" % filtered_keywords_str)
+    print(f"Keywords:{filtered_keywords_str}")
     return keywords_str.lower()
+
+

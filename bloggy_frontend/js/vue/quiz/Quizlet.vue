@@ -1,14 +1,15 @@
 <template>
-  <div class="container bloggify-form">
+  <div class="container quizlet-form">
     <!-- Quiz Landing page -->
-    <quiz-landing-component v-if="this.quizStatus === QuizState.UNDEFINED"
-                            :quiz="quiz"
-                            :quiz-state="this.quizStatus"/>
+    <quiz-landing-component
+        v-if="this.quizStatus === QuizState.UNDEFINED"
+        :quiz="quiz"
+        :quiz-state="this.quizStatus"/>
 
     <!-- Quiz Test page -->
     <div class="row --full-screen" v-if="this.quizStatus === QuizState.IN_PROGRESS">
-      <div class="bloggify-form--container">
-        <div class="bloggify-form--header">
+      <div class="quizlet-form--container">
+        <div class="quizlet-form--header">
           <div class="meta">
             <h1 class="display-2 text-capitalize fw-600 mb-4">{{ quiz.title }}</h1>
             <p class="text-muted">
@@ -29,7 +30,7 @@
           </div>
         </div>
         <!-- Quiz questions container-->
-        <div class="bloggify-form--card">
+        <div class="quizlet-form--card">
           <div class="mb-4">
             <h3 class="lead pb-2">{{ quiz.questions[currentIndex].title }}</h3>
             <input type="hidden" class="form-control" :value="quiz.questions[currentIndex].id">
@@ -49,7 +50,7 @@
                                                   :question-status="questionStatus"
                                                   :correctAnswer="quiz.questions[currentIndex].correctAnswer"/>-->
               <template v-if="quiz.questions[currentIndex].type === QuestionType.BINARY">
-                <div class="form-check bloggify-form--label"
+                <div class="form-check quizlet-form--label"
                      :class="[{ '--disabled': questionStatus === QuestionState.ANSWERED},
                 { '--wrong-answer': questionStatus === QuestionState.ANSWERED && radioButtonAnswer === answerOption.key && !quiz.questions[currentIndex].correctAnswer.includes(answerOption.key) },
                 { '--correct-answer': questionStatus === QuestionState.ANSWERED && quiz.questions[currentIndex].correctAnswer.includes(answerOption.key) }
@@ -93,7 +94,7 @@
               <!--                                      :question-status="questionStatus"-->
               <!--                                      :correctAnswer="quiz.questions[currentIndex].correctAnswer"/>-->
               <template v-if="quiz.questions[currentIndex].type === QuestionType.MULTIPLE">
-                <div class="form-check bloggify-form--label" :class="[
+                <div class="form-check quizlet-form--label" :class="[
                   { '--disabled': questionStatus === QuestionState.ANSWERED },
                   { '--wrong-answer': questionStatus === QuestionState.ANSWERED && checkboxAnswer.length && !quiz.questions[currentIndex].correctAnswer.includes(answerOption.key) },
                   { '--correct-answer': questionStatus === QuestionState.ANSWERED && quiz.questions[currentIndex].correctAnswer.includes(answerOption.key) }
@@ -182,14 +183,14 @@
 import Api from '../Api.js'
 import QuizLandingComponent from "./QuizLandingComponent.vue";
 import QuizSummaryPage from "./QuizSummaryPage.vue";
-import QuizState from "../enums/QuizState";
-import QuestionType from "../enums/QuestionType";
-import QuestionState from "../enums/QuestionState";
+import QuizState from "./QuizState";
+import QuestionType from "./QuestionType";
+import QuestionState from "./QuestionState";
 import QuestionKindBinary from "./QuestionKindBinary.vue";
 import QuestionKindMultiple from "./QuestionKindMultiple.vue";
 
 export default {
-  name: "bloggify",
+  name: "quizlet",
   computed: {
     QuestionType() {
       return QuestionType
@@ -317,7 +318,7 @@ export default {
       let url = `${window.location.origin}/${Api.saveQuizScore}`;
       axios.post(url, postBody)
           .then(response => {
-            console.log("Response:" + response);
+            // console.log("Response:" + response);
           })
           .catch(error => {
             console.log("Error:" + error);

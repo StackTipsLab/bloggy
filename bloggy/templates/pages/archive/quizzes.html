@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="container">
                     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3">
-                        {% for quiz in posts %}
+                        {% for quiz in quizzes %}
                             <div class="col">
                                 <div class="card article-card">
                                     {% if quiz.thumbnail %}
@@ -28,7 +28,7 @@
                                     <div class="card-body p-3">
                                         <h3 class="article-title" style="font-size:1.1rem">
                                             <a href="{% url 'quiz_single' slug=quiz.slug %}"
-                                               class="article-link">{{ quiz.title }}</a>
+                                               class="quiz-link">{{ quiz.title }}</a>
                                         </h3>
                                         <p class="font-sm mb-1">{{ quiz.excerpt }}</p>
                                         <p class="mt-3 mb-0">

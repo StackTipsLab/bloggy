@@ -1,39 +1,37 @@
 {% load static %}
+{% load custom_widgets %}
+{% load define_action %}
 {% spaceless %}
-    {% load custom_widgets %}
-    {% load define_action %}
-
-    <div data-cid="{{ article.id }}" data-type="article" style="position:relative;">
+    <div data-cid="{{ post.id }}" data-type="article" style="position:relative;">
         <div class="d-flex align-items-center d-flex">
             <div class="flex-grow-1 me-3">
                 <div class="archive-meta">
                     <small class="d-inline-block text-muted text-uppercase fw-bold" style="font-size:0.7rem">
-                        {% pretty_date article.updated_date %}
+                        {% pretty_date post.updated_date %}
                     </small>
                 </div>
 
-                <h3 class="font-sm fw-500 mb-2" >
-                    <a href="{% url 'article_single' slug=article.slug %}" class="article-link">{{ article.title }}</a>
+                <h3 class="font-sm fw-500 mb-2">
+                    <a href="{% url 'post_single' slug=post.slug %}" class="article-link">{{ post.title }}</a>
                 </h3>
             </div>
 
-
-{#            {% if article.video_id %}#}
-{#                <div class="flex-shrink-0">#}
-{#                    <div class="mini-thumbnail">#}
-{#                        <img loading="lazy"#}
-{#                             src="https://img.youtube.com/vi/{{ article.video_id }}/maxresdefault.jpg"#}
-{#                             class="img-fluid img-rounded">#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% elif article.thumbnail %}#}
-{#                <div class="flex-shrink-0">#}
-{#                    <div class="mini-thumbnail">#}
-{#                        <img loading="lazy" src="{{ article.thumbnail.url }}"#}
-{#                             class="img-fluid img-rounded">#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% endif %}#}
+            {% if post.video_id %}
+                <div class="flex-shrink-0">
+                    <div class="mini-thumbnail">
+                        <img loading="lazy"
+                             src="https://img.youtube.com/vi/{{ post.video_id }}/maxresdefault.jpg"
+                             class="img-fluid img-rounded">
+                    </div>
+                </div>
+            {% elif post.thumbnail %}
+                <div class="flex-shrink-0">
+                    <div class="mini-thumbnail">
+                        <img loading="lazy" src="{{ post.thumbnail.url }}"
+                             class="img-fluid img-rounded">
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endspaceless %}

@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ClearableFileInput
-from bloggy.models import MyUser
+
+from bloggy.models import User
 
 
 class NonClearableFileInput(ClearableFileInput):
@@ -9,7 +10,7 @@ class NonClearableFileInput(ClearableFileInput):
 
 class EditProfileForm(forms.ModelForm):
     class Meta:
-        model = MyUser
+        model = User
         fields = [
             'profile_photo',
             'name',
@@ -22,14 +23,42 @@ class EditProfileForm(forms.ModelForm):
         ]
 
         widgets = {
-            'profile_photo': NonClearableFileInput(attrs={'class': 'form-control-file'}),
-            'name': forms.TextInput(
-                attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Enter first name'}),
-            'bio': forms.Textarea(attrs={'class': 'form-control', 'rows': 3, 'placeholder': "About you"}),
-            'website': forms.TextInput(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your website'}),
-            'twitter': forms.TextInput(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your twitter'}),
-            'linkedin': forms.TextInput(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your linkedin'}),
-            'youtube': forms.TextInput(
-                attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your youtube channel link'}),
-            'github': forms.TextInput(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your github'}),
+            'profile_photo': NonClearableFileInput(attrs={
+                'class': 'form-control-file'
+            }),
+            'name': forms.TextInput(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Enter first name'
+            }),
+            'bio': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 3,
+                'placeholder': "About you"
+            }),
+            'website': forms.TextInput(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Your website'
+            }),
+            'twitter': forms.TextInput(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Your twitter'
+            }),
+            'linkedin': forms.TextInput(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Your linkedin'
+            }),
+            'youtube': forms.TextInput(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Your youtube channel link'
+            }),
+            'github': forms.TextInput(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Your github'
+            }),
         }

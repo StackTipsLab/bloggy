@@ -1,0 +1,3 @@
+password,username,email,name,is_staff,is_active,website,twitter,linkedin,youtube,github,bio
+admin@123,admin,admin@stacktips.com,Nilan,1,1,http://example.com,https://twitter.com/stacktips,https://www.linkedin.com/groups/5008366/,NULL,https://github.com/StackTipsLab,A perfectly crafted blog that developers love.
+admin@123,john.doe,john.doe@example.com,John Doe,0,1,http://example.com,https://twitter.com/stacktips,https://www.linkedin.com/groups/5008366/,NULL,https://github.com/StackTipsLab,A perfectly crafted blog that developers love.

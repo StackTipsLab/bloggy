@@ -1,13 +1,15 @@
 import re
+from datetime import datetime, timezone
 from urllib.parse import urlparse
+
 from django import template
+from django.conf import settings
 from django.utils.safestring import mark_safe
 from numerize.numerize import numerize
-from bloggy.models import Article, Votes, Bookmarks, Category, Option
-from django.conf import settings
+
+from bloggy.models import Vote, Bookmark, Post, Category, Option
 
 register = template.Library()
-from datetime import datetime
 
 
 @register.simple_tag
@@ -33,7 +35,7 @@ def sanitize_url(url):
         return url
 
     if not re.match('(?:http|https)://', url):
-        return 'https://{}'.format(url)
+        return f'https://{url}'
     return url
 
 
@@ -57,14 +59,14 @@ def format_number(num):
 @register.simple_tag
 def check_if_user_bookmarked(post_id, post_type, user):
     if user.is_authenticated:
-        return Bookmarks.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
+        return Bookmark.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
     return 0
 
 
 @register.simple_tag
 def check_if_user_voted(post_id, post_type, user):
     if user.is_authenticated:
-        return Votes.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
+        return Vote.objects.filter(post_id=post_id, post_type=post_type, user=user).count()
     return 0
 
 
@@ -75,130 +77,123 @@ def get_domain(website):
 
 
 @register.simple_tag
-def get_twitter_username(twitterUrl):
+def get_twitter_username(twitter_url):
     regex = r"^https?:\/\/(?:www\.)?twitter\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$"
-    result = re.findall(regex, twitterUrl)
+    result = re.findall(regex, twitter_url)
     if result:
         return result[0]
-    return twitterUrl
+    return twitter_url
 
 
 @register.simple_tag
-def get_github_username(githubUrl):
+def get_github_username(github_url):
     regex = r"^https?:\/\/(?:www\.)?github\.com\/(?:#!\/)?@?([^/?#]*)(?:[?#].*)?$"
-    result = re.findall(regex, githubUrl)
+    result = re.findall(regex, github_url)
     if result:
         return result[0]
-    return githubUrl
+    return github_url
 
 
 @register.simple_tag
-def format_date(dt=False, format='%Y-%m-%d %H:%M:%S'):
+def format_date(dt=False, date_format='%Y-%m-%d %H:%M:%S'):
     if dt is None:
         return ""
-    return datetime.today().strftime(format)
+    return datetime.today().strftime(date_format)
 
 
 @register.simple_tag
-def pretty_date(dt=False):
+def pretty_date(dt=None):
+    """
+       Get a datetime object or a int() Epoch timestamp and return a
+       pretty string like 'an hour ago', 'Yesterday', '3 months ago',
+       'just now', etc
+       """
     if dt is None:
         return ""
-    """
-    Get a datetime object or a int() Epoch timestamp and return a
-    pretty string like 'an hour ago', 'Yesterday', '3 months ago',
-    'just now', etc
-    """
-    time = dt.replace(tzinfo=None)
-    from datetime import datetime
-    now = datetime.now()
-    if type(time) is int:
-        diff = now - datetime.fromtimestamp(time)
-    elif isinstance(time, datetime):
-        diff = now - time
-    elif not time:
-        diff = 0
-    second_diff = diff.seconds
+
+    now = datetime.now(timezone.utc)
+    if isinstance(dt, int):
+        dt = datetime.fromtimestamp(dt)
+
+    diff = now - dt
+    seconds_diff = diff.total_seconds()
     day_diff = diff.days
 
     if day_diff < 0:
         return ''
 
-    if day_diff == 0:
-        if second_diff < 10:
-            return "just now"
-        if second_diff < 60:
-            return str(second_diff) + " seconds ago"
-        if second_diff < 120:
-            return "a minute ago"
-        if second_diff < 3600:
-            return str(second_diff // 60) + " minutes ago"
-        if second_diff < 7200:
-            return "an hour ago"
-        if second_diff < 86400:
-            return str(second_diff // 3600) + " hours ago"
+    if seconds_diff < 10:
+        return "just now"
+    if seconds_diff < 60:
+        return f"{int(seconds_diff)} seconds ago"
+    if seconds_diff < 3600:
+        minutes_diff = int(seconds_diff / 60)
+        return f"{minutes_diff} minute{'s' if minutes_diff > 1 else ''} ago"
+    if seconds_diff < 86400:
+        hours_diff = int(seconds_diff / 3600)
+        return f"{hours_diff} hour{'s' if hours_diff > 1 else ''} ago"
     if day_diff == 1:
         return "yesterday"
     if day_diff < 7:
-        return str(day_diff) + " days ago"
+        return f"{day_diff} day{'s' if day_diff > 1 else ''} ago"
     if day_diff < 31:
-        return str(day_diff // 7) + " weeks ago"
+        weeks_diff = int(day_diff / 7)
+        return f"{weeks_diff} week{'s' if weeks_diff > 1 else ''} ago"
     if day_diff < 365:
-        return str(day_diff // 30) + " months ago"
-    return str(day_diff // 365) + " years ago"
-    # return dt.strftime("%d %b, %Y")
+        months_diff = int(day_diff / 30)
+        return f"{months_diff} month{'s' if months_diff > 1 else ''} ago"
+    years_diff = int(day_diff / 365)
+    return f"{years_diff} year{'s' if years_diff > 1 else ''} ago"
 
 
-pass
+@register.inclusion_tag('widgets/related_posts.html', takes_context=True)
+def related_article_widget(context, count=12, categories=None, slug=None, widget_title="Related posts",
+                           widget_style="list"):
+    posts = None
+    if categories is None:
+        posts = Post.objects.filter(publish_status="LIVE").exclude(slug=slug).order_by('-published_date').distinct()[
+                :count]
+
+    category_slugs = []
+    if categories is not None:
+        for category in categories:
+            category_slugs.append(str(category.slug))
+
+    if len(category_slugs) > 0:
+        posts = Post.objects.filter(category__slug__in=category_slugs).filter(publish_status="LIVE").exclude(
+            slug=slug).order_by('-published_date').distinct()[:count].all()
+
+    return {
+        "widgetTitle": widget_title,
+        "relatedPosts": posts,
+        "widgetStyle": widget_style,
+    }
 
 
 @register.inclusion_tag('widgets/related_quiz_widget.html', takes_context=True)
-def related_quizzes_widget(context, limit=5, category=None, widgetTitle="Challenges", widgetStyle=None):
+def related_quizzes_widget(context, limit=5, category=None, widget_title="Challenges", widget_style=None):
+    from bloggy.models.quizzes import Quiz
     if category is None:
-        quizzes = Article.objects.filter(post_type="quiz")[:limit]
+        quizzes = Quiz.objects.all()[:limit]
     else:
-        quizzes = Article.objects.filter(post_type="quiz").filter(category=category).all()[:limit]
+        quizzes = Quiz.objects.filter(category=category).all()[:limit]
 
     return {
         'quizzes': quizzes,
-        "widgetTitle": widgetTitle,
-        "widgetStyle": widgetStyle,
+        "widget_style": widget_style,
+        "widget_title": widget_title,
     }
 
 
-@register.inclusion_tag('widgets/related_article_widget.html', takes_context=True)
-def related_article_widget(context, count=12, categories=None, slug=0, widgetTitle="Related posts", widgetStyle="list"):
-    articles = None
-    if categories is None:
-        articles = Article.objects.filter(publish_status="LIVE").filter(post_type="article") \
-                       .exclude(slug=slug).order_by('-published_date')[:count].all()
-        categories = []
-
-    category_slugs = []
-    for category in categories:
-        category_slugs.append(str(category.slug))
-
-    if len(category_slugs) > 0:
-        articles = Article.objects.filter(category__slug__in=category_slugs, publish_status="LIVE").filter(post_type="article") \
-                       .exclude(slug=slug).order_by('-published_date')[:count].all()
-
-    return {
-        "widgetTitle": widgetTitle,
-        "relatedArticles": articles,
-        "widgetStyle": widgetStyle,
-    }
-    pass
-
-
-@register.inclusion_tag('widgets/categories_widget.html', takes_context=True)
-def categories_widget(context, content_type="article", count=0, widgetStyle=""):
-    # if count > 0:
-    #     categories = Category.objects.filter(article_count__gt=0).order_by("-article_count")[:count].all()
-    # else:
-    categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
-
+@register.inclusion_tag('widgets/categories.html', takes_context=True)
+def categories_widget(context, content_type="post", count=10, widget_style=""):
+    if settings.SHOW_EMTPY_CATEGORIES:
+        categories = Category.objects.order_by("-article_count").all()[:count]
+    else:
+        categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()[:count]
     return {
         "categories": categories,
-        "widgetStyle": widgetStyle,
+        "widgetStyle": widget_style,
         "contentType": content_type
     }
 
@@ -218,8 +213,7 @@ def replace_all(pattern, repl, string) -> str:
 @register.filter
 def highlight_search(text, search):
     highlighted = text.replace(
-        search, '<span class="highlight">{}</span>'.format(search))
-    # highlighted = re.sub('(?i)' + re.escape('<span class="highlight">{}</span>'.format(search)), lambda m: search, text)
+        search, f'<span class="highlight">{search}</span>')
     return mark_safe(highlighted)
 
 

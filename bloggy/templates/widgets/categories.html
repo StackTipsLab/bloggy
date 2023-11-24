@@ -1,0 +1,24 @@
+{% load static %}
+{% if categories %}
+    {% if widgetStyle == "home" %}
+        <div class="category__items">
+            <ul class="p-0">
+                {% for category in categories %}
+                    <li>
+                        <a href="{% url 'categories_single' slug=category.slug %}" class="text-decoration-none text-reset">{{ category.title }}
+                            <img src="{% if category.thumbnail %} {{ category.thumbnail.url }} {% endif %}"
+                                 height="32px" width="32px" alt="">
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <ul class="tags-list {{ widgetStyle }} d-none d-lg-block d-xl-block">
+            {% for category in categories %}
+                <li><a href="{% url 'categories_single' slug=category.slug %}">#{{ category.slug }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}

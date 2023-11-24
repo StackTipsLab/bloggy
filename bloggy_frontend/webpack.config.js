@@ -14,7 +14,7 @@ const config = {
 
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, "../bloggify/static/dist")
+        path: path.resolve(__dirname, "../bloggy/static/dist")
     },
     plugins: [
         new MiniCssExtractPlugin({
@@ -28,7 +28,6 @@ const config = {
         new CopyPlugin({
             patterns: [
                 {from: "assets", to: "../media"},
-                {from: "js/json", to: "../json"},
             ],
         }),
     ],
@@ -38,7 +37,6 @@ const config = {
                 test: /\.s[ac]ss$/,
                 exclude: /node_modules/,
                 use: [
-                    // MiniCssExtractPlugin.loader,
                     "style-loader",
                     "css-loader",
                     "sass-loader",

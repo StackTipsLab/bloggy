@@ -19,20 +19,17 @@
 
             <div class="collapse navbar-collapse align-content-around" id="navbarNavAltMarkup">
                 <ul class="navbar-nav flex-shrink-0">
-                    {#                    <li class="nav-item">#}
-                    {#                        <a class="nav-link {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"#}
-                    {#                           href="{% url 'categories' %}">Topics</a>#}
-                    {#                    </li>#}
-
-
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"
+                           href="{% url 'categories' %}">Topics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.url_name == 'posts' %} active{% endif %}"
+                           href="{% url 'posts' %}">Articles</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'courses' %} active{% endif %}"
                            href="{% url 'courses' %}">Courses</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'articles' %} active{% endif %}"
-                           href="{% url 'articles' %}">Articles</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.resolver_match.url_name == 'quizzes' %} active{% endif %}"
@@ -49,7 +46,7 @@
                     </form>
                 </div>
             </div>
-
+        
             <div class="theme-switcher flex-shrink-0 d-none d-md-block">
                 {% include 'partials/theme_switch.html' %}
             </div>
@@ -67,10 +64,9 @@
                                 <p class="menu-heading font-xs pt-2">{% if user.name %}Hello,
                                     {{ user.name }}{% else %}My Account{% endif %}</p>
                                 <a class="dropdown-item" href="{% url 'profile.edit_profile' %}">Edit profile</a>
-                                <a class="dropdown-item" href="{% url 'profile.dashboard' %}">My Posts</a>
                                 <a class="dropdown-item" href="{% url 'profile.bookmarks' %}">Bookmarks</a>
                                 {% if user.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin dashboard</a>
+                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>
                                 {% endif %}
                                 <hr>
                                 <a class="dropdown-item text-danger"
@@ -101,6 +97,5 @@
 
         </div>
     </nav>
-
 {% endspaceless %}
 

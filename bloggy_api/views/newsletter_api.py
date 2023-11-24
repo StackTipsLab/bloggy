@@ -28,25 +28,30 @@ class SubscriberSerializer(ModelSerializer):
 class NewsletterApi(viewsets.ViewSet):
 
     def subscribe(self, request):
-        jsonBody = request.data
+        json_body = request.data
         try:
             token = token_service.generate_verification_code()
             subscriber = Subscribers.objects.create(
-                email=jsonBody.get('email'),
-                name=jsonBody.get('name'),
+                email=json_body.get('email'),
+                name=json_body.get('name'),
                 created_date=timezone.now(),
                 confirmation_code=token,
                 confirmed=False,
             )
             send_newsletter_verification_token(request, subscriber.email, subscriber.id, token)
         except IntegrityError:
-            return HttpResponse(status=208,
-                                content=json.dumps({"error": "Already subscribed"}),
-                                content_type="application/json")
-        return HttpResponse(json.dumps({"result": "successful"}), content_type="application/json")
+            return HttpResponse(
+                status=208,
+                content=json.dumps({"error": "Already subscribed"}),
+                content_type="application/json"
+            )
+        return HttpResponse(
+            json.dumps({"result": "successful"}),
+            content_type="application/json"
+        )
 
     def confirm(self, request, subscriber_id, token):
-        subscriber = Subscribers.objects.filter(id=subscriber_id).filter(confirmation_code=token).first()
+        subscriber = (Subscribers.objects.filter(id=subscriber_id).filter(confirmation_code=token).first())
         if subscriber is None:
             messages.error(request, "The verification link is expired or malformed.")
         elif subscriber.confirmed:
@@ -56,6 +61,7 @@ class NewsletterApi(viewsets.ViewSet):
             subscriber.confirmation_code = None
             subscriber.save()
             messages.success(request,
-                             "Thank you for verifying your emai. Now we will send you weekly tutorials, and (exclusive) freebies directly to your inbox.")
+                             "Thank you for verifying your email.  "
+                             "Now we will send you weekly tutorials, and (exclusive) freebies directly to your inbox.")
 
         return redirect("index")

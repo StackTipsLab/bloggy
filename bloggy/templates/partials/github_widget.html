@@ -1,0 +1,19 @@
+{% load static %}
+{% load custom_widgets %}
+{% spaceless %}
+    {% if githubLink %}
+        <div class="card card-rounded bg-dark mb-4" style="z-index:1">
+            <img src="{% static 'media/github-bg.png' %}" alt=""
+                 class="position-absolute top-0 left-0 width-full"
+                 style="pointer-events: none; z-index: -1; height: 100%; width: 100%; object-fit: cover">
+            <div class="p-2 p-lg-3">
+                <h3 class="card-title fw-500 text-light">
+                    <i class="fa-brands fa-github"></i>&nbsp;&nbsp;Checkout source code</h3>
+                <p class="body-bg card-text font-sm">Checkout the complete source code from our GitHub repo.</p>
+                <a class="btn btn-outline-light w-100" href="{{ githubLink }}" target="_blank">
+                    <i class="fa-sharp fa-solid fa-download fa-fade"></i>
+                    Download project</a>
+            </div>
+        </div>
+    {% endif %}
+{% endspaceless %}

@@ -59,7 +59,7 @@
   </div>
 </template>
 <script>
-import QuizState from "../enums/QuizState";
+import QuizState from "./QuizState";
 
 export default {
   name: 'quiz-summary-page',
@@ -96,12 +96,7 @@ export default {
           } else {
             inCorrectAnswersCount++
           }
-          // console.log("Question", question);
-          // console.log("User answer", userAnswer);
         }
-
-        // console.log("Correct answers count", correctAnswersCount);
-        // console.log("Incorrect answers count", inCorrectAnswersCount);
 
         return {
           "correctAnswersCount": correctAnswersCount,

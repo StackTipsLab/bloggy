@@ -1,8 +1,9 @@
+from urllib.parse import quote
+
 from django import http
 from django import urls
 from django.conf import settings
 from django.utils.deprecation import MiddlewareMixin
-from urllib.parse import quote
 
 
 class AppendOrRemoveSlashMiddleware(MiddlewareMixin):
@@ -57,7 +58,7 @@ class AppendOrRemoveSlashMiddleware(MiddlewareMixin):
 
 def generate_url(request, path):
     if request.get_host():
-        new_url = "%s://%s%s" % (request.is_secure() and 'https' or 'http', request.get_host(), quote(path))
+        new_url = f"{request.is_secure() and 'https' or 'http'}://{request.get_host()}{quote(path)}"
     else:
         new_url = quote(path)
     if request.GET:

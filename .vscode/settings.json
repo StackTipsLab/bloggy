@@ -1,0 +1,10 @@
+{
+    "editor.wordWrapColumn": 120,
+    "python.analysis.typeCheckingMode": "basic",
+    "python.formatting.provider": "autopep8",
+    "editor.formatOnSave": false,
+    "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    // "editor.fontFamily": "Dank Mono, JetBrains Mono NL, Fira Code, Menlo, Monaco, 'Courier New', monospace",
+    // "editor.fontSize": 14,
+}

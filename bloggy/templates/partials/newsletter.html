@@ -1,22 +1,24 @@
-<div class="card  mb-3 p-3 p-lg-4 newsletter-form-container">
-    <h3 class="h4">Join the list</h3>
-    <small class="mb-0">Sign up for weekly tutorials, and (exclusive) freebies directly in your inbox.</small>
-    <form id="subscription-form">
-        <div class="my-3">
-            <input type="email" class="form-control" id="email" placeholder="hello@example.com"
-                   aria-describedby="emailValidationFeedback" required>
-            <div id="emailValidationFeedback" class="font-xs invalid-feedback">
-                Please enter a valid email address.
+{% if user.is_authenticated == False %}
+    <div class="card  mb-4 p-2 p-lg-3 newsletter-form-container">
+        <h3 class="h4">Join the list</h3>
+        <small class="mb-0">Sign up for weekly tutorials, and (exclusive) freebies directly in your inbox.</small>
+        <form id="subscription-form">
+            <div class="my-3">
+                <input type="email" class="form-control" id="email" placeholder="hello@example.com"
+                       aria-describedby="emailValidationFeedback" required>
+                <div id="emailValidationFeedback" class="font-xs invalid-feedback">
+                    Please enter a valid email address.
+                </div>
             </div>
-        </div>
-        <div class="my-3">
-            <input type="text" class="form-control" id="name" placeholder="Your name"
-                   aria-describedby="nameValidationFeedback" required>
-            <div id="nameValidationFeedback" class="font-xs invalid-feedback">
-                Please enter your name.
+            <div class="my-3">
+                <input type="text" class="form-control" id="name" placeholder="Your name"
+                       aria-describedby="nameValidationFeedback" required>
+                <div id="nameValidationFeedback" class="font-xs invalid-feedback">
+                    Please enter your name.
+                </div>
             </div>
-        </div>
-        <button type="submit" class="btn w-100 btn-primary">Subscribe</button>
-    </form>
-    <small class="mt-2  font-xs">Great content, no spam, easy unsubscribe</small>
-</div>
+            <button type="submit" class="btn w-100 btn-primary">Subscribe</button>
+        </form>
+        <small class="mt-2  font-xs">Great content, no spam, easy unsubscribe</small>
+    </div>
+{% endif %}

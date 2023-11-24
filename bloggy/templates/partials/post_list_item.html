@@ -1,0 +1,67 @@
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    {% load define_action %}
+
+    <div class="feed-card {{ cssClass }} feed-card-{{ post.post_type }} post-list-item" data-cid="{{ post.id }}"
+         data-type="{{ post.post_type }}">
+        <div class="d-flex align-items-center d-flex">
+            <div class="flex-shrink-0">
+                {% if post.thumbnail %}
+                    <div class="archive-media-object">
+                        <img loading="lazy" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+                    </div>
+                {% else %}
+                    {% define post.category.first as category %}
+                    <div class="archive-media-object {{ post.post_type }}-object">
+                        {% if category.thumbnail %}
+                            <img loading="lazy" src="{{ category.thumbnail.url }}" style="object-fit: contain;padding: 1rem">
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="flex-grow-1 ms-3">
+                <div class="archive-meta">
+                    <small class="d-inline-block text-muted text-uppercase fw-bold"
+                           style="font-size:0.7rem">
+                        {% pretty_date post.updated_date %}
+                    </small>
+                    <span class="eyebrow__spacer">·</span>
+                    {% for category in post.category.all %}
+                        <a class="text-decoration-none text-reset link-primary fw-bold"
+                           style="z-index:999;position:relative"
+                           href="{% url 'categories_single' slug=category.slug %}">
+                            <small class="d-inline-block mb-1 text-primary text-uppercase fw-bold"
+                                   style="font-size:0.7rem;">{{ category.title }}</small>
+                            {% if forloop.last != True %}<span class="text-muted">,</span>{% endif %}
+                        </a>
+                    {% endfor %}
+
+                </div>
+
+                <h3 class="fw-500 mb-2">
+                    {% if post.post_type == 'lesson' %}
+                        <a href="{% url 'lesson_single' course=post.course.slug slug=post.slug %}"
+                           class="post-link">{{ post.title }}</a>
+                    {% else %}
+                        <a href="{% url 'post_single' slug=post.slug %}" class="post-link">{{ post.title }}</a>
+                    {% endif %}
+                </h3>
+
+                <div class="archive-meta">
+                    {% if post.difficulty %}
+                        <span class="badge-meta-pill {{ post.difficulty }}">{{ post.difficulty | capfirst }}</span>
+                    {% endif %}
+
+                    {% if post.post_type %}
+                        <span class="badge-meta-pill {{ post.post_type }}">{{ post.post_type | capfirst }}</span>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endspaceless %}

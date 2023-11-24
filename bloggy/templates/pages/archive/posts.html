@@ -1,0 +1,41 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    {% block content %}
+        <div class="container">
+            {% include "partials/category_archive_banner.html" with category=selected_category %}
+            <div class="row">
+                <main id="main-content" class="col-12 col-lg-9 py-3 py-lg-4">
+
+                    <div class="d-flex bd-highlight">
+                        {% categories_widget count=99 content_type="post" widget_style="list" %}
+                        <div class="flex-grow-1">
+                            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-1 latest-feed-container">
+                                 {% if posts|length <= 0 %}
+                                    <p class="lead my-3 text-muted">No contents found!</p>
+                                 {% endif %}
+
+                                {% for post in posts %}
+                                    <div class="col mb-3">
+                                        {% include "partials/post_list_item.html" with post=post cssClass="card-rounded" %}
+                                    </div>
+                                    {% if forloop.counter == 3 %}
+                                        {% include "partials/course_row_grid.html" with courses=courses %}
+                                    {% endif %}
+
+                                {% endfor %}
+                                {% include "partials/paging.html" with posts=posts %}
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <aside id="sidebar-right" class="flex-filled col-md-3">
+                    <div class="sidebar-content sticky-top" style="z-index: 99">
+                        {% include 'partials/newsletter.html' %}
+                    </div>
+                </aside>
+            </div>
+        </div>
+    {% endblock content %}
+{% endspaceless %}

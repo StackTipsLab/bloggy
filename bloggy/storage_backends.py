@@ -8,13 +8,10 @@ class StaticStorage(FileSystemStorage):
 
 
 class PublicMediaStorage(S3Boto3Storage):
+
     location = 'media'
     default_acl = 'public-read'
     file_overwrite = False
-    # security_token = None
-
-    # def _get_security_token(self):
-    #     return None
 
 
 class PrivateMediaStorage(S3Boto3Storage):

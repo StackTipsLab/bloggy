@@ -1,7 +1,7 @@
 {% extends "base-with-header-footer.html" %}
 {% load static %}
 {% load custom_widgets %}
-{#{% block base_css_class %}bg-light{% endblock base_css_class %}#}
+{% block base_css_class %}bg-light{% endblock base_css_class %}
 {% block content %}
     <section>
         <div class="container mt-5">
@@ -11,15 +11,15 @@
                 </div>
 
                 <div class="col-lg-9">
-                    {% if articles %}
+                    {% if posts %}
                         <div class="bg-white padding-medium">
                             <h1 class="display-3 fw-600 pb-2">My articles</h1>
 
-                            {% for article in articles %}
-                                {% include 'partials/article_row_list.html' with article=article %}
+                            {% for post in posts %}
+                                {% include 'partials/article_row_list.html' with posts=posts %}
                             {% endfor %}
 
-                            {% include 'partials/paging.html' with posts=articles %}
+                            {% include 'partials/paging.html' with posts=posts %}
                         </div>
                     {% endif %}
                 </div>

@@ -1,8 +1,9 @@
 from rest_framework import serializers
 
-from bloggy.models import Article, MyUser, Category
+from bloggy.models import Post, User, Category
 from bloggy.models.comment import Comment
 from bloggy.models.course import Course
+from bloggy.models.quizzes import Quiz
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -26,7 +27,7 @@ class AuthorSerializer(serializers.ModelSerializer):
     full_name = serializers.SerializerMethodField('get_full_name')
 
     class Meta:
-        model = MyUser
+        model = User
         fields = (
             'name',
             'username',
@@ -50,7 +51,7 @@ class UserSerializer(serializers.ModelSerializer):
     bio = serializers.CharField()
 
     class Meta:
-        model = MyUser
+        model = User
         fields = [
             'name',
             'email',
@@ -89,7 +90,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     course = CourseSerializer(many=False, read_only=True)
 
     class Meta:
-        model = Article
+        model = Post
         fields = [
             'id',
             'title',
@@ -105,28 +106,6 @@ class ArticleSerializer(serializers.ModelSerializer):
             'display_order',
             'published_date',
             'course',
-        ]
-
-
-class QuizSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Article
-        fields = [
-            'id',
-            'title',
-            # 'quizquestion_set',
-            'excerpt',
-            'content',
-            'duration',
-            'difficulty',
-            'is_featured',
-            'post_type',
-            # 'thumbnail',
-            # 'category',
-            'display_order',
-            'updated_date',
-            'published_date',
-            'slug',
         ]
 
 
@@ -154,4 +133,25 @@ class CommentSerializer(serializers.ModelSerializer):
             'comment_date',
             'active',
             'reply_set'
+        ]
+
+
+class QuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = [
+            'id',
+            'title',
+            'question_set',
+            'excerpt',
+            'content',
+            'duration',
+            'difficulty',
+            'is_featured',
+            'thumbnail',
+            'category',
+            'display_order',
+            'updated_date',
+            'published_date',
+            'slug',
         ]

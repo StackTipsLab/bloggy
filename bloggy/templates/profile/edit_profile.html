@@ -10,8 +10,8 @@
             </div>
 
             <div class="col-lg-9">
-                <div class="bg-white padding-medium">
-                    <h1 class="display-3 fw-600 pb-2">Update profile</h1>
+                <div class="">
+                    <h1 class="display-3 fw-600 pb-2 px-3">Update profile</h1>
                     {% if user_form.errors %}
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <div id="form_errors">
@@ -35,16 +35,13 @@
                         {% endfor %}
 
                         {% for field in form.visible_fields %}
-                            <div class="form-group {% if field.name == 'profile_photo' or field.name == 'bio' %} col-md-12 {% else %} col-md-6 {% endif %} my-2"
-                                 style="padding: 0 1rem !important;">
+                            <div class="form-group col-md-8 my-2" style="padding: 0 1rem !important;">
                                 {% if field.name == "profile_photo" %}
                                 {% else %}
                                     <label for="{{ field.name }}">{{ field.label_tag }}</label>
                                 {% endif %}
-
                                 <small class="errors "> {{ field.errors }}</small>
                                 {{ field }}
-
                                 <small id="emailHelp" class="form-text text-muted">{{ field.help_text }}</small>
                                 {% if field.name == "profile_photo" %}
                                 {% endif %}

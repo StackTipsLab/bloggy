@@ -1,0 +1,99 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% spaceless %}
+    {% load custom_widgets %}
+    {% load define_action %}
+    {% block jsonld %}
+        {% include "seo/course_jsonld.html" %}
+    {% endblock jsonld %}
+    {% block content %}
+        <section class="article-breadcrumb d-none d-md-block mb-4 d-print-none">
+            <div class="container">
+                <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'index' %}">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'courses' %}">Courses</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <span>{{ course.title }}</span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <div class="container">
+            {% with lessons_list=course.get_lessons.all %}
+                <div class="row">
+
+                    <main id="main-content" class="hero col-12 col-md-8 col-lg-8 col-print-12 pe-lg-2">
+                        <div class="article-details-card ms-md-3 mb-4 lessons_listl">
+
+
+                            <div class="padding-medium relative pb-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h1 class="post-title display-2 fw-600 mt-0 mb-2">{{ course.title }}</h1>
+                                        <p class="lead fw-500 pt-0 mb-2">{{ course.excerpt }}</p>
+                                        <p class="text-muted my-2">
+                                            <small class="text-muted text-uppercase fw-bold"
+                                                   style="font-size:0.7rem">
+                                                {{ lessons_list.count }} Lessons
+                                            </small>
+                                            <span class="meta-seperator"></span>
+                                        {% with course.category as category %}
+                                            <a class="text-decoration-none text-reset link-primary fw-bold"
+                                               style="z-index:999;position:relative"
+                                               href="{% url 'categories_single' slug=category.slug %}">
+                                                <small class="d-inline-block mb-1 text-primary text-uppercase fw-bold"
+                                                       style="font-size:0.7rem;">{{ category.title }}</small>
+                                            </a>
+                                            {% endwith %}
+                                            <span class="meta-seperator"></span>
+
+                                            {% if course.difficulty %}
+                                                <span class="badge-meta-pill {{ course.difficulty }}">{{ course.difficulty | capfirst }} Level</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="padding-medium relative pt-2">
+                                {{ course.description |safe }}
+
+                                <div class="container overflow-hidden">
+                                    <div class="row grid">
+
+                                        <div class="timeline-container p-4 mt-4">
+                                            <div class="wrapper">
+                                                <ul class="sessions ">
+                                                    {% for lesson in course.get_lessons %}
+                                                        {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
+                                                        <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
+                                                            <h3 class=""><a href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
+                                                               class="text-decoration-none h3 text-dark p-0 m-0 w-500">{{ lesson.title }}</a></h3>
+                                                            <p class="font-sm text-muted mb-3">{{ lesson.excerpt }}</p>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+
+                    <aside id="right-sidebar" class="col-12 col-md-3 col-lg-3 d-print-none">
+
+                    </aside>
+                </div>
+            {% endwith %}
+        </div>
+    {% endblock content %}
+{% endspaceless %}

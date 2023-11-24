@@ -29,10 +29,6 @@ SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
-
-# enable special cases like tag manager enabled in dev mode. Used to override the default DEBUG behaviour
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
-
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1, localhost").split(",")
 INTERNAL_IPS = ['127.0.0.1']
 
@@ -71,7 +67,6 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'bloggy.middleware.wp_redirect.OldUrlRedirectMiddleware',  # redirect for old wp site urls
     'bloggy.middleware.slash_middleware.AppendOrRemoveSlashMiddleware',  # Remove slash from url
 
     # Cache
@@ -86,9 +81,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # Social login
-    'social_django.middleware.SocialAuthExceptionMiddleware',
+    # 'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'bloggy.middleware.page_not_found.PageNotFoundMiddleware',  # new articles mismatch url redirect
+    'bloggy.middleware.redirect.RedirectMiddleware',  # new articles mismatch url redirect
 ]
 
 ROOT_URLCONF = 'bloggy.urls'
@@ -108,8 +103,8 @@ TEMPLATES = [
                 'bloggy.context_processors.app_settings',
 
                 # Social login
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
+                # 'social_django.context_processors.backends',
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -180,19 +175,17 @@ if USE_SPACES:
     STATIC_URL = f'{os.getenv("ASSETS_DOMAIN")}/static/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-    MEDIA_URL = f'/media/'
+    MEDIA_URL = '/media/'
     DEFAULT_FILE_STORAGE = 'bloggy.storage_backends.PublicMediaStorage'
     # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     PRIVATE_MEDIA_LOCATION = 'private'
     PRIVATE_FILE_STORAGE = 'bloggy.storage_backends.PrivateMediaStorage'
-
     AWS_S3_CUSTOM_DOMAIN = 'media.stacktips.com'
-
 
 else:
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'bloggy/')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'bloggy/static')
 
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -207,7 +200,7 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-AUTH_USER_MODEL = 'bloggy.MyUser'
+AUTH_USER_MODEL = 'bloggy.User'
 AUTH_USER_DEFAULT_GROUP = 'bloggy-members'
 
 SUMMERNOTE_THEME = 'bs4'
@@ -263,16 +256,11 @@ SUMMERNOTE_CONFIG = {
 
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
-SITE_TITLE = "StackTips"
-SITE_DESCRIPTION = "Free programming tutorials, how-to guides, code snippets on various tech subjects"
-SITE_LOGO = "https://media.stacktips.com/static/media/logo.png"
-
-# Social login
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.github.GithubOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-)
+SITE_TITLE = os.getenv("SITE_TITLE", "Bloggy")
+SITE_TAGLINE = os.getenv("SITE_TAGLINE", "A perfectly crafted blog that developers love.")
+SITE_DESCRIPTION = os.getenv("SITE_DESCRIPTION")
+SITE_LOGO = os.getenv("SITE_LOGO")
+ASSETS_DOMAIN = os.getenv("ASSETS_DOMAIN")
 
 GOOGLE_RECAPTHCA_SECRET_KEY = os.getenv('GOOGLE_RECAPTHCA_SECRET_KEY')
 GOOGLE_RECAPTHCA_TOKEN_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify'
@@ -286,7 +274,6 @@ REST_FRAMEWORK = {
 
     'EXCEPTION_HANDLER': 'rest_framework.views.exception_handler',
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ]
 }
@@ -295,19 +282,11 @@ REST_FRAMEWORK = {
 CACHE_TTL = 60 * 15
 CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
 CACHE_MIDDLEWARE_SECONDS = CACHE_TTL  # number of seconds to cache a page for (TTL)
-CACHE_MIDDLEWARE_KEY_PREFIX = ''  # should be used if the cache is shared across multiple sites that use the same Django instance
+CACHE_MIDDLEWARE_KEY_PREFIX = ''  # should be used if the cache is shared across multiple sites that use the same
 
-if DEBUG:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }, 'redis': {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': 'redis://127.0.0.1:6379',
-            "KEY_PREFIX": "bloggy"
-        },
-    }
-else:
+
+ENABLE_CACHING = os.getenv("ENABLE_CACHING", "False") == "True"
+if ENABLE_CACHING:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.PyLibMCCache',
@@ -322,8 +301,12 @@ else:
             },
         }
     }
-
-ASSETS_DOMAIN = os.getenv("ASSETS_DOMAIN", "https://media.stacktips.com")
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        }
+    }
 
 # Django HitCount
 HITCOUNT_KEEP_HIT_ACTIVE = {'days': 0}
@@ -334,9 +317,9 @@ HITCOUNT_HITS_PER_IP_LIMIT = 0
 SHORTCODES_YOUTUBE_JQUERY = False
 
 # SEO related
-PING_INDEX_NOW_POST_UPDATE = os.getenv("PING_INDEX_NOW_POST_UPDATE", True)
-PING_GOOGLE_POST_UPDATE = os.getenv("PING_GOOGLE_POST_UPDATE", True)
-INDEX_NOW_API_KEY = os.getenv("INDEX_NOW_API_KEY", "220764bdee4b4ff297c588217aaaafa3")
+PING_INDEX_NOW_POST_UPDATE = os.getenv("PING_INDEX_NOW_POST_UPDATE", "True")
+PING_GOOGLE_POST_UPDATE = os.getenv("PING_GOOGLE_POST_UPDATE", "True")
+INDEX_NOW_API_KEY = os.getenv("INDEX_NOW_API_KEY", )
 
 # Email configs
 EMAIL_BACKEND = os.getenv('EMAIL_BACKEND')
@@ -344,6 +327,42 @@ EMAIL_HOST = os.getenv('EMAIL_HOST')
 EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', True)
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'hello.stacktips@gmail.com')
-EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-mails'))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', "True")
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_FILE_PATH = os.getenv('EMAIL_FILE_PATH', os.path.join(BASE_DIR, 'test-emails'))
+
+# Read the POST_TYPE_CHOICES environment variable from the .env file
+POST_TYPE_CHOICES = os.getenv('POST_TYPE_CHOICES')
+SHOW_EMTPY_CATEGORIES = os.getenv("SHOW_EMTPY_CATEGORIES", "False") == "True"
+
+
+def get_post_types():
+    post_type = [choice.split(':') for choice in POST_TYPE_CHOICES.split(',')]
+    return list(post_type)
+
+
+# enable special cases like tag manager, google ads
+LOAD_GOOGLE_TAG_MANAGER = os.getenv("LOAD_GOOGLE_TAG_MANAGER", "False") == "True"
+LOAD_GOOGLE_ADS = os.getenv("LOAD_GOOGLE_ADS", "False") == "True"
+MY_ADS_TXT_CONTENT = os.getenv('MY_ADS_TXT_CONTENT')
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "DEBUG",
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        },
+    },
+}

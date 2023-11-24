@@ -1,3 +1,5 @@
+import random
+import string
 from datetime import timedelta
 
 from django.utils.timezone import now
@@ -19,10 +21,10 @@ def create_token(user, token_type):
         # return the existing token, if it is not expired
         if time_difference_in_minutes < TOKEN_VALIDITY:
             return token
-        else:
-            token.delete()
 
-    return VerificationToken.objects.create(user=user, token_type=token_type)
+        token.delete()
+
+    return VerificationToken.objects.create(user=user, token_type=token_type, token=generate_verification_code())
 
 
 def get_token(uuid, verification_token, token_type):
@@ -45,3 +47,10 @@ def is_token_expired(token):
 
 def delete_token_by_uuid(uuid):
     return VerificationToken.objects.filter(uuid=uuid).delete()
+
+
+def generate_verification_code():
+    # Generate a random 20-digit alphanumeric code similar to "JtM8t-MaV8y"
+    code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10)) + '-' + ''.join(
+        random.choices(string.ascii_uppercase + string.digits, k=10))
+    return code.lower()

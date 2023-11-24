@@ -1,0 +1,49 @@
+{
+  "/": {
+    "meta_title": "Interactive Quizzes",
+    "meta_description": "Elevate your coding skills with StackTips. Learn through articles, courses, and quizzes on StackTips",
+    "meta_keywords": "stacktips, stack tips, python course, java tutorials, spring tutorials, spring boot tutorials, maven course for beginners, practice quiz, aws practice quiz, aws practice test"
+  },
+  "/courses": {
+    "meta_title": "Courses",
+    "meta_description": "StackTips offers free Programming Courses to teach you the fundamentals of popular programming languages such as Java, Python, HTML, JavaScript and CSS",
+    "meta_keywords": "stacktips courses, stack tips courses, free courses, learn python for free, python course, maven for beginner, maven courses, maven basics course"
+  },
+  "/articles": {
+    "meta_title": "Tutorials",
+    "meta_description": "Learn from beginner basics to advanced tutorials on Java, Spring, Python, Android and Git.",
+    "meta_keywords": "stacktips tutorials, stack tips, free tutorials, java tutorials, spring tutorials, spring boot tutorials, django tutorials, python tutorials, git tutorials, maven tutorials, android tutorials"
+  },
+  "/topics": {
+    "meta_title": "Categories",
+    "meta_description": "Browse from collection of tutorials and courses organized by categories to make learning easy and accessible.",
+    "meta_keywords": "stacktips categories, stack tips topics, browse by topics, stacktips categories, tutorial categories, tutorial categories, all tutorials by category, android, django, python, django, spring, spring boot, git"
+  },
+  "/quizzes": {
+    "meta_title": "Interactive Quizzes",
+    "meta_description": "Use StackTips to test your coding skills and gauge your learning progress in a fun way",
+    "meta_keywords": "stacktips quizzes, stack tips quiz test, quizlzet, take a quiz, practice test, aws quiz, python test, advance python test, aws practitioner test, CLF-C01 AWS test, aws CLF-C01 quiz"
+  },
+  "/contact": {
+    "meta_title": "Get in touch",
+    "meta_description": "If you have any questions or have suggestions to improve the quality, let us know."
+  },
+  "/newsletter": {
+    "meta_title": "Newsletter",
+    "meta_description": "Get access to our fortnightly newsletter with articles, courses, and quizzes. You may unsubscribe at any time using the link in our newsletter."
+  },
+  "/login": {
+    "meta_title": "Login",
+    "meta_description": "To keep connected with us, please log in with your email address and account password",
+    "meta_keywords": "stacktips account, login to stacktips, join stacktips, your stack tips account, join for free, login, sign in, login stack tips, signin to stacktips.com, login to stacktips"
+  },
+  "/register": {
+    "meta_title": "Create your free account!",
+    "meta_description": "Register to get exclusive access to articles, live-demos, or courses, We aim to teach in the ways developers learn best",
+    "meta_keywords": "stacktips account, create free stacktips account, signup new account, free account, stack tips account free, join stacktips, stacktips free account, register free account, new account stack tips"
+  },
+  "/authors": {
+    "meta_title": "Our Authors @ StackTips",
+    "meta_description": "List of the authors on StackTips website."
+  }
+}

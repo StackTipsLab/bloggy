@@ -1,5 +1,5 @@
 <template>
-  <div class="form-check bloggify-form--label" :class="[
+  <div class="form-check quizlet-form--label" :class="[
                   { '--disabled': questionStatus === QuestionState.ANSWERED },
                   { '--wrong-answer': questionStatus === QuestionState.ANSWERED && checkboxAnswer.length && !correctAnswer.includes(answerOption.key) },
                   { '--correct-answer': questionStatus === QuestionState.ANSWERED && correctAnswer.includes(answerOption.key) }
@@ -36,8 +36,8 @@
   </div>
 </template>
 <script>
-import QuestionState from "../enums/QuestionState";
-import QuizState from "../enums/QuizState";
+import QuestionState from "./QuestionState";
+import QuizState from "./QuizState";
 
 export default {
   name: 'question-kind-multiple',

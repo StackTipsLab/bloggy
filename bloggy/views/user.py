@@ -1,6 +1,6 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
+from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.utils.html import strip_tags
 from django.views import View
@@ -10,9 +10,7 @@ from django.views.generic import DetailView, TemplateView
 from django.views.generic.detail import SingleObjectMixin
 
 from bloggy import settings
-from bloggy.models import MyUser
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-
+from bloggy.models import User
 from bloggy.services.post_service import DEFAULT_PAGE_SIZE
 
 
@@ -22,7 +20,7 @@ class AuthorsListView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        authors = MyUser.objects.filter(is_active=True).filter(is_staff=True).exclude(
+        authors = User.objects.filter(is_active=True).filter(is_staff=True).exclude(
             username__in=["siteadmin", "superadmin", "admin"]).all()
         context.update({
             "authors": authors
@@ -35,39 +33,34 @@ class PublicProfileView(SingleObjectMixin, View):
 
     def get_object(self, **kwargs):
         username = self.kwargs.get("username")
-        return get_object_or_404(MyUser, username=username)
+        return get_object_or_404(User, username=username)
 
     def get(self, request, *args, **kwargs):
         username = kwargs.get("username")
-        if username == "nilanchala":
-            return redirect(reverse('user_profile', kwargs={'username': "nilan"}))
-
         if username == 'siteadmin' or username == 'admin' or username == 'superadmin' or username == 'wp-admin':
             raise Http404
 
         self.object = self.get_object()
         context = self.get_context_data(object=self.object)
+        posts = self.object.posts.filter(publish_status="LIVE").order_by("-published_date")
 
-        # user = get_object_or_404(MyUser.objects.filter(is_active=True), username=username)
-        articles = self.object.articles.filter(publish_status="LIVE").order_by("-published_date")
-
-        paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
+        paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
         try:
-            articles = paginator.page(page)
+            posts = paginator.page(page)
         except PageNotAnInteger:
-            articles = paginator.page(1)
+            posts = paginator.page(1)
         except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
+            posts = paginator.page(paginator.num_pages)
 
-        context['seo_title'] = self.object.get_full_name()
-        description = "StackTips Author. {}. {}".format(self.object.get_full_name(), self.object.bio)
-        context['seo_description'] = strip_tags(description)
-        context['seo_image'] = self.object.get_avatar()
+        context['meta_title'] = self.object.get_full_name()
+        description = f"{settings.SITE_TITLE} Author. {self.object.get_full_name()}. {self.object.bio}"
+        context['meta_description'] = strip_tags(description)
+        context['meta_image'] = self.object.get_avatar()
 
         context.update({
-            'articles': articles,
-            'userProfile': self.object
+            'posts': posts,
+            'user': self.object
         })
 
         return render(request, self.template_name, context)
@@ -79,62 +72,32 @@ class MyProfileView(DetailView):
 
     def get_object(self, **kwargs):
         username = self.request.user  # self.kwargs.get("username")
-        return get_object_or_404(MyUser, username=username)
+        return get_object_or_404(User, username=username)
 
     def get_context_data(self, *args, **kwargs):
-        context = super(MyProfileView, self).get_context_data(*args, **kwargs)
+        context = super().get_context_data(*args, **kwargs)
         user = self.get_object()
-        logged_user = self.request.user
 
-        articles = user.articles.order_by("-published_date").filter(publish_status="LIVE")
-        paginator = Paginator(articles, DEFAULT_PAGE_SIZE)
+        posts = user.posts.order_by("-published_date").filter(publish_status="LIVE")
+        paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
         try:
-            articles = paginator.page(page)
+            posts = paginator.page(page)
         except PageNotAnInteger:
-            articles = paginator.page(1)
+            posts = paginator.page(1)
         except EmptyPage:
-            articles = paginator.page(paginator.num_pages)
+            posts = paginator.page(paginator.num_pages)
 
         context.update({
-            'articles': articles,
+            'posts': posts,
             'userProfile': user,
             'userType': "self",
         })
 
-        context['seo_title'] = "My Profile"
-        context['seo_description'] = "My profile. Access your profile, account settings My Profile. You need a StackTips account to sign in and view your profile."
+        context['meta_title'] = "My Profile"
+        context[
+            'meta_description'] = f'My profile. Access your {settings.SITE_TITLE} profile, account settings My Profile.'
         if user.profile_photo:
-            context['seo_image'] = "https://media.stacktips.com/static/media/logo.png"
+            context['meta_image'] = settings.SITE_LOGO
 
         return context
-
-# def add_follow(self, request):
-#     user = self.get_object()
-#     user.profile.followed_by.add(request.user.profile)
-# def get_context_data(self, *args, **kwargs):
-#     # //username = self.kwargs.get("username")
-#
-#
-#     # user = User.all().fi
-#
-#     profile = get_object_or_404(Profile, user_id=self.request.user.id)
-#     print(profile)
-#     context['profile'] = profile
-#     return context
-#
-# # def get_context_data(self, *args, **kwargs):
-# #     context = super(Profile, self).get_context_data(*args, **kwargs)
-# #     user = self.get_object()
-# #     context.update({
-# #         'startups': user.startups.all()  # .filter(created_date__lte=timezone.now()).order_by(' -created_date')
-# #     })
-# #     return context
-#
-# # def get_context_data(self, request, **kwargs):
-# #     user_form = UserForm(request.user)
-# #     profile_form = ProfileForm(request.user.profile)
-# #     context['user'] = request.user
-# #     context['user_form'] = user_form
-# #     context['profile_form'] = profile_form
-# #     return context

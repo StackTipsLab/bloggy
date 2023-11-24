@@ -16,6 +16,10 @@
                 </div>
             </div>
             <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3 mb-5">
+                {% if courses|length <= 0 %}
+                    <p class="lead my-3 text-muted">No contents found!</p>
+                {% endif %}
+
                 {% for course in courses %}
                     {% include 'partials/course_grid_column.html' %}
                 {% endfor %}

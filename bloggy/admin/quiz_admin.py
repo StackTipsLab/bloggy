@@ -1,7 +1,54 @@
 from django import forms
 from django.contrib import admin
-from bloggy.models import Article
-from bloggy.models.quizzes import QuizAnswer, QuizQuestion, UserQuizScore
+from django.utils.html import format_html
+
+from bloggy.admin import BloggyAdminForm, BloggyAdmin, publication_fieldsets, seo_fieldsets
+from bloggy.models.quizzes import QuizAnswer, QuizQuestion, Quiz, UserQuizScore
+
+
+class QuizForm(BloggyAdminForm):
+    model = Quiz
+
+
+@admin.register(Quiz)
+class QuizAdmin(BloggyAdmin):
+    prepopulated_fields = {
+        "slug": ("title",)
+    }
+    list_display = (
+        'id',
+        'title',
+        'category',
+        'is_published',
+        'display_order',
+        'published_date_display')
+
+    list_filter = (
+        'publish_status',
+        ("category", admin.RelatedOnlyFieldListFilter),
+    )
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 'excerpt', 'slug', 'content', 'thumbnail', 'category', 'difficulty', 'is_featured', 'duration')
+        }),
+        publication_fieldsets, seo_fieldsets)
+
+    summernote_fields = ('description',)
+    readonly_fields = ['thumbnail_tag']
+    ordering = ('-display_order',)
+    list_display_links = ['title']
+    form = QuizForm
+
+
+    def thumbnail_tag(self):
+        if self.thumbnail:
+            return format_html(f'<img src="{self.thumbnail.url}" width="auto" height="40"/>')
+        return ""
+
+    thumbnail_tag.short_description = 'Logo'
+    thumbnail_tag.allow_tags = True
 
 
 class QuizAnswerInLine(admin.TabularInline):
@@ -18,12 +65,6 @@ class QuizQuestionForm(forms.ModelForm):
 
 @admin.register(QuizQuestion)
 class QuizQuestionAdmin(admin.ModelAdmin):
-
-    def get_form(self, request, obj=None, change=False, **kwargs):
-        form = super().get_form(request, obj, **kwargs)
-        form.base_fields["article"].queryset = Article.objects.filter(post_type__exact="quiz")
-        return form
-
     inlines = [QuizAnswerInLine]
     list_display = ('title', 'type')
     form = QuizQuestionForm
@@ -43,7 +84,7 @@ class QuizQuestionAdmin(admin.ModelAdmin):
     def display_question_id(self, obj):
         return obj.question.id
 
-    display_question_id.short_description = "Question ID"
+    display_question_id.short_description = "Question id"
 
     def display_question_title(self, obj):
         return obj.question.title

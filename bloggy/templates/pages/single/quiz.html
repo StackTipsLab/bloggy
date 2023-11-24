@@ -16,7 +16,7 @@
                         <a href="{% url 'quizzes' %}">Quizzes</a>
                     </li>
                     <li class="breadcrumb-item active" aria-current="page">
-                        <span>{{ article.title }}</span>
+                        <span>{{ quiz.title }}</span>
                     </li>
                 </ol>
             </nav>
@@ -27,25 +27,24 @@
         <div class="row">
             <main id="main-content" class="article-details-card padding-medium lessons_list col-12 col-md-8">
                 <div id="vueRoot">
-                    <quizzlet :quiz="{{ article.get_questions_json }}"></quizzlet>
+                    <quizlet :quiz="{{ quiz.get_questions_json }}"></quizlet>
                 </div>
             </main>
 
             <aside id="sidebar" class="flex-filled col-12 px-3 col-md-4 pt-0">
                 <div class="sidebar-content sticky-top ms-lg-3" style="z-index: 99">
                     {% include "partials/home_widget_contribute_cta.html" %}
-                    {% related_article_widget count=6 slug=lesson.slug widgetTitle='Recent postss' widgetStyle="miniGrid" %}
-                    {% include 'partials/newsletter.html' %}
-
+                    {% related_article_widget count=6 slug=quiz.slug widget_title='Recent posts' widget_style="list" %}
+                    {#                    {% include 'partials/newsletter.html' %}#}
                 </div>
             </aside>
+        </div>
+    </div>
 
-            <section class="py-5">
-                {% with category.title|addstr:" Quiz" as widgetTitle %}
-                    {% related_quizzes_widget limit=15 widgetTitle=widgetTitle widgetStyle="grid" %}
-                {% endwith %}
-            </section>
-
+    <div class="bg-light  border-bottom py-5">
+        <div class="container">
+            <h2 class="text-center mx-auto display-3 mb-5">Related articles</h2>
+            {% related_quizzes_widget limit=15 widget_title=widget_title widget_style="grid" %}
         </div>
     </div>
 {% endblock %}

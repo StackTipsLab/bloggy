@@ -1,9 +1,10 @@
-from django.views import View
 from django.contrib import messages
-from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.models import Group
+from django.shortcuts import redirect
+from django.views import View
+
 from bloggy import settings
-from bloggy.models import MyUser
+from bloggy.models import User
 from bloggy.services.token_service import get_token, is_token_expired
 
 
@@ -15,17 +16,16 @@ class AccountActivationView(View):
             messages.error(request, "The verification link is expired or malformed.")
             return redirect('index')
 
-        else:
-            # activate user
-            user = MyUser.objects.get(email=verification_token.user.email)
-            user.is_active = True
-            user.is_staff = False
-            group = Group.objects.get_or_create(name=settings.AUTH_USER_DEFAULT_GROUP)
-            user.groups.add(group[0].id)
-            user.save()
+        # activate user
+        user = User.objects.get(email=verification_token.user.email)
+        user.is_active = True
+        user.is_staff = False
+        group = Group.objects.get_or_create(name=settings.AUTH_USER_DEFAULT_GROUP)
+        user.groups.add(group[0].id)
+        user.save()
 
-            # delete token as it
-            verification_token.delete()
+        # delete token as it
+        verification_token.delete()
 
-            messages.success(request, "You're all set! Your account is now active and ready to use.")
-            return redirect('login')
+        messages.success(request, "You're all set! Your account is now active and ready to use.")
+        return redirect('login')

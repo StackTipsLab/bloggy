@@ -6,8 +6,7 @@ class MyLoginView(LoginView):
 
     def get_success_url(self):
         redirect_url = self.request.GET.get('next')
-
         if redirect_url:
             return redirect_url
-        else:
-            return reverse('index')
+
+        return reverse('index')

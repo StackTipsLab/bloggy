@@ -14,28 +14,32 @@
 @import "content/widget";
 //@import "content/newsletter";
 @import "utils";
-@import "content/questions";
-@import "content/article";
+@import "content/post";
+@import "content/quiz";
 @import "content/toc";
-//@import "content/highlightjs";
-@import "content/highlightjsDark";
-@import "content/copy_code";
+
+[data-bs-theme=light] {
+  @import "content/highlightjs";
+}
+
+[data-bs-theme=dark] {
+  @import "content/highlightjsDark";
+}
+
+@import "content/code";
 @import "content/comments";
 @import "content/search";
 //@import "content/cookie-consent";
 @import "content/hero";
 @import "content/social";
 @import "content/login";
-@import "content/login-seperator";
 @import "content/update-profile";
-@import "content/quizet";
-//@import "content/model";
-@import "content/courses";
-@import "content/sponsor";
 @import "content/table";
-@import "content/ad_blocker_popup";
 @import "vendor/footer";
 @import "vendor/author";
 @import "vendor/bookmark_button";
 @import "vendor/toast";
 @import "vendor/dark_mode_toggle";
+@import "vendor/timeline";
+@import "content/quizlet";
+@import "content/category_widget";

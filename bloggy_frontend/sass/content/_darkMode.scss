@@ -3,16 +3,14 @@
   --bs-body-bg: #F6F7F9FF;
   --bs-light-rgb: #F6F7F9FF;
   --bs-card-bg: #ffffff;
-  --card-body-text-color: #4b5457;
+  --card-body-text-color: #cacdcd;
   --bs-secondary-rgb: 33, 37, 41;
   --bs-white-rgb: 255, 255, 255;
   --searchbar-text-color: #87bef5;
   --navbar-toggler-bg: #e1f5fe;
   --default-card-bg: #fff;
-  --quiz-card-bg: #ecfdf5;
   --course-card-bg: #fff;
   --heading-link-color: #0F172AFF;
-  --quiz-card-link-color: #0F172AFF;
   --main-navbar-color: #068bea;
   --main-navbar-dark-color: #067fd7;
   --feed-card-bg: var(--bs-body-bg);
@@ -47,11 +45,9 @@
   }
 
   --searchbar-text-color: var(--bs-secondary-color);
-  --quiz-card-bg: #000f0829;
   --course-card-bg: #000f0829;
   --default-card-bg: #2c3339;
   --navbar-toggler-bg: #2c3339;
-  --quiz-card-link-color: #0F172AFF;
   --heading-link-color: #cfefff;
   --main-navbar-color: #21262b;
   --main-navbar-dark-color: #2B3035;
@@ -71,7 +67,7 @@
   --table-border-color: #525353;
 
 
-  .lesson-menu-widget {
+  .timeline-container {
     background: rgb(44, 51, 57);
     background: linear-gradient(197deg, rgb(44 51 57) 0%, rgb(44 51 57) 25%, rgb(36, 41, 46) 87%, rgb(44, 51, 57) 100%);
   }

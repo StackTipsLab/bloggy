@@ -1,30 +1,32 @@
 import os
-from urllib import request
 
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView, FormView
+from django.template.context_processors import static
+from django.views.generic import FormView
 
+from bloggy import settings
 from bloggy.forms.edit_profile_form import EditProfileForm
-from bloggy.models import MyUser
+from bloggy.models import User
 from bloggy.templatetags.custom_widgets import sanitize_url
 
 
 class EditProfileView(FormView):
     template_name = "profile/edit_profile.html"
-    model = MyUser
+    model = User
     form_class = EditProfileForm
 
     def get_context_data(self, **kwargs):
-        context = super(EditProfileView, self).get_context_data(**kwargs)
-        context['seo_title'] = "Update Profile"
-        context['seo_description'] = "Update my profile. You need a StackTips account to sign in and view your profile."
-        context['seo_image'] = "https://media.stacktips.com/static/media/logo.png"
+        context = super().get_context_data(**kwargs)
+        context['meta_title'] = "Update Profile"
+        context[
+            'meta_description'] = f"Update my profile. You need a {settings.SITE_TITLE}  account to sign in and view your profile."
+        context['meta_image'] = static('static/media/logo.png')
         return context
 
     def get_initial(self):
-        initial = super(EditProfileView, self).get_initial()
+        initial = super().get_initial()
         username = self.request.user.username
-        user = get_object_or_404(MyUser, username=username)
+        user = get_object_or_404(User, username=username)
 
         # update initial field defaults with custom set default values:
         initial.update({
@@ -50,7 +52,7 @@ class EditProfileView(FormView):
 
         if self.request.FILES.get("profile_photo", None) is not None:
             # file_path = self.save_media_file(self.request.FILES["profile_photo"])
-            MyUser.objects.filter(username=self.request.user.username).update(
+            User.objects.filter(username=self.request.user.username).update(
                 profile_photo=self.request.FILES["profile_photo"],
                 name=form.cleaned_data["name"],
                 bio=form.cleaned_data["bio"],
@@ -61,7 +63,7 @@ class EditProfileView(FormView):
                 github=sanitize_url(form.cleaned_data["github"])
             )
         else:
-            MyUser.objects.filter(username=self.request.user.username).update(
+            User.objects.filter(username=self.request.user.username).update(
                 name=form.cleaned_data["name"],
                 bio=form.cleaned_data["bio"],
                 website=sanitize_url(form.cleaned_data["website"]),
@@ -76,19 +78,9 @@ class EditProfileView(FormView):
     def save_media_file(self, image):
         # This will generate random folder for saving your image using UUID
         media_path = f'uploads/user/{self.request.user.username}/{image.name}'
-        file_path = f'media/' + media_path
+        file_path = f'media/{media_path}'
 
-        # if settings.USE_SPACES:
-        #     # if image_type == 'private':
-        #     #     upload = UploadPrivate(file=image_file)
-        #     # else:
-        #     upload = Media(file=image)
-        #     upload.save()
-        #     image_url = upload.file.url
-        # else:
         if not os.path.exists(file_path):
-            # This will ensure that the path is created properly and will raise exception if the directory
-            # already exists
             os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
             # Create image save path with title

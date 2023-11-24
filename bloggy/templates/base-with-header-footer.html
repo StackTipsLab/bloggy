@@ -2,7 +2,7 @@
     {% load static %}
     {% load custom_widgets %}
     <!doctype html>
-    <html lang="en">
+    <html lang="en" class="h-100">
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -14,7 +14,7 @@
         {% block inline_scripts %}{% endblock inline_scripts %}
         {% include "seo/header_scripts.html" %}
     </head>
-    <body class="{% block base_css_class %}{% endblock base_css_class %}">
+    <body class="{% block base_css_class %}{% endblock base_css_class %} d-flex flex-column h-100">
     <div id="toastContainer"></div>
     <!-- Google Tag Manager (noscript) -->
     <noscript>
@@ -27,8 +27,8 @@
     </header>
     <div class="d-none d-print-block text-center py-5">
         <a href="{% url 'index' %}">
-            <img src="{% static 'media/logo.png' %}" alt="StackTips"
-                 width="auto" height="80" style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);">
+            <img src="{% static 'media/logo.png' %}" alt="StackTips" width="auto" height="80"
+                 style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);">
         </a>
     </div>
     <main>
@@ -41,10 +41,9 @@
                 {% endfor %}
             </div>
         {% endif %}
-
         {% block content %}{% endblock content %}
     </main>
-    <footer id="layout-footer">
+    <footer class="footer mt-auto bg-dark">
         {% include "partials/footer.html" %}
     </footer>
     </body>

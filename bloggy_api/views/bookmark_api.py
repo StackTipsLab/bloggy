@@ -3,12 +3,12 @@ from django.contrib import auth
 from django.http import HttpResponse
 from rest_framework.views import APIView
 
-from bloggy.models import Bookmarks
+from bloggy.models import Bookmark
 from bloggy_api.exception.unauthorized_access import UnauthorizedAccess
 
 
 class BookmarkAPIView(APIView):
-    model = Bookmarks
+    model = Bookmark
 
     def get(self, request):
         post_id = self.request.query_params.get('post_id', None)
@@ -46,7 +46,7 @@ class BookmarkAPIView(APIView):
         post_type = json_body.get('post_type')
 
         # Trying to get a bookmark from the table, or create a new one
-        bookmark, created = Bookmarks.objects.get_or_create(user=user, post_id=post_id, post_type=post_type)
+        bookmark, created = Bookmark.objects.get_or_create(user=user, post_id=post_id, post_type=post_type)
 
         # If no new bookmark has been created,
         # Then we believe that the request was to delete the bookmark
@@ -55,9 +55,7 @@ class BookmarkAPIView(APIView):
 
         return HttpResponse(
             json.dumps({
-                # "result": created,
-                "userBookmarkCount": Bookmarks.objects.filter(user=user, post_id=post_id, post_type=post_type).count(),
-                # "totalBookmarks": self.model.objects.filter(post_id=post_id, post_type=post_type).count()
+                "userBookmarkCount": Bookmark.objects.filter(user=user, post_id=post_id, post_type=post_type).count(),
             }),
 
             content_type="application/json"
