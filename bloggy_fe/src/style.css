@@ -1,0 +1,44 @@
+/* static/src/input.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    @variants responsive {
+        .masonry {
+            column-gap: 1.5em;
+            column-count: 1;
+        }
+
+        .masonry-sm {
+            column-gap: 1.5em;
+            column-count: 2;
+        }
+
+        .masonry-md {
+            column-gap: 1.5em;
+            column-count: 4;
+        }
+
+        .break-inside {
+            break-inside: avoid;
+        }
+
+    }
+}
+
+/*@layer utilities {*/
+/*  .page-body-p {*/
+/*    !* Add your custom styles here *!*/
+/*  }*/
+
+/*  .page-body-h2 {*/
+
+/*    !* Add your custom styles here *!*/
+/*  }*/
+
+/*  .page-body-pre {*/
+/*    background: red;*/
+/*  }*/
+/*}*/
