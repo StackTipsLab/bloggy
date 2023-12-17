@@ -23,14 +23,14 @@
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
     <header id="layout-header" class="sticky-top d-print-none">
-        {% include "partials/header.html" %}
+        {% include "partials/header2.html" %}
     </header>
-    <div class="d-none d-print-block text-center py-5">
+    {% comment %}<div class="d-none d-print-block text-center py-5">
         <a href="{% url 'index' %}">
             <img src="{% static 'media/logo.png' %}" alt="StackTips" width="auto" height="80"
                  style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);">
         </a>
-    </div>
+    </div>{% endcomment %}
     <main>
         {% if messages %}
             <div class="col-lg-5 mx-auto">

@@ -3,62 +3,63 @@
     {% load custom_widgets %}
     {% load define_action %}
 
-    <div class="feed-card {{ cssClass }} feed-card-{{ post.post_type }} post-list-item" data-cid="{{ post.id }}"
+    <div class="flex py-5 {{ cssClass }} feed-card-{{ post.post_type }}" data-cid="{{ post.id }}"
          data-type="{{ post.post_type }}">
-        <div class="d-flex align-items-center d-flex">
-            <div class="flex-shrink-0">
-                {% if post.thumbnail %}
-                    <div class="archive-media-object">
-                        <img loading="lazy" src="{{ post.thumbnail.url }}" alt="{{ post.title }}">
+        <div class="flex-initial w-4/12">
+            {% if post.thumbnail %}
+                <div class="w-full lg:w-auto pr-4 mb-8 lg:mb-0">
+                    <div class="w-44 h-24 object-cover">
+                        <img loading="lazy" src="{{ post.thumbnail.url }}" alt="{{ post.title }}"
+                             class="w-44 h-24 object-cover">
                     </div>
-                {% else %}
-                    {% define post.category.first as category %}
-                    <div class="archive-media-object {{ post.post_type }}-object">
-                        {% if category.thumbnail %}
-                            <img loading="lazy" src="{{ category.thumbnail.url }}" style="object-fit: contain;padding: 1rem">
-                        {% endif %}
-                    </div>
-                {% endif %}
+                </div>
+            {% else %}
+                {% define post.category.first as category %}
+                <div class="w-full lg:w-auto pr-4 mb-8 lg:mb-0">
+                    {% if category.thumbnail %}
+                        <div class="w-44 h-24 object-fill bg-gray-100 text-center">
+                            <img loading="lazy" src="{{ category.thumbnail.url }}" alt="{{ post.title }}"
+                                 class="mx-auto  h-24 py-2 object-fit-cover">
+                        </div>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="flex-initial w-8/12">
+            <div class="flex">
+                <small class="flex-none text-gray-400">
+                    {% pretty_date post.updated_date %}
+                </small>
+                <span class="flex-none text-gray-400">·</span>
+                {% for category in post.category.all %}
+                    <small class="flex-none text-primary">
+                        <a class="lh-1" href="{% url 'categories_single' slug=category.slug %}">
+                            {{ category.title }}
+                        </a>
+                        {% if forloop.last != True %},{% endif %}
+                    </small>
+                {% endfor %}
             </div>
 
-            <div class="flex-grow-1 ms-3">
-                <div class="archive-meta">
-                    <small class="d-inline-block text-muted text-uppercase fw-bold"
-                           style="font-size:0.7rem">
-                        {% pretty_date post.updated_date %}
-                    </small>
-                    <span class="eyebrow__spacer">·</span>
-                    {% for category in post.category.all %}
-                        <a class="text-decoration-none text-reset link-primary fw-bold"
-                           style="z-index:999;position:relative"
-                           href="{% url 'categories_single' slug=category.slug %}">
-                            <small class="d-inline-block mb-1 text-primary text-uppercase fw-bold"
-                                   style="font-size:0.7rem;">{{ category.title }}</small>
-                            {% if forloop.last != True %}<span class="text-muted">,</span>{% endif %}
-                        </a>
-                    {% endfor %}
+            <h3 class="antialiased text-xl font-semibold text-gray-800">
+                {% if post.post_type == 'lesson' %}
+                    <a href="{% url 'lesson_single' course=post.course.slug slug=post.slug %}"
+                       class="post-link hover:underline">{{ post.title }}</a>
+                {% else %}
+                    <a href="{% url 'post_single' slug=post.slug %}"
+                       class="post-link hover:underline">{{ post.title }}</a>
+                {% endif %}
+            </h3>
 
-                </div>
+            <div class="mt-2">
+                {% if post.difficulty %}
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300 mr-2 {{ post.difficulty }}">{{ post.difficulty | capfirst }}</span>
+                {% endif %}
 
-                <h3 class="fw-500 mb-2">
-                    {% if post.post_type == 'lesson' %}
-                        <a href="{% url 'lesson_single' course=post.course.slug slug=post.slug %}"
-                           class="post-link">{{ post.title }}</a>
-                    {% else %}
-                        <a href="{% url 'post_single' slug=post.slug %}" class="post-link">{{ post.title }}</a>
-                    {% endif %}
-                </h3>
-
-                <div class="archive-meta">
-                    {% if post.difficulty %}
-                        <span class="badge-meta-pill {{ post.difficulty }}">{{ post.difficulty | capfirst }}</span>
-                    {% endif %}
-
-                    {% if post.post_type %}
-                        <span class="badge-meta-pill {{ post.post_type }}">{{ post.post_type | capfirst }}</span>
-                    {% endif %}
-                </div>
-
+                {% if post.post_type %}
+                    <span class="bg-indigo-100 text-indigo-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300 mr-2 {{ post.post_type }}">{{ post.post_type | capfirst }}</span>
+                {% endif %}
             </div>
 
         </div>

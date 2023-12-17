@@ -1,22 +1,23 @@
 {% load static %}
 {% if categories %}
     {% if widgetStyle == "home" %}
-        <div class="category__items">
-            <ul class="p-0">
-                {% for category in categories %}
-                    <li>
-                        <a href="{% url 'categories_single' slug=category.slug %}" class="text-decoration-none text-reset">{{ category.title }}
-                            <img src="{% if category.thumbnail %} {{ category.thumbnail.url }} {% endif %}"
-                                 height="32px" width="32px" alt="">
-                        </a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% else %}
-        <ul class="tags-list {{ widgetStyle }} d-none d-lg-block d-xl-block">
+        <ul class="list-inline">
             {% for category in categories %}
-                <li><a href="{% url 'categories_single' slug=category.slug %}">#{{ category.slug }}</a>
+                <li class="rounded-lg  border-2 shadow-2xl inline-flex my-3 me-4 content-center py-2 px-3 hover:text-primary hover:border-primary">
+                    <a href="{% url 'categories_single' slug=category.slug %}" class="text-gray-700 text-center inline-flex">
+                        <img src="{% if category.thumbnail %} {{ category.thumbnail.url }} {% endif %}"
+                             height="28px" width="28px" alt="{{ category.title }}">
+                        <h3 class="font-normal text-gray-500 ps-3 text-lg">{{ category.title }}</h3>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul class="list-unstyled {{ widgetStyle }}">
+            {% for category in categories %}
+                <li class="py-2">
+                    <a href="{% url 'categories_single' slug=category.slug %}"
+                                    class="border border-gray-300 py-0.5 px-2 my-2 bg-gray-100 rounded-full text-uppercase text-xs">#{{ category.slug }}</a>
                 </li>
             {% endfor %}
         </ul>

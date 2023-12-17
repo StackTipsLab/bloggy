@@ -2,17 +2,24 @@
 {% load custom_widgets %}
 {% load define_action %}
 {% spaceless %}
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4" style="margin: 0 auto">
+    <div class="flex flex-row gap-4 px-4">
         {% for course in courses %}
-            <div class="col">
-                <div class="article-card card-rounded p-0 feed-card-course" style="height: 100%">
+            <div class="p-2 my-3 border shadow-sm rounded-lg dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 w-full">
+                <div class="article-card card-rounded p-0 feed-card-course">
                     <div class="card-body py-3 px-3">
-                        <h3 class="h3"><a href="{% url 'courses_single' slug=course.slug %}"
-                                          class="article-link h4">{{ course.title }}</a></h3>
-                        <p class="mt-2 mb-2 font-xs text-muted"
-                           style="line-height: 1.5;">{{ course.excerpt|slice:"0:160" }}..</p>
+                        <h3 class="antialiased text-xl font-semibold text-gray-800">
+                            <a href="{% url 'courses_single' slug=course.slug %}" class="hover:underline">{{ course.title }}</a>
+                        </h3>
+                        <p class="my-3 text-gray-600 text-sm line-clamp-3">{{ course.excerpt |slice:"0:100" }}</p>
+
                         <a href="{% url 'courses_single' slug=course.slug %}"
-                           class="text-decoration-none text-primary fw-500 font-sm">Start Course&nbsp;&rarr;</a>
+                           class="inline-flex items-center justify-center py-2 px-4 text-sm font-light text-gray-500 bg-gray-50 hover:bg-primary  border-primary border-1 rounded-md">
+                            <span class="w-full">Start Course</span>
+                            <svg class="w-4 h-4 ms-2 rtl:rotate-180" aria-hidden="true"
+                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>

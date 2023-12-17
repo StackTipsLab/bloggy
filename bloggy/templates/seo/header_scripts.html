@@ -1,11 +1,17 @@
 {% spaceless %}
 {% load static %}
 {% if debug %}
-    <link rel="stylesheet" href="{% static 'dist/app.styles.css' %}"/>
+    <script type="text/javascript" src="{% static 'dist2/index.js' %}"></script>
+{#    <link rel="stylesheet" href="{% static 'dist/app.styles.css' %}"/>#}
+    <link rel="stylesheet" href="{% static 'dist2/style.css' %}"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/@tailwindcss/typography@0.4.x/dist/typography.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="{% static 'dist2/index.js' %}"></script>
 {% else %}
     <link rel="stylesheet" href="{{ ASSETS_DOMAIN }}/static/dist/app.styles.css"/>
 {% endif %}
-<script async src="https://kit.fontawesome.com/16bc69a78f.js" crossorigin="anonymous"></script>
+{#<script async src="https://kit.fontawesome.com/16bc69a78f.js" crossorigin="anonymous"></script>#}
 
 <!-- Google Tag Manager -->
 {% if LOAD_GOOGLE_TAG_MANAGER  %}
