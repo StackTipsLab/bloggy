@@ -1,9 +1,15 @@
+import logging
 from django.contrib.auth.forms import UserCreationForm
-
+from django.core.exceptions import ValidationError
 from bloggy.models import User
+from django import forms
+
+logger = logging.getLogger(__name__)
 
 
 class SignUpForm(UserCreationForm):
+    honeypot = forms.CharField(required=False, widget=forms.HiddenInput)
+
     class Meta:
         model = User
         fields = ('name', 'email', 'password1', 'password2')
@@ -18,6 +24,13 @@ class SignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+    def clean_honeypot(self):
+        honeypot_value = self.cleaned_data.get('honeypot')
+        if honeypot_value:
+            logger.error("ERROR: Honeypot validation error!")
+            raise ValidationError("Oops! Looks like you're not a human!")
+        return honeypot_value
 
     @staticmethod
     def generate_unique_username(name):
