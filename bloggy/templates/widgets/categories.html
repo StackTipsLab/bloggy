@@ -5,8 +5,8 @@
             <ul class="p-0">
                 {% for category in categories %}
                     <li>
-                        <a href="{% url 'categories_single' slug=category.slug %}" class="text-decoration-none text-reset">{{ category.title }}
-                            <img src="{% if category.thumbnail %} {{ category.thumbnail.url }} {% endif %}"
+                        <a href="{% url 'categories_single' slug=category.slug %}" class="text-decoration-none text-reset">
+                            {{ category.title }} <img src="{% if category.thumbnail %} {{ category.thumbnail.url }} {% endif %}"
                                  height="32px" width="32px" alt="">
                         </a>
                     </li>

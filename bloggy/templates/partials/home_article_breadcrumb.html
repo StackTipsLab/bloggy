@@ -3,13 +3,13 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item">
-                    <a href="{% url 'index' %}">Home</a>
+                    <a href="{% url 'index' %}" class=" font-sm fw-500">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'posts' %}">Articles</a>
+                    <a href="{% url 'posts' %}" class="font-sm fw-500">Articles</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <span>{{ post.title }}</span>
+                    <span class=" text-muted font-sm fw-500">{{ post.title }}</span>
                 </li>
             </ol>
         </nav>

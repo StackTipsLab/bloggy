@@ -28,7 +28,7 @@
                             <div class="article-details-card mb-4 me-lg-3">
                                 <div class="padding-medium relative">
                                     <h1 class="display-2 fw-600"
-                                        style="line-height: 1.3;letter-spacing: -0.04rem">{{ post.title }}</h1>
+                                        style="line-height: 1.2;letter-spacing: -0.04rem">{{ post.title }}</h1>
 
                                     {% if post.thumbnail and post.template_type == "cover" %}
                                         <div class="article-single-thumbnails my-4">
@@ -68,7 +68,9 @@
 
         <div class="bg-light  border-bottom py-5">
             <div class="container">
-                <h2 class="text-center mx-auto display-3 mb-4">Related articles</h2>
+                <h2 class="mb-4 fw-600 ms-3">
+                    <span class="text-secondary">&blk14;</span> Related articles
+                </h2>
                 {% related_article_widget count=8 slug=post.slug categories=post.category.all widget_title='Related articles' widget_style="grid" %}
             </div>
         </div>
