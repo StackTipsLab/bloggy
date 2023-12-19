@@ -284,7 +284,6 @@ CACHE_MIDDLEWARE_ALIAS = 'default'  # which cache alias to use
 CACHE_MIDDLEWARE_SECONDS = CACHE_TTL  # number of seconds to cache a page for (TTL)
 CACHE_MIDDLEWARE_KEY_PREFIX = ''  # should be used if the cache is shared across multiple sites that use the same
 
-
 ENABLE_CACHING = os.getenv("ENABLE_CACHING", "False") == "True"
 if ENABLE_CACHING:
     CACHES = {
