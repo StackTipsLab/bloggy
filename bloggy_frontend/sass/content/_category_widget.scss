@@ -1,10 +1,11 @@
 .category__items {
-  text-align: center;
+  //text-align: center;
 
   li {
     box-sizing: border-box;
     //border: 1px solid $border-color;
-    border: 2px solid var(--tags-list-a-border-color);
+    border: 1px solid var(--tags-list-a-border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     border-radius: 58px;
     display: inline-flex;
     align-items: center;
