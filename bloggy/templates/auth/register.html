@@ -39,7 +39,7 @@
                     {{ form.password2|add_class:"form-control" }}
                     {{ form.password2.errors }}
                 </div>
-                {{ form.honeypot|add_class:"hidden" }}
+                {{ form.honeypot|add_class:"d-none" }}
                 <ul class="form-errors text-danger list-unstyled my-2">
                     {% for error in form.non_field_errors %}
                         <li>{{ error }}</li>{% endfor %}

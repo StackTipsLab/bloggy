@@ -21,7 +21,10 @@
 
         <section class="recent-articles py-3">
             <div class="container">
-                <h2 class="h2 py-2">Recent posts</h2>
+                <h2 class="mb-4 fw-600 ms-3">
+                    <span class="text-secondary">&blk14;</span> Recent <span class="text-gradient text-primary">tutorials</span>
+                </h2>
+
                 <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 g-3">
                     {% if posts|length <= 0 %}
                         <p class="lead my-3 text-muted">No contents found!</p>
@@ -42,9 +45,9 @@
 
         <section class="hero mt-md-3 mt-lg-5">
             {% load static %}
-            <div class="container p-5">
-                <h2 class="display-3 text-center mb-5 fw-600">
-                    Browse by <span class="text-gradient text-primary">Categories</span>
+            <div class="container py-5">
+                <h2 class="mb-4 fw-600">
+                    <span class="text-secondary">&blk14;</span> Browse by <span class="text-gradient text-primary">Categories</span>
                 </h2>
                 {% categories_widget count=15 widget_style="home" %}
             </div>
@@ -53,10 +56,11 @@
         <section class="homeCourses__section my-md-3 my-lg-5">
             {% load static %}
             <div class="container">
-                <h2 class="display-3 mb-3 fw-600">
-                    Popular <span class="text-gradient text-primary">Courses</span>
-                </h2>
 
+                <h2 class="mb-4 fw-600">
+                    <span class="text-secondary">&blk14;</span> Free <span
+                        class="text-gradient text-primary">Courses</span>
+                </h2>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3">
                     {% if courses|length <= 0 %}
                         <p class="lead my-3 text-muted">No contents found!</p>
