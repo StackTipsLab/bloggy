@@ -33,9 +33,9 @@
 
             <aside id="sidebar" class="flex-filled col-12 px-3 col-md-4 pt-0">
                 <div class="sidebar-content sticky-top ms-lg-3" style="z-index: 99">
+                    {% include 'widgets/ad-unit-vertical-responsive.html' %}
                     {% include "partials/home_widget_contribute_cta.html" %}
                     {% related_article_widget count=6 slug=quiz.slug widget_title='Recent posts' widget_style="list" %}
-                    {#                    {% include 'partials/newsletter.html' %}#}
                 </div>
             </aside>
         </div>

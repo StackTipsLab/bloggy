@@ -10,6 +10,9 @@
 {% spaceless %}
     {% block content %}
         {% include 'partials/home_article_breadcrumb.html' %}
+        <div class="container mt-3">
+            {% include 'widgets/ad-unit-horizontal-responsive.html' %}
+        </div>
         <div class="container mt-lg-5 mt-md-3">
             <div class="row">
                 <main id="main-content" class="hero col-12 col-md-9 col-lg-9 col-print-12 pe-lg-2">
@@ -27,7 +30,8 @@
                         <div class="flex-grow-1" style="overflow: hidden">
                             <div class="article-details-card mb-4 me-lg-3">
                                 <div class="padding-medium relative">
-                                    <h1 class="display-2 fw-600" style="line-height: 1.2;letter-spacing: -0.055rem">{{ post.title }}</h1>
+                                    <h1 class="display-2 fw-600"
+                                        style="line-height: 1.2;letter-spacing: -0.055rem">{{ post.title }}</h1>
 
                                     {% if post.thumbnail and post.template_type == "cover" %}
                                         <div class="article-single-thumbnails my-4">
@@ -57,7 +61,7 @@
                                     </article>
                                     {% include "partials/social_share.html" with object=post authorName=post.author.get_full_name_or_username %}
                                     {% include 'partials/author_widget.html' with author=post.author %}
-                                
+
                                     {% comment %}<section id="vueRoot" class="d-print-none my-5">
                                         <comments post-id="{{ post.id }}" post-type="{{ post.post_type }}" current-user="{{ user }}"></comments>
                                     </section>{% endcomment %}
@@ -65,10 +69,13 @@
                             </div>
                         </div>
                     </div>
+
+
                 </main>
 
                 <aside id="right-sidebar" class="col-12 col-md-3 col-lg-3 d-print-none">
                     {% include 'partials/video_widget.html' %}
+                    {% include 'widgets/ad-unit-vertical-responsive.html' %}
                     {% if post %}
                         {% include 'partials/toc_widget.html' %}
                         {% include 'partials/github_widget.html' with githubLink=post.github_link %}
@@ -78,8 +85,10 @@
                         {% include "partials/home_widget_contribute_cta.html" %}
                         {% include 'partials/newsletter.html' %}
                     </div>
+                    {% include 'widgets/ad-unit-vertical-responsive.html' %}
                 </aside>
             </div>
+            {% include 'widgets/ad-unit-horizontal-responsive.html' %}
         </div>
 
         <div class="bg-light  border-bottom py-5">
