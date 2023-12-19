@@ -1,4 +1,6 @@
-import 'bootstrap';
+import * as bootstrap from 'bootstrap'
+
+// import 'bootstrap';
 // const jQuery = require("jquery")
 // require("bootstrap")
 // require("@popperjs/core")
