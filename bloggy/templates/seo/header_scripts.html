@@ -33,7 +33,9 @@
 {% endif %}
 
 {% if LOAD_GOOGLE_ADS %}
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5125794458843883" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5125794458843883"
+            crossorigin="anonymous"></script>
+    <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
 {% endif %}
 {% csrf_token %}
 <meta name="is_authenticated" content="{{ user.is_authenticated }}"/>

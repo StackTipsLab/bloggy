@@ -11,7 +11,9 @@ TOKEN_VALIDITY = 30
 
 def create_token(user, token_type):
     """
-    Generate token:: Token and uuid will be generated automatically
+    Generate token:: Token and uuid will be generated automatically,
+
+    if expired, it will automatically renew new token.
     """
     token = VerificationToken.objects.filter(user=user, token_type=token_type).first()
     if token:

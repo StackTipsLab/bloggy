@@ -59,9 +59,9 @@
                         {% include 'widgets/ad-unit-vertical-responsive.html' %}
                         {% include 'partials/video_widget.html' %}
                         {% include "partials/home_widget_contribute_cta.html" %}
-                        {% include 'partials/newsletter.html' %}
                         {% include 'partials/github_widget.html' with githubLink=post.github_link %}
-                        {% related_quizzes_widget limit=15 widget_title="Related Quizzes" %}
+                        {% related_quizzes_widget limit=5 widget_title="Related Quizzes" %}
+                        {% include 'widgets/ad-unit-vertical-responsive.html' %}
                     </div>
                 </aside>
             </div>
