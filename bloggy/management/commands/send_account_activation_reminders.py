@@ -13,7 +13,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         # Get a list of users who have not activated their accounts
         inactive_users = User.objects.filter(is_active=False)
-        # inactive_users = User.objects.filter(email="nilanchala.p2007@gmail.com")
 
         email_count = 0
         for user in inactive_users:
