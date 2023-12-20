@@ -40,7 +40,7 @@ def email_verification_token(request, new_user, token):
     send_custom_email(subject, [new_user.email], "email/login_code_email.html", args)
 
 
-def email_registration_token(request, new_user, verification_token):
+def send_account_activation_email(request, new_user, verification_token):
     subject = f'Welcome to {settings.SITE_TITLE}!'
     args = {
         "email_subject": subject,
@@ -52,4 +52,4 @@ def email_registration_token(request, new_user, verification_token):
         ]))
     }
 
-    send_custom_email(subject, [new_user.email], "email/acc_active_email.html", args)
+    send_custom_email(subject, [new_user.email], "email/account_activation_email.html", args)

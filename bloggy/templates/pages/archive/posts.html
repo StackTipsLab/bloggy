@@ -20,7 +20,7 @@
                                     <div class="col mb-3">
                                         {% include "partials/post_list_item.html" with post=post cssClass="card-rounded" %}
                                     </div>
-                                    {% if forloop.counter == 3 %}
+                                    {% if forloop.counter|divisibleby:3 %}
                                         {% include "widgets/ad-unit-in-feed.html" %}
                                     {% endif %}
                                     {% if forloop.counter == 2 %}
@@ -37,6 +37,8 @@
                     <div class="sidebar-content sticky-top" style="z-index: 99">
                         {% include 'widgets/ad-unit-vertical-responsive.html' %}
                         {% include 'partials/newsletter.html' %}
+                        {% related_quizzes_widget limit=5 widget_title="Related Quizzes" %}
+                        {% include 'widgets/ad-unit-vertical-responsive.html' %}
                     </div>
                 </aside>
             </div>

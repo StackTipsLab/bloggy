@@ -17,7 +17,7 @@ class RegisterView(View):
             user = form.save()
 
             verification_token = create_token(user, token_type="signup")
-            email_service.email_registration_token(request, user, verification_token)
+            email_service.send_account_activation_email(request, user, verification_token)
             return redirect(reverse('login'))
 
         return render(request, 'auth/register.html', {'form': form})
