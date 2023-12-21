@@ -3,16 +3,16 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb m-0">
                 <li class="breadcrumb-item">
-                    <a href="{% url 'index' %}">Home</a>
+                    <a href="{% url 'index' %}" class=" font-sm fw-500">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'courses' %}">Courses</a>
+                    <a href="{% url 'courses' %}" class=" font-sm fw-500">Courses</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{% url 'courses_single' slug=course.slug %}">{{ guide.title }}</a>
+                    <a href="{% url 'courses_single' slug=course.slug %}" class=" font-sm fw-500">{{ course.title }}</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
-                    <span>{{ post.title }}</span>
+                    <span class=" text-muted font-sm fw-500">{{ post.title }}</span>
                 </li>
             </ol>
         </nav>
