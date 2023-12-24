@@ -26,8 +26,8 @@ class Command(BaseCommand):
 
         else:
             users = chain(
-                User.objects.all(),
-                Subscribers.objects.all(),
+                User.objects.all()
+                # Subscribers.objects.all(),
             )
 
             email_count = 0
