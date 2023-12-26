@@ -29,9 +29,14 @@
 
                         <div class="flex-grow-1" style="overflow: hidden">
                             <div class="article-details-card p-5 mb-4 mx-lg-3">
+                                {% if user.is_authenticated and user.is_superuser %}
+                                    <a class="mb-3 btn btn-sm btn-secondary btn-xs"
+                                       href="{{ post.get_admin_url }}">Edit post</a>
+                                {% endif %}
+
                                 <div class="padding-medium relative">
                                     <h1 class="display-2 fw-600"
-                                        style="line-height: 1.2;letter-spacing: -0.055rem">{{ post.title|safe }}</h1>
+                                        style="line-height: 1.33333;letter-spacing: -0.035rem">{{ post.title|safe }}</h1>
 
                                     {% if post.thumbnail and post.template_type == "cover" %}
                                         <div class="article-single-thumbnails my-4">
@@ -82,7 +87,7 @@
                     {% endif %}
 
                     <div class="sidebar-content" style="z-index: 99">
-                        {% include "partials/home_widget_contribute_cta.html" %}
+{#                        {% include "partials/home_widget_contribute_cta.html" %}#}
                         {% include 'partials/newsletter.html' %}
                     </div>
                     {% include 'widgets/ad-unit-vertical-responsive.html' %}
