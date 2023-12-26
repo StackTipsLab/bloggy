@@ -23,7 +23,7 @@ class Post(Content):
         max_length=20, choices=[
             ('beginner', 'Beginner'),
             ('intermediate', 'Intermediate'),
-            ('advance', 'advance'),
+            ('advance', 'Advance'),
         ],
         default='easy', blank=True, null=True,
         help_text="Select difficulty",

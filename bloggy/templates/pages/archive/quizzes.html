@@ -1,5 +1,6 @@
 {% extends "base-with-header-footer.html" %}
 {% load static %}
+{#{% block base_css_class %}bg-white{% endblock base_css_class %}#}
 {% spaceless %}
     {% load custom_widgets %}
     {% block content %}
@@ -20,22 +21,12 @@
                     <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3">
                         {% for quiz in quizzes %}
                             <div class="col">
-                                <div class="card article-card">
-                                    {% if quiz.thumbnail %}
-                                        <img src="{{ quiz.thumbnail.url }}" class="card-img-top" loading="lazy"
-                                             alt="{{ quiz.title }}">
-                                    {% endif %}
-                                    <div class="card-body p-3">
+                                <div class="card article-card card-stack">
+                                    <div class="card-body card-body pb-0 px-3 pt-3">
                                         <h3 class="article-title" style="font-size:1.1rem">
-                                            <a href="{% url 'quiz_single' slug=quiz.slug %}"
-                                               class="quiz-link">{{ quiz.title }}</a>
+                                            <a href="{% url 'quiz_single' slug=quiz.slug %}" class="quiz-link">{{ quiz.title }}</a>
                                         </h3>
-                                        <p class="font-sm mb-1">{{ quiz.excerpt }}</p>
-                                        <p class="mt-3 mb-0">
-                                            <a href="{% url 'courses_single' slug=quiz.slug %}"
-                                               class="text-decoration-none text-primary fw-500 font-sm w-100">Start
-                                                Quiz&nbsp;&rarr;</a>
-                                        </p>
+                                        <p class="font-xs text-muted mb-1">{{ quiz.excerpt |slice:"0:80" }}..</p>
                                     </div>
 
                                     <div class="card-footer ">

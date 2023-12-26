@@ -1,8 +1,8 @@
 {% extends "base-with-header-footer.html" %}
 {% load static %}
+{% load custom_widgets %}
+{% load define_action %}
 {% spaceless %}
-    {% load custom_widgets %}
-    {% load define_action %}
     {% block jsonld %}
         {% include "seo/course_jsonld.html" %}
     {% endblock jsonld %}
@@ -30,7 +30,7 @@
                 <div class="row">
 
                     <main id="main-content" class="hero col-12 col-md-8 col-lg-8 col-print-12 pe-lg-2">
-                        <div class="article-details-card ms-md-3 mb-4 lessons_listl">
+                        <div class="article-details-card p-5 ms-md-3 mb-4">
 
 
                             <div class="padding-medium relative pb-2">
@@ -44,13 +44,13 @@
                                                 {{ lessons_list.count }} Lessons
                                             </small>
                                             <span class="meta-seperator"></span>
-                                        {% with course.category as category %}
-                                            <a class="text-decoration-none text-reset link-primary fw-bold"
-                                               style="z-index:999;position:relative"
-                                               href="{% url 'categories_single' slug=category.slug %}">
-                                                <small class="d-inline-block mb-1 text-primary text-uppercase fw-bold"
-                                                       style="font-size:0.7rem;">{{ category.title }}</small>
-                                            </a>
+                                            {% with course.category as category %}
+                                                <a class="text-decoration-none text-reset link-primary fw-bold"
+                                                   style="z-index:999;position:relative"
+                                                   href="{% url 'categories_single' slug=category.slug %}">
+                                                    <small class="d-inline-block mb-1 text-primary text-uppercase fw-bold"
+                                                           style="font-size:0.7rem;">{{ category.title }}</small>
+                                                </a>
                                             {% endwith %}
                                             <span class="meta-seperator"></span>
 
@@ -62,19 +62,21 @@
                                 </div>
                             </div>
                             <div class="padding-medium relative pt-2">
-                                {{ course.description |safe }}
+                                <p>{{ course.description |safe }}</p>
 
                                 <div class="container overflow-hidden">
                                     <div class="row grid">
 
-                                        <div class="timeline-container p-4 mt-4">
+                                        <div class="timeline-container mt-4">
                                             <div class="wrapper">
                                                 <ul class="sessions ">
                                                     {% for lesson in course.get_lessons %}
                                                         {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
                                                         <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
-                                                            <h3 class=""><a href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
-                                                               class="text-decoration-none h3 text-dark p-0 m-0 w-500">{{ lesson.title }}</a></h3>
+                                                            <h3 class=""><a
+                                                                    href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
+                                                                    class="text-decoration-none h3 text-dark p-0 m-0 w-500">{{ lesson.title }}</a>
+                                                            </h3>
                                                             <p class="font-sm text-muted mb-3">{{ lesson.excerpt }}</p>
                                                         </li>
                                                     {% endfor %}

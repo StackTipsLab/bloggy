@@ -14,26 +14,27 @@ hr {
 }
 
 
+p {
+  margin-bottom: 1.4rem;
+  font-size: inherit;
+  line-height: 1.9;
+  text-rendering: optimizeLegibility;
+}
+
 .display-1,
 .display-2,
 .display-3,
 .display-4,
 .display-5,
 .display-6 {
-  font-weight: 700 !important;
-  //font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
+  font-weight: 800 !important;
 }
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-weight: 600;
-  //font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
+  font-weight: 700;
 }
 
-
-.btn {
-  //font-feature-settings: "cv02", "cv03", "cv04", "cv11" !important;
-}
 
 
 .fw-300 {
@@ -45,11 +46,11 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .fw-500 {
-  font-weight: 500 !important;
+  font-weight: 600 !important;
 }
 
 .fw-600 {
-  font-weight: 600 !important;
+  font-weight: 700 !important;
 }
 
 

@@ -36,8 +36,8 @@ class PostDetailsView(HitCountDetailView):
     count_hit = True
 
     def get_template_names(self):
-        if self.template_name:
-            return f"pages/single/{self.object.post_type}-{self.template_name}.html"
+        if self.object.template_type:
+            return f"pages/single/{self.object.post_type}-{self.object.template_type}.html"
 
         return f"pages/single/{self.object.post_type}.html"
 

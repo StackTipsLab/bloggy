@@ -51,14 +51,17 @@ Sitemap: {domain}/sitemap.xml
 
 @method_decorator([cache_page(settings.CACHE_TTL, key_prefix="page"), vary_on_cookie], name='dispatch')
 class PageDetailsView(TemplateView):
-    template_name = "pages/page.html"
+    template_name = "pages/page-default.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        url = context["url"]
-        page = Page.objects.filter(url=url).filter(publish_status="LIVE").first()
+        page = Page.objects.filter(url=context["url"]).filter(publish_status="LIVE").first()
+
         if page:
             context["page"] = page
+            if page.template_type:
+                self.template_name = f"pages/page-{page.template_type}.html"
+
             set_seo_settings(post=page, context=context)
             return context
         raise Http404

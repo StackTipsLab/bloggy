@@ -1,29 +1,3 @@
-//.courses-list-item {
-//  border-radius: $card-border-radius;
-//  background: var(--bs-card-bg);
-//  border-bottom: 2px solid #34d399;
-//
-//  .thumbnail--container {
-//    text-align: center;
-//    margin-right: 1.25rem;
-//    color: #66676a;
-//    display: flex;
-//    justify-content: center;
-//    align-items: initial;
-//    min-height: auto;
-//    max-width: 200px;
-//
-//    img.thumbnail {
-//      object-fit: cover;
-//      max-width: 100%;
-//      max-height: 100%;
-//      border-radius: 8px;
-//    }
-//
-//  }
-//
-//}
-
 .post-list-item {
 
   .post-link {
@@ -69,53 +43,46 @@ article {
   }
 
   li, p {
-    margin-top: 1.1em;
+    margin-top: 0;
+    //margin-top: 1.1em;
     margin-bottom: 1.1em;
-    //font-size: 1.05rem;
-    //line-height: 1.5555;
-    font-size: 1.125rem;
-    line-height: 1.7777778;
+    font-size: 1.05rem;
+    line-height: 1.66666678;
   }
 
   .lead {
-    font-size: 1.2222222em;
+    font-size: 1.22222em;
     line-height: 1.4545455;
     margin-top: 1.0909091em;
     margin-bottom: 1.0909091em;
+    font-weight: 600;
+    font-style: italic;
   }
 
   h1 {
-    font-size: $h1-font-size * 1.1;
-    //font-weight: 500;
-    margin: 2rem 0 .5rem;
+    font-size: $h1-font-size * 1.3;
     line-height: 1.1111111;
-    margin-bottom: 1.0666667em;
+    margin-bottom: 1em;
   }
 
   h2 {
     font-size: $h2-font-size * 1.3;
-    //margin: 2rem 0 .5rem;
-    //font-weight: 500;
-    //margin-bottom: 1.0666667em;
-    line-height: 1.3333333;
-    font-size: 1.6666667em;
-    margin-top: 1.8666667em;
-    margin-bottom: 1.0666667em;
+    margin-top: 1.11111em;
+    margin-bottom: .7555em;
     line-height: 1.3333333;
   }
 
   h3 {
-    font-size: $h3-font-size * 1.3;
-    margin: 2rem 0 .5rem;
-    //font-weight: 500;
+    font-size: $h3-font-size * 1.35;
+    margin-top: 1.2222222em;
+    margin-bottom: 1.0666667em;
     line-height: 1.3333333
   }
 
   h4 {
-    font-size: $h4-font-size * 1.3;
+    font-size: $h4-font-size * 1.24;
     margin: 2rem 0 1rem;
     line-height: 1.3333333;
-    //font-weight: 500;
   }
 
   h5, h6 {
@@ -320,6 +287,9 @@ article {
 .article-details-card {
   background: var(--bs-card-bg);
   overflow: hidden;
+  border-radius: $card-border-radius !important;
+  //box-shadow: 0 2px 6px rgba(225, 225, 225, 0.79);
+  box-shadow: 0 0 0 1px rgba(23,23,23,0.05);
 }
 
 .article-card {
@@ -331,11 +301,20 @@ article {
   transition: all 0.2s ease-in-out !important;
   min-height: 90px;
   margin: 0;
-  //box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.05);
+   box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.05);
+  //box-shadow: 0 2px 6px rgba(225, 225, 225, 0.79);
 
   &:hover {
     transform: translateY(-5px);
   }
+}
+
+
+.card-stack {
+  border: 1px solid rgba(25, 25, 28, 0.2) !important;
+  //background: none !important;
+  border-radius: 8px !important;
+  box-shadow: 2px 2px 0 -1px #fff, 2px 2px 0 0 rgba(25, 25, 28, 0.2) !important;
 }
 
 

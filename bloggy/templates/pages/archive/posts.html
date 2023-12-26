@@ -20,12 +20,12 @@
                                     <div class="col mb-3">
                                         {% include "partials/post_list_item.html" with post=post cssClass="card-rounded" %}
                                     </div>
-                                    {% if forloop.counter|divisibleby:3 %}
-                                        {% include "widgets/ad-unit-in-feed.html" %}
-                                    {% endif %}
-                                    {% if forloop.counter == 2 %}
-                                        {% include "partials/course_row_grid.html" with courses=courses %}
-                                    {% endif %}
+{#                                    {% if forloop.counter|divisibleby:3 %}#}
+{#                                        {% include "widgets/ad-unit-in-feed.html" %}#}
+{#                                    {% endif %}#}
+{#                                    {% if forloop.counter == 2 %}#}
+{#                                        {% include "partials/course_row_grid.html" with courses=courses %}#}
+{#                                    {% endif %}#}
 
                                 {% endfor %}
                                 {% include "partials/paging.html" with posts=posts %}

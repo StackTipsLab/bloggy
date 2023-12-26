@@ -15,6 +15,16 @@ class Page(Updatable, SeoAware):
     """
 
     title = models.CharField(max_length=300, help_text='Enter title')
+    template_type = models.CharField(
+        max_length=20, choices=[
+            ('newsletter', 'Newsletter'),
+            ('naked', 'Naked'),
+            ('default', 'Default'),
+        ],
+        default='default', blank=True, null=True,
+        help_text="Template type",
+        verbose_name="Template type")
+
     excerpt = models.CharField(
         max_length=500,
         help_text='Enter excerpt',

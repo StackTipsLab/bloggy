@@ -5,7 +5,10 @@
 }
 
 .share-appeal-widget {
-  //border: 1px solid #e1e1e1;
-  background: var(--feed-card-bg);
-  //box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);
+  border: 1px solid #e1e1e1;
+  //background: var(--feed-card-bg);
+  box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);
+  border: 1px solid rgba(25, 25, 28, 0.2) !important;
+  border-radius: 8px !important;
+  box-shadow: 2px 2px 0 -1px #fff, 2px 2px 0 0 rgba(25, 25, 28, 0.2) !important;
 }

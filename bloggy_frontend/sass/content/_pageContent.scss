@@ -8,10 +8,6 @@
   min-height: 100vh;
 }
 
-.padding-medium {
-  padding: 1.25rem;
-}
-
 
 @media screen and (max-width: 960px) {
   #main-content {
@@ -19,12 +15,6 @@
     padding-right: 0;
   }
 
-}
-
-@media screen and (min-width: 992px) {
-  .padding-medium {
-    padding: 0 1.5rem;
-  }
 }
 
 ul.static-pages-menu {

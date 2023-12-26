@@ -14,6 +14,7 @@ class PageAdmin(BloggyAdmin):
     list_display = (
         'id',
         'title',
+        'template_type',
         'url',
         'excerpt',
         'publish_status',
@@ -21,7 +22,7 @@ class PageAdmin(BloggyAdmin):
 
     fieldsets = (
         (None, {
-            'fields': ('title', 'excerpt', 'url', 'content',)
+            'fields': ('title', 'template_type', 'excerpt', 'url', 'content',)
         }), publication_fieldsets, seo_fieldsets)
 
     search_fields = ['title']

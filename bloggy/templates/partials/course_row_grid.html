@@ -5,14 +5,13 @@
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-4" style="margin: 0 auto">
         {% for course in courses %}
             <div class="col">
-                <div class="article-card card-rounded p-0 feed-card-course" style="height: 100%">
+                <div class="article-card card-stack card-rounded p-0 feed-card-course" style="height: 100%">
                     <div class="card-body py-3 px-3">
-                        <h3 class="h3"><a href="{% url 'courses_single' slug=course.slug %}"
-                                          class="article-link h4">{{ course.title }}</a></h3>
-                        <p class="mt-2 mb-2 font-xs text-muted"
-                           style="line-height: 1.5;">{{ course.excerpt|slice:"0:160" }}..</p>
-                        <a href="{% url 'courses_single' slug=course.slug %}"
-                           class="text-decoration-none text-primary fw-500 font-sm">Start Course&nbsp;&rarr;</a>
+                        <h3 class="h3">
+                            <a href="{% url 'courses_single' slug=course.slug %}" class="article-link h4">{{ course.title }}</a>
+                        </h3>
+                        <p class="mt-2 font-sm text-muted" style="line-height: 1.5;">{{ course.excerpt|slice:"0:120" }}..</p>
+{#                        <a href="{% url 'courses_single' slug=course.slug %}" class="mt-1 text-decoration-none text-primary btn btn-sm btn-outline-primary fw-500 font-sm">Start course</a>#}
                     </div>
                 </div>
             </div>

@@ -1,0 +1,53 @@
+{
+    "updates": {
+        "heading": "In the news this week..",
+        "list": [
+            {
+                "title": "Project Lombok-Is it Still Relevant in 2023?",
+                "thumbnail": "https://media.stacktips.com/media/uploads/posts/Project_Lombok.jpg",
+                "link": "https://stacktips.com/articles/project-lombok-is-it-still-relevant-in-2023",
+                "excerpt": "What is Project Lombok? Have you used this magical library? With the new Java Records feature, you might wonder if Lombok is still relevant. Let's weigh the pros and cons and see if this is suitable for you."
+            },
+            {
+                "title": "Notes to Crack CLF-C01 AWS Certified Cloud Practitioner Exam on First Attempt",
+                "thumbnail": "https://media.stacktips.com/media/uploads/articles/crack-clfc01-aws-certified-cloud-practitioner-in-first-attempt.jpeg",
+                "link": "https://stacktips.com/articles/crack-clfc01-aws-certified-cloud-practitioner-on-first-attempt",
+                "excerpt": "A quick guide to CLF-C01 AWS Certified Cloud Practitioner Practice exam notes covers the introduction to all the services provided by AWS."
+            },
+            {
+                "title": "Replace Embedded Tomcat with Jetty or Undertow Server in Spring Boot 3",
+                "thumbnail": "https://i3.ytimg.com/vi/1gEoiMVULt4/maxresdefault.jpg",
+                "link": "https://youtu.be/1gEoiMVULt4",
+                "excerpt": "This video explains how to replace the default embedded Tomcat with Jetty or Undertow servers"
+            },
+            {
+                "title": "Schedule Task in Spring Boot Using @Scheduled Annotation",
+                "thumbnail": "",
+                "link": "https://stacktips.com/articles/schedule-task-in-spring-boot-using-scheduled-annotation",
+                "excerpt": "Scheduling task in Spring boot using @Scheduled annotation with examples showcasing fixed rate, fixed delay, and using cron expressions."
+            }
+        ]
+    },
+
+    "news": {
+        "heading": "In the news this week..",
+        "list": [
+            {
+                "title": "Elon Musk's 'Anti-Woke' AI Is Here, Snowflakes Need Not Apply",
+                "link": "#"
+            },
+            {
+                "title": "Channel 4 and Snapchat extend and enhance partnership with 'Snap-first' programming",
+                "link": "#"
+            },
+            {
+                "title": "TikTok adds comment filtering tools to better handle Israel-Hamas war content",
+                "link": "#"
+            },
+            {
+                "title": "GTA trailer dropped early after leak and breaks all records.",
+                "link": "#"
+            }
+        ]
+    }
+}

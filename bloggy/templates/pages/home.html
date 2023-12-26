@@ -1,5 +1,6 @@
 {% extends "base-with-header-footer.html" %}
 {% load custom_widgets %}
+{#{% block base_css_class %}bg-white{% endblock base_css_class %}#}
 {% spaceless %}
     {% block content %}
         {% load static %}
@@ -21,7 +22,7 @@
 
         <section class="recent-articles py-3">
             <div class="container">
-                <h2 class="mb-4 fw-600 ms-3">
+                <h2 class="mb-4 fw-600">
                     <span class="text-secondary">&blk14;</span> Recent <span class="text-gradient text-primary">tutorials</span>
                 </h2>
 

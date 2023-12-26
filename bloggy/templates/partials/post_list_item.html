@@ -43,9 +43,9 @@
                 <h3 class="fw-500 mb-2">
                     {% if post.post_type == 'lesson' %}
                         <a href="{% url 'lesson_single' course=post.course.slug slug=post.slug %}"
-                           class="post-link">{{ post.title }}</a>
+                           class="post-link">{{ post.title | safe }}</a>
                     {% else %}
-                        <a href="{% url 'post_single' slug=post.slug %}" class="post-link">{{ post.title }}</a>
+                        <a href="{% url 'post_single' slug=post.slug %}" class="post-link">{{ post.title | safe }}</a>
                     {% endif %}
                 </h3>
 

@@ -1,6 +1,7 @@
 [data-bs-theme=light] {
-  --body-bg: #fff;
-  --bs-body-bg: #F6F7F9FF;
+  --body-bg: #F6F7F9FF;
+  //--bs-body-bg: #F6F7F9FF;
+  --bs-body-bg: #FFFFFF;
   --bs-light-rgb: #F6F7F9FF;
   --bs-card-bg: #ffffff;
   --card-body-text-color: #cacdcd;
@@ -13,15 +14,16 @@
   --heading-link-color: #0F172AFF;
   --main-navbar-color: #068bea;
   --main-navbar-dark-color: #067fd7;
-  --feed-card-bg: var(--bs-body-bg);
-  --breadcrumb-bg: var(--bs-body-bg);
+  --feed-card-bg: #ffffff;//var(--bs-body-bg);
+  --breadcrumb-bg: #eceff4f2; //#e9ecef;
   --breadcrumb-text-color: #343a40;
   --tags-list-a-bg: hsl(219, 23%, 97%);
   --tags-list-a-color: #24292e;
   --tags-list-a-border-color: #e1e1e1;
   --form-control-bg: #fff;
   --form-control-border-color: #212529;
-  --toc-header-bg: #e9ecef;
+  //--toc-header-bg: #e9ecef;
+  --toc-header-bg: #eceff4f2;
   --toc-content-bg: hsl(219deg, 23%, 97%);
   --archive-media-object-bg: #e4e4e78a;
   --table-column-bg: rgba(225, 225, 225, 0.25);
@@ -68,7 +70,7 @@
 
 
   .timeline-container {
-    background: rgb(44, 51, 57);
-    background: linear-gradient(197deg, rgb(44 51 57) 0%, rgb(44 51 57) 25%, rgb(36, 41, 46) 87%, rgb(44, 51, 57) 100%);
+    //background: rgb(44, 51, 57);
+    //background: linear-gradient(197deg, rgb(44 51 57) 0%, rgb(44 51 57) 25%, rgb(36, 41, 46) 87%, rgb(44, 51, 57) 100%);
   }
 }

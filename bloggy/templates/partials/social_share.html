@@ -1,15 +1,9 @@
-<div class="share-appeal-widget p-4 my-5">
+<div class="share-appeal-widget p-4 mt-5">
     {% load social_share %}
     {% spaceless %}
         <div class="d-grid gap-2 d-md-block d-print-none">
-            {% if authorName %}
-                <p class="">Did you like what <strong>{{ authorName }}</strong> wrote?
-                    <br/>Thank them for their work by sharing it on social
-                    media.</p>
-            {% else %}
-                <p class="">Was this post helpful to you? Please consider sharing this on your social media
-                    accounts.</p>
-            {% endif %}
+            <p class="h3">Did you like this article?</p>
+            <p>Please consider sharing this on your social media accounts.</p>
             {% post_to_facebook object "Facebook" %}
             {% post_to_twitter "{{ object.title }}" object "Share on X" %}
             {% send_email object.title "{{ object.title }}. Check it out!" object_or_url "Email link" %}

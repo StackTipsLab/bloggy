@@ -1,5 +1,5 @@
 <template>
-  <div class="container quizlet-form">
+  <div class="quizlet-form">
     <!-- Quiz Landing page -->
     <quiz-landing-component
         v-if="this.quizStatus === QuizState.UNDEFINED"
