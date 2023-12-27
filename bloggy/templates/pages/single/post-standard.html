@@ -19,12 +19,6 @@
                     <div class="d-flex ">
                         <div class="">
                             {% categories_widget count=13 content_type="article" widget_style="list" %}
-                            {% if user.is_authenticated and user.is_superuser %}
-                                <div class="mt-3">
-                                    <a class="mt-3 btn btn-sm btn-secondary btn-xs"
-                                       href="{{ post.get_admin_url }}">Edit article</a>
-                                </div>
-                            {% endif %}
                         </div>
 
                         <div class="flex-grow-1" style="overflow: hidden">

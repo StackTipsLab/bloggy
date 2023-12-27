@@ -10,7 +10,7 @@
                     <h1 class="display-1 px-lg-5">
                         Developer Friendly Way to Learn <span class="text-gradient text-primary">Programming.</span>
                     </h1>
-                    <p class="lead px-lg-5 py-2" style="max-width: 900px;margin: 0 auto">
+                    <p class="lead px-lg-5 py-2 fw-700" style="max-width: 900px;margin: 0 auto">
                         StackTips brings developer-friendly ways to learn programming. With courses, articles, and
                         how-to guides, we aim to teach in the ways developers learn best.
                     </p>
@@ -25,12 +25,10 @@
                 <h2 class="mb-4 fw-600">
                     <span class="text-secondary">&blk14;</span> Recent <span class="text-gradient text-primary">tutorials</span>
                 </h2>
-
                 <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 g-3">
                     {% if posts|length <= 0 %}
                         <p class="lead my-3 text-muted">No contents found!</p>
                     {% endif %}
-
                     {% for post in posts %}
                         <div class="col">
                             {% include "partials/post_list_item.html" with post=post cssClass="card-rounded" %}
