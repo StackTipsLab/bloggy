@@ -30,6 +30,15 @@
                                     <h1 class="display-2 fw-600"
                                         style="line-height: 1.2;letter-spacing: -0.04rem">{{ post.title }}</h1>
 
+                                    {% if post.video_id %}
+                                        <div class="article-details-card my-4">
+                                            {% with '[youtube=https://www.youtube.com/watch?v='|addstr:post.video_id|addstr:']' as youtubeUrl %}
+                                                {{ youtubeUrl|shortcodes|safe }}
+                                            {% endwith %}
+                                        </div>                        
+                                    {% endif %}
+
+
                                     {% if post.thumbnail and post.template_type == "cover" %}
                                         <div class="article-single-thumbnails my-4">
                                             <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" loading="lazy"/>
@@ -57,7 +66,7 @@
                     <div class="sidebar-content" style="z-index: 99">
                         {% include 'partials/lesson_single_toc.html' %}
                         {% include 'widgets/ad-unit-vertical-responsive.html' %}
-                        {% include 'partials/video_widget.html' %}
+                    
                         {% include 'partials/github_widget.html' with githubLink=post.github_link %}
                         {% related_quizzes_widget limit=5 widget_title="Related Quizzes" %}
                         {% include 'widgets/ad-unit-vertical-responsive.html' %}
