@@ -149,7 +149,7 @@ article {
   margin-right: 0.55rem;
   font-size: 0.65rem;
   font-weight: normal;
-  padding: 0.03rem 0.35rem;
+  padding: 0.3rem 0.35rem;
   text-transform: uppercase;
 
   &.article {
@@ -288,21 +288,18 @@ article {
   background: var(--bs-card-bg);
   overflow: hidden;
   border-radius: $card-border-radius !important;
-  //box-shadow: 0 2px 6px rgba(225, 225, 225, 0.79);
-  box-shadow: 0 0 0 1px rgba(23,23,23,0.05);
+  box-shadow: rgba(99, 99, 99, 0.1) 0 2px 8px 0;
 }
 
 .article-card {
   position: relative;
   overflow: hidden;
   border-radius: $card-border-radius;
-  //background: var(--bs-card-bg);
   background: var(--feed-card-bg);
   transition: all 0.2s ease-in-out !important;
   min-height: 90px;
   margin: 0;
-   box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.05);
-  //box-shadow: 0 2px 6px rgba(225, 225, 225, 0.79);
+  box-shadow: 0 0 0 1px rgba(23, 23, 23, 0.05);
 
   &:hover {
     transform: translateY(-5px);
@@ -418,4 +415,3 @@ article {
   }
 
 }
-

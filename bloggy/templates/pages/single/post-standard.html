@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="flex-grow-1" style="overflow: hidden">
-                            <div class="article-details-card p-5 mb-4 mx-lg-3">
+                            <div class="article-details-card p-lg-5 p-3 mb-4 mx-lg-3 mx-3">
                                 {% if user.is_authenticated and user.is_superuser %}
                                     <a class="mb-3 btn btn-sm btn-secondary btn-xs"
                                        href="{{ post.get_admin_url }}">Edit post</a>

@@ -6,10 +6,8 @@
   background: var(--feed-card-bg);
   border-radius: $card-border-radius;
   box-sizing: border-box;
-  //box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);
-  //background: var(--default-card-bg);
   transition: all 0.2s ease-in-out !important;
-  box-shadow: 0 0 0 1px rgba(23,23,23,0.05);
+  box-shadow: rgba(99, 99, 99, 0.1) 0 2px 8px 0;
 }
 
 .card-rounded {
@@ -33,9 +31,6 @@
 }
 
 .card-footer {
-  //padding: 0 0 0 0;
-  //margin: 0 1rem 0 1rem;
-  //border-top: none;
   border-color: var(--table-border-color);
   background-color: inherit;
 }

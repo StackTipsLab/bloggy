@@ -19,7 +19,7 @@
                         </div>
 
                         <div class="flex-grow-1" style="overflow: hidden">
-                            <div class="article-details-card p-5 mb-4 me-lg-3">
+                            <div class="article-details-card p-lg-5 p-3 mb-4 mx-lg-3 mx-3">
 
                                 {% if user.is_authenticated and user.is_superuser %}
                                     <a class="mb-3 btn btn-sm btn-secondary btn-xs"
@@ -58,7 +58,6 @@
                         {% include 'partials/lesson_single_toc.html' %}
                         {% include 'widgets/ad-unit-vertical-responsive.html' %}
                         {% include 'partials/video_widget.html' %}
-{#                        {% include "partials/home_widget_contribute_cta.html" %}#}
                         {% include 'partials/github_widget.html' with githubLink=post.github_link %}
                         {% related_quizzes_widget limit=5 widget_title="Related Quizzes" %}
                         {% include 'widgets/ad-unit-vertical-responsive.html' %}
@@ -66,15 +65,5 @@
                 </aside>
             </div>
         </div>
-
-        <div class="bg-light  border-bottom py-5">
-            <div class="container">
-                <h2 class="mb-4 fw-600 ms-3">
-                    <span class="text-secondary">&blk14;</span> Related articles
-                </h2>
-                {% related_article_widget count=8 slug=post.slug categories=post.category.all widget_title='Related articles' widget_style="grid" %}
-            </div>
-        </div>
-
     {% endblock content %}
 {% endspaceless %}

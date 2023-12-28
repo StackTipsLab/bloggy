@@ -1,20 +1,16 @@
 #login-wrapper {
   height: calc(100vh - 75px);
-  //background: $body-bg;
 }
 
 
 .login-wrapper-inner,
 .register-wrapper-inner {
   position: relative;
-  margin: 0 auto;
-  max-width: 520px;
+  max-width: 500px;
   border-radius: $card-border-radius;
   background: var(--bs-card-bg);
   padding: 2.5rem;
-  //border-radius: var(--radius-auto) !important;
-  //box-shadow: rgba(23, 23, 23, 0.05) 0 0 0 1px;
-  //box-shadow: 5px 15px 15px rgba(89, 152, 152, 0.05);
+  margin: 2rem auto;
   transition: all 0.2s ease-in-out !important;
   box-sizing: border-box
 }

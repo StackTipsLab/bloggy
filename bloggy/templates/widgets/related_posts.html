@@ -4,10 +4,10 @@
 {% if relatedPosts|length > 0 %}
 
     {% if widgetStyle == "list" %}
-        <h3 class="h3 mt-5 mb-3">{{ widgetTitle }}</h3>
-        <ul class="related-posts-list">
+        <h3 class="h3">{{ widgetTitle }}</h3>
+        <ul class="list-unstyled">
             {% for post in relatedPosts %}
-                <li class="my-2">
+                <li class="my-3">
                     <a data-cid="{{ post.id }}" data-type="article"
                        href="{% url 'post_single' slug=post.slug %}">{{ post.title }}</a>
                 </li>

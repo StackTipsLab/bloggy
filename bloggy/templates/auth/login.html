@@ -23,7 +23,7 @@
                     <p class="help is-danger">{{ form.password.errors }}</p>
                 </div>
                 <div class="w-100">
-                    <a href="" class="text-primary ml-2 form-textd">Forgot password?</a>
+                    <a href="{% url 'password_reset' %}" class="text-primary ml-2 form-textd">Forgot password?</a>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-primary login-btn w-100">Sign In</button>

@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LogoutView
+from django.contrib.auth.views import LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, \
+    PasswordResetCompleteView
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.sitemaps.views import sitemap, index
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
@@ -28,6 +29,8 @@ from bloggy.views import EditProfileView
 from bloggy.views.courses_view import CoursesListView, CourseDetailsView, LessonDetailsView
 from bloggy.views.pages import IndexView
 from bloggy.views.category_view import CategoriesView, CategoryDetailsView
+from .forms.password_reset_form import CustomPasswordResetForm
+from .forms.set_password_form import CustomSetPasswordForm
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
@@ -64,6 +67,22 @@ urlpatterns = [
     path('logout', LogoutView.as_view(), name='logout'),
     path('register', RegisterView.as_view(), name='register'),
     path('activate/<str:uuid>/<str:token>', AccountActivationView.as_view(), name='activate_account'),
+
+    path('password-reset/', PasswordResetView.as_view(
+        template_name='auth/password_reset.html',
+        email_template_name='email/password_reset_email.html',
+        form_class=CustomPasswordResetForm
+    ), name='password_reset'),
+    path('password-reset/done/', PasswordResetDoneView.as_view(template_name='auth/password_reset_done.html'),
+         name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/',
+         PasswordResetConfirmView.as_view(
+             template_name='auth/password_reset_confirm.html',
+             form_class=CustomSetPasswordForm), name='password_reset_confirm'),
+    path('password-reset-complete/',
+         PasswordResetCompleteView.as_view(template_name='auth/password_reset_complete.html'),
+         name='password_reset_complete'),
+
     path('authors', AuthorsListView.as_view(), name="authors"),
     path('user/<str:username>', PublicProfileView.as_view(), name="user_profile"),
 
