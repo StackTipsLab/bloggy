@@ -20,30 +20,35 @@
             <div class="collapse navbar-collapse align-content-around" id="navbarNavAltMarkup">
                 <ul class="navbar-nav flex-shrink-0">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"
+                        <a class="nav-link py-3 {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"
                            href="{% url 'categories' %}">Topics</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'posts' %} active{% endif %}"
+                        <a class="nav-link py-3 {% if request.resolver_match.url_name == 'posts' %} active{% endif %}"
                            href="{% url 'posts' %}">Articles</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'courses' %} active{% endif %}"
+                        <a class="nav-link py-3 {% if request.resolver_match.url_name == 'courses' %} active{% endif %}"
                            href="{% url 'courses' %}">Courses</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.resolver_match.url_name == 'quizzes' %} active{% endif %}"
+                        <a class="nav-link py-3 {% if request.resolver_match.url_name == 'quizzes' %} active{% endif %}"
                            href="{% url 'quizzes' %}">Quizzes</a>
                     </li>
                 </ul>
-                <div class="has-search mx-lg-4 my-autod w-100 d-inline-block flex-grow-1 py-3 py-lg-0">
-                    <form role="search" method="GET" action="{% url 'search' %}">
+                <div class="has-search mx-lg-4 my-autod w-100 d-inline-block flex-grow-1 py-3 py-lg-0 mx-lg-5 mx-0">
+                    <form role="search" method="GET" action="{% url 'search' %}" class="mx-lg-5 mx-0">
                         <span class="form-control-feedback">
                             <span class="search-glass">&#9906;</span>
                         </span>
                         <input id="q" name="q" class="me-2 form-control" type="search"
                                placeholder="Search.." aria-label="Search" value="{{ search_query }}">
                     </form>
+
+                    <div class="d-flex d-lg-none my-4">
+                        <a href="{% url 'login' %}" class="btn btn-secondary me-3 w-50">Login</a>
+                        <a href="{% url 'register' %}" class="btn btn-secondary w-50">Register</a>
+                    </div>
                 </div>
             </div>
         
