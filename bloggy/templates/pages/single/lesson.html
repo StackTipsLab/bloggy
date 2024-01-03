@@ -30,19 +30,12 @@
                                     <h1 class="display-2 fw-600"
                                         style="line-height: 1.2;letter-spacing: -0.04rem">{{ post.title }}</h1>
 
-                                    {% if post.video_id %}
-                                        <div class="article-details-card my-4">
-                                            {% with '[youtube=https://www.youtube.com/watch?v='|addstr:post.video_id|addstr:']' as youtubeUrl %}
-                                                {{ youtubeUrl|shortcodes|safe }}
-                                            {% endwith %}
-                                        </div>                        
-                                    {% endif %}
-
-
                                     {% if post.thumbnail and post.template_type == "cover" %}
                                         <div class="article-single-thumbnails my-4">
                                             <img src="{{ post.thumbnail.url }}" alt="{{ post.title }}" loading="lazy"/>
                                         </div>
+                                    {% else %}
+                                        {% include 'partials/video_widget.html' %}
                                     {% endif %}
 
                                     <article id="article-content" class="article-content" data-cid="{{ post.id }}"

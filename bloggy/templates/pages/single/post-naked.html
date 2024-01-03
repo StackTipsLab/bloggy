@@ -27,7 +27,7 @@
 
                 <div class="hero article-meta-container mb-4">
                     {% if article.publish_status == "DRAFT" %}
-                        <span class="badge rounded-pill text-bg-warning text-white">{{ article.publish_status }} / PREVIEW</span>
+                        <span class="badge rounded-pill text-bg-warning text-white">{{ article.publish_status }}/PREVIEW</span>
                     {% endif %}
                     <small class="d-inline-block mb-1 text-muted text-uppercase fw-bolder"
                            style="font-size:0.75rem">Published {% pretty_date article.updated_date %},&nbsp</small>

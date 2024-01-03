@@ -3,14 +3,14 @@
 {% load define_action %}
 {% load shortcodes_filters %}
 {% if post.video_id %}
-    <div class="article-details-card p-0">
+    <div class="article-details-card my-4">
         {% with '[youtube=https://www.youtube.com/watch?v='|addstr:post.video_id|addstr:']' as youtubeUrl %}
             {{ youtubeUrl|shortcodes|safe }}
         {% endwith %}
     </div>
-    <div class="pt-2 mb-4">
+    <!-- <div class="pt-2 mb-4">
         <a href="{{ 'https://www.youtube.com/watch?v='|addstr:post.video_id }}"
            class="youtube-button" target="_blank">
             <i class="fa-brands fa-youtube pe-2"></i>Watch on YouTube</a>
-    </div>
+    </div> -->
 {% endif %}
