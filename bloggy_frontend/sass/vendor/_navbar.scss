@@ -1,28 +1,32 @@
 @import "../customVariables";
 
 #main-navbar {
-  background: var(--main-navbar-color);
+  background-color: var(--main-navbar-color);
+  backdrop-filter: blur(10px);
 }
 
 .navbar {
   padding: 0.2rem 0 !important;
   z-index: 9999;
 
-  &.--not-top {
-    box-shadow: 0 2px 6px 2px rgb(0 106 194 / 20%);
-  }
+  //&.--not-top {
+  //box-shadow: 0 2px 6px 2px rgb(0 106 194 / 20%);
+  //}
 
 }
 
 #loginCta {
-  @extend .btn, .btn-secondary;
+  @extend .btn, .btn-primary;
   margin: 0 auto;
-  padding: 0.35rem 0.75rem !important;
+  padding: 0.6rem 0.75rem 0.5rem 0.75rem !important;
+  line-height: 1;
   height: fit-content;
+  color: #FFFFFF !important;
 
   .active,
   &:active,
   &:hover {
+    color: #FFFFFF !important;
   }
 }
 
@@ -47,15 +51,11 @@
 }
 
 .navbar-nav .nav-link {
-  //margin: auto 0;
   margin: auto 0.25rem;
-  //padding: 3px 8px !important;
-  //border-radius: 20px;
   border-radius: 3px;
-  //border-radius: 0;
-  font-weight: 400;
+  font-weight: 600;
   @extend .font-sm;
-
+  letter-spacing: -0.02rem;
 }
 
 .navbar.affix {
@@ -79,13 +79,14 @@
 
 .navbar-nav a {
   @extend .font-xs;
-  color: #f8f9fa !important;
+  color: $secondary !important;
   letter-spacing: -0.05px;
   transition: all 0.2s ease-in-out !important;
   padding: 0;
-  font-weight: 400;
+  font-weight: 500;
+  line-height: 1;
+  margin: 0;
   text-transform: uppercase;
-
 
   &.active {
     color: $primary;
@@ -104,7 +105,8 @@
 
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link:hover {
-  color: #f8f9fa !important;
+  //color: #f8f9fa !important;
+  color: $secondary !important;
   transition: background-color 300ms linear, transform 0.2s;
   //background: var(--main-navbar-dark-color);
 }

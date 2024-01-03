@@ -12,8 +12,12 @@
   --default-card-bg: #fff;
   --course-card-bg: #fff;
   --heading-link-color: #0F172AFF;
-  --main-navbar-color: #068bea;
-  --main-navbar-dark-color: #067fd7;
+  //--main-navbar-color: #068bea;
+  //--main-navbar-dark-color: #067fd7;
+
+  --main-navbar-color: rgba(255, 255, 255, .6);;
+  --main-navbar-dark-color: #ffffff;
+
   --feed-card-bg: #ffffff;//var(--bs-body-bg);
   --breadcrumb-bg: #eceff4f2; //#e9ecef;
   --breadcrumb-text-color: #343a40;
