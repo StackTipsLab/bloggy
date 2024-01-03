@@ -4,7 +4,7 @@
     display: flex;
     background: $gray-300;
     padding: 0.25rem;
-    border-radius: 0.25rem;
+    border-radius: 0;
     box-sizing: border-box;
     box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);
     transition: all 0.2s ease-in-out !important;
@@ -53,6 +53,8 @@
   border: none;
   transition: all 0.2s ease-in-out !important;
   padding: 6px 12px !important;
+  line-height: 1rem;
+  border-radius: 0;
 
   button, a {
     color: unset;
@@ -62,6 +64,7 @@
     background: none;
     outline: none;
     border: 0;
+    border-radius: 0;
   }
 
   i, svg {

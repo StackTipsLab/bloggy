@@ -1,20 +1,20 @@
 {% load static %}
 {% spaceless %}
-{% if category %}
-    <div class="my-4 p-4 category-archive-banner" style="border-color:{{ category.color }};">
-        <div class="d-lg-flex">
-            <div class="flex-shrink-0">
-                {% if category.thumbnail %}
-                    <div class="category-thumbnail">
-                        <img src="{{ category.thumbnail.url }}" alt="{{ category.title }}" />
-                    </div>
-                {% endif %}
-            </div>
-            <div class="flex-grow-1 ms-lg-3">
-                <h1 class="display-5 fw-bold">{{ category.title }}</h1>
-                {% if category.excerpt %}<p class="mb-1">{{ category.excerpt }}</p>{% endif %}
+    {% if category %}
+        <div class="my-lg-5 my-3 p-lg-4 p-3 category-archive-banner" style="border-color:{{ category.color }};">
+            <div class="d-lg-flex">
+                <div class="flex-shrink-0  me-lg-4">
+                    {% if category.thumbnail %}
+                        <div class="category-thumbnail">
+                            <img src="{{ category.thumbnail.url }}" alt="{{ category.title }}"/>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="flex-grow-1">
+                    <h1 class="display-4 fw-600">{{ category.title }}</h1>
+                    <div>{% if category.excerpt %}<p class="mb-1">{{ category.excerpt }}</p>{% endif %}</div>
+                </div>
             </div>
         </div>
-    </div>
-{% endif %}
+    {% endif %}
 {% endspaceless %}

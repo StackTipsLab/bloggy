@@ -1,9 +1,10 @@
 .timeline-container {
-
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: $card-border-radius;
+  margin-left: 0;
+  padding-left: 0;
   //background: rgb(226, 244, 255);
   //background: linear-gradient(197deg, rgb(226, 244, 255) 0%, rgb(237, 248, 255) 25%, rgb(230, 246, 255) 87%, rgb(223, 243, 255) 100%);
 
