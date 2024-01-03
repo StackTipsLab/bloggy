@@ -79,7 +79,7 @@
 
 .navbar-nav a {
   @extend .font-xs;
-  color: $secondary !important;
+  color: $headings-color !important;
   letter-spacing: -0.05px;
   transition: all 0.2s ease-in-out !important;
   padding: 0;

@@ -21,6 +21,8 @@ p {
   text-rendering: optimizeLegibility;
 }
 
+.display-1 {line-height: 1.11111;}
+
 .display-1,
 .display-2,
 .display-3,
@@ -50,6 +52,10 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .fw-600 {
+  font-weight: 600 !important;
+}
+
+.fw-700 {
   font-weight: 700 !important;
 }
 
@@ -136,7 +142,6 @@ h1, h2, h3, h4, h5, h6,
     padding: 4px 8px;
     text-transform: lowercase;
     display: inline-block;
-    //background: #e1f5fe;
     background: var(--tags-list-a-bg);
     transition: color 0.8s, border 0.5s, color 0.5s;
     color: var(--tags-list-a-color);

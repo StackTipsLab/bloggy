@@ -36,8 +36,8 @@
                            href="{% url 'quizzes' %}">Quizzes</a>
                     </li>
                 </ul>
-                <div class="has-search mx-lg-4 my-autod w-100 d-inline-block flex-grow-1 py-3 py-lg-0 mx-lg-5 mx-0">
-                    <form role="search" method="GET" action="{% url 'search' %}" class="mx-lg-5 mx-0">
+                <div class="has-search mx-lg-4 my-autod w-100 d-inline-block flex-grow-1 py-3 py-lg-0 mx-0">
+                    <form role="search" method="GET" action="{% url 'search' %}" class="mx-lg-2 mx-0">
                         <span class="form-control-feedback">
                             <span class="search-glass">&#9906;</span>
                         </span>
@@ -45,58 +45,64 @@
                                placeholder="Search.." aria-label="Search" value="{{ search_query }}">
                     </form>
 
-                    <div class="d-flex d-lg-none my-4">
+                    <div class="d-flex d-lg-none mt-3">
                         <a href="{% url 'login' %}" class="btn btn-primary me-3 w-50">Login</a>
                         <a href="{% url 'register' %}" class="btn btn-primary w-50">Register</a>
                     </div>
                 </div>
             </div>
-        
-            <div class="theme-switcher flex-shrink-0 d-none d-md-block">
-                {% include 'partials/theme_switch.html' %}
-            </div>
+
             <div class="navbar-nav ml-auto d-none d-md-block">
-                {% if user.is_authenticated %}
-                    <div class="nav-item dropdown">
-                        <a class="nav-item nav-link dropdown-toggle user-action" id="userProfileDropDownCta"
-                           data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ user.get_avatar }}" class="avatar" loading="lazy"/>
-                        </a>
+                <div class="d-flex">
 
-                        <div class="dropdown custom-dropdown">
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <p class="menu-heading font-xs pt-2">{% if user.name %}Hello,
-                                    {{ user.name }}{% else %}My Account{% endif %}</p>
-                                <a class="dropdown-item" href="{% url 'profile.edit_profile' %}">Edit profile</a>
-                                <a class="dropdown-item" href="{% url 'profile.bookmarks' %}">Bookmarks</a>
-                                {% if user.is_superuser %}
-                                    <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>
-                                {% endif %}
-                                <hr>
-                                <a class="dropdown-item text-danger"
-                                   href="{% url 'logout' %}?next={{ request.path }}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                         fill="currentColor"
-                                         class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                              d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                        <path fill-rule="evenodd"
-                                              d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                    </svg>
-                                    Logout
-                                </a>
-                            </div>
-                        </div>
-
+                    <div class="theme-switcher flex-shrink-0 d-none d-md-block">
+                        {% include 'partials/theme_switch.html' %}
                     </div>
-                {% else %}
-                    <ul class="navbar-nav d-none d-md-block">
-                        <li class="nav-item">
-                            <a class="nav-link btn-primary" id="loginCta"
-                               href="{% url 'login' %}?next={{ request.path }}">Sign in</a>
-                        </li>
-                    </ul>
-                {% endif %}
+
+                    <a href="https://www.buymeacoffee.com/nilan" target="_blank" class="nav-link">
+                        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
+                             alt="Buy Me A Coffee" style="height: 34px !important;">
+                    </a>
+
+                    {% if user.is_authenticated %}
+                        <div class="nav-item dropdown">
+                            <a class="nav-item nav-link dropdown-toggle user-action" id="userProfileDropDownCta"
+                               data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ user.get_avatar }}" class="avatar" loading="lazy"/>
+                            </a>
+
+                            <div class="dropdown custom-dropdown">
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <p class="menu-heading font-xs pt-2">{% if user.name %}Hello,
+                                        {{ user.name }}{% else %}My Account{% endif %}</p>
+                                    <a class="dropdown-item" href="{% url 'profile.edit_profile' %}">Edit profile</a>
+                                    <a class="dropdown-item" href="{% url 'profile.bookmarks' %}">Bookmarks</a>
+                                    {% if user.is_superuser %}
+                                        <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>
+                                    {% endif %}
+                                    <hr>
+                                    <a class="dropdown-item text-danger"
+                                       href="{% url 'logout' %}?next={{ request.path }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor"
+                                             class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                            <path fill-rule="evenodd"
+                                                  d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                                        </svg>
+                                        Logout
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    {% else %}
+                        <a class="nav-link btn-primary" id="loginCta"
+                           href="{% url 'login' %}?next={{ request.path }}">Sign in</a>
+                    {% endif %}
+                </div>
+
             </div>
 
         </div>

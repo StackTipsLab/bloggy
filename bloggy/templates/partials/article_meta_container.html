@@ -12,20 +12,19 @@
              width="42px" style="border-radius: 50%"/>
 
         <div class="d-flex flex-row gap-2 ms-3 align-items-center">
-            <a class="text-decoration-none text-dark lead fw-500 "
+            <a class="text-decoration-none text-dark fw-500"
                href="{% url 'user_profile' username=author.username %}">
                 {{ author.get_full_name_or_username }}
             </a>
 
-            <span class="font-sm" style="color: #d5d5d5">&bull;</span>
+            <span class="font-xs" style="color: #d5d5d5">&bull;</span>
             <span class="text-decoration-none text-muted fw-500"> {{ post.updated_date|date:"M d, Y" }}</span>
-
-            <span class="font-sm" style="color: #d5d5d5">&bull;</span>
+            <span class="font-xs" style="color: #d5d5d5">&bull;</span>
             {% for category in post.category.all %}
-                <a class="text-decoration-none link-primary text-primary text-lowercase lead fw-500"
+                <a class="text-decoration-none link-primary text-primary fw-500"
                    style="z-index:999;position:relative"
                    href="{% url 'categories_single' slug=category.slug %}">
-                    #{{ category.title }}
+                    {{ category.title }}
                     {% if forloop.last != True %}
                         <span class="text-muted pe-2"></span>
                     {% endif %}

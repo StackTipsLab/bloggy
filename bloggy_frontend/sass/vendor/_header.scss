@@ -2,10 +2,11 @@
 
   .form-control {
     padding: 5px 2rem 5px 2rem;
-    border: 1px solid #888888;
+    border: 1px solid #eceff4;
+    background:#eceff4;
     //background: var(--main-navbar-dark-color);
     //color: #f8f9fa !important;
-    border-radius: 20px;
+    //border-radius: 20px;
 
     &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
       //color: var(--searchbar-text-color);
@@ -21,9 +22,9 @@
     }
 
     &:hover, &:active, &:focus, &:active {
-      --docsearch-searchbox-focus-background: rgba(0, 0, 0, 0.15);
-      --docsearch-searchbox-shadow: 0 0 0 0.25rem rgba(255, 228, 132, 0.4);
-      border-color: #ffe484;
+      --docsearch-searchbox-focus-background: #eceff4;//rgba(0, 0, 0, 0.15);
+      --docsearch-searchbox-shadow: 0 0 0 0.25rem rgb(190, 217, 255);
+      border-color: #b1d1ff;
       background: var(--docsearch-searchbox-focus-background);
       box-shadow: var(--docsearch-searchbox-shadow);
       color: var(--docsearch-text-color);
