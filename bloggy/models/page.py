@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models import TextField
+from django.urls import reverse
 
 from bloggy.models.mixin.SeoAware import SeoAware
 from bloggy.models.mixin.updatable import Updatable
@@ -45,6 +46,11 @@ class Page(Updatable, SeoAware):
         default='DRAFT', blank=True, null=True,
         help_text="Select publish status",
         verbose_name="Publish status")
+
+    def get_admin_url(self):
+        return reverse(
+            f'admin:{self._meta.app_label}_{self._meta.model_name}_change'
+            , args=[self.id])
 
     def __str__(self):
         return str(self.title)
