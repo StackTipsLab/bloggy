@@ -8,51 +8,45 @@
     {% include "seo/article_jsonld.html" with author=post.author %}
 {% endblock jsonld %}
 {% spaceless %}
-{% block content %}
-    <div class="container questions-page py-3 py-md-5">
-
-        <div class="row justify-content-left pb-5 gx-5">
-            <div class="col-12 col-md-4 col-lg-3">
-                <div class="sidebar-content sticky-top" style="z-index: 99">
-                    <div id="toc">
-                        <div id="toc-content" class="content">
+    {% block content %}
+        <div class="container questions-page py-3 py-md-5">
+            <div class="row justify-content-left pb-5 gx-5">
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="sidebar-content sticky-top" style="z-index: 99">
+                        <div id="toc">
+                            <div id="toc-content" class="content">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-8 col-lg-9">
-                <h1 class="display-2 fw-bolder">{{ article.title }}</h1>
-                <p class="lead text-gray-dark">{{ article.excerpt }}</p>
-                {% include "partials/social_share.html" with object=article %}
 
-                <div class="hero article-meta-container mb-4">
-                    {% if article.publish_status == "DRAFT" %}
-                        <span class="badge rounded-pill text-bg-warning text-white">{{ article.publish_status }}/PREVIEW</span>
-                    {% endif %}
-                    <small class="d-inline-block mb-1 text-muted text-uppercase fw-bolder"
-                           style="font-size:0.75rem">Published {% pretty_date article.updated_date %},&nbsp</small>
-                    {% for category in article.category.all %}
-                        <a class="text-decoration-none text-reset link-primary fw-bold"
-                           style="z-index:999;
-                                                  position:relative"
+                <div class="col-12 col-md-8 col-lg-8">
+                    {% for category in post.category.all %}
+                        <a class="mb-3 btn btn-sm btn-secondary btn-xs"
+                           style="z-index:999; position:relative;background-color:{{ category.color }} !important;"
                            href="{% url 'categories_single' slug=category.slug %}">
-                            <small class="d-inline-block mb-1 text-primary text-uppercase fw-bolder"
-                                   style="font-size:0.75rem">{{ category.title }}</small>
-                            {% if forloop.last != True %}<span class="text-muted">,</span>{% endif %}
+                            {{ category.title }}
                         </a>
+                        {% if forloop.last != True %}<span class="text-muted">&nbsp;{% endif %}
                     {% endfor %}
-                </div>
-                <div class="flex-grow-1">
-                    {% if article %}
+                    <h1 class="display-2 fw-700" style="line-height: 1.33333;letter-spacing: -0.035rem">{{ post.title }}</h1>
+                    <p class="lead fw-600 fst-italic">{{ post.excerpt }}</p>
+                    <div class="hero article-meta-container mb-4">
+                        {% if post.publish_status == "DRAFT" %}
+                            <span class="badge rounded-pill text-bg-warning text-white">{{ post.publish_status }}/PREVIEW</span>
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1">
                         <div class="mb-3">
                             <div id="article-content" class="article-content">
-                                {{ article.content|expand_media_url }}
+                                {{ post.content|expand_media_url }}
                             </div>
                         </div>
-                    {% endif %}
+                    </div>
+
+                    {% include "partials/social_share.html" with object=article %}
                 </div>
             </div>
         </div>
-    </div>
-{% endblock content %}
+    {% endblock content %}
 {% endspaceless %}
