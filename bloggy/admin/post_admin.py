@@ -7,6 +7,7 @@ from django.utils.safestring import mark_safe
 
 from bloggy.admin import BloggyAdmin, BloggyAdminForm, publication_fieldsets, seo_fieldsets
 from bloggy.models import Post
+from bloggy.services.post_service import cleanse_html
 
 
 class PostForm(BloggyAdminForm):
@@ -101,6 +102,7 @@ class PostAdmin(BloggyAdmin):
             obj.published_date = timezone.now()
         if not obj.pk:
             obj.author = request.user
+        obj.content = cleanse_html(obj.content)
 
         super().save_model(request, obj, form, change)
 

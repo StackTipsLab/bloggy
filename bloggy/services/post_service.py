@@ -2,6 +2,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 from bloggy.models import Post, Quiz
 from bloggy.utils.string_utils import StringUtils
+from bs4 import BeautifulSoup
 
 DEFAULT_PAGE_SIZE = 20
 
@@ -64,3 +65,17 @@ def set_seo_settings(post, context):
 
     if post.thumbnail:
         context['meta_image'] = post.thumbnail.url
+
+
+def cleanse_html(html_string):
+    soup = BeautifulSoup(html_string, 'html.parser')
+    for tag in soup.find_all(True, {'style': True}):
+        del tag['style']
+
+    # Find and remove empty <p>, <a>, and <span> tags
+    for tag in soup.find_all(['p', 'a', 'span']):
+        if not tag.contents or (len(tag.contents) == 1 and not tag.contents[0].strip()):
+            tag.extract()
+
+    # Get the modified HTML string
+    return str(soup)
