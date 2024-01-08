@@ -26,6 +26,10 @@
     <div class="container">
         <div class="row">
             <main id="main-content" class="article-details-card p-5 lessons_list col-12 col-md-8">
+                {% if user.is_authenticated and user.is_superuser %}
+                    <a class="mb-3 btn btn-sm btn-secondary btn-xs"
+                       href="{{ quiz.get_admin_url }}">Edit post</a>
+                {% endif %}
                 <div id="vueRoot">
                     <quizlet :quiz="{{ quiz.get_questions_json }}"></quizlet>
                 </div>
@@ -35,12 +39,10 @@
                 <div class="sidebar-content sticky-top ms-lg-3" style="z-index: 99">
                     {% include 'widgets/ad-unit-vertical-responsive.html' %}
                     {% include "partials/home_widget_contribute_cta.html" %}
-                    
-                    
                     <div class="card card-rounded card-shadow mb-4 p-3 p-lg-4">
                         {% related_article_widget count=6 slug=quiz.slug widget_title='Recent posts' widget_style="list" %}
                     </div>
-                    
+
                 </div>
             </aside>
         </div>

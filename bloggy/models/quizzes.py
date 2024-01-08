@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.db.models import TextField
+from django.urls import reverse
 from hitcount.models import HitCount
 
 from bloggy import settings
@@ -57,6 +58,9 @@ class Quiz(Content):
     @property
     def get_questions_json(self):
         return get_questions_json(self)
+
+    def get_admin_url(self):
+        return reverse(f'admin:{self._meta.app_label}_{self._meta.model_name}_change', args=[self.id])
 
     def get_questions(self):
         return self.quizquestion_set.all()

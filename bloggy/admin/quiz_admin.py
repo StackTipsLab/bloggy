@@ -35,7 +35,7 @@ class QuizAdmin(BloggyAdmin):
         }),
         publication_fieldsets, seo_fieldsets)
 
-    summernote_fields = ('description',)
+    summernote_fields = ('content',)
     readonly_fields = ['thumbnail_tag']
     ordering = ('-display_order',)
     list_display_links = ['title']
