@@ -56,15 +56,10 @@ INSTALLED_APPS = [
     'bloggy_api',
     'mail_templated',  # Used for templated email https://github.com/artemrizhov/django-mail-templated
     'storages',
-
+    'debug_toolbar',  # dev only
     'hitcount',
     'colorfield'
 ]
-
-if DEBUG:
-    INSTALLED_APPS += (
-        'debug_toolbar',  # dev only
-    )
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
