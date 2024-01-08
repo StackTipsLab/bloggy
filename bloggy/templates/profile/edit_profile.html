@@ -35,7 +35,7 @@
                         {% endfor %}
 
                         {% for field in form.visible_fields %}
-                            <div class="form-group col-md-8 my-2" style="padding: 0 1rem !important;">
+                            <div class="form-group col-12 col-md-8 my-2" style="padding: 0 1rem !important;">
                                 {% if field.name == "profile_photo" %}
                                 {% else %}
                                     <label for="{{ field.name }}">{{ field.label_tag }}</label>
