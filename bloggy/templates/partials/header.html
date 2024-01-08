@@ -18,6 +18,7 @@
             </button>
 
             <div class="collapse navbar-collapse align-content-around" id="navbarNavAltMarkup">
+                <hr class="d-block d-md-none">
                 <ul class="navbar-nav flex-shrink-0">
                     <li class="nav-item">
                         <a class="nav-link py-3 {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"
@@ -45,10 +46,44 @@
                                placeholder="Search.." aria-label="Search" value="{{ search_query }}">
                     </form>
 
-                    <div class="d-flex d-lg-none mt-3">
-                        <a href="{% url 'login' %}" class="btn btn-primary me-3 w-50">Login</a>
-                        <a href="{% url 'register' %}" class="btn btn-primary w-50">Register</a>
-                    </div>
+                    {% if user.is_authenticated %}
+                        <div class="d-flex row d-lg-none mt-3">
+                            <div class="d-flex flex-column">
+                                <hr>
+
+                                <ul class="navbar-nav flex-shrink-0">
+                                 <li class="nav-item">
+                                        <a class="nav-link py-3">{% if user.name %}Hello, {{ user.name }}{% else %}
+                                    My Account{% endif %}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link py-3" href="{% url 'profile.edit_profile' %}">Edit
+                                            profile</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link py-3" href="{% url 'profile.bookmarks' %}">Bookmarks</a>
+                                    </li>
+                                    {% if user.is_superuser %}
+                                        <li class="nav-item">
+                                            <a class="nav-link py-3" href="{% url 'admin:index' %}">Dashboard</a>
+                                        </li>
+                                    {% endif %}
+                                    <hr>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-danger py-3"
+                                           href="{% url 'logout' %}?next={{ request.path }}"
+                                           style="color: red !important;">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="d-flex d-lg-none mt-3">
+                            <a href="{% url 'login' %}" class="btn btn-primary me-3 w-50">Login</a>
+                            <a href="{% url 'register' %}" class="btn btn-primary w-50">Register</a>
+                        </div>
+                    {% endif %}
+
                 </div>
             </div>
 
