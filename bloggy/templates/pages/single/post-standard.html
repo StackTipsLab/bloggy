@@ -62,7 +62,7 @@
                                     {% include "partials/social_share.html" with object=post authorName=post.author.get_full_name_or_username %}
                                     {% include 'partials/author_widget.html' with author=post.author %}
 
-                                    {% comment %}<section id="vueRoot" class="d-print-none my-5">
+                                   {% comment %} <section id="vueRoot" class="d-print-none my-5">
                                         <comments post-id="{{ post.id }}" post-type="{{ post.post_type }}" current-user="{{ user }}"></comments>
                                     </section>{% endcomment %}
                                 </div>

@@ -73,8 +73,8 @@
                                                     {% for lesson in course.get_lessons %}
                                                         {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
                                                         <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
-                                                            <h3 class=""><a
-                                                                    href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
+                                                            <h3 class="">
+                                                                <a href="{% url 'lesson_single' course=course.slug slug=lesson.slug %}"
                                                                     class="text-decoration-none h3 text-dark p-0 m-0 w-500">{{ lesson.title }}</a>
                                                             </h3>
                                                             <p class="font-sm text-muted mb-3">{{ lesson.excerpt }}</p>

@@ -1,6 +1,9 @@
+from datetime import timezone
+
 from django.contrib import admin
 from bloggy.admin import BloggyAdmin, BloggyAdminForm, seo_fieldsets, publication_fieldsets
 from bloggy.models.course import Course
+from bloggy.services.post_service import cleanse_html
 
 
 class CourseForm(BloggyAdminForm):
@@ -45,5 +48,6 @@ class CourseAdmin(BloggyAdmin):
     list_display_links = ['title']
     form = CourseForm
 
-
-
+    def save_model(self, request, obj, form, change):
+        obj.description = cleanse_html(obj.description)
+        super().save_model(request, obj, form, change)
