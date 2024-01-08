@@ -1,28 +1,39 @@
 {% load static %}
 {% spaceless %}
     {% if category %}
-        <div class="my-lg-5 my-3 p-lg-4 p-3 category-archive-banner" style="border-color:{{ category.color }};">
-            <div class="d-lg-flex">
-                <div class="flex-shrink-0  me-lg-4">
-                    {% if category.thumbnail %}
-                        <div class="category-thumbnail">
-                            <img src="{{ category.thumbnail.url }}" alt="{{ category.title }}"/>
+        {% include 'partials/category_archive_breadcrumb.html' %}
+
+        <div class="container py-lg-5 py-3 ">
+            <div class="category-archive-banner" style="border-color:{{ category.color }};">
+                <div class="d-lg-flex">
+                    <div class="flex-shrink-0  me-lg-4">
+                        {% if category.thumbnail %}
+                            <div class="category-thumbnail">
+                                <img src="{{ category.thumbnail.url }}" alt="{{ category.title }}"/>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="flex-grow-1">
+                        <h1 class="display-2 fw-700"
+                            style="line-height: 1.33333;letter-spacing: -0.035rem;color: {{ category.color }}">{{ category.title }}
+                        </h1>
+                        <div>{% if category.excerpt %}<p class="mb-1">{{ category.excerpt }}</p>{% endif %}
                         </div>
-                    {% endif %}
-                </div>
-                <div class="flex-grow-1">
-                    <h1 class="display-4 fw-600">{{ category.title }}
-                        <small class="d-inline-block text-muted text-uppercase fw-500 font-xs">
-                            #{{ category.article_count }} article{{ category.article_count | pluralize }}
-                        </small>
-                    </h1>
-                    <div>{% if category.excerpt %}<p class="mb-1">{{ category.excerpt }}</p>{% endif %}</div>
-                    {% if user.is_authenticated and user.is_superuser %}
-                        <a class="btn btn-sm btn-secondary btn-xs my-3" href="{{ category.get_admin_url }}">Edit
-                            course</a>
-                    {% endif %}
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <a class="btn btn-sm btn-secondary btn-xs my-3" href="{{ category.get_admin_url }}">Edit
+                                course</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
+
+
+            <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3 mt-lg-3">
+                {% for course in courses %}
+                    {% include 'partials/course_grid_column.html' with hideThumbnail=False %}
+                {% endfor %}
+            </div>
+
         </div>
     {% endif %}
 {% endspaceless %}

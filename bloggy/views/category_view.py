@@ -5,7 +5,7 @@ from django.http import Http404
 from django.views.generic import TemplateView, ListView
 
 from bloggy import settings
-from bloggy.models import Category
+from bloggy.models import Category, Course
 from bloggy.models import Post
 from bloggy.services.post_service import set_seo_settings
 
@@ -24,7 +24,6 @@ class CategoriesView(TemplateView):
 
         logger.debug('Loading categories: %s', categories)
         context['categories'] = categories
-
         return context
 
 
@@ -45,6 +44,10 @@ class CategoryDetailsView(ListView):
 
         posts = Post.objects.filter(category__slug__in=[category_param], publish_status="LIVE").order_by(
             "-published_date")
+
+        courses = Course.objects.filter(category=category, publish_status="LIVE").order_by(
+            "-published_date")
+
         paginator = Paginator(posts, self.paginate_by)
         page = self.request.GET.get('page')
 
@@ -56,6 +59,7 @@ class CategoryDetailsView(ListView):
             posts = paginator.page(paginator.num_pages)
 
         context['posts'] = posts
+        context['courses'] = courses
         context['categories'] = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
 
         set_seo_settings(post=category, context=context)

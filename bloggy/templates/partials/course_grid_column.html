@@ -1,6 +1,6 @@
 <div class="col">
     <div class="article-card card-shadow card">
-        {% if course.thumbnail %}
+        {% if course.thumbnail and not hideThumbnail %}
             <img src="{{ course.thumbnail.url }}" class="card-img-top" alt="{{ course.title }}"
                  loading="lazy" height="155">
         {% endif %}
@@ -10,9 +10,6 @@
                    class="quiz-link">{{ course.title }}</a>
             </h3>
             <small class="font-sm py-2">{{ course.excerpt|truncatechars:110 }}</small>
-{#            <a href="{% url 'courses_single' slug=course.slug %}"#}
-{#               class="text-decoration-none text-uppercase font-xs text-primary fw-500 pt-3 d-block">#}
-{#                Start Course&nbsp;&rarr;</a>#}
         </div>
         <div class="card-footer ">
             <div class="d-flex justify-content-between py-2">
