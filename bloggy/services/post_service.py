@@ -74,7 +74,7 @@ def cleanse_html(html_string):
 
     # Find and remove empty <p>, <a>, and <span> tags
     for tag in soup.find_all(['p', 'a', 'span']):
-        if not tag.contents or (len(tag.contents) == 1 and not tag.contents[0].strip()):
+        if not tag and (not tag.contents or (len(tag.contents) == 1 and not tag.contents[0].strip())):
             tag.extract()
 
     # Get the modified HTML string

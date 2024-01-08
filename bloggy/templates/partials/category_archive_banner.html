@@ -11,8 +11,16 @@
                     {% endif %}
                 </div>
                 <div class="flex-grow-1">
-                    <h1 class="display-4 fw-600">{{ category.title }}</h1>
+                    <h1 class="display-4 fw-600">{{ category.title }}
+                        <small class="d-inline-block text-muted text-uppercase fw-500 font-xs">
+                            #{{ category.article_count }} article{{ category.article_count | pluralize }}
+                        </small>
+                    </h1>
                     <div>{% if category.excerpt %}<p class="mb-1">{{ category.excerpt }}</p>{% endif %}</div>
+                    {% if user.is_authenticated and user.is_superuser %}
+                        <a class="btn btn-sm btn-secondary btn-xs my-3" href="{{ category.get_admin_url }}">Edit
+                            course</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

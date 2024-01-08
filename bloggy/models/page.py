@@ -52,6 +52,9 @@ class Page(Updatable, SeoAware):
             f'admin:{self._meta.app_label}_{self._meta.model_name}_change'
             , args=[self.id])
 
+    def get_admin_url(self):
+        return reverse(f'admin:{self._meta.app_label}_{self._meta.model_name}_change', args=[self.id])
+
     def __str__(self):
         return str(self.title)
 

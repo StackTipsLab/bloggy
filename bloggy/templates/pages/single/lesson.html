@@ -43,7 +43,7 @@
                                         {% if post %}
                                             <div class="mb-3">
                                                 <div id="article-content" class="article-content text-zoomed">
-                                                    <div>{{ post.content|expand_media_url }}</div>
+                                                    {{ post.content|expand_media_url }}
                                                 </div>
                                             </div>
                                         {% endif %}

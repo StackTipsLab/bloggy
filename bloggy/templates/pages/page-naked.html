@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         {% if user.is_authenticated and user.is_superuser %}
-            <a class="mb-3 btn btn-sm btn-secondary btn-xs"
+            <a class="my-3 btn btn-sm btn-secondary btn-xs"
                href="{{ page.get_admin_url }}">Edit post</a>
         {% endif %}
     </div>

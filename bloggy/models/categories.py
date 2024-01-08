@@ -43,6 +43,9 @@ class Category(Updatable, SeoAware):
     def get_absolute_url(self):
         return reverse('categories_single', args=[str(self.slug)])
 
+    def get_admin_url(self):
+        return reverse(f'admin:{self._meta.app_label}_{self._meta.model_name}_change', args=[self.id])
+
     def thumbnail_tag(self):
         if self.thumbnail_tag:
             return format_html(f'<img src="{self.thumbnail.url}" width="auto" height="40"/>')

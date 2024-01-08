@@ -404,3 +404,33 @@ article {
   }
 
 }
+
+
+figure.callout {
+  padding: 1rem;
+  white-space: pre-wrap;
+  display: flex;
+  background: $body-bg;
+  margin: 1.25em 0;
+  page-break-inside: avoid;
+
+
+  .icon {
+    display: inline-block;
+    max-width: 40em;
+    max-height: 40em;
+    text-decoration: none;
+    vertical-align: text-bottom;
+    margin-right: 0.5em;
+    font-size: 1.75rem !important;
+  }
+
+  :nth-child(2) {
+    width: 100%;
+    white-space: normal;
+  }
+
+  p {
+    margin: 1.1em 0;
+  }
+}

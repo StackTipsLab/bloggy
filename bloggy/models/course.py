@@ -46,6 +46,9 @@ class Course(Content):
     def get_absolute_url(self):
         return reverse("courses_single", kwargs={"slug": str(self.slug)})
 
+    def get_admin_url(self):
+        return reverse(f'admin:{self._meta.app_label}_{self._meta.model_name}_change', args=[self.id])
+
     @property
     def get_lessons(self):
         return self.post_set.filter(publish_status="LIVE").order_by("display_order").all()
