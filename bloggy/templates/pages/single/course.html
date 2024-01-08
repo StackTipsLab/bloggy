@@ -64,13 +64,12 @@
                                 </div>
                             </div>
                             <div class="padding-medium relative pt-2">
-                                <p>{{ course.description |safe }}</p>
-
+                                {{ course.description |safe }}
                                 <div class="container overflow-hidden">
                                     <div class="row grid">
-                                        <div class="timeline-container mt-4">
+                                        <div class="timeline-container mt-3">
                                             <div class="wrapper">
-                                                <ul class="sessions ">
+                                                <ul class="sessions">
                                                     {% for lesson in course.get_lessons %}
                                                         {% url 'lesson_single' course=course.slug slug=lesson.slug as current_url %}
                                                         <li class="list-group-item {% if request.get_full_path == current_url %}active{% endif %}">
