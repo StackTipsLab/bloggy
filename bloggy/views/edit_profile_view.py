@@ -1,6 +1,7 @@
 import os
 
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.template.context_processors import static
 from django.urls import reverse
@@ -12,7 +13,7 @@ from bloggy.models import User
 from bloggy.templatetags.custom_widgets import sanitize_url
 
 
-class EditProfileView(FormView):
+class EditProfileView(LoginRequiredMixin, FormView):
     template_name = "profile/edit_profile.html"
     model = User
     form_class = EditProfileForm
@@ -20,7 +21,8 @@ class EditProfileView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['meta_title'] = "Update Profile"
-        context['meta_description'] = f"Update my profile. You need a {settings.SITE_TITLE}  account to sign in and view your profile."
+        context[
+            'meta_description'] = f"Update my profile. You need a {settings.SITE_TITLE} account to sign in and view your profile."
         context['meta_image'] = static('static/media/logo.png')
         return context
 
@@ -40,43 +42,38 @@ class EditProfileView(FormView):
             'twitter': user.twitter,
             'youtube': user.youtube,
             'github': user.github,
+            "receive_news_updates": user.receive_news_updates,
+            "receive_new_content": user.receive_new_content,
         })
 
         return initial
 
     def get_success_url(self):
         return reverse('profile.account')
-        # return self.request.get_full_path()
 
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
+
+        profile_data = {
+            "name": form.cleaned_data["name"],
+            "bio": form.cleaned_data["bio"],
+            "website": sanitize_url(form.cleaned_data["website"]),
+            "twitter": sanitize_url(form.cleaned_data["twitter"]),
+            "youtube": sanitize_url(form.cleaned_data["youtube"]),
+            "linkedin": sanitize_url(form.cleaned_data["linkedin"]),
+            "github": sanitize_url(form.cleaned_data["github"]),
+            "receive_news_updates": form.cleaned_data["receive_news_updates"],
+            "receive_new_content": form.cleaned_data["receive_new_content"],
+        }
 
         if self.request.FILES.get("profile_photo", None) is not None:
-            # file_path = self.save_media_file(self.request.FILES["profile_photo"])
-            User.objects.filter(username=self.request.user.username).update(
-                profile_photo=self.request.FILES["profile_photo"],
-                name=form.cleaned_data["name"],
-                bio=form.cleaned_data["bio"],
-                website=sanitize_url(form.cleaned_data["website"]),
-                twitter=sanitize_url(form.cleaned_data["twitter"]),
-                youtube=sanitize_url(form.cleaned_data["youtube"]),
-                linkedin=sanitize_url(form.cleaned_data["linkedin"]),
-                github=sanitize_url(form.cleaned_data["github"])
-            )
-        else:
-            User.objects.filter(username=self.request.user.username).update(
-                name=form.cleaned_data["name"],
-                bio=form.cleaned_data["bio"],
-                website=sanitize_url(form.cleaned_data["website"]),
-                twitter=sanitize_url(form.cleaned_data["twitter"]),
-                youtube=sanitize_url(form.cleaned_data["youtube"]),
-                linkedin=sanitize_url(form.cleaned_data["linkedin"]),
-                github=sanitize_url(form.cleaned_data["github"])
-            )
+            profile_data["profile_photo"] = self.request.FILES["profile_photo"]
 
-            messages.success(self.request, 'Your profile details have been successfully updated.')
+        User.objects.update_or_create(
+            username=self.request.user.username,
+            defaults=profile_data
+        )
 
+        messages.success(self.request, 'Your profile details have been successfully updated.')
         return super().form_valid(form)
 
     def save_media_file(self, image):

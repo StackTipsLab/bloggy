@@ -66,6 +66,8 @@ class User(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     youtube = models.CharField(max_length=100, null=True, blank=True)
     github = models.CharField(max_length=100, null=True, blank=True)
     bio = models.TextField(max_length=250, null=True, blank=True)
+    receive_news_updates = models.BooleanField(default=True)
+    receive_new_content = models.BooleanField(default=True)
 
     class Meta:
         db_table = "bloggy_user"

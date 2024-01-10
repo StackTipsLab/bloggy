@@ -52,25 +52,35 @@
                                 <hr>
 
                                 <ul class="navbar-nav flex-shrink-0">
-                                 <li class="nav-item">
-                                        <a class="nav-link py-3">{% if user.name %}Hello, {{ request.user.name }}{% else %}
-                                    My Account{% endif %}</a>
+                                    <li class="nav-item">
+                                        <a class="nav-link py-3">{% if user.name %}Hello,
+                                            {{ request.user.name }}{% else %}
+                                            My Account{% endif %}</a>
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="nav-link py-3" href="{% url 'profile.edit_profile' %}">Edit
-                                            profile</a>
+                                        <a href="{% url 'profile.account' %}" class="nav-link py-3">Account</a>
                                     </li>
-{#                                    <li class="nav-item">#}
-{#                                        <a class="nav-link py-3" href="{% url 'profile.bookmarks' %}">Bookmarks</a>#}
-{#                                    </li>#}
 
+                                    <li class="nav-item">
+                                        <a href="{% url 'profile.dashboard' %}" class="nav-link py-3">Dashboard</a>
+                                    </li>
+
+                                    {% if user.is_staff %}
+                                        <li class="nav-item">
+                                            <a class="nav-link py-3"
+                                               href="{% url 'user_profile' username=user.username %}">Your profile<i
+                                                    class="fa-solid fa-arrow-up-right-from-square float-lg-end ms-3"></i></a>
+                                        </li>
+                                    {% endif %}
 
                                     {% if user.is_superuser %}
                                         <li class="nav-item">
-                                            <a class="nav-link py-3" href="{% url 'admin:index' %}">Dashboard</a>
+                                            <a class="nav-link py-3" href="{% url 'admin:index' %}">Admin panel<i
+                                                    class="fa-solid fa-arrow-up-right-from-square float-lg-end ms-3"></i></a>
                                         </li>
                                     {% endif %}
+
                                     <hr>
                                     <li class="nav-item">
                                         <a class="nav-link text-danger py-3"
@@ -111,32 +121,44 @@
 
                             <div class="dropdown custom-dropdown">
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-{#                                    <p class="menu-heading font-xs pt-2">#}
-                                <li class="nav-item">
-                                    <a class="dropdown-item"><span class="menu-heading">{% if user.name %}<span class="me-2">👋</span>Hello, {{ user.name }}{% else %}My Account{% endif %}</span></a>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item"><span class="menu-heading">
+                                            <span class="me-2">👋</span>Hello, {{ user.name }}</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" href="{% url 'profile.account' %}"><i
+                                                class="fa-solid fa-user me-2"></i>My Account</a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" href="{% url 'profile.dashboard' %}"><i
+                                                class="fa-solid fa-gauge me-2"></i>Dashboard</a>
+                                    </li>
+
+                                    {% if user.is_staff %}
+                                        <li class="nav-item">
+                                            <a class="dropdown-item"
+                                               href="{% url 'user_profile' username=user.username %}"><i
+                                                    class="fa-solid fa-arrow-up-right-from-square me-2"></i>Your Profile</a>
+                                        </li>
+                                    {% endif %}
+
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                           data-bs-target="#feedbackModal"><i class="fa-solid fa-comments me-2"></i>Give
+                                            Feedback</a>
                                     </li>
 
                                     {% if user.is_superuser %}
                                         <li class="nav-item">
-                                            <a class="dropdown-item" href="{% url 'index' %}"><i class="fa-solid fa-house me-2"></i>Home</a>
+                                            <a class="dropdown-item" href="{% url 'admin:index' %}"><i
+                                                    class="fa-solid fa-gauge me-2"></i>Admin Panel</a>
                                         </li>
                                     {% endif %}
-
-                                     <li class="nav-item">
-                                            <a class="dropdown-item" href="{% url 'profile.account' %}"><i class="fa-solid fa-user me-2"></i>My Account</a>
-                                     </li>
-
-                                    <li class="nav-item">
-                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal"><i class="fa-solid fa-comments me-2"></i>Give Feedback</a>
-                                    </li>
-
-
-{#                                    <a class="dropdown-item" href="{% url 'profile.edit_profile' %}">Edit profile</a>#}
-{#                                    <a class="dropdown-item" href="{% url 'profile.bookmarks' %}">Bookmarks</a>#}
-                                    {% if user.is_superuser %}
-                                        <a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a>
-                                    {% endif %}
                                     <hr>
+
                                     <a class="dropdown-item text-danger"
                                        href="{% url 'logout' %}?next={{ request.path }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

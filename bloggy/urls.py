@@ -36,6 +36,7 @@ from .views import RegisterView
 from .views.account import AccountActivationView
 from .views.account_view import AccountView
 from .views.change_password_view import ChangePasswordView
+from .views.my_dashboard_view import DashboardView
 from .views.posts import PostListView, PostDetailsView
 from .views.login import MyLoginView
 from .views.pages import AdsTextView, robots
@@ -93,7 +94,7 @@ urlpatterns = [
     path('edit-profile', login_required(EditProfileView.as_view()), name="profile.edit_profile"),
     path('account/update-username', login_required(UpdateUsernameView.as_view()), name='profile.account.update_username'),
     path('account/change-password', login_required(ChangePasswordView.as_view()), name='profile.account.change_password'),
-    # path('dashboard', login_required(MyProfileView.as_view()), name="profile.dashboard"),
+    path('dashboard', login_required(DashboardView.as_view()), name="profile.dashboard"),
     # path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
 
     path('contact', TemplateView.as_view(template_name="pages/contact.html"), name='pages.contact'),
@@ -109,7 +110,6 @@ urlpatterns = [
 
     path('summernote/', include('django_summernote.urls')),
     path('api/1.0/', include('bloggy_api.urls')),
-
 
 ]
 

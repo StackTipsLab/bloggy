@@ -1,18 +1,25 @@
 {% load static %}
 {% load custom_widgets %}
-<div class="card card-bordered card-shadowd p-4">
+<div class="card card-bordered card-shadowdd p-4 mb-3">
     <a href="{% url 'index' %}" class="pb-3 text-decoration-none link-dark link-offset-2 fw-600">Home</a>
     <hr class="m-0 opacity-25">
     <a href="{% url 'profile.account' %}" class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Account</a>
     <hr class="m-0 opacity-25">
 
-    <a href="{% url 'user_profile' username=user.username %}" 
-       class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Your profile</a>
+    <a href="{% url 'profile.dashboard' %}" class="py-3  text-decoration-none link-dark link-offset-2 fw-600">
+        Dashboard</a>
     <hr class="m-0 opacity-25">
+
+    {% if user.is_staff %}
+        <a href="{% url 'user_profile' username=user.username %}"
+           class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Your profile<i
+                class="fa-solid fa-arrow-up-right-from-square float-lg-end ms-3"></i></a>
+        <hr class="m-0 opacity-25">
+    {% endif %}
 
     {% if user.is_superuser %}
         <a href="{% url 'admin:index' %}" class="py-3  text-decoration-none link-dark link-offset-2 fw-600">
-            Dashboard</a>
+            Admin panel<i class="fa-solid fa-arrow-up-right-from-square float-lg-end ms-3"></i></a>
         <hr class="m-0 opacity-25">
     {% endif %}
 

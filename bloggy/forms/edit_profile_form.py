@@ -1,6 +1,5 @@
 from django import forms
-from django.forms import ClearableFileInput
-
+from django.forms import ClearableFileInput, ModelForm, inlineformset_factory
 from bloggy.models import User
 
 
@@ -11,18 +10,20 @@ class NonClearableFileInput(ClearableFileInput):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
-        help_texts={
-            "bio": "This will be displayed publicly on your profile. Keep it short and crisp."
+        help_texts = {
+            "bio": "This will be displayed publicly on your profile. Keep it short and crisp.",
+            'receive_news_updates': "News about product and feature updates",
+            'receive_new_content': "Get notified when new content is added"
         }
+
+        labels = {
+            'receive_news_updates': "News and updates",
+            'receive_new_content': "New tutorials & courses"
+        }
+
         fields = [
-            'profile_photo',
-            'name',
-            'website',
-            'twitter',
-            'linkedin',
-            'youtube',
-            'github',
-            'bio'
+            'profile_photo', 'name', 'website', 'twitter', 'linkedin', 'youtube', 'github', 'bio',
+            'receive_news_updates', 'receive_new_content'
         ]
 
         widgets = {
@@ -64,4 +65,13 @@ class EditProfileForm(forms.ModelForm):
                 'rows': 5,
                 'placeholder': 'Your github'
             }),
+
+            'receive_news_updates': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+
+            'receive_new_content': forms.CheckboxInput(attrs={
+                'class': 'form-check-input',
+            }),
+
         }

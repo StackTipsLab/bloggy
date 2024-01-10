@@ -39,9 +39,13 @@
         <div class="py-3 pb-md-5">
             <h1 class="h2 py-3 px-2">My articles(so far)</h1>
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-3 mb-3">
-                {% for post in posts %}
-                    <div class="col">{% include "partials/post_list_item.html" with post=post cssClass="" %}</div>
-                {% endfor %}
+                {% if posts|length <= 0 %}
+                    <p class="lead my-3 text-muted">Currently, there are no published posts.</p>
+                {% else %}
+                    {% for post in posts %}
+                        <div class="col">{% include "partials/post_list_item.html" with post=post cssClass="" %}</div>
+                    {% endfor %}
+                {% endif %}
             </div>
             {% include 'partials/paging.html' with posts=posts %}
 

@@ -30,11 +30,11 @@
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-lg-3">
-                {% include 'partials/dashboard_menu.html' %}
+            <div class="col-12 col-lg-3 col-xl-3">
+                {% include 'partials/dashboard_menu.html' with user=user %}
             </div>
 
-            <div class="col-lg-7">
+            <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card p-lg-5 p-3 card-bordered card-shadowd">
                     <h1 class="h2">Account details</h1>
                     <p>Manage your account settings such as username, password, and personal information.</p>
@@ -64,8 +64,7 @@
 
                     </div>
                     <div class="mb-3">
-                        <a href="{% url 'profile.account.change_password' %}" class="btn border-2 btn-outline-primary"
-                           target="_blank">Change password</a>
+                        <a href="{% url 'profile.account.change_password' %}" class="btn border-2 btn-outline-primary">Change password</a>
                     </div>
 
                     <div class="d-flex justify-content-between mt-5">
@@ -81,9 +80,9 @@
                         <div class="col-12">
                             <h4 class="h4 mb-0">Profile photo</h4>
                             <img src="{{ user.get_avatar }}" alt=""
-                             class="img-fluid rounded-circled mt-2 mb-3" id="profile_photo_preview"
-                             height="100px"
-                             width="100px">
+                                 class="img-fluid rounded-circled mt-2 mb-3" id="profile_photo_preview"
+                                 height="100px"
+                                 width="100px">
                         </div>
 
                         <div class="col-12 col-lg-6">
@@ -114,6 +113,22 @@
                         <div class="col-12">
                             <h4 class="h4 mb-0">Bio</h4>
                             <p class="text-muted">{% if user.bio %}{{ user.bio }}{% else %}-{% endif %}</p>
+                        </div>
+                    </div>
+
+
+                    <h2 class="h3 mt-4 mb-2">Notification settings</h2>
+                    <div class="custom-form">
+                        <div class="col-md-12 my-2">
+                            <input type="checkbox" name="receive_news_updates" class="form-check-input" id="id_receive_news_updates"  {% if user.receive_news_updates %}checked{% endif %} style="pointer-events: none;">
+                            <label class="form-check-label px-2" for="id_receive_news_updatesd">News and updates</label>
+                            <span id="emailHelp" class="helptext ms-4 text-muted">News about product and feature updates</span>
+                        </div>
+
+                        <div class="col-md-12 mt-3">
+                            <input type="checkbox" name="receive_new_content" class="form-check-input" id="id_receive_new_content" {% if user.receive_new_content %}checked{% endif %} style="pointer-events: none;">
+                            <label class="form-check-label px-2" for="id_receive_new_contentd">New tutorials&amp; courses</label>
+                            <span id="emailHelp" class="helptext ms-4 text-muted">Get notified when new content is added</span>
                         </div>
                     </div>
                 </div>

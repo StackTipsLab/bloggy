@@ -23,13 +23,13 @@
 
     <div class="container mt-5">
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-12 col-lg-3 col-xl-3">
                 {% include 'partials/dashboard_menu.html' with user=user %}
             </div>
 
-            <div class="col-lg-7">
+            <div class="col-12 col-lg-9 col-xl-7">
                 <div class="card p-lg-5 p-3 card-bordered card-shadowd">
-                    <h1 class="h2">Update profile</h1>
+                    <h1 class="h2">Edit personal information</h1>
                     {% if user_form.errors %}
                         <div class="alert alert-danger alert-dismissible" role="alert">
                             <div id="form_errors">
@@ -53,20 +53,35 @@
 
                         <div class="row">
                             {% for field in form.visible_fields %}
-                                <div class="{% if field.name == 'profile_photo' or field.name == 'bio' %} col-md-12 {% else %} col-md-6 {% endif %} my-2">
-                                    {% if field.name == "profile_photo" %}
-                                    {% else %}
-                                        {{ field.label_tag }}
+                                {% if field.name == 'receive_news_updates' or field.name ==  'receive_new_content' %}
+                                    {% if field.name == 'receive_news_updates' %}
+                                        <h2 class="h3 mt-4 mb-2">Notification settings</h2>
                                     {% endif %}
-                                    <small class="errors"> {{ field.errors }}</small>
-                                    {{ field }}
-                                    <span id="emailHelp" class="helptext">{{ field.help_text }}</span>
-                                    {% if field.name == "profile_photo" %}
-                                    {% endif %}
-                                </div>
+
+                                    <div class="col-md-12 my-2">
+                                        {{ field }}
+                                        <label class="form-check-label px-2"
+                                               for="{{ field.auto_id }}">{{ field.label }}</label>
+                                        <small class="errors"> {{ field.errors }}</small>
+                                        <span id="emailHelp"
+                                              class="helptext ms-4 text-muted">{{ field.help_text }}</span>
+                                    </div>
+                                {% else %}
+
+                                    <div class="{% if field.name == 'profile_photo' or field.name == 'bio' %} col-md-12 {% else %} col-md-6 {% endif %} my-2">
+                                        {% if field.name == "profile_photo" %}
+                                        {% else %}
+                                            <label for="{{ field.auto_id }}">{{ field.label }}</label>
+                                        {% endif %}
+                                        <small class="errors"> {{ field.errors }}</small>
+                                        {{ field }}
+                                        <span id="emailHelp" class="helptext">{{ field.help_text }}</span>
+                                        {% if field.name == "profile_photo" %}
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
                             {% endfor %}
                         </div>
-
                         <div class="form-group my-4 col-md-12">
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>

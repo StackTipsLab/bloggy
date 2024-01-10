@@ -33,7 +33,7 @@ class PublicProfileView(DetailView):
 
     def get_object(self, queryset=None):
         username = self.kwargs['username']
-        if username == 'siteadmin' or username == 'admin' or username == 'superadmin':
+        if username in ('siteadmin', 'admin', 'superadmin'):
             raise Http404
         return get_object_or_404(User, username=username)
 
