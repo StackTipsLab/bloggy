@@ -12,10 +12,8 @@
         <div class="col-12 col-lg-9 col-xl-8">
             <div class="card p-lg-5 p-3 card-bordered card-shadowd">
                 <h1 class="h2">Dashboard</h1>
-
-
                 {% if posts|length <= 0 %}
-                    <p class="lead my-3 text-muted">Currently, there are no published posts.</p>
+                    <p class="text-muted">Currently, there are no published posts.</p>
                 {% else %}
                     {% for post in posts %}
                         {% include 'partials/article_row_list.html' with post=post %}

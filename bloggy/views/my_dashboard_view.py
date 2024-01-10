@@ -11,8 +11,7 @@ class DashboardView(DetailView):
     DEFAULT_PAGE_SIZE = 12
 
     def get_object(self, **kwargs):
-        username = self.request.user  # self.kwargs.get("username")
-        return get_object_or_404(User, username=username)
+        return get_object_or_404(User, username=self.request.user.username)
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)

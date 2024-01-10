@@ -26,7 +26,7 @@
                     <div class="mb-3">
                         <input type="hidden" name="source" value="{{ meta_title }}"/>
                         <input type="hidden" name="sourceLink" value="{{ request.build_absolute_uri }}"/>
-
+                        <input type="hidden" name="honeypot" value="" class="d-none"/>
                         {% if user.is_authenticated %}
                             <input type="hidden" name="name" value="{{ request.user.get_full_name_or_username }}"/>
                             <input type="hidden" name="email" value="{{ request.user.email }}"/>
