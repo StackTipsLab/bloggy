@@ -11,6 +11,9 @@ class NonClearableFileInput(ClearableFileInput):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
+        help_texts={
+            "bio": "This will be displayed publicly on your profile. Keep it short and crisp."
+        }
         fields = [
             'profile_photo',
             'name',

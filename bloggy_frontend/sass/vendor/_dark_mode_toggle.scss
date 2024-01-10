@@ -30,17 +30,16 @@
   }
 }
 
-input[type=checkbox]:checked + label {
-  &:before {
-    content: "\2600";
-    display: inline-block;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-variation-settings: normal;
-    //color: #1b1b1b;
-    color: #ffffff;
-  }
-
-}
+//input[type=checkbox]:checked + label {
+//  &:before {
+//    content: "\2600";
+//    display: inline-block;
+//    font-size: inherit;
+//    text-rendering: auto;
+//    -webkit-font-smoothing: antialiased;
+//    -moz-osx-font-smoothing: grayscale;
+//    font-variation-settings: normal;
+//    //color: #1b1b1b;
+//    color: #ffffff;
+//  }
+//}

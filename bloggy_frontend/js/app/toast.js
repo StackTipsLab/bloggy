@@ -1,4 +1,4 @@
-window.showToast = function(message, type) {
+window.showToast = function (message, type, initialDelay = 100, showUntil = 3000) {
     const toastContainer = document.getElementById('toastContainer');
 
     // Create the toast element
@@ -13,7 +13,7 @@ window.showToast = function(message, type) {
     setTimeout(() => {
         toast.classList.add('show-toast');
         toast.classList.add(type);
-    }, 100);
+    }, initialDelay);
 
     // Remove the toast after a certain duration
     setTimeout(() => {
@@ -21,5 +21,6 @@ window.showToast = function(message, type) {
         setTimeout(() => {
             toastContainer.removeChild(toast);
         }, 300);
-    }, 3000);
+
+    }, showUntil);
 }

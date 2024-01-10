@@ -1,0 +1,124 @@
+{% extends "base-with-header-footer.html" %}
+{% load static %}
+{% load custom_widgets %}
+{% block base_css_class %}bg-white{% endblock base_css_class %}
+{% block content %}
+    <section class="article-breadcrumb d-none d-md-block d-print-none">
+        <div class="container">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item">
+                        <a href="{% url 'index' %}" class=" font-sm fw-500">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span class=" text-muted font-sm fw-500">Account</span>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    {% if messages %}
+        <div class="col-md-6 offset-md-2 mx-auto mt-5">
+            {% for message in messages %}
+                <div class="mt-3 alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-3">
+                {% include 'partials/dashboard_menu.html' %}
+            </div>
+
+            <div class="col-lg-7">
+                <div class="card p-lg-5 p-3 card-bordered card-shadowd">
+                    <h1 class="h2">Account details</h1>
+                    <p>Manage your account settings such as username, password, and personal information.</p>
+
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <h4 class="h4 mb-0">Username</h4>
+                                <a href="{% url 'profile.account.update_username' %}"
+                                   class="btn btn-xs btn-outline-primary rounded rounded-3 text-lowercase font-sm">
+                                    Edit<i class="fa-regular fa-pen-to-square ms-2"></i>
+                                </a>
+                            </div>
+                            <p class="text-muted">{% if user.username %}{{ user.username }}{% else %}-{% endif %}</p>
+                        </div>
+
+                        <div class="col-12">
+                            <h4 class="h4 mb-0">Email</h4>
+                            <p class="text-muted">{% if user.email %}{{ user.email }}{% else %}-{% endif %}</p>
+                        </div>
+
+                        <div class="col-12">
+                            <h4 class="h4 mb-0">Joined on</h4>
+                            <p class="text-muted">
+                                {% if user.date_joined %}{{ user.date_joined }}{% else %}-{% endif %}</p>
+                        </div>
+
+                    </div>
+                    <div class="mb-3">
+                        <a href="{% url 'profile.account.change_password' %}" class="btn border-2 btn-outline-primary"
+                           target="_blank">Change password</a>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-5">
+                        <h3 class="h3 mb-4"><span class="">Personal</span> information</h3>
+                        <div>
+                            <a href="{% url 'profile.edit_profile' %}"
+                               class="btn btn-xs btn-outline-primary rounded rounded-3 text-lowercase font-sm">
+                                Edit<i class="fa-regular fa-pen-to-square ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-12">
+                            <h4 class="h4 mb-0">Profile photo</h4>
+                            <img src="{{ user.get_avatar }}" alt=""
+                             class="img-fluid rounded-circled mt-2 mb-3" id="profile_photo_preview"
+                             height="100px"
+                             width="100px">
+                        </div>
+
+                        <div class="col-12 col-lg-6">
+                            <h4 class="h4 mb-0">Full name</h4>
+                            <p class="text-muted">{% if user.name %}{{ user.name }}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <h4 class="h4 mb-0">Website</h4>
+                            <p class="text-muted">{% if user.website %}{{ user.website }}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <h4 class="h4 mb-0">Twitter</h4>
+                            <p class="text-muted">{% if user.twitter %}{{ user.twitter }}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <h4 class="h4 mb-0">Linkedin</h4>
+                            <p class="text-muted">
+                                {% if user.linkedin %}{{ user.linkedin }}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <h4 class="h4 mb-0">Youtube</h4>
+                            <p class="text-muted">{% if user.youtube %}{{ user.youtube }}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <h4 class="h4 mb-0">Github</h4>
+                            <p class="text-muted">{% if user.github %}{{ user.github }}{% else %}-{% endif %}</p>
+                        </div>
+                        <div class="col-12">
+                            <h4 class="h4 mb-0">Bio</h4>
+                            <p class="text-muted">{% if user.bio %}{{ user.bio }}{% else %}-{% endif %}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

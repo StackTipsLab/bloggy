@@ -21,15 +21,7 @@
     {% include "partials/header.html" %}
 </header>
 <main>
-    {% if messages %}
-        <div class="col-lg-5 mx-auto">
-            {% for message in messages %}
-                <div class="mt-3 alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+    {% include 'widgets/feedback-form.html' %}
     {% block content %}{% endblock content %}
 </main>
 </body>

@@ -53,16 +53,19 @@
 
                                 <ul class="navbar-nav flex-shrink-0">
                                  <li class="nav-item">
-                                        <a class="nav-link py-3">{% if user.name %}Hello, {{ user.name }}{% else %}
+                                        <a class="nav-link py-3">{% if user.name %}Hello, {{ request.user.name }}{% else %}
                                     My Account{% endif %}</a>
                                     </li>
+
                                     <li class="nav-item">
                                         <a class="nav-link py-3" href="{% url 'profile.edit_profile' %}">Edit
                                             profile</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link py-3" href="{% url 'profile.bookmarks' %}">Bookmarks</a>
-                                    </li>
+{#                                    <li class="nav-item">#}
+{#                                        <a class="nav-link py-3" href="{% url 'profile.bookmarks' %}">Bookmarks</a>#}
+{#                                    </li>#}
+
+
                                     {% if user.is_superuser %}
                                         <li class="nav-item">
                                             <a class="nav-link py-3" href="{% url 'admin:index' %}">Dashboard</a>
@@ -108,12 +111,30 @@
 
                             <div class="dropdown custom-dropdown">
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <p class="menu-heading font-xs pt-2">{% if user.name %}Hello,
-                                        {{ user.name }}{% else %}My Account{% endif %}</p>
-                                    <a class="dropdown-item" href="{% url 'profile.edit_profile' %}">Edit profile</a>
-                                    <a class="dropdown-item" href="{% url 'profile.bookmarks' %}">Bookmarks</a>
+{#                                    <p class="menu-heading font-xs pt-2">#}
+                                <li class="nav-item">
+                                    <a class="dropdown-item"><span class="menu-heading">{% if user.name %}<span class="me-2">👋</span>Hello, {{ user.name }}{% else %}My Account{% endif %}</span></a>
+                                    </li>
+
                                     {% if user.is_superuser %}
-                                        <a class="dropdown-item" href="{% url 'admin:index' %}">Dashboard</a>
+                                        <li class="nav-item">
+                                            <a class="dropdown-item" href="{% url 'index' %}"><i class="fa-solid fa-house me-2"></i>Home</a>
+                                        </li>
+                                    {% endif %}
+
+                                     <li class="nav-item">
+                                            <a class="dropdown-item" href="{% url 'profile.account' %}"><i class="fa-solid fa-user me-2"></i>My Account</a>
+                                     </li>
+
+                                    <li class="nav-item">
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal"><i class="fa-solid fa-comments me-2"></i>Give Feedback</a>
+                                    </li>
+
+
+{#                                    <a class="dropdown-item" href="{% url 'profile.edit_profile' %}">Edit profile</a>#}
+{#                                    <a class="dropdown-item" href="{% url 'profile.bookmarks' %}">Bookmarks</a>#}
+                                    {% if user.is_superuser %}
+                                        <a class="dropdown-item" href="{% url 'admin:index' %}"><i class="fa-solid fa-gauge me-2"></i>Dashboard</a>
                                     {% endif %}
                                     <hr>
                                     <a class="dropdown-item text-danger"

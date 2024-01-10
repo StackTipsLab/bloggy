@@ -34,6 +34,8 @@ from .forms.set_password_form import CustomSetPasswordForm
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
 from .views.account import AccountActivationView
+from .views.account_view import AccountView
+from .views.change_password_view import ChangePasswordView
 from .views.posts import PostListView, PostDetailsView
 from .views.login import MyLoginView
 from .views.pages import AdsTextView, robots
@@ -41,8 +43,9 @@ from .views.pages import PageDetailsView
 from .views.quizzes_view import QuizListView, QuizDetailView
 from .views.rss import PostsRssFeed, CoursesRssFeed
 from .views.search import SearchListView
-from .views.user import MyProfileView, PublicProfileView, AuthorsListView
-from .views.user_collections import UserBookmarksView
+from .views.update_username_view import UpdateUsernameView
+from .views.user import PublicProfileView, AuthorsListView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -86,9 +89,12 @@ urlpatterns = [
     path('authors', AuthorsListView.as_view(), name="authors"),
     path('user/<str:username>', PublicProfileView.as_view(), name="user_profile"),
 
+    path('account', login_required(AccountView.as_view()), name='profile.account'),
     path('edit-profile', login_required(EditProfileView.as_view()), name="profile.edit_profile"),
+    path('account/update-username', login_required(UpdateUsernameView.as_view()), name='profile.account.update_username'),
+    path('account/change-password', login_required(ChangePasswordView.as_view()), name='profile.account.change_password'),
     # path('dashboard', login_required(MyProfileView.as_view()), name="profile.dashboard"),
-    path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
+    # path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
 
     path('contact', TemplateView.as_view(template_name="pages/contact.html"), name='pages.contact'),
     path("rss/articles", PostsRssFeed(), name="articles_feed"),
@@ -103,6 +109,8 @@ urlpatterns = [
 
     path('summernote/', include('django_summernote.urls')),
     path('api/1.0/', include('bloggy_api.urls')),
+
+
 ]
 
 if settings.DEBUG:

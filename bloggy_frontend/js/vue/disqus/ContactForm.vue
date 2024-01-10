@@ -7,10 +7,6 @@
           <div :class="['alert mb-2', 'alert-' + this.submitStatus]">{{ this.submitMessage }}</div>
         </template>
 
-        <!--        <div class="my-3">-->
-        <!--          <div class="sent-message text-success">Your message has been sent. Thank you!</div>-->
-        <!--        </div>-->
-
         <div class="form-group ">
           <label for="userName">Your name<sup class="text-danger">*</sup></label>
           <input type="text" name="userName" v-model="userName" class="form-control" id="userName" required>
@@ -105,12 +101,10 @@ export default {
 
               axios.post(`${window.location.origin}/${Api.contact}`, postBody)
                   .then((response) => {
-                    // console.log(response.data);
                     this.submitStatus = "success";
                     this.submitMessage = "Your message has been sent. Thank you!";
                   })
                   .catch((error) => {
-                    // console.log(error);
                     this.submitStatus = "danger";
                     this.submitMessage = "Something went wrong. Please try again later.";
                   });

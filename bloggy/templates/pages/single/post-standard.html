@@ -41,7 +41,7 @@
 
                                     <div class="d-lg-flex justify-content-between align-items-center py-2 mb-2">
                                         {% include 'partials/article_meta_container.html' with post=post %}
-                                        {% comment %}<div class="d-none d-md-inline" id="bookmarkContainer"></div>{% endcomment %}
+{#                                        <div class="d-none d-md-inline" id="bookmarkContainer"></div>#}
                                         <div class="hero article-meta-container" style="font-size: 0.85rem">
                                             {% if post.publish_status == "DRAFT" %}
                                                 <span class="badge rounded-pill text-bg-warning text-white">{{ post.publish_status }} / PREVIEW</span>

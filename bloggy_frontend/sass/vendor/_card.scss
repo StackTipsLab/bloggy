@@ -7,7 +7,11 @@
   border-radius: $card-border-radius;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out !important;
+}
+
+.card-shadow {
   //box-shadow: rgba(99, 99, 99, 0.1) 0 2px 8px 0;
+  box-shadow: 0 3px 8px -1px rgba(0, 0, 0, 0.05);
 }
 
 .card-rounded {

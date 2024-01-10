@@ -41,7 +41,7 @@ class Command(BaseCommand):
                 }
 
                 try:
-                    email_service.send_custom_email(subject, [user.email], "email/wish_card_email.html", args)
+                    email_service.send_html_email(subject, [user.email], "email/wish_card_email.html", args)
                     print('Success: Card sent to {}', user.email)
                 except Exception as ex:
                     print('Error sending card to {}: {}', user.email, ex)

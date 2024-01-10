@@ -22,7 +22,6 @@ class CategoriesView(TemplateView):
         else:
             categories = Category.objects.filter(article_count__gt=0).order_by("-article_count").all()
 
-        logger.debug('Loading categories: %s', categories)
         context['categories'] = categories
         return context
 

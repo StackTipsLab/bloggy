@@ -31,7 +31,7 @@ class Command(BaseCommand):
             }
 
             try:
-                email_service.send_custom_email(
+                email_service.send_html_email(
                     subject,
                     [user.email],
                     "email/account_activation_reminder_email.html",

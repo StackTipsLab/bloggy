@@ -5,6 +5,7 @@
     "editor.formatOnSave": false,
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
-    // "editor.fontFamily": "Dank Mono, JetBrains Mono NL, Fira Code, Menlo, Monaco, 'Courier New', monospace",
-    // "editor.fontSize": 14,
+//     "editor.fontFamily": "Dank Mono, JetBrains Mono NL, Fira Code, Menlo, Monaco, 'Courier New', monospace",
+//     "editor.fontSize": 14,
+    "python.linting.pylintArgs": ["--disable=C0111"]
 }

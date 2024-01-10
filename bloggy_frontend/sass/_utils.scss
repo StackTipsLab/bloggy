@@ -374,3 +374,43 @@ figcaption {
     }
   }
 }
+
+
+.custom-form {
+
+  p {
+    line-height: 1.3333333;
+    margin-bottom: 1rem;
+  }
+
+  .form-control {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--form-control-border-color);
+    background: var(--form-control-bg);
+  }
+
+  label {
+    color: #65748a !important;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+    font-size: 0.75em;
+
+  }
+
+  .helptext {
+    display: block;
+    line-height: 1.33333;
+    font-size: 0.875em;
+    margin-top: 0.444rem;
+  }
+
+  .form-check-label {
+    text-transform: none;
+    color: $body-color !important;
+    font-weight: normal;
+    margin-top: 0;
+    font-size: initial;
+  }
+}

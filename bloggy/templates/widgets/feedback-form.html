@@ -1,0 +1,98 @@
+<div class="modal right fade non" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0 mb-0 px-4 pb-0 bg-white ">
+                <h3 class="h3" id="feedbackModalLabel">Give Feedback</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body my-0 bg-white pt-1 p-4">
+                <p class="mb-0">If you need a response, please <a href="{% url 'pages.contact' %}">contact</a> us
+                    instead.</p>
+
+                <div class="my-3 border rounded-2 border-primary p-1 text-primary font-sm card-shadow">
+                    <div class="d-flex">
+                        <div class="flex-shrink-0">
+                            <small class="text-left m-0"><i class="fa-solid fa-book p-2 pt-1"></i></small>
+                        </div>
+                        <div class="flex-grow-1">
+                            <small class="text-left m-0">{{ meta_title }}</small>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="" id="feedback-form" method="post" class="custom-form">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <input type="hidden" name="source" value="{{ meta_title }}"/>
+                        <input type="hidden" name="sourceLink" value="{{ request.build_absolute_uri }}"/>
+
+                        {% if user.is_authenticated %}
+                            <input type="hidden" name="name" value="{{ request.user.get_full_name_or_username }}"/>
+                            <input type="hidden" name="email" value="{{ request.user.email }}"/>
+                        {% else %}
+                            <div class="mt-4 mb-2">
+                                <label for="name" class="form-label">Your name</label>
+                                <input type="text" class="form-control" id="name" placeholder="John Doe.">
+                            </div>
+                            <div class="mt-4 mb-2">
+                                <label for="email" class="form-label">Your email</label>
+                                <input type="email" class="form-control" id="email" placeholder="hello@example.com">
+                            </div>
+                        {% endif %}
+
+                        <div class="mt-4 mb-2">
+                            <label for="exampleFormControlTextarea1" class="form-label">What did you want to tell
+                                us?</label>
+                            <textarea class="form-control bg-white" id="messageTextArea" rows="5"
+                                      name="message"
+                                      placeholder="Enter your feedback"></textarea>
+                        </div>
+
+                        <div class="form-check form-switch mt-4 mb-2">
+                            <input class="form-check-input" type="checkbox" role="switch" value="true" id="bugCheckBox">
+                            <label class="form-check-label" for="bugCheckBox">I think this is a bug</label>
+                        </div>
+
+                        <div class="form-check form-switch mt-2 mb-4">
+                            <input class="form-check-input" type="checkbox" role="switch" value="true"
+                                   id="keepMeInformed">
+                            <label class="form-check-label" for="keepMeInformed">It’s okay to contact me about this
+                                feedback</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send feedback</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#feedback-form").submit(function (e) {
+            e.preventDefault();
+            console.log("Form data:" + $(this).serialize())
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'api.submit_feedback' %}",
+                data: $(this).serialize(),
+
+                success: function (response) {
+                    if (response.success) {
+                        $('#feedbackModal').modal('hide');
+                        showToast(response.message, "success", 300, 5000)
+                        document.getElementById("messageTextArea").value = '';
+                    } else {
+                        showToast(response.message, "error")
+                    }
+                },
+                error: function () {
+                    showToast("Failed to submit feedback. Please try again.", "error")
+                }
+            });
+        });
+    });
+</script>

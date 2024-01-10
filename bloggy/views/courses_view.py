@@ -51,6 +51,8 @@ class CourseDetailsView(HitCountDetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         set_seo_settings(post=self.object, context=context)
+        context["posts"] = Post.objects.filter(course=self.object).order_by(
+            "display_order").all()
         return context
 
 

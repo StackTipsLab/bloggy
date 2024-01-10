@@ -7,8 +7,8 @@
         <div class="container py-4 px-5">
             <div class="d-flex d-flex py-3">
                 <div class="user-avatar flex-shrink-0 ps-4">
-                    <img src="{{ user.get_avatar }}"
-                         alt="{{ user.name }}"
+                    <img src="{{ userProfile.get_avatar }}"
+                         alt="{{ userProfile.name }}"
                          class="img-fluid image-rounded-square"
                          style="box-shadow: 5px 15px 15px rgb(89 152 152 / 5%);"
                          height="250px"
@@ -16,14 +16,14 @@
                 </div>
 
                 <div class="flex-grow-1 profile-details ps-4">
-                    {% if user.get_full_name %}
-                        <h1 class="h1">{{ user.get_full_name }}</h1>
+                    {% if userProfile.get_full_name %}
+                        <h1 class="h1">{{ userProfile.get_full_name }}</h1>
                     {% else %}
-                        <h1 class="h2 my-3">{{ user.username }}</h1>
+                        <h1 class="h2 my-3">{{ userProfile.username }}</h1>
                     {% endif %}
 
-                    {% if user.bio %}
-                        <p class="mb-2">{{ user.bio | safe }}</p>
+                    {% if userProfile.bio %}
+                        <p class="mb-2">{{ userProfile.bio | safe }}</p>
                     {% endif %}
 
                     <div class="pt-1">

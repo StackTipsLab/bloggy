@@ -1,19 +1,23 @@
 {% load static %}
 {% load custom_widgets %}
-<ul class="list-unstyled static-pages-menu d-none d-md-block">
-    <li>
-        <a href="{% url 'user_profile' username=user.username %}">My profile</a>
-    </li>
-    <li>
-        <a class="{% if request.resolver_match.url_name == 'profile.bookmarks' %} active{% endif %}"
-           href="{% url 'profile.bookmarks' %}">Bookmarks</a>
-    </li>
-    <li>
-        <a href="{% url 'profile.edit_profile' %}">Edit profile</a>
-    </li>
+<div class="card card-bordered card-shadowd p-4">
+    <a href="{% url 'index' %}" class="pb-3 text-decoration-none link-dark link-offset-2 fw-600">Home</a>
+    <hr class="m-0 opacity-25">
+    <a href="{% url 'profile.account' %}" class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Account</a>
+    <hr class="m-0 opacity-25">
+
+    <a href="{% url 'user_profile' username=user.username %}" 
+       class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Your profile</a>
+    <hr class="m-0 opacity-25">
+
     {% if user.is_superuser %}
-        <li>
-            <a href="{% url 'admin:index' %}">Dashboard</a>
-        </li>
+        <a href="{% url 'admin:index' %}" class="py-3  text-decoration-none link-dark link-offset-2 fw-600">
+            Dashboard</a>
+        <hr class="m-0 opacity-25">
     {% endif %}
-</ul>
+
+    <a href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal"
+       class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Give feedback</a>
+    <hr class="m-0 opacity-25">
+    <a href="" class="pt-3 text-decoration-none  link-danger link-offset-2 fw-600">Logout</a>
+</div>

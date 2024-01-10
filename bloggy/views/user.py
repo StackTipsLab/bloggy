@@ -1,13 +1,11 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.utils.html import strip_tags
-from django.views import View
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
 from django.views.generic import DetailView, TemplateView
-from django.views.generic.detail import SingleObjectMixin
 
 from bloggy import settings
 from bloggy.models import User
@@ -28,22 +26,20 @@ class AuthorsListView(TemplateView):
         return context
 
 
-class PublicProfileView(SingleObjectMixin, View):
-    template_name = "pages/user.html"
+class PublicProfileView(DetailView):
+    model = User
+    template_name = 'pages/user_profile.html'
+    context_object_name = 'userProfile'
 
-    def get_object(self, **kwargs):
-        username = self.kwargs.get("username")
+    def get_object(self, queryset=None):
+        username = self.kwargs['username']
+        if username == 'siteadmin' or username == 'admin' or username == 'superadmin':
+            raise Http404
         return get_object_or_404(User, username=username)
 
-    def get(self, request, *args, **kwargs):
-        username = kwargs.get("username")
-        if username == 'siteadmin' or username == 'admin' or username == 'superadmin' or username == 'wp-admin':
-            raise Http404
-
-        self.object = self.get_object()
-        context = self.get_context_data(object=self.object)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         posts = self.object.posts.filter(publish_status="LIVE").order_by("-published_date")
-
         paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
         page = self.request.GET.get('page')
         try:
@@ -53,51 +49,9 @@ class PublicProfileView(SingleObjectMixin, View):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
 
+        context['posts'] = posts
         context['meta_title'] = self.object.get_full_name()
         description = f"{settings.SITE_TITLE} Author. {self.object.get_full_name()}. {self.object.bio}"
         context['meta_description'] = strip_tags(description)
         context['meta_image'] = self.object.get_avatar()
-
-        context.update({
-            'posts': posts,
-            'user': self.object
-        })
-
-        return render(request, self.template_name, context)
-
-
-class MyProfileView(DetailView):
-    # template_name = "pages/user.html"
-    template_name = "profile/user_dashboard.html"
-
-    def get_object(self, **kwargs):
-        username = self.request.user  # self.kwargs.get("username")
-        return get_object_or_404(User, username=username)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        user = self.get_object()
-
-        posts = user.posts.order_by("-published_date").filter(publish_status="LIVE")
-        paginator = Paginator(posts, DEFAULT_PAGE_SIZE)
-        page = self.request.GET.get('page')
-        try:
-            posts = paginator.page(page)
-        except PageNotAnInteger:
-            posts = paginator.page(1)
-        except EmptyPage:
-            posts = paginator.page(paginator.num_pages)
-
-        context.update({
-            'posts': posts,
-            'userProfile': user,
-            'userType': "self",
-        })
-
-        context['meta_title'] = "My Profile"
-        context[
-            'meta_description'] = f'My profile. Access your {settings.SITE_TITLE} profile, account settings My Profile.'
-        if user.profile_photo:
-            context['meta_image'] = settings.SITE_LOGO
-
         return context

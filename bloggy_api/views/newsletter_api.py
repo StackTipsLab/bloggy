@@ -2,14 +2,16 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils import timezone
 from rest_framework import viewsets
 from rest_framework.serializers import ModelSerializer
 from rest_framework.utils import json
 
+from bloggy import settings
 from bloggy.models.subscriber import Subscribers
 from bloggy.services import token_service
-from bloggy.services.email_service import send_newsletter_verification_token
+from bloggy.services.email_service import send_html_email
 
 
 class SubscriberSerializer(ModelSerializer):
@@ -38,7 +40,7 @@ class NewsletterApi(viewsets.ViewSet):
                 confirmation_code=token,
                 confirmed=False,
             )
-            send_newsletter_verification_token(request, subscriber.email, subscriber.id, token)
+            self.send_verification_email(request, subscriber.email, subscriber.id, token)
         except IntegrityError:
             return HttpResponse(
                 status=208,
@@ -60,8 +62,19 @@ class NewsletterApi(viewsets.ViewSet):
             subscriber.confirmed = True
             subscriber.confirmation_code = None
             subscriber.save()
-            messages.success(request,
-                             "Thank you for verifying your email.  "
-                             "Now we will send you weekly tutorials, and (exclusive) freebies directly to your inbox.")
-
+            messages.success(
+                request,
+                "Thank you for verifying your email."
+                "Now we will send you weekly tutorials, and (exclusive) freebies directly to your inbox.")
         return redirect("index")
+
+    def send_verification_email(self, request, email, uuid, token):
+        subject = f'Confirm to {settings.SITE_TITLE} newsletter'
+
+        args = {
+            "email_subject": subject,
+            "app_name": settings.SITE_TITLE,
+            "verification_link": request.build_absolute_uri(reverse("newsletter_verification", args=[uuid, token]))
+        }
+
+        send_html_email(subject, [email], "email/newsletter_verification_token.html", args)

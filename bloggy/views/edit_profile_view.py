@@ -1,7 +1,9 @@
 import os
 
-from django.shortcuts import get_object_or_404
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
 from django.template.context_processors import static
+from django.urls import reverse
 from django.views.generic import FormView
 
 from bloggy import settings
@@ -18,8 +20,7 @@ class EditProfileView(FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['meta_title'] = "Update Profile"
-        context[
-            'meta_description'] = f"Update my profile. You need a {settings.SITE_TITLE}  account to sign in and view your profile."
+        context['meta_description'] = f"Update my profile. You need a {settings.SITE_TITLE}  account to sign in and view your profile."
         context['meta_image'] = static('static/media/logo.png')
         return context
 
@@ -44,7 +45,8 @@ class EditProfileView(FormView):
         return initial
 
     def get_success_url(self):
-        return self.request.get_full_path()
+        return reverse('profile.account')
+        # return self.request.get_full_path()
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
@@ -72,6 +74,8 @@ class EditProfileView(FormView):
                 linkedin=sanitize_url(form.cleaned_data["linkedin"]),
                 github=sanitize_url(form.cleaned_data["github"])
             )
+
+            messages.success(self.request, 'Your profile details have been successfully updated.')
 
         return super().form_valid(form)
 

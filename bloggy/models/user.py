@@ -81,7 +81,6 @@ class User(AbstractBaseUser, ResizeImageMixin, PermissionsMixin):
     def get_full_name_or_username(self):
         if self.name:
             return self.name
-
         return self.username
 
     def __str__(self):
