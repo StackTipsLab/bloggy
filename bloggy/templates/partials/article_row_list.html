@@ -15,8 +15,16 @@
                     <span class="ms-3 badge-meta-pill {{ post.post_type| lower }}">{{ post.post_type | capfirst }}</span>
                 </div>
                 <h3 class="h4 fw-500 mb-2">
-                    <a href="{% url 'post_single' slug=post.slug %}"
-                       class="text-decoration-none link-dark">{{ post.title }}</a>
+                    {% if post.post_type == 'lesson' %}
+                        <a href="{% url 'lesson_single' course=post.course.slug slug=post.slug %}"
+                           class="text-decoration-none link-dark">{{ post.title }}</a>
+                    {% elif post.post_type == 'quiz' %}
+                        <a href="{% url 'quiz_single' slug=post.slug %}"
+                           class="text-decoration-none link-dark">{{ post.title }}</a>
+                    {% else %}
+                        <a href="{% url 'post_single' slug=post.slug %}"
+                           class="text-decoration-none link-dark">{{ post.title }}</a>
+                    {% endif %}
                 </h3>
 
 
