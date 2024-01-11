@@ -32,7 +32,9 @@
         </a>
     </div>
     <main>
-        {% include 'widgets/feedback-form.html' %}
+        {% if user.is_authenticated %}
+            {% include 'widgets/feedback-form.html' %}
+        {% endif %}
         {% block content %}{% endblock content %}
     </main>
     <footer class="footer mt-5">
