@@ -3,23 +3,8 @@
 {% load custom_widgets %}
 {% block base_css_class %}bg-white{% endblock base_css_class %}
 {% block content %}
-    <section class="article-breadcrumb d-none d-md-block d-print-none">
-        <div class="container">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item">
-                        <a href="{% url 'index' %}" class=" font-sm fw-500">Home</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">
-                        <span class=" text-muted font-sm fw-500">Account</span>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-    </section>
-
     {% if messages %}
-        <div class="col-md-6 offset-md-2 mx-auto mt-5">
+        <div class="col-md-6 offset-md-2 mx-auto mt-4 mt-lg-5">
             {% for message in messages %}
                 <div class="mt-3 alert alert-{{ message.tags }}">
                     {{ message }}

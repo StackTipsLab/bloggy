@@ -6,18 +6,18 @@
                 integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
                 crossorigin="anonymous" async></script>
 
-        <div class=" container pt-5 pb-3">
-            <div id="homeIntroSection" class="hero" style="max-width: 860px;margin: 0 auto;text-align: center;">
-                <h1 class="display-1">
-                    Browse tutorial by <br/><span
-                        class="text-gradient text-primary">Categories</span>
-                </h1>
-                <p class="lead text-gray-dark">
-                    Collection of tutorials and courses organized by categories. Select a category and start your
-                    journey towards being a better developer.
-                </p>
+        <header class="hero py-4 py-lg-5 text-center text-md-start" id="homeIntroSection">
+            <div class="container">
+                <div class="col-12 col-lg-7 col-xl-7">
+                    <h1 class="font-sm text-uppercase text-primary">Topics</h1>
+                    <h2 class="display-1">Browse tutorials by <span class="text-gradient text-primary">Category</span></h2>
+                    <p class="fs-4 fw-400">Collection of tutorials and courses organized by categories. Select a
+                        category and start your journey towards being a better developer.
+                    </p>
+                </div>
             </div>
-        </div>
+        </header>
+       
         <div class="container">
             <div class="row row-eq-height archive-grid pb-4" data-masonry='{"percentPosition": true }'>
                 {% if categories|length <= 0 %}
@@ -31,7 +31,7 @@
                                  style="border-bottom: 3px solid {{ category.color }};">
                                 <div class="d-flex justify-content-between flex-row mb-1">
                                     <div class="d-flex flex-column ml-2">
-                                        <h3 class="display-5 fw-500">{{ category.title }}</h3>
+                                        <h3 class="display-5 fw-600">{{ category.title }}</h3>
                                         <small class="d-inline-block text-muted text-uppercase fw-500 font-xs">
                                             {{ category.article_count }} article{{ category.article_count | pluralize }}
                                         </small>

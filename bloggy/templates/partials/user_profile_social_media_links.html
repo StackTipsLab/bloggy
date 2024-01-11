@@ -1,6 +1,6 @@
 {% load static %}
 {% load custom_widgets %}
-<div class="social-media-links d-flex my-3">
+<div class="social-media-links d-flex my-3 {{ cssClass }}">
     {% if userProfile.youtube %}
         <a href="{% sanitize_url userProfile.youtube %}" target="_blank" class="github  text-decoration-none">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32px" height="32px">

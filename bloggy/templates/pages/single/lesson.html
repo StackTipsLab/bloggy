@@ -27,8 +27,8 @@
                                 {% endif %}
 
                                 <div class="relative">
-                                    <h1 class="display-2 fw-700"
-                                        style="line-height: 1.2;letter-spacing: -0.04rem">{{ post.title }}</h1>
+                                    <h1 class="display-2 fw-700" style="line-height: 1.2;letter-spacing: -0.04rem">{{ post.title }}</h1>
+                                    <div class="mb-2"><em><small class="text-muted font-xs text-uppercase fw-400">Last Updated: {{ course.updated_date|date:"M d, Y" }}</small></em></div>
 
                                     {% if post.thumbnail and post.template_type == "cover" %}
                                         <div class="article-single-thumbnails my-4">

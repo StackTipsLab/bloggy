@@ -3,7 +3,8 @@ $font-family-sans-serif: 'muli','Inter', -apple-system, BlinkMacSystemFont, "Seg
 $font-family-monospace: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 //$font-family-monospace: 'SFMono-Medium', 'SF Mono', 'Segoe UI Mono', 'Roboto Mono', 'Ubuntu Mono', Menlo, Monaco, Consolas, Courier, monospace;
 
-$body-bg: hsl(219, 23%, 97%) !default;
+$body-bg: rgb(250, 250, 250) !default;
+//$body-bg: hsl(219, 23%, 97%) !default;
 $blue-bg-01: #e1f5fe !default;
 $blue-bg-02: #e3f2fd !default;
 $blue-bg-03: #bbdefb !default;

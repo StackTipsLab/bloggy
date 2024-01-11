@@ -2,16 +2,17 @@
 
 #main-navbar {
   background-color: var(--main-navbar-color);
-  backdrop-filter: blur(10px);
+
 }
 
 .navbar {
   padding: 0.2rem 0 !important;
   z-index: 9999;
 
-  //&.--not-top {
-  //box-shadow: 0 2px 6px 2px rgb(0 106 194 / 20%);
-  //}
+  &.--not-top {
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px 2px rgba(210, 210, 210, 0.2);
+  }
 
 }
 

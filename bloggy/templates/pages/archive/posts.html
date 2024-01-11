@@ -3,10 +3,24 @@
 {% spaceless %}
     {% load custom_widgets %}
     {% block content %}
-        {% include "partials/category_archive_banner.html" with category=selected_category %}
+        {% if selected_category %}
+            {% include "partials/category_archive_banner.html" with category=selected_category %}
+        {% else %}
+            <header class="hero py-4 py-lg-5 text-center text-md-start" id="homeIntroSection">
+                <div class="container">
+                    <div class="col-12 col-lg-7 col-xl-7">
+                        <h1 class="font-sm text-uppercase text-primary">Tutorials</h1>
+                        <h2 class="display-1">Browse from hundreds of development tutorials</h2>
+                        <p class="fs-4 fw-400">Learn from beginner to advanced tutorials on Java, Spring, Python, Android and Git.</p>
+                    </div>
+                </div>
+            </header>
+        {% endif %}
+
+
         <div class="container">
             <div class="row">
-                <main id="main-content" class="col-12 col-lg-9 py-3 py-lg-4">
+                <main id="main-content" class="col-12 col-lg-9 pb-3 pb-lg-4">
 
                     <div class="d-flex bd-highlight">
                         {% categories_widget count=99 content_type="post" widget_style="list" %}

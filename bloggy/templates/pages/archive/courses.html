@@ -4,17 +4,22 @@
     {% load custom_widgets %}
     {% load define_action %}
     {% block content %}
-        <div class=" container pt-5 pb-3">
-            <div class="hero pt-lg-2 " style="max-width: 850px;margin: 0 auto">
-                <div class="text-center mb-5 px-lg-5">
-                    <h1 class="display-1 px-lg-5">Courses</h1>
-                    <p class="lead">
-                        Want to learn a topic? StackTips offers free courses on Java, Python, HTML, JavaScript and CSS.
+
+        <header class="bg-whited py-4 py-lg-5 text-center text-md-start">
+            <div class="container">
+                <div class="col-12 col-lg-7 col-xl-7">
+                    <h1 class="font-sm text-uppercase text-primary">Courses</h1>
+                    <h2 class="display-1">Learn from our free courses</h2>
+                    <p class="fs-4 fw-400">Want to learn a topic? StackTips offers free courses on Java, Python, HTML,
+                        JavaScript and CSS.
                         Enroll in
                         these free courses and learn a new programming language.
                     </p>
                 </div>
             </div>
+        </header>
+
+        <div class=" container mb-3">
             <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3 mb-5">
                 {% if courses|length <= 0 %}
                     <p class="lead my-3 text-muted">No contents found!</p>

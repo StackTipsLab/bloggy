@@ -18,7 +18,7 @@
             </button>
 
             <div class="collapse navbar-collapse align-content-around" id="navbarNavAltMarkup">
-                <hr class="d-block d-md-none">
+                <div class="d-block d-md-none shadow shadow shadow-lg w-100" style="height:2px;background: #f7f4f4;"></div>
                 <ul class="navbar-nav flex-shrink-0">
                     <li class="nav-item">
                         <a class="nav-link py-3 {% if request.resolver_match.url_name == 'categories' %} active{% endif %}"
@@ -49,11 +49,11 @@
                     {% if user.is_authenticated %}
                         <div class="d-flex row d-lg-none mt-3">
                             <div class="d-flex flex-column">
-                                <hr>
+                                <div class="d-block d-md-none shadow shadow shadow-lg w-100" style="height:2px;background: #f7f4f4;"></div>
 
                                 <ul class="navbar-nav flex-shrink-0">
                                     <li class="nav-item">
-                                        <a class="nav-link py-3">{% if user.name %}Hello,
+                                        <a class="nav-link py-3" style="font-size: 1rem !important;font-weight: 600;text-transform: none;">{% if user.name %}Hello,
                                             {{ request.user.name }}{% else %}
                                             My Account{% endif %}</a>
                                     </li>
@@ -81,7 +81,7 @@
                                         </li>
                                     {% endif %}
 
-                                    <hr>
+                                    <div class="d-block d-md-none shadow shadow shadow-lg w-100" style="height:2px;background: #f7f4f4;"></div>
                                     <li class="nav-item">
                                         <a class="nav-link text-danger py-3"
                                            href="{% url 'logout' %}?next={{ request.path }}"

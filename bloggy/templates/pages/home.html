@@ -14,27 +14,28 @@
             </div>
         {% endif %}
 
-        <section id="homeIntroSection" class="container homeIntro">
-            <div class="hero jumbotron py-lg-5 py-4 px-3 text-center">
-                <div class="container">
-                    <h1 class="display-1 px-lg-5 fw-bold">
-                        Developer Friendly Way to Learn <span class="text-gradient text-primary">Programming..</span>
+
+
+        <header class="hero py-4 py-lg-5 text-center text-md-start gradient-bg" id="homeIntroSection">
+            <div class="container">
+                <div class="col-12 col-lg-7 col-xl-7">
+                    <h1 class="display-1">
+                        Developer Friendly Way to Learn <span class="text-gradient text-primary">Programming!</span>
                     </h1>
-                    <p class="lead px-lg-5 py-2 fw-600" style="max-width: 900px;margin: 0 auto">
-                        StackTips brings developer-friendly ways to learn programming. With courses, articles, and
+                    <p class="fs-4 fw-400">StackTips brings developer-friendly ways to learn programming. With courses,
+                        articles, and
                         how-to guides, we aim to teach in the ways developers learn best.
                     </p>
-                    <a class="btn btn-primary btn-lg mt-3" href="{% url 'login' %}?next={{ request.path }}">Create
-                        free account!</a>
+                    <a class="btn btn-primary btn-lg" href="{% url 'login' %}?next={{ request.path }}">Create free
+                        account!</a>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <section class="recent-articles py-3">
+        <section class="recent-articles py-3 mt-3 mt-lg-4">
             <div class="container">
-                <h2 class="mb-4 fw-600">
-                    <span class="text-secondary">&blk14;</span> Recent <span class="text-gradient text-primary">tutorials</span>
-                </h2>
+                <div class="section-title mb-4"><h2 class="h1">Recent <span
+                        class="text-gradient text-primary">tutorials</span></h2></div>
                 <div class="row row-cols-1 row-cols-md-1 row-cols-lg-2 g-3">
                     {% if posts|length <= 0 %}
                         <p class="lead my-3 text-muted">No contents found!</p>
@@ -45,31 +46,29 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="text-center mt-5">
-                    <a href="{% url 'posts' %}" class="btn btn-lg btn-primary">View all articles&nbsp;&nbsp<span
-                            class="tag__chevron">&#8594</span></a>
+                <div class="text-center mt-3 mt-lg-5">
+                    <a href="{% url 'posts' %}" class="btn btn-lg border-2 btn-outline-primary">Browse all tutorials
+                        <i class="fa-solid fa-arrow-right ms-2"></i>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="hero mt-md-3 mt-lg-5">
+        <section class="hero my-3 my-lg-5">
             {% load static %}
-            <div class="container py-5">
-                <h2 class="mb-4 fw-600">
-                    <span class="text-secondary">&blk14;</span> Browse by <span class="text-gradient text-primary">Categories</span>
-                </h2>
+            <div class="container mb-3 mb-lg-4">
+                <div class="section-title mb-5"><h2 class="h1">Browse by <span class="text-gradient text-primary">category</span>
+                </h2></div>
                 {% categories_widget count=15 widget_style="home" %}
             </div>
         </section>
 
-        <section class="homeCourses__section my-md-3 my-lg-5">
+        <section class="homeCourses__section my-3 my-lg-4">
             {% load static %}
             <div class="container">
-
-                <h2 class="mb-4 fw-600">
-                    <span class="text-secondary">&blk14;</span> Free <span
-                        class="text-gradient text-primary">Courses</span>
-                </h2>
+                <div class="section-title mb-4"><h2 class="h1">Free <span
+                        class="text-gradient text-primary">courses</span></h2>
+                </div>
                 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4 gy-3">
                     {% if courses|length <= 0 %}
                         <p class="lead my-3 text-muted">No contents found!</p>

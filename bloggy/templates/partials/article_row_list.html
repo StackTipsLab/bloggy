@@ -14,7 +14,7 @@
                     {% endif %}
                     <span class="ms-3 badge-meta-pill {{ post.post_type| lower }}">{{ post.post_type | capfirst }}</span>
                 </div>
-                <h3 class="h4 fw-500 mb-2">
+                <h3 class="h4 fw-600 mb-2">
                     {% if post.post_type == 'lesson' %}
                         <a href="{% url 'lesson_single' course=post.course.slug slug=post.slug %}"
                            class="text-decoration-none link-dark">{{ post.title }}</a>

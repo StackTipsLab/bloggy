@@ -40,7 +40,7 @@
 
                 </div>
 
-                <h3 class="fw-500 mb-2">
+                <h3 class="fw-600 mb-2">
                     {% if post.post_type == 'lesson' %}
                         <a href="{% url 'lesson_single' course=post.course.slug slug=post.slug %}"
                            class="post-link">{{ post.title | safe }}</a>

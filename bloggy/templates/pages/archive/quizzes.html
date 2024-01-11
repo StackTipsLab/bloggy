@@ -7,18 +7,20 @@
         <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"
                 integrity="sha384-GNFwBvfVxBkLMJpYMOABq3c+d3KnQxudP/mGPkzpZSTYykLBNsZEnG2D9G/X/+7D"
                 crossorigin="anonymous" async></script>
-        <div class="container">
-            <div id="homeIntroSection" class="hero py-5" style="max-width: 860px;margin: 0 auto;text-align: center;">
-                <h1 class="display-1">
-                    Challenge yourself with our<br/><span class="text-gradient text-primary">Interactive Quizzes</span>
-                </h1>
-                <p class="lead text-gray-dark">
-                    Test your knowledge and learning progress with our quizzes! Our user-friendly platform
+
+        <header class="hero py-4 py-lg-5 text-center text-md-start" id="homeIntroSection">
+            <div class="container">
+                <div class="col-12 col-lg-7 col-xl-7">
+                    <h1 class="font-sm text-uppercase text-primary">Quizzes</h1>
+                    <h2 class="display-1">Challenge yourself with our Interactive<span class="text-gradient text-primary"> Quizzes</span></h2>
+                    <p class="fs-4 fw-400">Test your knowledge and learning progress with our quizzes! Our user-friendly platform
                     and extensive question bank make learning fun and easy. Pick a quiz and jump right in.
-                </p>
+                    </p>
+                </div>
             </div>
-        </div>
-        <div class="container pb-4 d-flexd">
+        </header>
+
+        <div class="container pb-4">
             <div class="row row-eq-height archive-grid pb-4" data-masonry='{"percentPosition": true }'>
                 {% for quiz in quizzes %}
                     <div class="col-md-3">
@@ -32,7 +34,7 @@
                                     <p class="font-xs text-muted mb-1">{{ quiz.excerpt }}.</p>
                                 </div>
 
-                                <div class="card-footer ">
+                                <div class="card-footer">
                                     <div class="d-flex justify-content-between py-2">
                                         <small class="card-text text-muted text-uppercase font-xs">
                                             <i class="fa-solid fa-book"></i> {{ quiz.get_questions.count }}

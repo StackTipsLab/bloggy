@@ -40,21 +40,21 @@
                             <div class="relative pb-2">
                                 <div class="d-flex align-items-center">
                                     <div class="flex-grow-1">
-
                                         <h1 class="post-title display-2 fw-700 mt-0 mb-2">{{ course.title }}</h1>
                                         <p class="lead fw-500 pt-0 mb-2">{{ course.excerpt }}</p>
                                         <p class="text-muted my-2">
-                                            <small class="text-muted text-uppercase fw-bold" style="font-size:0.7rem">
+                                            <small class="text-muted text-uppercase fw-500" style="font-size:0.7rem">
                                                 <i class="fa-solid fa-book"></i> {{ lessons_list.count }} Lessons
                                             </small>
                                             <span class="meta-seperator px-2"></span>
 
                                             {% with course.category as category %}
-                                                <small class="text-muted text-uppercase pe-1" style="font-size:0.7rem;"><i class="fa-solid fa-tag"></i></small>
-                                                <a class="text-decoration-none text-reset link-primary fw-bold"
+                                                <small class="text-muted text-uppercase pe-1" style="font-size:0.7rem;"><i
+                                                        class="fa-solid fa-tag"></i></small>
+                                                <a class="text-decoration-none text-reset link-primary fw-500"
                                                    style="z-index:999;position:relative"
                                                    href="{% url 'categories_single' slug=category.slug %}">
-                                                    <small class="d-inline-block mb-1 text-primary text-uppercase fw-bold"
+                                                    <small class="d-inline-block mb-1 text-primary text-uppercase fw-500"
                                                            style="font-size:0.7rem;">{{ category.title }}</small>
                                                 </a>
                                             {% endwith %}
