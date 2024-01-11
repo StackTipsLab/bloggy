@@ -1,5 +1,5 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.http import Http404
+from django.http import Http404, HttpResponseForbidden
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
@@ -50,8 +50,20 @@ class CourseDetailsView(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        # check if article is published? if live no issues.
+        if self.object.publish_status == "DRAFT":
+            logged_user = self.request.user
+
+            # If not live, check for the context parameter and the user login status
+            # If user is the owner of the post or user is an admin, can preview the post
+            if not logged_user:
+                raise HttpResponseForbidden("You do not have permission to view this page.")
+            if not (logged_user.username.__eq__(self.object.author.username) or logged_user.is_superuser):
+                raise HttpResponseForbidden("You do not have permission to view this page.")
+
         set_seo_settings(post=self.object, context=context)
-        context["posts"] = Post.objects.filter(course=self.object).order_by(
+        context["posts"] = Post.objects.filter(course=self.object).filter(publish_status="LIVE").order_by(
             "display_order").all()
         return context
 
@@ -66,7 +78,7 @@ class LessonDetailsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         guide_slug = context["course"]
-        post = Post.objects.filter(course__slug=guide_slug).filter(slug=context["slug"]).order_by(
+        post = Post.objects.filter(course__slug=guide_slug).filter(slug=context["slug"], publish_status="LIVE").order_by(
             "display_order").first()
         if not post:
             raise Http404

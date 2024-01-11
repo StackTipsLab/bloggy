@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponseForbidden
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
@@ -61,9 +61,9 @@ class PostDetailsView(HitCountDetailView):
             # If not live, check for the context parameter and the user login status
             # If user is the owner of the post or user is an admin, can preview the post
             if not logged_user:
-                raise HttpResponse('Unauthorized', status=401)
+                raise HttpResponseForbidden("You do not have permission to view this page.")
             if not (logged_user.username.__eq__(self.object.author.username) or logged_user.is_superuser):
-                raise HttpResponse('Unauthorized', status=401)
+                raise HttpResponseForbidden("You do not have permission to view this page.")
 
         context = super().get_context_data(**kwargs)
         set_seo_settings(post=self.object, context=context)

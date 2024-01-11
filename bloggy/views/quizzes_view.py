@@ -1,3 +1,4 @@
+from django.http import HttpResponseForbidden
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
@@ -25,9 +26,9 @@ class QuizListView(ListView):
         return context
 
 
-@method_decorator(
-    [cache_page(settings.CACHE_TTL, key_prefix="quiz_single"), vary_on_cookie],
-    name='dispatch'
+@method_decorator([
+    cache_page(settings.CACHE_TTL, key_prefix="quiz_single"),
+    vary_on_cookie],name='dispatch'
 )
 class QuizDetailView(HitCountDetailView):
     model = Quiz
@@ -38,5 +39,16 @@ class QuizDetailView(HitCountDetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        # check if article is published? if live no issues.
+        if self.object.publish_status == "DRAFT":
+            logged_user = self.request.user
+
+            # If not live, check for the context parameter and the user login status
+            # If user is the owner of the post or user is an admin, can preview the post
+            if not logged_user:
+                raise HttpResponseForbidden("You do not have permission to view this page.")
+            if not (logged_user.username.__eq__(self.object.author.username) or logged_user.is_superuser):
+                raise HttpResponseForbidden("You do not have permission to view this page.")
+
         set_seo_settings(post=self.object, context=context)
         return context
