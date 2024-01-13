@@ -10,7 +10,6 @@ from bloggy.services.token_service import get_token, is_token_expired
 
 class AccountActivationView(View):
     def get(self, request, uuid, token):
-
         verification_token = get_token(uuid, token, token_type="signup")
         if is_token_expired(verification_token):
             messages.error(request, "The verification link is expired or malformed.")

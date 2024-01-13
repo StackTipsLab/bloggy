@@ -1,0 +1,41 @@
+{% extends "base-with-header-footer.html" %}
+{% load custom_widgets %}
+{% load static %}
+{% block base_css_class %}bg-white{% endblock base_css_class %}
+{% block content %}
+    <div class="container mt-4 mt-lg-5">
+        <div class="row">
+            <div class="col-12 col-lg-3 col-xl-3">
+                {% include 'partials/user_profile_menu.html' with user=user %}
+                {% include 'partials/dashboard_menu.html' with user=user %}
+            </div>
+
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card p-lg-5 p-3 card-bordered card-shadowd">
+                    <h1 class="h2">Create newsletter</h1>
+
+                    {% if messages %}
+                        <div class="mx-auto my-3 my-lg-4">
+                            {% for message in messages %}
+                                <div class="mt-3 alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="post" enctype="multipart/form-data" class="col-12 col-lg-12 custom-form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">Creat newsletter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-12 col-lg-3 col-xl-3">
+            </div>
+        </div>
+    </div>
+{% endblock %}

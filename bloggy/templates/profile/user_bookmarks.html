@@ -6,6 +6,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-12 col-lg-3 col-xl-3">
+                {% include 'partials/user_profile_menu.html' with user=user %}
                 {% include 'partials/dashboard_menu.html' with user=user %}
             </div>
 

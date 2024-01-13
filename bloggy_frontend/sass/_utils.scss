@@ -389,6 +389,10 @@ figcaption {
     background: var(--form-control-bg);
   }
 
+  .form-check-input {
+    border-color: var(--form-control-border-color);
+  }
+
   label {
     color: #65748a !important;
     text-transform: uppercase;

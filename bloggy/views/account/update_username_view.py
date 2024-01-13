@@ -1,5 +1,5 @@
-# views.py
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import UpdateView
 from django.contrib.auth import get_user_model
@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from bloggy.forms.update_username_form import UpdateUsernameForm
 
 
-class UpdateUsernameView(UpdateView):
+class UpdateUsernameView(LoginRequiredMixin, UpdateView):
     model = get_user_model()
     form_class = UpdateUsernameForm
     template_name = 'profile/update_username.html'

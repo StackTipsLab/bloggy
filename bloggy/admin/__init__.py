@@ -7,3 +7,4 @@ from .subscriber_admin import *
 from .user_admin import *
 from .page_admin import *
 from .quiz_admin import *
+from .newsletter_admin import *

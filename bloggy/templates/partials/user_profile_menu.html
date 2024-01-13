@@ -1,0 +1,24 @@
+{% load static %}
+{% load custom_widgets %}
+<div class="card card-bordered card-shadowdd p-4 mb-3">
+    <a href="{% url 'index' %}" class="pb-3 text-decoration-none link-dark link-offset-2 fw-600">Home</a>
+    <hr class="m-0 opacity-25">
+    <a href="{% url 'profile.account' %}" class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Account</a>
+    <hr class="m-0 opacity-25">
+
+    <a href="{% url 'dashboard' %}" class="py-3  text-decoration-none link-dark link-offset-2 fw-600">
+        Dashboard</a>
+    <hr class="m-0 opacity-25">
+
+    {% if user.is_staff %}
+        <a href="{% url 'user_profile' username=user.username %}"
+           class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Your profile<i
+                class="fa-solid fa-arrow-up-right-from-square float-lg-end ms-3 font-xs text-muted"></i></a>
+        <hr class="m-0 opacity-25">
+    {% endif %}
+
+    <a href="#" data-bs-toggle="modal" data-bs-target="#feedbackModal"
+       class="py-3 text-decoration-none link-dark link-offset-2 fw-600">Give feedback</a>
+    <hr class="m-0 opacity-25">
+    <a href="" class="pt-3 text-decoration-none  link-danger link-offset-2 fw-600">Logout</a>
+</div>

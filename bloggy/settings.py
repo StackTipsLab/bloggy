@@ -58,7 +58,9 @@ INSTALLED_APPS = [
     'storages',
     'debug_toolbar',  # dev only
     'hitcount',
-    'colorfield'
+    'colorfield',
+    'django_ace'
+
 ]
 
 MIDDLEWARE = [
@@ -82,7 +84,6 @@ MIDDLEWARE = [
     # Social login
     # 'social_django.middleware.SocialAuthExceptionMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'bloggy.middleware.redirect.RedirectMiddleware',  # new articles mismatch url redirect
 ]
 
 ROOT_URLCONF = 'bloggy.urls'

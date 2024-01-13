@@ -27,26 +27,29 @@ from django.views.generic.base import TemplateView
 from bloggy import settings
 from bloggy.views import EditProfileView
 from bloggy.views.courses_view import CoursesListView, CourseDetailsView, LessonDetailsView
-from bloggy.views.pages import IndexView
+from bloggy.views.page_view import IndexView
 from bloggy.views.category_view import CategoriesView, CategoryDetailsView
 from .forms.password_reset_form import CustomPasswordResetForm
 from .forms.set_password_form import CustomSetPasswordForm
 from .services.sitemaps import sitemaps_list
 from .views import RegisterView
-from .views.account import AccountActivationView
-from .views.account_view import AccountView
-from .views.change_password_view import ChangePasswordView
-from .views.my_dashboard_view import DashboardView
-from .views.posts import PostListView, PostDetailsView
-from .views.login import MyLoginView
-from .views.pages import AdsTextView, robots
-from .views.pages import PageDetailsView
-from .views.quizzes_view import QuizListView, QuizDetailView
-from .views.rss import PostsRssFeed, CoursesRssFeed
-from .views.search import SearchListView
-from .views.update_username_view import UpdateUsernameView
-from .views.user import PublicProfileView, AuthorsListView
-
+from bloggy.views.account.account_view import AccountView
+from bloggy.views.account.change_password_view import ChangePasswordView
+from bloggy.views.newsletter.create_newsletter_view import CreateNewsletterView
+from bloggy.views.account.my_dashboard_view import DashboardView
+from bloggy.views.newsletter.newsletter_list_view import NewsletterListView
+from .views.auth.account_activation_view import AccountActivationView
+from .views.newsletter.manage_newsletter_view import ManageNewsletterView
+from .views.newsletter.newsletter_details_view import NewsletterDetailsView
+from .views.post_view import PostListView, PostDetailsView
+from bloggy.views.auth.login_view import MyLoginView
+from .views.page_view import AdsTextView, robots
+from .views.page_view import PageDetailsView
+from .views.quizz_view import QuizListView, QuizDetailView
+from .views.rss_view import PostsRssFeed, CoursesRssFeed
+from .views.search_view import SearchListView
+from bloggy.views.account.update_username_view import UpdateUsernameView
+from .views.user_view import PublicProfileView, AuthorsListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -71,38 +74,45 @@ urlpatterns = [
     path('logout', LogoutView.as_view(), name='logout'),
     path('register', RegisterView.as_view(), name='register'),
     path('activate/<str:uuid>/<str:token>', AccountActivationView.as_view(), name='activate_account'),
-
     path('password-reset/', PasswordResetView.as_view(
         template_name='auth/password_reset.html',
         email_template_name='email/password_reset_email.html',
         form_class=CustomPasswordResetForm
     ), name='password_reset'),
-    path('password-reset/done/', PasswordResetDoneView.as_view(template_name='auth/password_reset_done.html'),
-         name='password_reset_done'),
-    path('password-reset-confirm/<uidb64>/<token>/',
-         PasswordResetConfirmView.as_view(
-             template_name='auth/password_reset_confirm.html',
-             form_class=CustomSetPasswordForm), name='password_reset_confirm'),
-    path('password-reset-complete/',
-         PasswordResetCompleteView.as_view(template_name='auth/password_reset_complete.html'),
-         name='password_reset_complete'),
+
+    path('password-reset/done/', PasswordResetDoneView.as_view(
+        template_name='auth/password_reset_done.html'
+    ), name='password_reset_done'),
+
+    path('password-reset-confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(
+        template_name='auth/password_reset_confirm.html',
+        form_class=CustomSetPasswordForm
+    ), name='password_reset_confirm'),
+
+    path('password-reset-complete/', PasswordResetCompleteView.as_view(
+        template_name='auth/password_reset_complete.html'
+    ), name='password_reset_complete'),
 
     path('authors', AuthorsListView.as_view(), name="authors"),
     path('user/<str:username>', PublicProfileView.as_view(), name="user_profile"),
 
-    path('account', login_required(AccountView.as_view()), name='profile.account'),
-    path('edit-profile', login_required(EditProfileView.as_view()), name="profile.edit_profile"),
-    path('account/update-username', login_required(UpdateUsernameView.as_view()), name='profile.account.update_username'),
-    path('account/change-password', login_required(ChangePasswordView.as_view()), name='profile.account.change_password'),
-    path('dashboard', login_required(DashboardView.as_view()), name="profile.dashboard"),
-    # path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
+    path('account', AccountView.as_view(), name='profile.account'),
+    path('edit-profile', EditProfileView.as_view(), name="profile.edit_profile"),
+    path('account/update-username', UpdateUsernameView.as_view(), name='profile.account.update_username'),
+    path('account/change-password', ChangePasswordView.as_view(), name='profile.account.change_password'),
+    path('dashboard', DashboardView.as_view(), name="dashboard"),
 
+    path('newsletter/<path:url>', NewsletterDetailsView.as_view(), name="newsletter.details"),
+    path('dashboard/newsletter', NewsletterListView.as_view(), name="dashboard.newsletter"),
+    path('dashboard/newsletter/new', CreateNewsletterView.as_view(), name="dashboard.newsletter.new"),
+    path('dashboard/newsletter/manage/<str:id>', ManageNewsletterView.as_view(), name="dashboard.newsletter.manage"),
+
+    # path('bookmarks', login_required(UserBookmarksView.as_view()), name="profile.bookmarks"),
     path('contact', TemplateView.as_view(template_name="pages/contact.html"), name='pages.contact'),
     path("rss/articles", PostsRssFeed(), name="articles_feed"),
     path("rss/courses", CoursesRssFeed(), name="courses_feed"),
     path('sitemap.xml', index, {'sitemaps': sitemaps_list}, name='django.contrib.sitemaps.views.index'),
-    path('sitemap/<str:section>.xml', sitemap, {'sitemaps': sitemaps_list},
-         name='django.contrib.sitemaps.views.sitemap'),
+    path('sitemap/<str:section>.xml', sitemap, {'sitemaps': sitemaps_list}, name='django.contrib.sitemaps.views.sitemap'),
 
     # static files for SEO or other reasons
     path('robots.txt', robots, name='robots'),

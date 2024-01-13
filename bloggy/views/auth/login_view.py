@@ -8,7 +8,7 @@ class MyLoginView(LoginView):
     def get(self, request):
         if request.user and request.user.is_authenticated:
             return redirect(reverse("profile.account"))
-        return super().get( request)
+        return super().get(request)
 
     def get_success_url(self):
         redirect_url = self.request.GET.get('next')

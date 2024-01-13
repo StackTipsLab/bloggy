@@ -63,7 +63,7 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a href="{% url 'profile.dashboard' %}" class="nav-link py-3">Dashboard</a>
+                                        <a href="{% url 'dashboard' %}" class="nav-link py-3">Dashboard</a>
                                     </li>
 
                                     {% if user.is_staff %}
@@ -133,7 +133,7 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <a class="dropdown-item" href="{% url 'profile.dashboard' %}"><i
+                                        <a class="dropdown-item" href="{% url 'dashboard' %}"><i
                                                 class="fa-solid fa-gauge me-2"></i>Dashboard</a>
                                     </li>
 

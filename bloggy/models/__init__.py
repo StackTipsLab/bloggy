@@ -7,6 +7,5 @@ from .option import Option
 from .post import Post
 from .course import Course
 from .quizzes import Quiz, QuizQuestion, QuizAnswer, UserQuizScore
-from .redirect_rule import RedirectRule
 from .verification_token import VerificationToken
 

@@ -17,10 +17,8 @@ urlpatterns = [
     path('bookmark', BookmarkAPIView.as_view()),
 
     path('newsletter/subscribe', NewsletterApi.as_view({'post': 'subscribe'})),
-
     path('newsletter/subscribe', NewsletterApi.as_view({'post': 'subscribe'})),
-    path('newsletter/confirm/<int:subscriber_id>/<str:token>', NewsletterApi.as_view({'get': 'confirm'}),
-         name='newsletter_verification'),
+    path('newsletter/confirm/<int:subscriber_id>/<str:token>', NewsletterApi.as_view({'get': 'confirm'}), name='newsletter_verification'),
 
     path('comments', CommentsAPIView.as_view()),
     path('comments/<int:id>', CommentsAPIView.as_view()),

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
@@ -6,7 +7,7 @@ from bloggy import settings
 from bloggy.models import User
 
 
-class DashboardView(DetailView):
+class DashboardView(LoginRequiredMixin, DetailView):
     template_name = "profile/my_dashboard_view.html"
     DEFAULT_PAGE_SIZE = 12
 

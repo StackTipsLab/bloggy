@@ -1,10 +1,7 @@
 from django import forms
-from django.forms import ClearableFileInput, ModelForm, inlineformset_factory
+
+from bloggy.forms.custom_input_fields import NonClearableFileInput
 from bloggy.models import User
-
-
-class NonClearableFileInput(ClearableFileInput):
-    template_name = 'forms/widgets/non_clearable_imagefield.html'
 
 
 class EditProfileForm(forms.ModelForm):

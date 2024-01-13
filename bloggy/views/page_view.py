@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseForbidden
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_cookie
@@ -55,13 +55,16 @@ class PageDetailsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        page = Page.objects.filter(url=context["url"]).filter(publish_status="LIVE").first()
+        page_content = Page.objects.filter(url=context["url"]).first()
+        if page_content:
+            if (page_content.publish_status == "DRAFT"
+                    and not (self.request.user.is_authenticated and self.request.user.is_superuser)):
+                raise HttpResponseForbidden("You do not have permission to view this page.")
 
-        if page:
-            context["page"] = page
-            if page.template_type:
-                self.template_name = f"pages/page-{page.template_type}.html"
+            context["page"] = page_content
+            if page_content.template_type:
+                self.template_name = f"pages/page-{page_content.template_type}.html"
 
-            set_seo_settings(post=page, context=context)
+            set_seo_settings(post=page_content, context=context)
             return context
         raise Http404
