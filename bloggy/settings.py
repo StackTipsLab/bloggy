@@ -59,8 +59,6 @@ INSTALLED_APPS = [
     'debug_toolbar',  # dev only
     'hitcount',
     'colorfield',
-    'django_ace'
-
 ]
 
 MIDDLEWARE = [
